@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UtopiaCity.Models.Emergency;
+using UtopiaCity.Models.Sport;
 
 namespace UtopiaCity.Data
 {
@@ -15,5 +16,7 @@ namespace UtopiaCity.Data
         }
 
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
+
+        public DbSet<SportComplex> SportComplex { get; set; }
     }
 }
