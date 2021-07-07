@@ -1,5 +1,3 @@
-using System;
-
 namespace UtopiaCity.Models
 {
     public class ErrorViewModel
