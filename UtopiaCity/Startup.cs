@@ -1,17 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UtopiaCity.Data;
+using UtopiaCity.Services.Emergency;
 
 namespace UtopiaCity
 {
@@ -34,6 +30,12 @@ namespace UtopiaCity
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            #region Services
+
+            services.AddScoped<EmergencyReportService, EmergencyReportService>();
+
+            #endregion
 
             services.Configure<IdentityOptions>(options =>
             {
