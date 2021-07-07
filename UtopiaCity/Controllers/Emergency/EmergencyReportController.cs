@@ -1,23 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using UtopiaCity.Data;
 using UtopiaCity.Models.Emergency;
-using UtopiaCity.Services.Emergency;
 
 namespace UtopiaCity.Controllers.Emergency
 {
     public class EmergencyReportController : Controller
     {
-        private readonly EmergencyReportService _emergencyReportService;
+        private ApplicationDbContext _dbContext;
 
-        public EmergencyReportController(EmergencyReportService emergencyReportService)
+        public EmergencyReportController(ApplicationDbContext dbContext)
         {
-            _emergencyReportService = emergencyReportService;
+            this._dbContext = dbContext;
         }
 
         // view list of reports
         public async Task<IActionResult> Index()
         {
-            return View("EmergencyReportListView", await _emergencyReportService.GetEmergencyReports());
+            return View("EmergencyReportListView", await _dbContext.EmergencyReport.ToListAsync());
         }
 
         // get specific item by id
@@ -28,19 +32,19 @@ namespace UtopiaCity.Controllers.Emergency
                 return NotFound();
             }
 
-            var report = await _emergencyReportService.GetEmergencyReportById(id);
+            var report = await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id));
             if (report == null)
             {
                 NotFound();
             }
 
-            return View("DetailsEmergencyReportView", report);
+            return View(report);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View("CreateEmergencyReportView");
+            return View();
         }
 
         [HttpPost]
@@ -48,11 +52,12 @@ namespace UtopiaCity.Controllers.Emergency
         {
             if (ModelState.IsValid)
             {
-                await _emergencyReportService.AddEmergencyReport(newReport);
+                _dbContext.Add(newReport);
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("CreateEmergencyReportView", newReport);
+            return View(newReport);
         }
 
         [HttpGet]
@@ -63,13 +68,13 @@ namespace UtopiaCity.Controllers.Emergency
                 return NotFound();
             }
 
-            var report = await _emergencyReportService.GetEmergencyReportById(id);
+            var report = await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id));
             if (report == null)
             {
                 return NotFound();
             }
 
-            return View("EditEmergencyReportView", report);
+            return View(report);
         }
 
         [HttpPost]
@@ -82,11 +87,12 @@ namespace UtopiaCity.Controllers.Emergency
 
             if (ModelState.IsValid)
             {
-                await _emergencyReportService.UpdateEmergencyReport(edited);
+                _dbContext.Update(edited);
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("EditEmergencyReportView", edited);
+            return View(edited);
         }
 
         [HttpGet]
@@ -97,26 +103,27 @@ namespace UtopiaCity.Controllers.Emergency
                 return NotFound();
             }
 
-            var report = await _emergencyReportService.GetEmergencyReportById(id);
+            var report = await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id));
             if (report == null)
             {
                 return NotFound();
             }
 
-            return View("DeleteEmergencyReportView", report);
+            return View(report);
         }
 
-        [HttpPost, ActionName("DeleteEmergencyReportView")]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var report = await _emergencyReportService.GetEmergencyReportById(id);
+            var report = await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id));
             if (report == null)
             {
                 // TODO rewrite?
                 return NotFound();
             }
 
-            await _emergencyReportService.DeleteEmergencyReport(report);
+            _dbContext.Remove(report);
+            await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }
