@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using UtopiaCity.Data;
+using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.Emergency;
 
 namespace UtopiaCity
@@ -34,6 +35,7 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
+            services.AddScoped<FlightService, FlightService>();
 
             #endregion
 
