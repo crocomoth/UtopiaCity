@@ -1,24 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
+using UtopiaCity.Services.Sport;
 
 namespace UtopiaCity.Controllers.Sport
 {
     public class SportComplexController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly SportComplexService _sportComplexService;
 
-        public SportComplexController(ApplicationDbContext dbContext)
+        public SportComplexController(SportComplexService sportComplexService)
         {
-            _dbContext = dbContext;
+            _sportComplexService = sportComplexService;
         }
 
-        public IActionResult AllSportComplexes() => View(_dbContext.SportComplex);
+        public IActionResult AllSportComplexes() => View(_sportComplexService.GetAllSportComplexes());
 
         public IActionResult Details(int id)
         {
-            var sportComplex = _dbContext.SportComplex.FirstOrDefault(x => x.Id.Equals(id));
+            var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
@@ -35,8 +34,7 @@ namespace UtopiaCity.Controllers.Sport
         {
             if (ModelState.IsValid && sportComplex != null)
             {
-                _dbContext.Add(sportComplex);
-                _dbContext.SaveChanges();
+                _sportComplexService.AddSportComplexToDb(sportComplex);
                 return RedirectToAction(nameof(AllSportComplexes));
             }
 
@@ -46,7 +44,7 @@ namespace UtopiaCity.Controllers.Sport
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var sportComplex = _dbContext.SportComplex.FirstOrDefault(s => s.Id.Equals(id));
+            var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
@@ -58,21 +56,20 @@ namespace UtopiaCity.Controllers.Sport
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var sportComplex = _dbContext.SportComplex.FirstOrDefault(x => x.Id.Equals(id));
+            var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
             }
 
-            _dbContext.Remove(sportComplex);
-            _dbContext.SaveChanges();
+            _sportComplexService.RemoveSportComplexFromDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var sportComplex = _dbContext.SportComplex.FirstOrDefault(x => x.Id.Equals(id));
+            var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
@@ -89,8 +86,7 @@ namespace UtopiaCity.Controllers.Sport
                 return NotFound();
             }
 
-            _dbContext.SportComplex.Update(sportComplex);
-            _dbContext.SaveChanges();
+            _sportComplexService.UpdateSportComplexInDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
     }

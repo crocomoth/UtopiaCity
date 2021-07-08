@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using UtopiaCity.Data;
 using UtopiaCity.Services.Emergency;
+using UtopiaCity.Services.Sport;
 
 namespace UtopiaCity
 {
@@ -34,6 +35,7 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
+            services.AddScoped<SportComplexService, SportComplexService>();
 
             #endregion
 
