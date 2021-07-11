@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Emergency;
+using UtopiaCity.Models.CityAdministration.ResidentAccount;
 
 namespace UtopiaCity.Data
 {
@@ -12,5 +13,6 @@ namespace UtopiaCity.Data
         }
 
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
+        public DbSet<RersidentAccount> RersidentAccount { get; set; }
     }
 }
