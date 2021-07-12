@@ -12,25 +12,30 @@ namespace UtopiaCity.Controllers.Airport
     public class FlightController:Controller
     {
         private FlightService _flightService;
+
         public FlightController(FlightService flightService)
         {
             _flightService = flightService;
         }
+
         public IActionResult Index()
         {
             return View("FlightList", _flightService.GetFlightList());
         }
+
         public IActionResult Details(int id)
         {
             if (string.IsNullOrWhiteSpace(id.ToString()))
             {
                 return NotFound();
             }
+
             var flight = _flightService.GetFlightById(id);
             if (flight is null)
             {
                 NotFound();
             }
+
             return View("FlightDetailsView", flight);
         }
 
@@ -39,6 +44,7 @@ namespace UtopiaCity.Controllers.Airport
         {
             return View("FlightCreateView");
         }
+
         [HttpPost]
         public IActionResult Create(Flight newFlight)
         {
@@ -58,11 +64,13 @@ namespace UtopiaCity.Controllers.Airport
             {
                 return NotFound();
             }
+
             var flight = _flightService.GetFlightById(id);
             if (flight is null)
             {
                 NotFound();
             }
+
             return View("FlightEditView", flight);
         }
 
@@ -73,11 +81,13 @@ namespace UtopiaCity.Controllers.Airport
             {
                 return NotFound();
             }
+
             if (ModelState.IsValid)
             {
                 _flightService.UpdateFlight(edited);
                 return RedirectToAction(nameof(Index));
             }
+
             return View("FlightEditView", edited);
         }
 
@@ -88,11 +98,13 @@ namespace UtopiaCity.Controllers.Airport
             {
                 NotFound();
             }
+
             var flight = _flightService.GetFlightById(id);
             if (flight is null)
             {
                 NotFound();
             }
+
             return View("FlightDeleteView", flight);
         }
 
@@ -104,6 +116,7 @@ namespace UtopiaCity.Controllers.Airport
             {
                 NotFound();
             }
+
             _flightService.DeleteFlight(flight);
             return RedirectToAction(nameof(Index));
         }

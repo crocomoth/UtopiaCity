@@ -36,6 +36,7 @@ namespace UtopiaCity
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
             services.AddScoped<FlightService, FlightService>();
+            services.AddScoped<WeatherReportService, WeatherReportService>();
 
             #endregion
 

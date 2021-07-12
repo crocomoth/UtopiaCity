@@ -13,10 +13,12 @@ namespace UtopiaCity.Services.Airport
     public class FlightService
     {
         private ApplicationDbContext _dbContext;
+
         public FlightService(ApplicationDbContext context)
         {
             _dbContext = context;
         }
+
         /// <summary>
         /// Gets list of all flights
         /// </summary>
@@ -25,6 +27,7 @@ namespace UtopiaCity.Services.Airport
         {
             return _dbContext.Flights.ToList();
         }
+
         /// <summary>
         /// Gets flight by Id
         /// </summary>
@@ -34,6 +37,7 @@ namespace UtopiaCity.Services.Airport
         {
             return _dbContext.Flights.FirstOrDefault(x => x.Id.Equals(id));
         } 
+
         /// <summary>
         /// Create a new flight, by adding it to the database
         /// </summary>
@@ -43,6 +47,7 @@ namespace UtopiaCity.Services.Airport
             _dbContext.Add(newflight);
             _dbContext.SaveChanges();
         }
+
         /// <summary>
         /// Update existing flight
         /// </summary>
@@ -52,6 +57,7 @@ namespace UtopiaCity.Services.Airport
             _dbContext.Update(editedFlight);
             _dbContext.SaveChanges();
         }
+
         /// <summary>
         /// Remove flight from database
         /// </summary>
