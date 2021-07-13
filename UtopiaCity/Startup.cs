@@ -8,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using UtopiaCity.Data;
 using UtopiaCity.Services.Emergency;
+using UtopiaCity.Services.Reservation;
 using UtopiaCity.Services.Restaurant;
+using UtopiaCity.Services.RestaurantType;
 
 namespace UtopiaCity
 {
@@ -36,6 +38,8 @@ namespace UtopiaCity
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
             services.AddTransient<RestaurantService>();
+            services.AddTransient<RestaurantTypeService>();
+            services.AddTransient<ReservationService>();
 
             #endregion
 

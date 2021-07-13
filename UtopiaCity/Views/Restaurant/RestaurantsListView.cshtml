@@ -4,45 +4,65 @@
     ViewData["Title"] = "RestaurantListView";
 }
 
-<h1>RestaurantListView</h1>
+<h1>Our Restaurants!</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add new restaurant</a>
 </p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seats)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
+<p>
+    @if (User.Identity.IsAuthenticated)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Seats)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+        <a asp-controller="Reservation" asp-action="Index">Your booking list</a>
     }
-    </tbody>
-</table>
+    else
+    {
+        <a>You need logging in for booking</a>
+    }
+</p>
+@if (!Model.Any())
+{
+    <h2>List is empty!</h2>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Reservation" asp-action="Create" asp-route-id="@item.Id">Booking</a>
+                    }
+                    else
+                    {
+                        <a>You need logging in for booking</a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

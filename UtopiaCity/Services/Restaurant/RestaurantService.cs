@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Data;
+
 
 namespace UtopiaCity.Services.Restaurant
 {
@@ -19,7 +21,7 @@ namespace UtopiaCity.Services.Restaurant
         }
         public async Task<List<Models.PublicCatering.Restaurant>> GetRestaurants()
         {
-            return await _dbContext.Restaurants.ToListAsync();
+            return await _dbContext.Restaurants.Include(r =>r.RestaurantType).ToListAsync();
         }
         public async Task AddRestaurant(Models.PublicCatering.Restaurant restaurant)
         {

@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace UtopiaCity.Models.PublicCatering
 {
-    public class User : IdentityUser
+    public sealed class User : IdentityUser
     {
-        public virtual List<Reservation> Reservations { get; set; } 
+        public List<Reservation> Reservations { get; set; } 
     }
 }

@@ -26,7 +26,7 @@ namespace UtopiaCity.Controllers.PublicCatering
         {
             return View("CreateRestaurantView");
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Create(Restaurant newRestaurant)
         {

@@ -15,8 +15,8 @@ namespace UtopiaCity.Data
 
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<RestaurantType> RestaurantTypes { get; set; }
         public override DbSet<IdentityUser> Users { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<RestaurantType> RestaurantTypes { get; set; }
     }
 }
