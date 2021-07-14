@@ -1,153 +1,126 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CityAdministration.ResidentAccount;
+using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity.Controllers.CityAdministration
 {
     public class RersidentAccountsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ResidentAccountService _residentAccountService;
 
-        public RersidentAccountsController(ApplicationDbContext context)
+        public RersidentAccountsController(ResidentAccountService residentAccountService)
         {
-            _context = context;
+            _residentAccountService = residentAccountService;
         }
 
-        // GET: RersidentAccounts
+        // view list of accounts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.RersidentAccount.ToListAsync());
+            return View("Index", await _residentAccountService.GetRersidentAccounts());
         }
 
-        // GET: RersidentAccounts/Details/5
+        // get specific item by id
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return NotFound();
             }
 
-            var rersidentAccount = await _context.RersidentAccount
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (rersidentAccount == null)
+            var account = await _residentAccountService.GetRersidentAccountById(id);
+            if (account == null)
             {
-                return NotFound();
+                NotFound();
             }
 
-            return View(rersidentAccount);
+            return View("Details", account);
         }
 
-        // GET: RersidentAccounts/Create
-        public IActionResult Create()
+        [HttpGet]
+        public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
-        // POST: RersidentAccounts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,FamilyName,BirthDate,Gender")] RersidentAccount rersidentAccount)
+        public async Task<IActionResult> Create(RersidentAccount newAccount)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(rersidentAccount);
-                await _context.SaveChangesAsync();
+                await _residentAccountService.AddRersidentAccount(newAccount);
                 return RedirectToAction(nameof(Index));
             }
-            return View(rersidentAccount);
+
+            return View("Create", newAccount);
         }
 
-        // GET: RersidentAccounts/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null)
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return NotFound();
             }
 
-            var rersidentAccount = await _context.RersidentAccount.FindAsync(id);
-            if (rersidentAccount == null)
+            var account = await _residentAccountService.GetRersidentAccountById(id);
+            if (account == null)
             {
                 return NotFound();
             }
-            return View(rersidentAccount);
+
+            return View("Edit", account);
         }
 
-        // POST: RersidentAccounts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("FirstName,FamilyName,BirthDate,Gender")] RersidentAccount rersidentAccount)
+        public async Task<IActionResult> Edit(string id, RersidentAccount edited)
         {
-            if (id != rersidentAccount.Id)
+            if (id != edited.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(rersidentAccount);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RersidentAccountExists(rersidentAccount.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _residentAccountService.UpdateRersidentAccount(edited);
                 return RedirectToAction(nameof(Index));
             }
-            return View(rersidentAccount);
+
+            return View("Edit", edited);
         }
 
-        // GET: RersidentAccounts/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null)
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return NotFound();
             }
 
-            var rersidentAccount = await _context.RersidentAccount
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (rersidentAccount == null)
+            var account = await _residentAccountService.GetRersidentAccountById(id);
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(rersidentAccount);
+            return View("Delete", account);
         }
 
-        // POST: RersidentAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var rersidentAccount = await _context.RersidentAccount.FindAsync(id);
-            _context.RersidentAccount.Remove(rersidentAccount);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var account = await _residentAccountService.GetRersidentAccountById(id);
+            if (account == null)
+            {
+                // TODO rewrite?
+                return NotFound();
+            }
 
-        private bool RersidentAccountExists(string id)
-        {
-            return _context.RersidentAccount.Any(e => e.Id == id);
+            await _residentAccountService.DeleteRersidentAccount(account);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
