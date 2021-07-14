@@ -12,7 +12,7 @@ namespace UtopiaCity.Models.Sport
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression(@"[^' '][a-zA-Z0-9' ']{1,100}[^' ']", ErrorMessage = "Enter correct title")]
+        [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct title")]
         public string Title { get; set; }
 
         [Required]
@@ -28,7 +28,7 @@ namespace UtopiaCity.Models.Sport
         //TODO Take Address as a class
         /*public Address Address {get;set;}*/
         [Required]
-        [RegularExpression(@"[^' '][a-zA-Z0-9' ']{1,100}[^' ']", ErrorMessage = "Enter correct address")]
+        [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct address")]
         public string Address { get; set; }
     }
 }
