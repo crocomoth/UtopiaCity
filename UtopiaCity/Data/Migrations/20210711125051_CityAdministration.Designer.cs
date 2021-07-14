@@ -11,7 +11,7 @@ namespace UtopiaCity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20210711125051_InitialCreate")]
-    partial class InitialCreate
+    partial class CityAdministration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

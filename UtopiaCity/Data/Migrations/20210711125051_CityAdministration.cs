@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UtopiaCity.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class CityAdministration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
