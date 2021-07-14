@@ -2,6 +2,7 @@
 {
     public enum TypesOfSport
     {
+        CommonActivities = 0,
         Swimming = 1,
         Motorsport = 2,
         Cycling = 3,
