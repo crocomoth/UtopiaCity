@@ -1,10 +1,12 @@
-﻿namespace UtopiaCity.Services.Timeline
+﻿using UtopiaCity.Data;
+
+namespace UtopiaCity.Services.Timeline
 {
     public class TimelineService
     {
-        private readonly TimelineContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public TimelineService(TimelineContext dbContext)
+        public TimelineService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
