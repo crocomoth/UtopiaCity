@@ -13,13 +13,17 @@ namespace UtopiaCity.Models.TimelineModel
 
         //CHANGE MODEL FOR SHOW ONLY DAY AND YEAR
         [DataType(DataType.Date)]
+        [Display(Name = "День и год")]
         public DateTime DayAndYear { get; set; }
 
+        [Display(Name = "Расписание")]
         public string Schedule { get; set; }
 
         //public bool TranscriptionOfPermission { get; set; }
+        [Display(Name = "Транскрипция разрешений")]
         public string TranscriptionOfPermission { get; set; }
 
+        [Display(Name = "Уникальные правила")]
         public string UniqueRules { get; set; }
     }
 }

@@ -318,6 +318,29 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("SportComplex");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.TimelineModel", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DayAndYear")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Schedule")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranscriptionOfPermission")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniqueRules")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TimelineModel");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
