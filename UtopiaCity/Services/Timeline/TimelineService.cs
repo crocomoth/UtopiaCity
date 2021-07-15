@@ -29,7 +29,7 @@ namespace UtopiaCity.Services.Timeline
         /// <summary>
         /// EDIT EVENT
         /// </summary>
-        /// <param name="editedEvent">EVENT</param>
+        /// <param name="chosenEvent">EVENT</param>
         /// <returns>EDITED EVENT</returns>
         public async Task EditEvent(TimelineModel chosenEvent)
         {
@@ -69,3 +69,4 @@ namespace UtopiaCity.Services.Timeline
 
     }
 }
+
