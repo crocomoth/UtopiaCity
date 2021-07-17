@@ -16,7 +16,6 @@ namespace UtopiaCity.Common
         {
             // simple sets
             subDbInitializers.Add(new EmergencyReportInitializer());
-
             subDbInitializers.Add(new SportComplexInitializer());
 
             // complex sets
