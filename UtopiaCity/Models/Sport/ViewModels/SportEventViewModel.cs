@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
-namespace UtopiaCity.Models.Sport
+namespace UtopiaCity.Models.Sport.ViewModels
 {
-    public class SportEvent
+    public class SportEventViewModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string SportEventId { get; set; }
         public string Title { get; set; }
         public DateTime DateOfTheEvent { get; set; }
         public string SportComplexId { get; set; }
-        
-        //TODO: Add Citizen as a subscriber on event
+        public string SportComplexTitle{ get; set; }
+        public string SportComplexAddress { get; set; }
+        public List<string> SportComplexesTitles { get; set; }
     }
 }

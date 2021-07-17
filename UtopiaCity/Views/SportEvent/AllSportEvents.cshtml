@@ -31,10 +31,7 @@
                 @Html.DisplayFor(modelItem => item.DateOfTheEvent)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SportComplex.Title) <a asp-controller="SportComplex" asp-action="Details">Sport complex details</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SportComplex.Address)
+                <a asp-controller="SportComplex" asp-action="Details" asp-route-id="@item.SportComplexId">Sport complex details</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SportEventId">Edit</a> |
