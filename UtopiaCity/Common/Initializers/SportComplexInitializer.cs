@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using System.Linq;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.Sport.Enums;
+using UtopiaCity.Data;
 
 namespace UtopiaCity.Common.Initializers
 {
     public class SportComplexInitializer : ISubDbInitializer
     {
-        public void InitializeSet(UtopiaCity.Data.ApplicationDbContext context)
+        public void InitializeSet(ApplicationDbContext context)
         {
             if (context.SportComplex.Any())
             {
@@ -67,7 +68,7 @@ namespace UtopiaCity.Common.Initializers
             context.SaveChanges();
         }
 
-        public void ClearSet(UtopiaCity.Data.ApplicationDbContext context)
+        public void ClearSet(ApplicationDbContext context)
         {
             if (!context.SportComplex.Any())
             {
