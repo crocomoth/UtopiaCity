@@ -221,10 +221,8 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -234,6 +232,9 @@ namespace UtopiaCity.Data.Migrations
 
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FlightNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Weather")
                         .HasColumnType("nvarchar(max)");
@@ -297,6 +298,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BuildDate")
@@ -306,6 +308,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TypeOfSport")
