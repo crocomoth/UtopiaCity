@@ -10,7 +10,7 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210716184910_LifeMigration")]
+    [Migration("20210718183920_LifeMigration")]
     partial class LifeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -294,6 +294,7 @@ namespace UtopiaCity.Data.Migrations
             modelBuilder.Entity("UtopiaCity.Models.Life.Event", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
@@ -305,6 +306,10 @@ namespace UtopiaCity.Data.Migrations
 
                     b.Property<int>("EventType")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

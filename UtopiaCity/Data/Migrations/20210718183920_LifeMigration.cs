@@ -13,6 +13,7 @@ namespace UtopiaCity.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     EventType = table.Column<int>(nullable: false)
                 },
