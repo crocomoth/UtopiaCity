@@ -33,7 +33,7 @@ namespace UtopiaCity.Services.Airport
         /// </summary>
         /// <param name="id">Flights' Id</param>
         /// <returns>Special flight if exist, otherwise null</returns>
-        public Flight GetFlightById(int id)
+        public Flight GetFlightById(string id)
         {
             return _dbContext.Flights.FirstOrDefault(x => x.Id.Equals(id));
         } 
@@ -66,6 +66,15 @@ namespace UtopiaCity.Services.Airport
         {
             _dbContext.Remove(currentFlight);
             _dbContext.SaveChanges();
+        }
+
+        /// <summary>
+        ///  Set the unique Flight Number
+        /// </summary>
+        /// <returns>Random integer value</returns>
+        public int GetRandomFlightNumber()
+        {
+            return new Random().Next(100, 999);
         }
     }
 }

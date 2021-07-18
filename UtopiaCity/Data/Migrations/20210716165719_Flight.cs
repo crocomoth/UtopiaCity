@@ -7,20 +7,12 @@ namespace UtopiaCity.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Report",
-                table: "EmergencyReport",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
             migrationBuilder.CreateTable(
                 name: "Flights",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
+                    FlightNumber = table.Column<int>(nullable: false),
                     ArrivalTime = table.Column<DateTime>(nullable: false),
                     DepartureTime = table.Column<DateTime>(nullable: false),
                     Destination = table.Column<string>(nullable: true),
@@ -36,13 +28,6 @@ namespace UtopiaCity.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Flights");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Report",
-                table: "EmergencyReport",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string));
         }
     }
 }
