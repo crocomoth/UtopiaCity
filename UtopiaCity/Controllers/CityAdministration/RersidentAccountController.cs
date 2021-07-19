@@ -1,18 +1,15 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using UtopiaCity.Data;
 using UtopiaCity.Models.CityAdministration.ResidentAccount;
 using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity.Controllers.CityAdministration
 {
-    public class RersidentAccountsController : Controller
+    public class RersidentAccountController : Controller
     {
         private readonly ResidentAccountService _residentAccountService;
 
-        public RersidentAccountsController(ResidentAccountService residentAccountService)
+        public RersidentAccountController(ResidentAccountService residentAccountService)
         {
             _residentAccountService = residentAccountService;
         }
