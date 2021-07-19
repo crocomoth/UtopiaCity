@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using UtopiaCity.Common;
 using UtopiaCity.Data;
 using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.Emergency;
@@ -75,6 +76,27 @@ namespace UtopiaCity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                DbInitializer.RegisterSubInitializers();
+
+                var appConfig = Configuration.GetSection("AppConfig").Get<AppConfig>();
+                if (appConfig != null)
+                {
+                    if (appConfig.ClearDb)
+                    {
+                        DbInitializer.ClearDb(context);
+                    }
+
+                    if (appConfig.SeedDb)
+                    {
+                        DbInitializer.InitializeDb(context);
+                    }
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
