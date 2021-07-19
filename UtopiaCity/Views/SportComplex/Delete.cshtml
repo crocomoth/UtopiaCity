@@ -1,0 +1,51 @@
+﻿@model UtopiaCity.Models.Sport.SportComplex
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SportComplex</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfSeats)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfSeats)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BuildDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BuildDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TypeOfSport)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TypeOfSport)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SportComplexId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="AllSportComplexes">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<UtopiaCity.Models.PublicCatering.Reservation>
+@inject UserManager<IdentityUser> _userManager
+
+@{
+    ViewData["Title"] = "ReservationListView";
+}
+
+<h1>Yours Reservations!</h1>
+
+<p>
+    <a asp-controller="Restaurant" asp-action="Index">Back to restaurants list</a>
+</p>
+@if (!Model.Any())
+{
+    <h2>List is empty!</h2>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Restaurant.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,43 @@
+@model UtopiaCity.Models.PublicCatering.Restaurant
+
+@{
+    ViewData["Title"] = "DetailsRestaurantView";
+}
+
+<h1>More about the restaurant</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Seats)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Seats)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RestaurantType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RestaurantType.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+    <a asp-controller="Reservation" asp-action="Create" asp-route-id="@Model.Id">Booking</a>
+</div>

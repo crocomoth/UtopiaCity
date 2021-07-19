@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using UtopiaCity.Data;
 using UtopiaCity.Models.PublicCatering;
-using UtopiaCity.Services.Reservation;
+using UtopiaCity.Services.PublicCatering.Reservation;
 
 
 namespace UtopiaCity.Controllers.PublicCatering
@@ -21,19 +18,19 @@ namespace UtopiaCity.Controllers.PublicCatering
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View("ReservationsListView", await _reservationService.GetReservations());
+            return View("~/Views/PublicCatering/Reservation/ReservationsListView.cshtml", await _reservationService.GetReservations());
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View("CreateReservationView");
+            return View("~/Views/PublicCatering/Reservation/CreateReservationView.cshtml");
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Reservation newReservation)
         {
-            if (!ModelState.IsValid) return View("CreateReservationView", newReservation);
+            if (!ModelState.IsValid) return View("~/Views/PublicCatering/Reservation/CreateReservationView.cshtml", newReservation);
             await _reservationService.AddReservation(newReservation);
             return RedirectToAction(nameof(Index));
         }
@@ -52,7 +49,7 @@ namespace UtopiaCity.Controllers.PublicCatering
                 return NotFound();
             }
 
-            return View("EditReservationView", reservation);
+            return View("~/Views/PublicCatering/Reservation/EditReservationView.cshtml", reservation);
         }
 
         [HttpPost]
@@ -63,7 +60,7 @@ namespace UtopiaCity.Controllers.PublicCatering
                 return NotFound();
             }
 
-            if (!ModelState.IsValid) return View("EditReservationView", edited);
+            if (!ModelState.IsValid) return View("~/Views/PublicCatering/Reservation/EditReservationView.cshtml", edited);
             await _reservationService.UpdateReservation(edited);
             return RedirectToAction(nameof(Index));
         }
@@ -75,14 +72,12 @@ namespace UtopiaCity.Controllers.PublicCatering
             {
                 return NotFound();
             }
-
             var reservation = await _reservationService.GetReservationById(id);
             if (reservation == null)
             {
                 return NotFound();
             }
-
-            return View("DeleteReservationView", reservation);
+            return View("~/Views/PublicCatering/Reservation/DeleteReservationView.cshtml", reservation);
         }
 
         [HttpPost, ActionName("DeleteRestaurantView")]

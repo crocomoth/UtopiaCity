@@ -6,11 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using UtopiaCity.Common;
 using UtopiaCity.Data;
+using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.Emergency;
-using UtopiaCity.Services.Reservation;
-using UtopiaCity.Services.Restaurant;
-using UtopiaCity.Services.RestaurantType;
+using UtopiaCity.Services.PublicCatering.Reservation;
+using UtopiaCity.Services.PublicCatering.RestaurantType;
+using UtopiaCity.Services.Sport;
 
 namespace UtopiaCity
 {
@@ -37,9 +39,15 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
-            services.AddTransient<RestaurantService>();
-            services.AddTransient<RestaurantTypeService>();
-            services.AddTransient<ReservationService>();
+
+            services.AddScoped<SportComplexService, SportComplexService>();
+          
+            services.AddScoped<FlightService, FlightService>();
+          
+            services.AddScoped<WeatherReportService, WeatherReportService>();
+            
+            services.AddScoped<ReservationService, ReservationService>();
+            services.AddScoped<RestaurantTypeService, RestaurantTypeService>();
 
             #endregion
 
@@ -79,6 +87,27 @@ namespace UtopiaCity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                DbInitializer.RegisterSubInitializers();
+
+                var appConfig = Configuration.GetSection("AppConfig").Get<AppConfig>();
+                if (appConfig != null)
+                {
+                    if (appConfig.ClearDb)
+                    {
+                        DbInitializer.ClearDb(context);
+                    }
+
+                    if (appConfig.SeedDb)
+                    {
+                        DbInitializer.InitializeDb(context);
+                    }
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
