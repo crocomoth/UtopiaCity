@@ -14,7 +14,15 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
+            if (!context.PermitedModel.Any())
+            {
+                return;
+            }
+
             context.RemoveRange(context.TimelineModel.ToList());
+            
+            context.RemoveRange(context.PermitedModel.ToList());
+
             context.SaveChanges();
         }
 
@@ -71,6 +79,32 @@ namespace UtopiaCity.Common.Initializers
                     }
                     );
             }
+
+            //Permited Conditons
+            if(!context.PermitedModel.Any())
+            {
+                context.PermitedModel.AddRange(
+                    new Models.TimelineModel.PermitedModel
+                    {
+                        Season = "Winter",
+                        SpeedOfWind = 10.01M,
+                        GovernmentStatus = false,
+                        Rainfall = "rain",
+                        TimeOfDay = "night"
+                    },
+
+                    new Models.TimelineModel.PermitedModel
+                    {
+                        Season = "Winter",
+                        SpeedOfWind = 10.01M,
+                        GovernmentStatus = false,
+                        Rainfall = "rain",
+                        TimeOfDay = "night"
+                    }
+
+                    );
+            }
+
 
             context.SaveChanges();
         }
