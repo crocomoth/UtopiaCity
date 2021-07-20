@@ -24,5 +24,7 @@ namespace UtopiaCity.Data
 
         public DbSet<TimelineModel> TimelineModel { get; set; }
 
+        public DbSet<UtopiaCity.Models.TimelineModel.ScheduleModel> ScheduleModel { get; set; }
+
     }
 }
