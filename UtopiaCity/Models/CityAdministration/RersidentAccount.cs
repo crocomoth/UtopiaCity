@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UtopiaCity.Models.CityAdministration.ResidentAccount
+namespace UtopiaCity.Models.CityAdministration
 {
     public class RersidentAccount
     {

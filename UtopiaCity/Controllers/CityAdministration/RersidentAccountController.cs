@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using UtopiaCity.Models.CityAdministration.ResidentAccount;
+using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity.Controllers.CityAdministration

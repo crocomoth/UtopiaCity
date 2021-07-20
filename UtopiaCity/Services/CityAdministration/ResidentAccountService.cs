@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
-using UtopiaCity.Models.CityAdministration.ResidentAccount;
+using UtopiaCity.Models.CityAdministration;
 
 namespace UtopiaCity.Services.CityAdministration
 {

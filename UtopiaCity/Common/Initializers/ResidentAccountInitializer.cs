@@ -2,7 +2,7 @@
 using System.Linq;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
-using UtopiaCity.Models.CityAdministration.ResidentAccount;
+using UtopiaCity.Models.CityAdministration;
 
 namespace UtopiaCity.Common.Initializers
 {

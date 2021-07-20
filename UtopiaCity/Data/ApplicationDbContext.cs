@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Emergency;
-using UtopiaCity.Models.CityAdministration.ResidentAccount;
+using UtopiaCity.Models.CityAdministration;
 
 namespace UtopiaCity.Data
 {
