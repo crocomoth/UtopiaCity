@@ -21,7 +21,7 @@ namespace UtopiaCity.Controllers.Life
             return View(_service.GetAll());
         }
         [HttpGet]
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
@@ -38,7 +38,7 @@ namespace UtopiaCity.Controllers.Life
         }
         [HttpGet]
         public IActionResult Edit(string id)
-        {            
+        {
             if (string.IsNullOrWhiteSpace(id))
             {
                 return NotFound();
@@ -53,29 +53,59 @@ namespace UtopiaCity.Controllers.Life
             var eventTypes = Enum.GetValues(typeof(EventType))
                 .Cast<EventType>()
                 .Select(x => new EventTypeItem { Id = (int)x, Name = x.ToString() });
-            
+
             var selected = eventTypes.FirstOrDefault(x => x.Id.Equals((int)e.EventType));
 
             ViewData["select"] = new SelectList(items: eventTypes, selectedValue: selected, dataTextField: nameof(EventTypeItem.Name), dataValueField: nameof(EventTypeItem.Id));
 
-            return View("Edit", e);
+            return View(e);
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, Event edited)
+        public IActionResult Edit(string id, Event e)
         {
-            if (id != edited.Id)
+            if (id != e.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _service.Update(edited);
+                _service.Update(e);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("Edit", edited);
+            return View("Edit", e);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+
+            var e = _service.GetById(id);
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            return View(e);
+        }
+
+        [HttpPost, ActionName("DeleteConfirmed")]
+        public IActionResult DeleteConfirmed(string id)
+        {
+            var e = _service.GetById(id);
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            _service.Remove(e);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
