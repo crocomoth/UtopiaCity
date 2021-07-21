@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using UtopiaCity.Data;
 using UtopiaCity.Models.HousingSystem;
+using UtopiaCity.Services.HousingSystem;
 
 namespace UtopiaCity.Controllers.HousingSystem
 {
     public class HousingSystemController : Controller
     {
-        private ApplicationDbContext _dbContext;
-        public HousingSystemController(ApplicationDbContext dbContext)
+        private readonly HousingSystemService _housingSystemService;
+        public HousingSystemController(HousingSystemService housingSystemService)
         {
-            this._dbContext = dbContext;
+            _housingSystemService = housingSystemService;
         }
 
         // view list of estates 
         public async Task<IActionResult> Index()
         {
-            return View("RealEstateListView", await _dbContext.RealEstate.ToListAsync());
+            return View("RealEstateListView", await _housingSystemService.GetRealEstatesList());
         }
 
         // get specific item by id
@@ -28,19 +27,19 @@ namespace UtopiaCity.Controllers.HousingSystem
                 return NotFound();
             }
 
-            var estate = await _dbContext.RealEstate.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var estate = _housingSystemService.GetRealEstateById(id);
             if (estate == null)
             {
                 return NotFound();
             }
 
-            return View(estate);
+            return View("DetailsRealEstateView", await estate);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return View("CreateRealEstateView");
         }
 
         [HttpPost]
@@ -48,12 +47,11 @@ namespace UtopiaCity.Controllers.HousingSystem
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Add(newEstate);
-                await _dbContext.SaveChangesAsync();
+                await _housingSystemService.AddRealEstate(newEstate);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(newEstate);
+            return View("CreateRealEstateView", newEstate);
         }
 
         [HttpGet]
@@ -64,13 +62,13 @@ namespace UtopiaCity.Controllers.HousingSystem
                 return NotFound();
             }
 
-            var estate = _dbContext.RealEstate.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var estate = await _housingSystemService.GetRealEstateById(id);
             if (estate == null)
             {
                 return NotFound();
             }
 
-            return View(estate);
+            return View("EditRealEstateView", estate);
         }
 
         [HttpPost]
@@ -83,12 +81,11 @@ namespace UtopiaCity.Controllers.HousingSystem
 
             if (ModelState.IsValid)
             {
-                _dbContext.Update(edited);
-                await _dbContext.SaveChangesAsync();
+                await _housingSystemService.UpdateRealEstate(edited);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(edited);
+            return View("EditRealEstateView", edited);
         }
 
         [HttpGet]
@@ -99,28 +96,27 @@ namespace UtopiaCity.Controllers.HousingSystem
                 return NotFound();
             }
 
-            var estate = _dbContext.RealEstate.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var estate = await _housingSystemService.GetRealEstateById(id);
 
             if (estate == null)
             {
                 return NotFound();
             }
 
-            return View(estate);
+            return View("DeleteRealEstateView", estate);
         }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var estate = _dbContext.RealEstate.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var estate = await _housingSystemService.GetRealEstateById(id);
             if (estate == null)
             {
                 // TODO rewrite?
                 return NotFound();
             }
 
-            _dbContext.Remove(estate);
-            await _dbContext.SaveChangesAsync();
+            await _housingSystemService.RemoveRealEstate(estate);
             return RedirectToAction(nameof(Index));
         }
     }

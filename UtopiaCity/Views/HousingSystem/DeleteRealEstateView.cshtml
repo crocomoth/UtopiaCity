@@ -1,4 +1,5 @@
-﻿@model UtopiaCity.Models.HousingSystem.RealEstate
+﻿@using UtopiaCity.Models.HousingSystem
+@model UtopiaCity.Models.HousingSystem.RealEstate
 
 @{
     ViewData["Title"] = "DeleteRealEstateView";
@@ -31,7 +32,7 @@
         </dd>
     </dl>
     
-    <form asp-action="DeleteRealEstateView">
+    <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
