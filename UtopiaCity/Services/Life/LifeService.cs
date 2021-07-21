@@ -70,6 +70,6 @@ namespace UtopiaCity.Services.Life
         public bool Exist(string id)
         {
             return _dbContext.Events.Any(x => x.Id.Equals(id));
-        }
+        }        
     }
 }

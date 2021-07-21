@@ -107,5 +107,20 @@ namespace UtopiaCity.Controllers.Life
             _service.Remove(e);
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Details(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+
+            var e = _service.GetById(id);
+            if (e == null)
+            {
+                NotFound();
+            }
+
+            return View(e);
+        }
     }
 }
