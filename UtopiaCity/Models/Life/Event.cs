@@ -21,7 +21,7 @@ namespace UtopiaCity.Models.Life
         public string Description { get; set; }
         [Required]
         [Display(Name = "Event Type")]
-        public int EventType { get; set; }
+        public int EventType { get; set; } //use EventType enums 0-3
     }
     public enum EventType 
     {

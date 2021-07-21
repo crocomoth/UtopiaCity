@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,47 @@ namespace UtopiaCity.Controllers.Life
             }
 
             return View("Create", e);
+        }
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {            
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+
+            var e = _service.GetById(id);
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            var eventTypes = Enum.GetValues(typeof(EventType))
+                .Cast<EventType>()
+                .Select(x => new EventTypeItem { Id = (int)x, Name = x.ToString() });
+            
+            var selected = eventTypes.FirstOrDefault(x => x.Id.Equals((int)e.EventType));
+
+            ViewData["select"] = new SelectList(items: eventTypes, selectedValue: selected, dataTextField: nameof(EventTypeItem.Name), dataValueField: nameof(EventTypeItem.Id));
+
+            return View("Edit", e);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(string id, Event edited)
+        {
+            if (id != edited.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _service.Update(edited);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View("Edit", edited);
         }
     }
 }
