@@ -14,10 +14,12 @@ namespace UtopiaCity.Models.HousingSystem
         public EstateType Type { get; set; }
         [Required]
         [Display(Name = "House address")]
+        // TODO implement different class Address?
         public string Address { get; set; }
         [Required]
         [Display(Name = "House owner")]
-        public string Owner { get; set; }
+        // TODO retrieve person data from LIFE?
+        public string Owner { get; set; }       
         public List<Resident> Residents { get; set; }
     }
     public enum EstateType
