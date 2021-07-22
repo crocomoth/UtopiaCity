@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UtopiaCity.Common.Initializers;
+using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Common
