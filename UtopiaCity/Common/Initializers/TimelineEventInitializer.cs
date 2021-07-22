@@ -32,11 +32,7 @@ namespace UtopiaCity.Common.Initializers
 
             DateTime dayAndYear = DateTime.Now;
 
-            string day = dayAndYear.Day.ToString(myCounty);
-
-            string year= dayAndYear.Year.ToString(myCounty);
-
-            string dayAndYearProp = string.Concat(day, "/", year);
+            string dd = dayAndYear.ToString("dd:yy", myCounty);
 
             Console.WriteLine(dayAndYear);
 
@@ -49,7 +45,7 @@ namespace UtopiaCity.Common.Initializers
                     {
                         DayAndYear = DateTime.Now,
 
-                        Schedule = dayAndYearProp,
+                        Schedule = dd,
 
                         TranscriptionOfPermission = "ALL IS RIGHT",
 
@@ -60,7 +56,7 @@ namespace UtopiaCity.Common.Initializers
                     {
                         DayAndYear = DateTime.Now,
                     
-                        Schedule = "Friday",
+                        Schedule = dd,
                     
                         TranscriptionOfPermission = "ALL IS RIGHT",
                     
@@ -71,7 +67,7 @@ namespace UtopiaCity.Common.Initializers
                     {
                         DayAndYear = DateTime.Now,
                     
-                        Schedule = dayAndYearProp,
+                        Schedule = dd,
                     
                         TranscriptionOfPermission = "ALL IS RIGHT",
                     
