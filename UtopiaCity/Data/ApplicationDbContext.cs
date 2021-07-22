@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Models.Emergency;
+using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
 
@@ -18,8 +19,11 @@ namespace UtopiaCity.Data
 
         public DbSet<SportComplex> SportComplex { get; set; }
 
+        public DbSet<RersidentAccount> RersidentAccount { get; set; }
+        public DbSet<SportComplex> SportComplex { get; set; }
+        
         public DbSet<Flight> Flights { get; set; }
-
+        
         public DbSet<WeatherReport> WeatherReports { get; set; }
 
         public DbSet<TimelineModel> TimelineModel { get; set; }

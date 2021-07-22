@@ -28,7 +28,7 @@ namespace UtopiaCity.Services.Sport
         /// </summary>
         /// <param name="id">Id of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
-        public SportComplex GetSportComplexById(int id) => _dbContext.SportComplex.FirstOrDefault(x => x.Id.Equals(id));
+        public SportComplex GetSportComplexById(string id) => _dbContext.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(id));
 
         /// <summary>
         /// Method for adding new sport complex to database.
