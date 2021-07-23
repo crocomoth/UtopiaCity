@@ -23,9 +23,9 @@ namespace UtopiaCity.Controllers.Airport
             return View("FlightList", _flightService.GetFlightList());
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
-            if (string.IsNullOrWhiteSpace(id.ToString()))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return NotFound();
             }
@@ -50,6 +50,7 @@ namespace UtopiaCity.Controllers.Airport
         {
             if (ModelState.IsValid)
             {
+                newFlight.FlightNumber = _flightService.GetRandomFlightNumber();
                 _flightService.AddFlight(newFlight);
                 return RedirectToAction(nameof(Index));
             }
@@ -58,9 +59,9 @@ namespace UtopiaCity.Controllers.Airport
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
-            if (string.IsNullOrWhiteSpace(id.ToString()))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return NotFound();
             }
@@ -77,7 +78,7 @@ namespace UtopiaCity.Controllers.Airport
         [HttpPost]
         public IActionResult Edit(string id, Flight edited)
         {
-            if (id != edited.Id.ToString())
+            if (id != edited.Id)
             {
                 return NotFound();
             }
@@ -92,9 +93,9 @@ namespace UtopiaCity.Controllers.Airport
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
-            if (id == 0)
+            if (string.IsNullOrWhiteSpace(id))
             {
                 NotFound();
             }
@@ -109,7 +110,7 @@ namespace UtopiaCity.Controllers.Airport
         }
 
         [HttpPost, ActionName("FlightDeleteView")]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(string id)
         {
             var flight = _flightService.GetFlightById(id);
             if (flight is null)

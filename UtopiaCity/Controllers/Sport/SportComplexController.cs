@@ -15,7 +15,7 @@ namespace UtopiaCity.Controllers.Sport
 
         public IActionResult AllSportComplexes() => View(_sportComplexService.GetAllSportComplexes());
 
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
@@ -42,7 +42,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
@@ -54,7 +54,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(string id)
         {
             var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
@@ -67,7 +67,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             var sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
@@ -79,9 +79,9 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, SportComplex sportComplex)
+        public IActionResult Edit(string id, SportComplex sportComplex)
         {
-            if (id != sportComplex.Id)
+            if (id != sportComplex.SportComplexId)
             {
                 return NotFound();
             }
