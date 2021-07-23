@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UtopiaCity.Common.Initializers;
+using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Common
@@ -22,6 +23,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new FlightInitializer());
           
             subDbInitializers.Add(new SportComplexInitializer());
+
             subDbInitializers.Add(new LifeInitializer());
         }
 

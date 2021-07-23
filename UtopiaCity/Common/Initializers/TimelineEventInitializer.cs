@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Common.Initializers

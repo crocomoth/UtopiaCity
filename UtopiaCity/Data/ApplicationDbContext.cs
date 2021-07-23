@@ -22,8 +22,6 @@ namespace UtopiaCity.Data
         
         public DbSet<SportComplex> SportComplex { get; set; }
         
-        public DbSet<RersidentAccount> RersidentAccount { get; set; }
-        
         public DbSet<Flight> Flights { get; set; }
         
         public DbSet<WeatherReport> WeatherReports { get; set; }
