@@ -7,8 +7,8 @@ namespace UtopiaCity.Models.HousingSystem
 {
     public class EstateAddress
     {
-        public List<String> District { get; set; }
-        public List<String> Street { get; set; }
-        public List<int> HouseNumber { get; set; }    
+        public String District { get; set; }
+        public String Street { get; set; }
+        public int HouseNumber { get; set; }    
     }
 }

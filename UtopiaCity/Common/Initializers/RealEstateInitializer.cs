@@ -57,8 +57,6 @@ namespace UtopiaCity.Common.Initializers
 
             context.AddRange(realEstate1, realEstate2, realEstate3, realEstate4, realEstate5);
             context.SaveChanges();
-
-
         }
     }
 }
