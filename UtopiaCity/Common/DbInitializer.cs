@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UtopiaCity.Common.Initializers;
+using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Common
@@ -15,6 +16,7 @@ namespace UtopiaCity.Common
         {
             // simple sets
             subDbInitializers.Add(new EmergencyReportInitializer());
+
             subDbInitializers.Add(new TimelineEventInitializer());
 
             // complex sets
