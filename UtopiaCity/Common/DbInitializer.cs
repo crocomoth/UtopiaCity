@@ -14,7 +14,6 @@ namespace UtopiaCity.Common
 
         public static void RegisterSubInitializers()
         {
-            // simple sets
             subDbInitializers.Add(new EmergencyReportInitializer());
           
             subDbInitializers.Add(new TimelineEventInitializer());
@@ -24,8 +23,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new FlightInitializer());
           
             subDbInitializers.Add(new SportComplexInitializer());
-
-            // complex sets
+            subDbInitializers.Add(new LifeInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)
