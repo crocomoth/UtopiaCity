@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UtopiaCity.Models.Sport.Enums;
 
 namespace UtopiaCity.Models.Sport
@@ -9,7 +10,8 @@ namespace UtopiaCity.Models.Sport
     /// </summary>
     public class SportComplex
     {
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string SportComplexId { get; set; }
 
         [Required]
         [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct title")]
