@@ -9,6 +9,7 @@ using System;
 using UtopiaCity.Common;
 using UtopiaCity.Data;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Services.Business;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Sport;
 
@@ -43,6 +44,8 @@ namespace UtopiaCity
             services.AddScoped<FlightService, FlightService>();
           
             services.AddScoped<WeatherReportService, WeatherReportService>();
+
+            services.AddScoped<BankService, BankService>();
 
             #endregion
 

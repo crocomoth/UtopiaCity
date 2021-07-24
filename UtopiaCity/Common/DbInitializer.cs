@@ -21,6 +21,7 @@ namespace UtopiaCity.Common
 
             subDbInitializers.Add(new SportComplexInitializer());
 
+            subDbInitializers.Add(new BankInitializer());
 
             // complex sets
         }
