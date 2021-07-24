@@ -1,0 +1,82 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager>
+
+@{
+    ViewData["Title"] = "Transport Managers List";
+}
+
+<h1>Orders List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeOfOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForPassenger)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForPassenger.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForPassenger.MobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForPassenger.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForPassenger.TransportType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ForPassenger.PayType)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForPassenger.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForPassenger.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForPassenger.MobilePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForPassenger.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForPassenger.TransportType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForPassenger.PayType)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h1>Please select your type of order: </h1>
+<a asp-action="GetPassengerDirection">
+    <div class="form-group">
+        <input type="submit" value="For Passengers" class="btn btn-primary" />
+    </div>
+</a>
+<a asp-action="GetCompanyDirection">
+    <div class="form-group">
+        <input type="submit" value="For Companies" class="btn btn-primary" />
+    </div>
+</a>

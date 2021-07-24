@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UtopiaCity.Common.Initializers;
+using UtopiaCity.Common.Initializers.AirportTransportSystem;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
@@ -17,6 +18,7 @@ namespace UtopiaCity.Common
             // simple sets
             subDbInitializers.Add(new EmergencyReportInitializer());
             subDbInitializers.Add(new FlightInitializer());
+            subDbInitializers.Add(new ForPassengerInitializer());
 
             // complex sets
         }
