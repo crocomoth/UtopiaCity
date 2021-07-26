@@ -17,6 +17,9 @@ namespace UtopiaCity.Data
         }
 
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
+        public DbSet<SportComplex> SportComplex { get; set; }
+
+        public DbSet<RersidentAccount> RersidentAccount { get; set; }
 
         public DbSet<RersidentAccount> RersidentAccount { get; set; }
         
@@ -28,10 +31,6 @@ namespace UtopiaCity.Data
 
         public DbSet<TimelineModel> TimelineModel { get; set; }
 
-        public DbSet<UtopiaCity.Models.TimelineModel.ScheduleModel> ScheduleModel { get; set; }
-        
-        public DbSet<PermitedModel> PermitedModel { get; set; }
-        
         public DbSet<Event> Events { get; set; }
     }
 }
