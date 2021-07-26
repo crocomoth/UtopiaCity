@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TimeOfDay)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PermissionStatus)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +47,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TimeOfDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermissionStatus)
             </td>
         </tr>
 }

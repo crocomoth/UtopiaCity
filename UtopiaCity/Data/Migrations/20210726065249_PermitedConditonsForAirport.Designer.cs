@@ -10,14 +10,14 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210720104757_PermitedConditonsForAirport")]
+    [Migration("20210726065249_PermitedConditonsForAirport")]
     partial class PermitedConditonsForAirport
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.15")
+                .HasAnnotation("ProductVersion", "3.1.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -223,10 +223,9 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -236,6 +235,9 @@ namespace UtopiaCity.Data.Migrations
 
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FlightNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Weather")
                         .HasColumnType("nvarchar(max)");
@@ -273,6 +275,31 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FamilyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RersidentAccount");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
                 {
                     b.Property<string>("Id")
@@ -291,12 +318,36 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("EmergencyReport");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Life.Event", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EventType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("SportComplexId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -315,7 +366,7 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<int>("TypeOfSport")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("SportComplexId");
 
                     b.ToTable("SportComplex");
                 });
@@ -329,14 +380,17 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<bool>("GovernmentStatus")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PermissionStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Rainfall")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Season")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("SpeedOfWind")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("SpeedOfWind")
+                        .HasColumnType("int");
 
                     b.Property<string>("TimeOfDay")
                         .HasColumnType("nvarchar(max)");

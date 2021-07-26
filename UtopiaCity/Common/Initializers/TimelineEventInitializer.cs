@@ -84,19 +84,31 @@ namespace UtopiaCity.Common.Initializers
                     new Models.TimelineModel.PermitedModel
                     {
                         Season = "Winter",
-                        SpeedOfWind = 10.01M,
+                        SpeedOfWind = 10,
                         GovernmentStatus = false,
                         Rainfall = "rain",
-                        TimeOfDay = "night"
+                        TimeOfDay = "night",
+                        PermissionStatus = "takeof allowed"
                     },
 
                     new Models.TimelineModel.PermitedModel
                     {
                         Season = "Winter",
-                        SpeedOfWind = 10.01M,
+                        SpeedOfWind = 9,
                         GovernmentStatus = false,
                         Rainfall = "rain",
-                        TimeOfDay = "night"
+                        TimeOfDay = "night",
+                        PermissionStatus = "takeof prohibited"
+                    },
+
+                    new Models.TimelineModel.PermitedModel
+                    {
+                        Season = "Summer",
+                        SpeedOfWind = 7,
+                        GovernmentStatus = true,
+                        Rainfall = "none",
+                        TimeOfDay = "day",
+                        PermissionStatus = "takeof is postponed"
                     }
 
                     );

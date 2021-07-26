@@ -222,6 +222,7 @@ namespace UtopiaCity.Data.Migrations
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ArrivalTime")
@@ -270,6 +271,31 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherReports");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FamilyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RersidentAccount");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
@@ -352,14 +378,17 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<bool>("GovernmentStatus")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PermissionStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Rainfall")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Season")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("SpeedOfWind")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("SpeedOfWind")
+                        .HasColumnType("int");
 
                     b.Property<string>("TimeOfDay")
                         .HasColumnType("nvarchar(max)");

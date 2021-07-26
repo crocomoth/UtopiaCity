@@ -9,9 +9,10 @@ namespace UtopiaCity.Models.TimelineModel
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public string Season { get; set; }
-        public decimal SpeedOfWind { get; set; }
+        public int SpeedOfWind { get; set; }
         public bool GovernmentStatus { get; set; }
         public string Rainfall { get; set; }
         public string TimeOfDay { get; set; }  
+        public string PermissionStatus { get; set; }
     }
 }

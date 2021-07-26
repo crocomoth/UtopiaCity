@@ -17,19 +17,20 @@ namespace UtopiaCity.Data
         }
 
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
-        public DbSet<SportComplex> SportComplex { get; set; }
-
-        public DbSet<RersidentAccount> RersidentAccount { get; set; }
-
-        public DbSet<RersidentAccount> RersidentAccount { get; set; }
         
         public DbSet<SportComplex> SportComplex { get; set; }
+        
+        public DbSet<RersidentAccount> RersidentAccount { get; set; }
         
         public DbSet<Flight> Flights { get; set; }
         
         public DbSet<WeatherReport> WeatherReports { get; set; }
 
         public DbSet<TimelineModel> TimelineModel { get; set; }
+
+        public DbSet<PermitedModel> PermitedModel { get; set; }
+
+        public DbSet<ScheduleModel> ScheduleModel { get; set; }
 
         public DbSet<Event> Events { get; set; }
     }
