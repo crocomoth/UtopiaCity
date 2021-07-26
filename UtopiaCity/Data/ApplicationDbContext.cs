@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.Airport.TransportManagerSystem;
 using UtopiaCity.Models.Emergency;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Models.CityAdministration;
@@ -14,7 +15,12 @@ namespace UtopiaCity.Data
             : base(options)
         {
         }
-
+        public DbSet<EmergencyReport> EmergencyReport { get; set; }       
+        public DbSet<SportComplex> SportComplex { get; set; }      
+        public DbSet<Flight> Flights { get; set; }
+        public DbSet<WeatherReport> WeatherReports { get; set; }
+        public DbSet<ForPassenger> ForPassengers { get; set; }
+        public DbSet<TransportManager> TransportManagers { get; set; }
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
         public DbSet<SportComplex> SportComplex { get; set; }
         public DbSet<RersidentAccount> RersidentAccount { get; set; }
