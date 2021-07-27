@@ -1,0 +1,62 @@
+﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.TimelineModel>
+
+@{
+    ViewData["Title"] = "ListTimelineView";
+}
+
+<h1>ListTimelineView</h1>
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">ScheduleListView</a>
+
+        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">PermitedConditonsView</a>
+        
+    </li>
+</ul>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DayAndYear)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Schedule)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TranscriptionOfPermission)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UniqueRules)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DayAndYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Schedule)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TranscriptionOfPermission)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UniqueRules)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

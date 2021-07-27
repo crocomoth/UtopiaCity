@@ -1,0 +1,57 @@
+﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.PermitedModel>
+
+@{
+    ViewData["Title"] = "PermitedConditonsView";
+}
+
+<h1>PermitedConditonsView</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Season)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpeedOfWind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GovernmentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rainfall)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeOfDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PermissionStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Season)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpeedOfWind)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GovernmentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rainfall)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeOfDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermissionStatus)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
