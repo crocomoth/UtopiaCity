@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UtopiaCity.Common.Initializers;
+using UtopiaCity.Common.Initializers.AirportTransportSystem;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
@@ -24,6 +25,8 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new ResidentAccountInitializer());
           
             subDbInitializers.Add(new FlightInitializer());
+          
+            subDbInitializers.Add(new ForPassengerInitializer());
           
             subDbInitializers.Add(new SportComplexInitializer());
 

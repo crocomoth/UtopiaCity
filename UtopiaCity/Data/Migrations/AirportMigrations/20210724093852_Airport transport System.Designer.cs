@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210724093852_Airport transport System")]
+    partial class AirporttransportSystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,31 +320,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FamilyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RersidentAccount");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
                 {
                     b.Property<string>("Id")
@@ -361,36 +338,12 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("EmergencyReport");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Life.Event", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EventType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
                 {
-                    b.Property<string>("SportComplexId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -409,87 +362,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<int>("TypeOfSport")
                         .HasColumnType("int");
 
-                    b.HasKey("SportComplexId");
+                    b.HasKey("Id");
 
                     b.ToTable("SportComplex");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.PermitedModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("GovernmentStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PermissionStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rainfall")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Season")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SpeedOfWind")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TimeOfDay")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PermitedModel");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.ScheduleModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("EventName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EventType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModelName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimeOfEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("TimeOfStart")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ScheduleModel");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.TimelineModel", b =>
-                {
-                    b.Property<string>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DayAndYear")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Schedule")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TranscriptionOfPermission")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UniqueRules")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TimelineModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
