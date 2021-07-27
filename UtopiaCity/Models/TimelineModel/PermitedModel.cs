@@ -4,8 +4,6 @@ namespace UtopiaCity.Models.TimelineModel
 {
     public class PermitedModel
     {
-
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public string Season { get; set; }
