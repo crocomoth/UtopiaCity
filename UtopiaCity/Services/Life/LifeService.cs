@@ -70,6 +70,55 @@ namespace UtopiaCity.Services.Life
         public bool Exist(string id)
         {
             return _dbContext.Events.Any(x => x.Id.Equals(id));
-        }        
+        }
+        public List<Event> Search(EventDto dto)
+        {
+            var list = SearchByDates(from: dto.From, to: dto.To);
+            list = SearchByEventType(list, dto.EventType);
+            list = SearchByWord(list, dto.SearchWord);
+            return list;
+        }
+        private List<Event> SearchByDates(DateTime? from, DateTime? to)
+        {
+            if (from != null && to != null)
+            {
+                return _dbContext.Events.Where(x => x.Date >= from && x.Date <= to).ToList();
+            }
+            else if (from != null)
+            {
+                return _dbContext.Events.Where(x => x.Date >= from).ToList();
+            }
+            else if (to != null)
+            {
+                return _dbContext.Events.Where(x => x.Date <= to).ToList();
+            }
+            else
+            {
+                return _dbContext.Events.ToList();
+            }
+        }
+        private List<Event> SearchByEventType(List<Event> events, int? type)
+        {
+            if (type != null)
+            {
+                return events.Where(x => x.EventType.Equals(type)).ToList();
+            }
+            else
+            {
+                return events;
+            }
+        }
+
+        private List<Event> SearchByWord(List<Event> events, string word)
+        {
+            if (!string.IsNullOrEmpty(word))
+            {
+                return events.Where(x => x.Title.Contains(word) || x.Description.Contains(word)).ToList();
+            }
+            else
+            {
+                return events;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Services.Life;
@@ -121,6 +122,11 @@ namespace UtopiaCity.Controllers.Life
             }
 
             return View(e);
+        }
+        [HttpPost]
+        public IActionResult Search(EventDto dto)
+        {
+            return View("Index", _service.Search(dto));
         }
     }
 }

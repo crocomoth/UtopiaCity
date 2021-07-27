@@ -1,0 +1,37 @@
+﻿<div class="container" style="border-radius:10px;
+    border-style:solid;
+    border-width:thin;
+    border-color:blue;
+    padding: 15px;
+    margin:5px;">
+    <form asp-controller = "Life" asp-action = "Search">
+        <div class="row">
+            <div class="form-group col-sm">
+                <label>Searching Word</label><br />
+                <input type="text" name="SearchWord" value="" style="border-radius: 10px" id="sword" />
+                <br />
+            </div>
+            <div class="form-group col-sm">
+                <label>From</label><br />
+                <input type="datetime-local" name="From" value="" style="border-radius: 10px" id="sfrom" />
+                <br />
+            </div>
+            <div class="form-group col-sm">
+                <label>To</label><br />
+                <input type="datetime-local" name="To" value="" style="border-radius: 10px" id="sto" />
+                <br />
+            </div>
+            <div class="form-group col-sm">
+                <label>Event Type</label><br />
+                <input type="number" name="EventType" value="" style="border-radius: 10px" id="stype" />
+                <br />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm">
+                <input type="submit" name="search" value="Search" style="border-radius: 10px; background-color:dodgerblue; color:black" id="search" /><br />
+            </div>
+        </div>
+    </form>
+</div>
