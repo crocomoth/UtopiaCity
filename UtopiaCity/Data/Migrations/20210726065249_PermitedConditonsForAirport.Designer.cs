@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210726065249_PermitedConditonsForAirport")]
+    partial class PermitedConditonsForAirport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,51 +247,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Flights");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MobilePhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PayType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TransportType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ForPassengers");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ForPassengerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TypeOfOrder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForPassengerId");
-
-                    b.ToTable("TransportManagers");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Airport.WeatherReport", b =>
                 {
                     b.Property<string>("Id")
@@ -342,28 +299,6 @@ namespace UtopiaCity.Data.Migrations
 
                     b.ToTable("RersidentAccount");
                 });
-
-            modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
-            {
-                b.Property<string>("Id")
-                    .HasColumnType("nvarchar(450)");
-
-                b.Property<DateTime>("DateCreated")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Name")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("Salt")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("SerialNumber")
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("Id");
-
-                b.ToTable("EmergencyCertificate");
-            });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
                 {
@@ -563,13 +498,6 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
-                        .WithMany()
-                        .HasForeignKey("ForPassengerId");
                 });
 #pragma warning restore 612, 618
         }
