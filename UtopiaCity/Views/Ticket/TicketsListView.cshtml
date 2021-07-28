@@ -1,0 +1,53 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.Ticket>
+
+@{
+    ViewData["Title"] = "TicketsListView";
+}
+
+<h1>TicketListView</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Flight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RersidentAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PermitedModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direction)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Flight" asp-action="Index">@Html.DisplayFor(modelItem => item.Flight.FlightNumber)</a>
+                </td>
+                <td>
+                    <a asp-controller="RersidentAccount" asp-action="Index">@Html.DisplayFor(modelItem => item.RersidentAccount.FirstName)</a>
+                </td>
+                <td>
+                    <a asp-controller="PermitedConditions" asp-action="Index">@Html.DisplayFor(modelItem => item.PermitedModel.PermissionStatus)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direction)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
