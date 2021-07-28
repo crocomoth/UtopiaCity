@@ -44,7 +44,7 @@ namespace UtopiaCity.Common.Initializers.AirportTransportSystem
                 MobilePhone = "97786452323",
                 FullName = "Ivanov Ivan Ivanovich",
                 Address = "Rechnaya 6",
-                TransportType = "BusNumber4",
+                TransportType = "BusNumber",
                 PayType = "cash",
             };
             var passenger3 = new ForPassenger
@@ -53,7 +53,7 @@ namespace UtopiaCity.Common.Initializers.AirportTransportSystem
                 MobilePhone = "87754331212",
                 FullName = "Evgen'ev Evgenii Evgenievich",
                 Address = "Rechnaya 8",
-                TransportType = "BusNumber54",
+                TransportType = "BusNumber",
                 PayType = "BankService",
             };
             var passenger4 = new ForPassenger
@@ -71,7 +71,7 @@ namespace UtopiaCity.Common.Initializers.AirportTransportSystem
                 MobilePhone = "97778056311",
                 FullName = "Aleksandrov Aleksandr Aleksandrovich",
                 Address = "Rechnaya 3",
-                TransportType = "BusNumber99",
+                TransportType = "BusNumber",
                 PayType = "webMoney",
             };
             var passenger6 = new ForPassenger
@@ -98,7 +98,7 @@ namespace UtopiaCity.Common.Initializers.AirportTransportSystem
                 MobilePhone = "87772473589",
                 FullName = "Sergeev Sergei Sergeevich",
                 Address = "Yablochnaya 24",
-                TransportType = "BusNumber11",
+                TransportType = "BusNumber",
                 PayType = "cash",
             };
             var passenger9 = new ForPassenger

@@ -7,7 +7,6 @@ namespace UtopiaCity.Models.Airport.TransportManagerSystem
     {
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public string Id { get; set; }
 
         public string FullName { get; set; }

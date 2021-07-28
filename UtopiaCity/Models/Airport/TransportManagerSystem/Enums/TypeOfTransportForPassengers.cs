@@ -8,10 +8,7 @@ namespace UtopiaCity.Models.Airport.TransportManagerSystem.Enums
     public enum TypeOfTransportForPassengers
     {
         Car = 0,
-        BusNumber4 = 1,
-        BusNumber11 = 2,
-        BusNumber99 = 3,
-        BusNumber54 = 4,
-        AirportSpecialBus = 5
+        Bus = 1,
+        AirportSpecialBus = 2
     }
 }

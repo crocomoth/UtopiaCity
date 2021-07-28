@@ -22,6 +22,7 @@ namespace UtopiaCity.Data
         public DbSet<WeatherReport> WeatherReports { get; set; }
         public DbSet<ForPassenger> ForPassengers { get; set; }
         public DbSet<TransportManager> TransportManagers { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
         
         public DbSet<RersidentAccount> RersidentAccount { get; set; }
 
