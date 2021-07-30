@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Models.Sport;
-using UtopiaCity.Models.Sport.ViewModels;
+using UtopiaCity.ViewModels.Sport;
 using UtopiaCity.Services.Sport;
 
 namespace UtopiaCity.Controllers.Sport
@@ -26,34 +26,26 @@ namespace UtopiaCity.Controllers.Sport
         [HttpGet]
         public IActionResult Create()
         {
-            var sportEventViewModel = new SportEventViewModel
-            {
-                SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles()
-            };
-            return View(sportEventViewModel);
+            ViewBag.SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles();
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Create(SportEventViewModel sportEventViewModel)
+        public IActionResult Create(SportComplexEventViewModel sportComplexEventViewModel)
         {
-            if (ModelState.IsValid && sportEventViewModel == null)
+            if (sportComplexEventViewModel == null)
             {
                 return View("Error", "You made mistakes while creating new Sport Event");
             }
 
-            var sportComplex = _sportComplexService.GetSportComplexByTitle(sportEventViewModel.SportComplexTitle);
+            var sportComplex = _sportComplexService.GetSportComplexByTitle(sportComplexEventViewModel.SportComplex.Title);
             if (sportComplex == null)
             {
                 return View("Error", "Incorrect sport complex chosen." + Environment.NewLine + "Please, try again");
             }
 
-            SportEvent sportEvent = new SportEvent
-            {
-                Title = sportEventViewModel.Title,
-                DateOfTheEvent = sportEventViewModel.DateOfTheEvent,
-                SportComplexId = sportComplex.SportComplexId
-            };
-
+            SportEvent sportEvent = sportComplexEventViewModel.SportEvent;
+            sportEvent.SportComplexId = sportComplex.SportComplexId;
             _sportEventService.AddSportEventToDb(sportEvent);
             return RedirectToAction(nameof(AllSportEvents));
         }
@@ -74,15 +66,13 @@ namespace UtopiaCity.Controllers.Sport
 
             var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
 
-            var sportEventViewModel = new SportEventViewModel
+            var sportComplexEventViewModel = new SportComplexEventViewModel
             {
-                Title = sportEvent.Title,
-                DateOfTheEvent = sportEvent.DateOfTheEvent,
-                SportComplexTitle = sportComplex.Title,
-                SportComplexAddress = sportComplex.Address
+                SportComplex = sportComplex,
+                SportEvent = sportEvent
             };
 
-            return View(sportEventViewModel);
+            return View(sportComplexEventViewModel);
         }
         
         [HttpPost, ActionName("Delete")]
@@ -119,39 +109,32 @@ namespace UtopiaCity.Controllers.Sport
 
             var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
 
-            var sportEventViewModel = new SportEventViewModel
+            var sportComplexEventViewModel = new SportComplexEventViewModel
             {
-                SportEventId = sportEvent.SportEventId,
-                Title = sportEvent.Title,
-                DateOfTheEvent = sportEvent.DateOfTheEvent,
-                SportComplexId = sportComplex.SportComplexId,
-                SportComplexTitle = sportComplex.Title,
-                SportComplexAddress = sportComplex.Address,
-                SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles()
+                SportComplex = sportComplex,
+                SportEvent = sportEvent
             };
 
-            return View(sportEventViewModel);
+            ViewBag.SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles();
+            return View(sportComplexEventViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, SportEventViewModel sportEventViewModel)
+        public IActionResult Edit(string id, SportComplexEventViewModel sportComplexEventViewModel)
         {
             if (id == null)
             {
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");
             }
-            else if (sportEventViewModel == null)
+            else if (sportComplexEventViewModel == null)
             {
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportEvent = new SportEvent
-            {
-                SportEventId = sportEventViewModel.SportEventId,
-                Title = sportEventViewModel.Title,
-                DateOfTheEvent = sportEventViewModel.DateOfTheEvent,
-                SportComplexId = _sportComplexService.GetSportComplexByTitle(sportEventViewModel.SportComplexTitle).SportComplexId
-            };
+            var sportComplex = _sportComplexService.GetSportComplexByTitle(sportComplexEventViewModel.SportComplex.Title);
+
+            var sportEvent = sportComplexEventViewModel.SportEvent;
+            sportEvent.SportComplexId = sportComplex.SportComplexId;
 
             _sportEventService.UpdateSportEventInDb(sportEvent);
             return RedirectToAction(nameof(AllSportEvents));
@@ -172,17 +155,13 @@ namespace UtopiaCity.Controllers.Sport
 
             var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
 
-            var sportEventViewModel = new SportEventViewModel
+            var sportComplexEventViewModel = new SportComplexEventViewModel
             {
-                SportEventId = sportEvent.SportEventId,
-                Title = sportEvent.Title,
-                DateOfTheEvent = sportEvent.DateOfTheEvent,
-                SportComplexId = sportEvent.SportComplexId,
-                SportComplexTitle = sportComplex.Title,
-                SportComplexAddress = sportComplex.Address
+                SportComplex = sportComplex,
+                SportEvent = sportEvent
             };
 
-            return View(sportEventViewModel);
+            return View(sportComplexEventViewModel);
         }
     }
 }

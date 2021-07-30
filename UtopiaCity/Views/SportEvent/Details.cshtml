@@ -1,4 +1,4 @@
-﻿@model UtopiaCity.Models.Sport.ViewModels.SportEventViewModel
+﻿@model SportComplexEventViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,32 +11,32 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.SportEvent.Title)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.SportEvent.Title)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfTheEvent)
+            @Html.DisplayNameFor(model => model.SportEvent.DateOfTheEvent)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateOfTheEvent)
+            @Html.DisplayFor(model => model.SportEvent.DateOfTheEvent)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SportComplexTitle)
+            @Html.DisplayNameFor(model => model.SportComplex.Title)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SportComplexTitle)
+            @Html.DisplayFor(model => model.SportComplex.Title)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SportComplexAddress)
+            @Html.DisplayNameFor(model => model.SportComplex.Address)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SportComplexAddress)
+            @Html.DisplayFor(model => model.SportComplex.Address)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.SportEventId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.SportEvent.SportEventId">Edit</a> |
     <a asp-action="AllSportEvents">Back to List</a>
 </div>
