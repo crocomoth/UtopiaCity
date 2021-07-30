@@ -1,0 +1,50 @@
+﻿@model SportComplexEventViewModel
+
+@{
+    ViewData["Title"] = "Create"; 
+}
+
+<h1>Create</h1>
+
+<h4>SportEvent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SportEvent.Title" class="control-label"></label>
+                <input asp-for="SportEvent.Title" class="form-control" />
+                <span asp-validation-for="SportEvent.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SportEvent.DateOfTheEvent" class="control-label"></label>
+                <input asp-for="SportEvent.DateOfTheEvent" class="form-control" />
+                <span asp-validation-for="SportEvent.DateOfTheEvent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SportComplex.Title" class="control-label"></label>
+                <select asp-for="SportComplex.Title" class="form-control">
+                    @foreach (var sportComplexTitle in ViewBag.SportComplexesTitles)
+                    {
+                        <option value="@sportComplexTitle">
+                            @sportComplexTitle
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="SportComplex.Title" class="text-danger"></span>
+             </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AllSportEvents">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,42 @@
+﻿@model SportComplexEventViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SportEvent</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SportEvent.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SportEvent.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SportEvent.DateOfTheEvent)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SportEvent.DateOfTheEvent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SportComplex.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SportComplex.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SportComplex.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SportComplex.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SportEvent.SportEventId">Edit</a> |
+    <a asp-action="AllSportEvents">Back to List</a>
+</div>

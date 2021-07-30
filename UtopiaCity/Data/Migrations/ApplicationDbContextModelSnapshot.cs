@@ -318,6 +318,27 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("SportComplex");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
+                {
+                    b.Property<string>("SportEventId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateOfTheEvent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SportComplexId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SportEventId");
+
+                    b.HasIndex("SportComplexId");
+
+                    b.ToTable("SportEvent");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -367,6 +388,13 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
+                        .WithMany()
+                        .HasForeignKey("SportComplexId");
                 });
 #pragma warning restore 612, 618
         }
