@@ -21,7 +21,21 @@ namespace UtopiaCity.Controllers.Sport
             _sportComplexService = sportComplexService;
         }
 
-        public IActionResult AllSportEvents() => View(_sportEventService.GetAllSportEvents());
+        public IActionResult AllSportEvents()
+        {
+            var allSportEvents = _sportEventService.GetAllSportEvents().ToList();
+            var sportComplexEventViewModels = new List<SportComplexEventViewModel>();
+            foreach(var sportEvent in allSportEvents)
+            {
+                sportComplexEventViewModels.Add(new SportComplexEventViewModel
+                {
+                    SportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId),
+                    SportEvent = sportEvent
+                });
+            }
+
+            return View(sportComplexEventViewModels);
+        }
 
         [HttpGet]
         public IActionResult Create()

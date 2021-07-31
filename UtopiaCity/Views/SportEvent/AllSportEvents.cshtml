@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UtopiaCity.Models.Sport.SportEvent>
+﻿@model IEnumerable<SportComplexEventViewModel>
 
 @{
     ViewData["Title"] = "AllSportEvents";
@@ -7,16 +7,19 @@
 <h1>AllSportEvents</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-outline-primary" role="button" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.SportEvent.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfTheEvent)
+                @Html.DisplayNameFor(model => model.SportEvent.DateOfTheEvent)
+            </th>
+            <th>
+                Sport Complex
             </th>
             <th></th>
         </tr>
@@ -25,18 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.SportEvent.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateOfTheEvent)
+                @Html.DisplayFor(modelItem => item.SportEvent.DateOfTheEvent)
             </td>
             <td>
-                <a asp-controller="SportComplex" asp-action="Details" asp-route-id="@item.SportComplexId">Sport complex details</a>
+                <a asp-controller="SportComplex" asp-action="Details" asp-route-id="@item.SportComplex.SportComplexId">@item.SportComplex.Title</a>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SportEventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SportEventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SportEventId">Delete</a>
+                <a class="btn btn-outline-success btn-sm" role="button" asp-action="Edit" asp-route-id="@item.SportEvent.SportEventId">Edit</a> |
+                <a class="btn btn-outline-info btn-sm" role="button" asp-action="Details" asp-route-id="@item.SportEvent.SportEventId">Details</a> |
+                <a class="btn btn-outline-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.SportEvent.SportEventId">Delete</a>
             </td>
         </tr>
 }
