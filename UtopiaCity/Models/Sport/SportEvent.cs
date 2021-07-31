@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace UtopiaCity.Models.Sport
 {
+    /// <summary>
+    /// Represents sport event.
+    /// </summary>
     public class SportEvent
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

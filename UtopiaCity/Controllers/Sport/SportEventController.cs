@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.ViewModels.Sport;
 using UtopiaCity.Services.Sport;

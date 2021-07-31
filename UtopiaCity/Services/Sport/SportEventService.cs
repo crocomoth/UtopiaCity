@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
 
 namespace UtopiaCity.Services.Sport
 {
+    /// <summary>
+    /// Class to handle basic CRUD operations for <see cref="SportEvent"/>
+    /// </summary>
     public class SportEventService
     {
         private readonly ApplicationDbContext _dbContext;
@@ -16,22 +17,43 @@ namespace UtopiaCity.Services.Sport
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets list of all sport events.
+        /// </summary>
+        /// <returns>List of all existing sport events.</returns>
         public List<SportEvent> GetAllSportEvents() => _dbContext.SportEvent.ToList();
 
+        /// <summary>
+        /// Gets <see cref="SportEvent"/> by Id.
+        /// </summary>
+        /// <param name="id">Id of sport event.</param>
+        /// <returns>Sport event if it exists, otherwise null.</returns>
         public SportEvent GetSportEventById(string id) => _dbContext.SportEvent.FirstOrDefault(x => x.SportEventId.Equals(id));
 
+        /// <summary>
+        /// Method for adding new sport event to database.
+        /// </summary>
+        /// <param name="sportEvent">Sport event for adding.</param>
         public void AddSportEventToDb(SportEvent sportEvent)
         {
             _dbContext.Add(sportEvent);
             _dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Method for removing sport event from database.
+        /// </summary>
+        /// <param name="sportEvent">Sport event for adding.</param>
         public void RemoveSportEventFromDb(SportEvent sportEvent)
         {
             _dbContext.Remove(sportEvent);
             _dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Method for updating sport event in database.
+        /// </summary>
+        /// <param name="sportEvent">Sport event for adding.</param>
         public void UpdateSportEventInDb(SportEvent sportEvent)
         {
             _dbContext.Update(sportEvent);
