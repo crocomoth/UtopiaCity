@@ -23,5 +23,9 @@ namespace UtopiaCity.Data
         public DbSet<WeatherReport> WeatherReports { get; set; }
 
         public DbSet<Bank> Banks { get; set; }
+
+        public DbSet<CompanyStatus> CompanyStatuses { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
     }
 }

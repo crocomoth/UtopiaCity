@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace UtopiaCity.Models.Business
 {
-    public class Bank
+    public class Company
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-
+        
         [Required]
         public string Name { get; set; }
+        
+        public string CEO { get; set; }  // <----
+        
+        public string IIK { get; set; }
 
-        [Required]
-        [StringLength(8, MinimumLength = 8)]
-        public string BIK { get; set; }
+        public string BIN { get; set; }
 
-        public ICollection<Company> Companies { get; set; }
+        public string BankId { get; set; }
+        public Bank Bank { get; set; }
+
+        public string CompanyStatusId { get; set; }
+        public CompanyStatus CompanyStatus { get; set; }
     }
 }

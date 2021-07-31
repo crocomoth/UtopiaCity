@@ -47,6 +47,9 @@ namespace UtopiaCity
 
             services.AddScoped<BankService, BankService>();
 
+            services.AddScoped<CompanyStatusService, CompanyStatusService>();
+
+            services.AddScoped<CompanyAppService, CompanyAppService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>

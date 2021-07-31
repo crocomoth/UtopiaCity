@@ -23,6 +23,10 @@ namespace UtopiaCity.Common
 
             subDbInitializers.Add(new BankInitializer());
 
+            subDbInitializers.Add(new CompanyStatusInitializer());
+
+            subDbInitializers.Add(new CompanyInitializer());
+
             // complex sets
         }
 

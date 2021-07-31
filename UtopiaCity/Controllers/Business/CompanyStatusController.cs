@@ -8,36 +8,36 @@ using UtopiaCity.Services.Business;
 
 namespace UtopiaCity.Controllers.Business
 {
-    public class BankController: Controller
+    public class CompanyStatusController: Controller
     {
-        private readonly BankService _bankService;
+        private readonly CompanyStatusService _companyStatusService;
 
-        public BankController(BankService bankService)
+        public CompanyStatusController(CompanyStatusService companyStatusService)
         {
-            _bankService = bankService;
+            _companyStatusService = companyStatusService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View("IndexView", await _bankService.GetAll());
+            return View("Index", await _companyStatusService.GetAll());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View("CreateView");
+            return View("Create");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Bank bank)
+        public async Task<IActionResult> Create(CompanyStatus status)
         {
             if (ModelState.IsValid)
             {
-                await _bankService.Create(bank);
+                await _companyStatusService.Create(status);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("CreateView", bank);
+            return View("Create", status);
         }
 
         [HttpGet]
@@ -48,32 +48,32 @@ namespace UtopiaCity.Controllers.Business
                 return NotFound();
             }
 
-            var bank = await _bankService.GetById(id);
-            if (bank == null)
+            var status = await _companyStatusService.GetById(id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            return View("EditView", bank);
+            return View("Edit", status);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, Bank bank)
+        public async Task<IActionResult>Edit(string id, CompanyStatus status)
         {
-            if (id != bank.Id)
+            if (id != status.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                await _bankService.Update(bank);
+                await _companyStatusService.Update(status);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("EditView", bank);
+            return View("Edit", status);
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
@@ -82,26 +82,25 @@ namespace UtopiaCity.Controllers.Business
                 return NotFound();
             }
 
-            var bank = await _bankService.GetById(id);
-            if (bank == null)
+            var status = await _companyStatusService.GetById(id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            return View("DeleteView", bank);
+            return View("Delete", status);
         }
 
-
-        [HttpPost, ActionName("DeleteView")]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var bank = await _bankService.GetById(id);
-            if (bank == null)
+            var status = await _companyStatusService.GetById(id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            await _bankService.Delete(bank);
+            await _companyStatusService.Delete(status);
             return RedirectToAction(nameof(Index));
         }
     }
