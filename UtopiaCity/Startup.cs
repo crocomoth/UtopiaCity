@@ -8,9 +8,11 @@ using Microsoft.Extensions.Hosting;
 using System;
 using UtopiaCity.Common;
 using UtopiaCity.Data;
+using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.Business;
 using UtopiaCity.Services.Emergency;
+using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 
 namespace UtopiaCity
@@ -38,12 +40,11 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
-
+            services.AddScoped<ResidentAccountService, ResidentAccountService>();
             services.AddScoped<SportComplexService, SportComplexService>();
-          
             services.AddScoped<FlightService, FlightService>();
-          
             services.AddScoped<WeatherReportService, WeatherReportService>();
+            services.AddScoped<LifeService, LifeService>();
 
             services.AddScoped<BankService, BankService>();
 

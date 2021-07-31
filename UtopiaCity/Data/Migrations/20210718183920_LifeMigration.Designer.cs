@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210718183920_LifeMigration")]
+    partial class LifeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,9 +223,10 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -233,9 +236,6 @@ namespace UtopiaCity.Data.Migrations
 
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FlightNumber")
-                        .HasColumnType("int");
 
                     b.Property<string>("Weather")
                         .HasColumnType("nvarchar(max)");
@@ -271,75 +271,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherReports");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Business.Bank", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BIK")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(8)")
-                        .HasMaxLength(8);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Banks");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Business.Company", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BIN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BankId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CEO")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyStatusId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IIK")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BankId");
-
-                    b.HasIndex("CompanyStatusId");
-
-                    b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Business.CompanyStatus", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CompanyStatuses");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
@@ -387,9 +318,10 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
                 {
-                    b.Property<string>("SportComplexId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -408,7 +340,7 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<int>("TypeOfSport")
                         .HasColumnType("int");
 
-                    b.HasKey("SportComplexId");
+                    b.HasKey("Id");
 
                     b.ToTable("SportComplex");
                 });
@@ -462,17 +394,6 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Business.Company", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Business.Bank", "Bank")
-                        .WithMany()
-                        .HasForeignKey("BankId");
-
-                    b.HasOne("UtopiaCity.Models.Business.CompanyStatus", "CompanyStatus")
-                        .WithMany()
-                        .HasForeignKey("CompanyStatusId");
                 });
 #pragma warning restore 612, 618
         }
