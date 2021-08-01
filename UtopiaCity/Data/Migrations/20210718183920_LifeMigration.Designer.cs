@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210718183920_LifeMigration")]
+    partial class LifeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,8 +223,10 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -232,9 +236,6 @@ namespace UtopiaCity.Data.Migrations
 
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FlightNumber")
-                        .HasColumnType("int");
 
                     b.Property<string>("Weather")
                         .HasColumnType("nvarchar(max)");
@@ -317,9 +318,10 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
                 {
-                    b.Property<string>("SportComplexId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -338,30 +340,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<int>("TypeOfSport")
                         .HasColumnType("int");
 
-                    b.HasKey("SportComplexId");
+                    b.HasKey("Id");
 
                     b.ToTable("SportComplex");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
-                {
-                    b.Property<string>("SportEventId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateOfTheEvent")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SportComplexId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SportEventId");
-
-                    b.HasIndex("SportComplexId");
-
-                    b.ToTable("SportEvent");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -413,13 +394,6 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
-                        .WithMany()
-                        .HasForeignKey("SportComplexId");
                 });
 #pragma warning restore 612, 618
         }
