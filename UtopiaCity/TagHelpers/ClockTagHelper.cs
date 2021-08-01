@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
+using System.Globalization;
 
-namespace UtopiaCity.TagHelpers{
-    public class ClockTagHelper : TagHelper
+namespace UtopiaCity.TagHelpers
 {
-    public override void Process(TagHelperContext context, TagHelperOutput output)
+    public class ClockTagHelper : TagHelper
     {
-        output.TagName = "time";
-        var currentTime = DateTime.Now.ToString("hh:f");
-        //string datetime = DateTime.Now.ToString("hh:f");
-        //output.Attributes.SetAttribute("datetime=" + datetime);
-        output.Content.SetContent(currentTime);
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            ///
+            output.TagName = "time";
+            CultureInfo cultureInfo = new CultureInfo("ru-Ru");
+            var currentTime = DateTime.Now.ToString("hh:mm", cultureInfo);
+            output.Content.SetContent(currentTime);
+        }
     }
-}
 }
