@@ -14,7 +14,7 @@ namespace UtopiaCity.Data.Migrations
                     SportEventId = table.Column<string>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     DateOfTheEvent = table.Column<DateTime>(nullable: false),
-                    SportComplexId = table.Column<string>(nullable: true)
+                    SportComplexId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,7 +24,7 @@ namespace UtopiaCity.Data.Migrations
                         column: x => x.SportComplexId,
                         principalTable: "SportComplex",
                         principalColumn: "SportComplexId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

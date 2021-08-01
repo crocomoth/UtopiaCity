@@ -12,6 +12,8 @@ namespace UtopiaCity.Models.Sport
         public string SportEventId { get; set; }
         public string Title { get; set; }
         public DateTime DateOfTheEvent { get; set; }
+
+        [ForeignKey("SportComplex")]
         public string SportComplexId { get; set; }
         
         //TODO: Add Citizen as a subscriber on event
