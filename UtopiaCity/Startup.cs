@@ -55,9 +55,9 @@ namespace UtopiaCity
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
 
             services.AddScoped<FlightService, FlightService>();
-          
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
+
             #endregion
 
             services.Configure<IdentityOptions>(options =>
