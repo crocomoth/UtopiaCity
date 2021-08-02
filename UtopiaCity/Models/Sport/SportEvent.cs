@@ -19,11 +19,12 @@ namespace UtopiaCity.Models.Sport
         public string Title { get; set; }
 
         [Required]
-        [Range(typeof(DateTime), "1/1/1900", "31/07/2021", ErrorMessage="Enter correct Date")]
         public DateTime DateOfTheEvent { get; set; }
 
         [ForeignKey("SportComplex")]
         public string SportComplexId { get; set; }
+
+        public virtual SportComplex SportComplex { get; set; }
         
         //TODO: Add Citizen as a subscriber on event
     }

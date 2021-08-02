@@ -2,6 +2,7 @@
 using System.Linq;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
+using Microsoft.EntityFrameworkCore;
 
 namespace UtopiaCity.Services.Sport
 {
@@ -18,10 +19,10 @@ namespace UtopiaCity.Services.Sport
         }
 
         /// <summary>
-        /// Gets list of all sport events.
+        /// Gets list of all sport events with their sport complexes.
         /// </summary>
-        /// <returns>List of all existing sport events.</returns>
-        public List<SportEvent> GetAllSportEvents() => _dbContext.SportEvent.ToList();
+        /// <returns>List of all existing sport events with their sport complexes.</returns>
+        public List<SportEvent> GetAllSportEvents() => _dbContext.SportEvent.Include(s => s.SportComplex).ToList();
 
         /// <summary>
         /// Gets <see cref="SportEvent"/> by Id.

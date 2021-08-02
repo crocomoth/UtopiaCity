@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.ViewModels.Sport;
 using UtopiaCity.Services.Sport;
@@ -21,13 +20,13 @@ namespace UtopiaCity.Controllers.Sport
 
         public IActionResult AllSportEvents()
         {
-            var allSportEvents = _sportEventService.GetAllSportEvents().ToList();
+            var allSportEvents = _sportEventService.GetAllSportEvents();
             var sportComplexEventViewModels = new List<SportComplexEventViewModel>();
             foreach(var sportEvent in allSportEvents)
             {
                 sportComplexEventViewModels.Add(new SportComplexEventViewModel
                 {
-                    SportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId),
+                    SportComplex = sportEvent.SportComplex,
                     SportEvent = sportEvent
                 });
             }

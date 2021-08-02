@@ -15,6 +15,15 @@ namespace UtopiaCity.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SportEvent>()
+                .HasOne(s => s.SportComplex)
+                .WithMany(s => s.SportEvents);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
         public DbSet<SportComplex> SportComplex { get; set; }
         public DbSet<SportEvent> SportEvent { get; set; }
