@@ -13,6 +13,7 @@ namespace UtopiaCity.TagHelpers
             CultureInfo cultureInfo = new CultureInfo("ru-Ru");
             var currentTime = DateTime.Now.ToString("hh:mm", cultureInfo);
             output.Content.SetContent(currentTime);
+            
         }
     }
 }
