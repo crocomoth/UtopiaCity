@@ -52,7 +52,7 @@ namespace UtopiaCity.Common.Initializers
             var sportComplexes = context.SportComplex.ToList();
             for (int i = 0; i < sportEvents.Length; i++)
             {
-                sportEvents[i].SportComplex = sportComplexes.First(x => sportEvents[i].Title.ToLower().Contains(x.TypeOfSport.ToString().ToLower()));
+                sportEvents[i].SportComplex = sportComplexes.First(x => sportEvents[i].Title.Contains(x.TypeOfSport.ToString()));
             }
 
             context.AddRange(sportEvents);
