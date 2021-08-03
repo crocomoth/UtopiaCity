@@ -48,6 +48,7 @@ namespace UtopiaCity.Services.Life
         public bool Exist(string id)
         {
             return _dbContext.Events.Any(x => x.Id.Equals(id));
+<<<<<<< HEAD
         }
         public IQueryable<Event> Search(EventDto dto)
         {
@@ -98,5 +99,8 @@ namespace UtopiaCity.Services.Life
                 return events;
             }
         }
+=======
+        }        
+>>>>>>> parent of 7818a12 (search panel is added to index)
     }
 }
