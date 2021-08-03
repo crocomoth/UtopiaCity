@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
@@ -16,7 +17,7 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            var sportEvents = new SportEvent[]
+            var sportEvents = new List<SportEvent>()
             {
                 new SportEvent()
                 {
@@ -50,9 +51,17 @@ namespace UtopiaCity.Common.Initializers
             };
 
             var sportComplexes = context.SportComplex.ToList();
-            for (int i = 0; i < sportEvents.Length; i++)
+            for (int i = 0; i < sportEvents.Count; i++)
             {
-                sportEvents[i].SportComplex = sportComplexes.First(x => sportEvents[i].Title.Contains(x.TypeOfSport.ToString()));
+                var sportComplex = sportComplexes.FirstOrDefault(x => sportEvents[i].Title.Contains(x.TypeOfSport.ToString()));
+                if (sportComplex == null)
+                {
+                    sportEvents.RemoveAt(i--);
+                }
+                else
+                {
+                    sportEvents[i].SportComplex = sportComplex;
+                }
             }
 
             context.AddRange(sportEvents);
