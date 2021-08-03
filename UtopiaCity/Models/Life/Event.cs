@@ -7,6 +7,19 @@ using System.Threading.Tasks;
 
 namespace UtopiaCity.Models.Life
 {
+    //api key ab3594366644bb53a9c73b8b92dc2a3b
+    //base url http://api.mediastack.com/v1/
+    //http://api.mediastack.com/v1/news   ? access_key = YOUR_ACCESS_KEY
+    // optional parameters: 
+
+    //& sources = cnn,bbc
+    //& categories = business,sports
+    //& countries = us,au
+    //& languages = en,-de
+    //& keywords = virus,-corona
+    //& sort = published_desc
+    //& offset = 0
+    //& limit = 100
     public class Event
     {
         [Key]
@@ -25,9 +38,12 @@ namespace UtopiaCity.Models.Life
     }
     public enum EventType 
     {
-        Unknown,
-        Sport, 
-        Weather,
-        News
+        general,
+        business,
+        entertainment,
+        health,
+        science,
+        sports,
+        technology
     }
 }
