@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.ScheduleModel>
+﻿@model IEnumerable<UtopiaCity.Models.Airport.Flight>
 
 @{
     ViewData["Title"] = "ScheduleListView";
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ModelName)
+                @Html.DisplayNameFor(model => model.FlightNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EventName)
+                @Html.DisplayNameFor(model => model.ArrivalTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EventType)
+                @Html.DisplayNameFor(model => model.DepartureTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeOfStart)
+                @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeOfEnd)
+                @Html.DisplayNameFor(model => model.Weather)
             </th>
             <th></th>
         </tr>
@@ -34,19 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ModelName)
+                @Html.DisplayFor(modelItem => item.FlightNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EventName)
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EventType)
+                @Html.DisplayFor(modelItem => item.DepartureTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TimeOfStart)
+                @Html.DisplayFor(modelItem => item.Destination)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TimeOfEnd)
+                @Html.DisplayFor(modelItem => item.Weather)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
