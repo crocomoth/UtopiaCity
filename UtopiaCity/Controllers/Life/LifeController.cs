@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Services.Life;
@@ -127,7 +128,6 @@ namespace UtopiaCity.Controllers.Life
 
             return View(e);
         }
-<<<<<<< HEAD
         [HttpPost]
         public IActionResult Search(EventDto dto)
         {
@@ -137,7 +137,5 @@ namespace UtopiaCity.Controllers.Life
             ViewData["select"] = JsonConvert.SerializeObject(eventTypes);
             return View("Index", _service.Search(dto).ToList());
         }
-=======
->>>>>>> parent of 7818a12 (search panel is added to index)
     }
 }
