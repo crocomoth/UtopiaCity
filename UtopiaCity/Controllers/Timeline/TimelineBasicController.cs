@@ -123,5 +123,13 @@ namespace UtopiaCity.Controllers.Timeline
             return View("DetailsTimelineView", chosenEvent);
         }
 
+        //VIEW DATA 
+        public ActionResult ViewDataResult()
+        {
+            TimelineModel t = new TimelineModel();
+            ViewData["List"] = t;
+            return View();
+        }
+
     }
 }
