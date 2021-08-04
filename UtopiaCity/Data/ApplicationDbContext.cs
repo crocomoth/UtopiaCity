@@ -7,6 +7,7 @@ using UtopiaCity.Models.Life;
 using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
+using UtopiaCity.Models.CitizenAccount;
 
 namespace UtopiaCity.Data
 {
@@ -31,7 +32,9 @@ namespace UtopiaCity.Data
         public DbSet<PermitedModel> PermitedModel { get; set; }
 
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
-
         public DbSet<Event> Events { get; set; }
+
+        public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<CitizensTask> CitizensTasks { get; set; }
     }
 }

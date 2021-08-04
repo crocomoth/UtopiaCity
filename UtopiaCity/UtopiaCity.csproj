@@ -6,12 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210728091250_Tickets.cs" />
+    <Compile Remove="Data\Migrations\20210728091250_Tickets.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210804182109_UpdateAppUserv2.cs" />
+    <Compile Remove="Data\Migrations\20210804182109_UpdateAppUserv2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.16">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
