@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
+using UtopiaCity.Models.Airport;
 using UtopiaCity.Models.TimelineModel;
 
 namespace UtopiaCity.Services.Timeline
@@ -9,7 +10,6 @@ namespace UtopiaCity.Services.Timeline
     public class ScheduleService
     {
         private readonly ApplicationDbContext _dbContext;
-
         public ScheduleService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -20,7 +20,7 @@ namespace UtopiaCity.Services.Timeline
         /// </summary>
         /// <returns>LIST</returns>
         public async Task<List<ScheduleModel>> GetList() => await _dbContext.ScheduleModel.ToListAsync();
-
+        public async Task<List<Flight>> GetFlights() => await _dbContext.Flights.ToListAsync();
 
     }
 }

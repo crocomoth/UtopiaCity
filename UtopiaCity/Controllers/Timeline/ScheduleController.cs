@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Models.Airport;
 using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Timeline
@@ -18,7 +18,7 @@ namespace UtopiaCity.Controllers.Timeline
         //LIST
         public async Task<IActionResult> Index()
         {
-            return View("ScheduleListView", await _scheduleService.GetList());
+            return View("ScheduleListView", await _scheduleService.GetFlights());
         }
 
     }

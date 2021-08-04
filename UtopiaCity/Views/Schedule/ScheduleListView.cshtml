@@ -1,0 +1,59 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.Flight>
+
+@{
+    ViewData["Title"] = "ScheduleListView";
+}
+
+<h1>ScheduleListView</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weather)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weather)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
