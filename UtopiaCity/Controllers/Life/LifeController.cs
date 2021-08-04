@@ -60,7 +60,7 @@ namespace UtopiaCity.Controllers.Life
                 .Cast<EventType>()
                 .Select(x => new EventTypeItem { Id = (int)x, Name = x.ToString() });
 
-            var selected = Enumerable.FirstOrDefault<EventTypeItem>(eventTypes, (Func<EventTypeItem, bool>)(x => (bool)x.Id.Equals((int)(int)e.EventType)));
+            var selected = Enumerable.FirstOrDefault<EventTypeItem>(eventTypes, (Func<EventTypeItem, bool>)(x => (bool)x.Id.Equals((int)e.EventType)));
 
             ViewData["select"] = new SelectList(items: eventTypes, selectedValue: selected, dataTextField: nameof(EventTypeItem.Name), dataValueField: nameof(EventTypeItem.Id));
 
