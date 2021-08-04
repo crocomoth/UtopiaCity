@@ -21,6 +21,5 @@ namespace UtopiaCity.Services.Timeline
         /// <returns>LIST</returns>
         public async Task<List<ScheduleModel>> GetList() => await _dbContext.ScheduleModel.ToListAsync();
         public async Task<List<Flight>> GetFlights() => await _dbContext.Flights.ToListAsync();
-
     }
 }

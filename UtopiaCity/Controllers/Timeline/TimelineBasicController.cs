@@ -1,6 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.Life;
 using UtopiaCity.Models.TimelineModel;
+using UtopiaCity.Models.TimelineModel.CollectionDataModel;
+using UtopiaCity.Services.Airport;
+using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Timeline
@@ -8,9 +14,12 @@ namespace UtopiaCity.Controllers.Timeline
     public class TimelineBasicController : Controller
     {
         private readonly TimelineService _timelineService;
-
-        public TimelineBasicController(TimelineService timelineService)
+        private readonly FlightService _flightService;
+        private readonly LifeService _lifeService;
+        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService)
         {
+            _lifeService = lifeService;
+            _flightService = flightService;
             _timelineService = timelineService;
         }
 
@@ -124,11 +133,19 @@ namespace UtopiaCity.Controllers.Timeline
         }
 
         //VIEW DATA 
-        public ActionResult ViewDataResult()
+        public ActionResult ViewModelResult()
         {
-            TimelineModel t = new TimelineModel();
-            ViewData["List"] = t;
-            return View();
+            CollectionDataModel dataViewModel = new CollectionDataModel();
+            
+            List<Flight> flights = _flightService.GetFlightList();
+            
+            List<Event> events = _lifeService.GetAll();
+            
+            dataViewModel._flights = flights;
+            
+            dataViewModel._events = events;
+
+            return View(dataViewModel);
         }
 
     }
