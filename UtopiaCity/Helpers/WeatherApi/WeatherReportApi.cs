@@ -10,6 +10,7 @@ using UtopiaCity.Models.Life.WeatherReport;
 
 namespace UtopiaCity.Helpers.WeatherReportApi
 {
+    //thir party api to fetch weather data
     public class WeatherReportApi
     {
         private const string _url = "http://api.openweathermap.org/data/2.5/forecast?id=1526384&units=metric&appid=5b98e225e9b8afbfa5fb5b1cf47fcffe";
