@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
+using UtopiaCity.Common;
+using UtopiaCity.Services.Emergency;
 
 namespace UtopiaCity
 {
@@ -34,6 +36,10 @@ namespace UtopiaCity
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            #region Services
+            services.AddScoped<EmergencyReportService, EmergencyReportService>();
+            #endregion
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -71,6 +77,27 @@ namespace UtopiaCity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                DbInitializer.RegisterSubInitializers();
+
+                var appConfig = Configuration.GetSection("AppConfig").Get<AppConfig>();
+                if (appConfig != null)
+                {
+                    if (appConfig.ClearDb)
+                    {
+                        DbInitializer.ClearDb(context);
+                    }
+
+                    if (appConfig.SeedDb)
+                    {
+                        DbInitializer.InitializeDb(context);
+                    }
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
