@@ -17,6 +17,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new EmergencyReportInitializer());
 
             // complex sets
+            subDbInitializers.Add(new FlightInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)

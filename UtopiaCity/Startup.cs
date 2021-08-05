@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Common;
 using UtopiaCity.Services.Emergency;
+using UtopiaCity.Services.Airport;
 
 namespace UtopiaCity
 {
@@ -39,6 +40,7 @@ namespace UtopiaCity
 
             #region Services
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
+            services.AddScoped<FlightService, FlightService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>
