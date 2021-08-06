@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Emergency;
 
 namespace UtopiaCity.Data
@@ -14,5 +15,6 @@ namespace UtopiaCity.Data
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<WeatherReport> WeatherReports { get; set; }
+        public DbSet<RersidentAccount> RersidentAccount { get; set; }
     }
 }
