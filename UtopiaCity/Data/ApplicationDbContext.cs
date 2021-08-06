@@ -5,6 +5,7 @@ using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Emergency;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Models.Sport;
+using UtopiaCity.Models.TimelineModel;
 
 namespace UtopiaCity.Data
 {
@@ -20,5 +21,6 @@ namespace UtopiaCity.Data
         public DbSet<RersidentAccount> RersidentAccount { get; set; }
         public DbSet<SportComplex> SportComplexes { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<PermitedModel> PermitedModel { get; set; }
     }
 }
