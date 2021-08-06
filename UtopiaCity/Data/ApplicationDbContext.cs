@@ -22,5 +22,6 @@ namespace UtopiaCity.Data
         public DbSet<SportComplex> SportComplexes { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<PermitedModel> PermitedModel { get; set; }
+        public DbSet<ScheduleModel> ScheduleModel { get; set; }
     }
 }
