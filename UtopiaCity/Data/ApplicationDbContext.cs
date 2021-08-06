@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.Airport.TransportManagerSystem;
 using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Emergency;
 using UtopiaCity.Models.Life;
@@ -24,5 +25,6 @@ namespace UtopiaCity.Data
         public DbSet<PermitedModel> PermitedModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<TimelineModel> TimelineModel { get; set; }
+        public DbSet<ForPassenger> ForPassengers { get; set; }
     }
 }
