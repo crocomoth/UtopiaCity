@@ -26,5 +26,6 @@ namespace UtopiaCity.Data
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ForPassenger> ForPassengers { get; set; }
+        public DbSet<TransportManager> TransportManagers { get; set; }
     }
 }
