@@ -18,6 +18,7 @@ using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Life;
+using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity
 {
@@ -48,6 +49,7 @@ namespace UtopiaCity
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
             services.AddScoped<SportComplexService, SportComplexService>();
             services.AddScoped<LifeService, LifeService>();
+            services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>
