@@ -15,6 +15,7 @@ using UtopiaCity.Data;
 using UtopiaCity.Common;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity
 {
@@ -42,6 +43,7 @@ namespace UtopiaCity
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
+            services.AddScoped<ResidentAccountService, ResidentAccountService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>
