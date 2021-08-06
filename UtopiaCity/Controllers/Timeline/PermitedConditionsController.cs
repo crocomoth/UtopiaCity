@@ -16,7 +16,7 @@ namespace UtopiaCity.Controllers.Timeline
         //LIST
         public async Task<IActionResult> Index()
         {
-            return View("PermitedConditonsView", await _permitedConditionsService.GetList());
+            return View("PermitedConditionsView", await _permitedConditionsService.GetList());
         }
     }
 }
