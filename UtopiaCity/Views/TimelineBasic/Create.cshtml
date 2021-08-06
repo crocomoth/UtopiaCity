@@ -1,0 +1,48 @@
+﻿@model UtopiaCity.Models.TimelineModel.TimelineModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>CreateTimelineView</h1>
+
+<h4>TimelineModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DayAndYear" class="control-label"></label>
+                <input asp-for="DayAndYear" class="form-control" />
+                <span asp-validation-for="DayAndYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Schedule" class="control-label"></label>
+                <input asp-for="Schedule" class="form-control" />
+                <span asp-validation-for="Schedule" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TranscriptionOfPermission" class="control-label"></label>
+                <input asp-for="TranscriptionOfPermission" class="form-control" />
+                <span asp-validation-for="TranscriptionOfPermission" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UniqueRules" class="control-label"></label>
+                <input asp-for="UniqueRules" class="form-control" />
+                <span asp-validation-for="UniqueRules" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
