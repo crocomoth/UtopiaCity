@@ -5,11 +5,11 @@ using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity.Controllers.CityAdministration
 {
-    public class RersidentAccountController : Controller
+    public class ResidentAccountController : Controller
     {
         private readonly ResidentAccountService _residentAccountService;
 
-        public RersidentAccountController(ResidentAccountService residentAccountService)
+        public ResidentAccountController(ResidentAccountService residentAccountService)
         {
             _residentAccountService = residentAccountService;
         }
@@ -17,7 +17,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         // view list of accounts
         public async Task<IActionResult> Index()
         {
-            return View("Index", await _residentAccountService.GetRersidentAccounts());
+            return View("~/Views/CityAdministration/RersidentAccount/Index.cshtml", await _residentAccountService.GetRersidentAccounts());
         }
 
         // get specific item by id
@@ -34,13 +34,13 @@ namespace UtopiaCity.Controllers.CityAdministration
                 NotFound();
             }
 
-            return View("Details", account);
+            return View("~/Views/CityAdministration/RersidentAccount/Details.cshtml", account);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View("Create");
+            return View("~/Views/CityAdministration/RersidentAccount/Create.cshtml");
         }
 
         [HttpPost]
@@ -52,7 +52,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("Create", newAccount);
+            return View("~/Views/CityAdministration/RersidentAccount/Create.cshtml", newAccount);
         }
 
         [HttpGet]
@@ -69,7 +69,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return NotFound();
             }
 
-            return View("Edit", account);
+            return View("~/Views/CityAdministration/RersidentAccount/Edit.cshtml", account);
         }
 
         [HttpPost]
@@ -86,7 +86,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("Edit", edited);
+            return View("~/Views/CityAdministration/RersidentAccount/Edit.cshtml", edited);
         }
 
         [HttpGet]
@@ -103,7 +103,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return NotFound();
             }
 
-            return View("Delete", account);
+            return View("~/Views/CityAdministration/RersidentAccount/Delete.cshtml", account);
         }
 
         [HttpPost, ActionName("Delete")]
