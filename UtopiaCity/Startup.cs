@@ -52,6 +52,7 @@ namespace UtopiaCity
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
             services.AddScoped<ScheduleService, ScheduleService>();
             services.AddScoped<TimelineService, TimelineService>();
+            services.AddScoped<SportEventService, SportEventService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>

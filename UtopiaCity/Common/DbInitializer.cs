@@ -25,6 +25,7 @@ namespace UtopiaCity.Common
             // complex sets
             subDbInitializers.Add(new FlightInitializer());
             subDbInitializers.Add(new ForPassengerInitializer());
+            subDbInitializers.Add(new SportEventInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)
