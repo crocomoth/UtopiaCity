@@ -16,6 +16,16 @@ namespace UtopiaCity.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SportEvent>()
+                .HasOne(s => s.SportComplex)
+                .WithMany(e => e.SportEvents)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<EmergencyReport> EmergencyReport { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<WeatherReport> WeatherReports { get; set; }
@@ -28,5 +38,6 @@ namespace UtopiaCity.Data
         public DbSet<ForPassenger> ForPassengers { get; set; }
         public DbSet<TransportManager> TransportManagers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<SportEvent> SportEvents { get; set; }
     }
 }

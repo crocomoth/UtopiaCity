@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using UtopiaCity.Models.Sport.Enums;
@@ -14,6 +16,7 @@ namespace UtopiaCity.Models.Sport
         public string SportComplexId { get; set; }
 
         [Required]
+        [DisplayName("Sport complex's title")]
         [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct title")]
         public string Title { get; set; }
 
@@ -32,5 +35,7 @@ namespace UtopiaCity.Models.Sport
         [Required]
         [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct address")]
         public string Address { get; set; }
+
+        public List<SportEvent> SportEvents { get; set; }
     }
 }
