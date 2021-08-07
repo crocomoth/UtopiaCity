@@ -1,7 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UtopiaCity.Models.CitizenAccount
 {
@@ -12,7 +11,12 @@ namespace UtopiaCity.Models.CitizenAccount
         public string Id { get; set; }
         public string UserId { get; set; }
         public AppUser User { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        [Required]
+        [Display(Name = "Reminder Date")]
         public DateTime ReminderDate { get; set; }
     }
 }

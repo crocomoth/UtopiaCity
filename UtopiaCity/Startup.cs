@@ -63,6 +63,7 @@ namespace UtopiaCity
 
 
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
+
             #endregion
 
             services.Configure<IdentityOptions>(options =>

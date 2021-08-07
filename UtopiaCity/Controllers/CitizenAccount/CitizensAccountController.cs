@@ -31,12 +31,8 @@ namespace UtopiaCity.Controllers.CitizenAccount
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditAsync(string id)
+        public async Task<IActionResult> EditAsync()
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return NotFound();
-            }
             AppUser report = await _userManager.GetUserAsync(User);
 
             if (report == null)
