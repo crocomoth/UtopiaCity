@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SportComplexEventViewModel>
+﻿@model IEnumerable<SportEventViewModel>
 
 @{
     ViewData["Title"] = "AllSportEvents";
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SportEvent.Title)
+                @Html.DisplayNameFor(model => model.SportEventTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SportEvent.DateOfTheEvent)
+                @Html.DisplayNameFor(model => model.DateOfTheEvent)
             </th>
             <th>
                 Sport Complex
@@ -29,18 +29,18 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SportEvent.Title)
+                    @Html.DisplayFor(modelItem => item.SportEventTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SportEvent.DateOfTheEvent)
+                    @Html.DisplayFor(modelItem => item.DateOfTheEvent)
                 </td>
                 <td>
-                    <a asp-controller="SportComplex" asp-action="Details" asp-route-id="@item.SportComplex.SportComplexId">@item.SportComplex.Title</a>
+                    <a asp-controller="SportComplex" asp-action="Details" asp-route-id="@item.SportComplexId">@item.SportComplexTitle</a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-success btn-sm" role="button" asp-action="Edit" asp-route-id="@item.SportEvent.SportEventId">Edit</a> |
-                    <a class="btn btn-outline-info btn-sm" role="button" asp-action="Details" asp-route-id="@item.SportEvent.SportEventId">Details</a> |
-                    <a class="btn btn-outline-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.SportEvent.SportEventId">Delete</a>
+                    <a class="btn btn-outline-success btn-sm" role="button" asp-action="Edit" asp-route-id="@item.SportEventId">Edit</a> |
+                    <a class="btn btn-outline-info btn-sm" role="button" asp-action="Details" asp-route-id="@item.SportEventId">Details</a> |
+                    <a class="btn btn-outline-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.SportEventId">Delete</a>
                 </td>
             </tr>
         }

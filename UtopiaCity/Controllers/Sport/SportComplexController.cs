@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
+using UtopiaCity.ViewModels.Sport;
 
 namespace UtopiaCity.Controllers.Sport
 {
@@ -13,50 +16,98 @@ namespace UtopiaCity.Controllers.Sport
             _sportComplexService = sportComplexService;
         }
 
-        public IActionResult AllSportComplexes() => View(_sportComplexService.GetAllSportComplexes());
+        public IActionResult AllSportComplexes()
+        {
+            List<SportComplex> sportComplexes = _sportComplexService.GetAllSportComplexes();
+            List<SportComplexViewModel> sportComplexViewModels = new List<SportComplexViewModel>();
+            foreach(SportComplex sportComplex in sportComplexes)
+            {
+                sportComplexViewModels.Add(new SportComplexViewModel
+                {
+                    SportComplexId = sportComplex.SportComplexId,
+                    SportComplexTitle = sportComplex.Title,
+                    NumberOfSeats = sportComplex.NumberOfSeats,
+                    BuildDate = sportComplex.BuildDate,
+                    TypeOfSport = sportComplex.TypeOfSport,
+                    Address = sportComplex.Address
+                });
+            }
+
+            return View(sportComplexViewModels);
+        }
 
         public IActionResult Details(string id)
         {
-            var sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
             }
 
-            return View(sportComplex);
+            SportComplexViewModel sportComplexViewModel = new SportComplexViewModel
+            {
+                SportComplexId = sportComplex.SportComplexId,
+                SportComplexTitle = sportComplex.Title,
+                NumberOfSeats = sportComplex.NumberOfSeats,
+                BuildDate = sportComplex.BuildDate,
+                TypeOfSport = sportComplex.TypeOfSport,
+                Address = sportComplex.Address
+            };
+
+            return View(sportComplexViewModel);
         }
 
         [HttpGet]
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(SportComplex sportComplex)
+        public IActionResult Create(SportComplexViewModel sportComplexViewModel)
         {
-            if (ModelState.IsValid && sportComplex != null)
+            if (sportComplexViewModel == null)
             {
-                _sportComplexService.AddSportComplexToDb(sportComplex);
-                return RedirectToAction(nameof(AllSportComplexes));
+                return View("Error", "You made mistakes while creating new Sport Complex");
             }
 
-            return View("Error", "You made mistakes while creating new Sport Complex");
+            SportComplex sportComplex = new SportComplex
+            {
+                SportComplexId = sportComplexViewModel.SportComplexId,
+                Title = sportComplexViewModel.SportComplexTitle,
+                NumberOfSeats = sportComplexViewModel.NumberOfSeats,
+                BuildDate = sportComplexViewModel.BuildDate,
+                TypeOfSport = sportComplexViewModel.TypeOfSport,
+                Address = sportComplexViewModel.Address
+            };
+
+            _sportComplexService.AddSportComplexToDb(sportComplex);
+            return RedirectToAction(nameof(AllSportComplexes));
         }
 
         [HttpGet]
         public IActionResult Delete(string id)
         {
-            var sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
             }
 
-            return View(sportComplex);
+            SportComplexViewModel sportComplexViewModel = new SportComplexViewModel
+            {
+                SportComplexId = sportComplex.SportComplexId,
+                SportComplexTitle = sportComplex.Title,
+                NumberOfSeats = sportComplex.NumberOfSeats,
+                BuildDate = sportComplex.BuildDate,
+                TypeOfSport = sportComplex.TypeOfSport,
+                Address = sportComplex.Address
+            };
+
+            return View(sportComplexViewModel);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(string id)
         {
-            var sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
@@ -69,22 +120,42 @@ namespace UtopiaCity.Controllers.Sport
         [HttpGet]
         public IActionResult Edit(string id)
         {
-            var sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
                 return NotFound();
             }
 
-            return View(sportComplex);
+            SportComplexViewModel sportComplexViewModel = new SportComplexViewModel
+            {
+                SportComplexId = sportComplex.SportComplexId,
+                SportComplexTitle = sportComplex.Title,
+                NumberOfSeats = sportComplex.NumberOfSeats,
+                BuildDate = sportComplex.BuildDate,
+                TypeOfSport = sportComplex.TypeOfSport,
+                Address = sportComplex.Address
+            };
+
+            return View(sportComplexViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, SportComplex sportComplex)
+        public IActionResult Edit(string id, SportComplexViewModel sportComplexViewModel)
         {
-            if (id != sportComplex.SportComplexId)
+            if (id != sportComplexViewModel.SportComplexId)
             {
                 return NotFound();
             }
+
+            SportComplex sportComplex = new SportComplex
+            {
+                SportComplexId = sportComplexViewModel.SportComplexId,
+                Title = sportComplexViewModel.SportComplexTitle,
+                NumberOfSeats = sportComplexViewModel.NumberOfSeats,
+                BuildDate = sportComplexViewModel.BuildDate,
+                TypeOfSport = sportComplexViewModel.TypeOfSport,
+                Address = sportComplexViewModel.Address
+            };
 
             _sportComplexService.UpdateSportComplexInDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));

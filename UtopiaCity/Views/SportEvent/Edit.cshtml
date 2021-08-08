@@ -1,4 +1,4 @@
-﻿@model SportComplexEventViewModel
+﻿@model SportEventViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,21 +12,21 @@
     <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SportEvent.SportEventId" />
-            <input type="hidden" asp-for="SportComplex.SportComplexId" />
+            <input type="hidden" asp-for="@Model.SportEventId" />
+            <input type="hidden" asp-for="@Model.SportComplexId" />
             <div class="input-group mb-3">
-                <label asp-for="SportEvent.Title" class="input-group-text"></label>
-                <input asp-for="SportEvent.Title" class="form-control" />
-                <span asp-validation-for="SportEvent.Title" class="text-danger"></span>
+                <label asp-for="@Model.SportEventTitle" class="input-group-text"></label>
+                <input asp-for="@Model.SportEventTitle" class="form-control" />
+                <span asp-validation-for="@Model.SportEventTitle" class="text-danger"></span>
             </div>
             <div class="input-group mb-3">
-                <label asp-for="SportEvent.DateOfTheEvent" class="input-group-text"></label>
-                <input asp-for="SportEvent.DateOfTheEvent" class="form-control" />
-                <span asp-validation-for="SportEvent.DateOfTheEvent" class="text-danger"></span>
+                <label asp-for="@Model.DateOfTheEvent" class="input-group-text"></label>
+                <input asp-for="@Model.DateOfTheEvent" class="form-control" />
+                <span asp-validation-for="@Model.DateOfTheEvent" class="text-danger"></span>
             </div>
             <div class="input-group mb-3">
-                <label asp-for="SportComplex.Title" class="input-group-text"></label>
-                <select asp-for="SportComplex.Title" class="form-control">
+                <label asp-for="@Model.SportComplexTitle" class="input-group-text"></label>
+                <select asp-for="@Model.SportComplexTitle" class="form-control">
                     @foreach (var sportComplexTitle in ViewBag.SportComplexesTitles)
                     {
                         <option value="@sportComplexTitle">
@@ -34,7 +34,7 @@
                         </option>
                     }
                 </select>
-                <span asp-validation-for="SportComplex.Title" class="text-danger"></span>
+                <span asp-validation-for="@Model.SportComplexTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-primary" />

@@ -82,5 +82,12 @@ namespace UtopiaCity.Services.Sport
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
         public SportComplex GetSportComplexByTitle(string title) => _dbContext.SportComplexes.FirstOrDefault(x => x.Title.Equals(title));
+
+        /// <summary>
+        /// Gets <see cref="SportComplex.SportComplexId"/> by Title.
+        /// </summary>
+        /// <param name="title">Title of sport complex.</param>
+        /// <returns>Sport complex's id if it exists, otherwise null.</returns>
+        public string GetSportComplexIdByTitle(string title) => _dbContext.SportComplexes.FirstOrDefault(x => x.Title.Equals(title)).SportComplexId;
     }
 }

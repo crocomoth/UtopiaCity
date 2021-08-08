@@ -1,4 +1,4 @@
-﻿@model SportComplex
+﻿@model SportComplexViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="SportComplexId" />
             <div class="input-group mb-3">
-                <label asp-for="Title" class="input-group-text"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="SportComplexTitle" class="input-group-text"></label>
+                <input asp-for="SportComplexTitle" class="form-control" />
+                <span asp-validation-for="SportComplexTitle" class="text-danger"></span>
             </div>
             <div class="input-group mb-3">
                 <label asp-for="NumberOfSeats" class="input-group-text"></label>

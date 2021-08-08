@@ -53,7 +53,8 @@ namespace UtopiaCity.Common.Initializers
             var sportComplexes = context.SportComplexes.ToList();
             for (int i = 0; i < sportEvents.Count; i++)
             {
-                var sportComplex = sportComplexes.FirstOrDefault(x => sportEvents[i].Title.Contains(x.TypeOfSport.ToString()));
+                var sportComplex = sportComplexes.FirstOrDefault(x => sportEvents[i].Title
+                    .Contains(x.TypeOfSport.ToString(), StringComparison.InvariantCultureIgnoreCase));
                 if (sportComplex == null)
                 {
                     sportEvents.RemoveAt(i--);

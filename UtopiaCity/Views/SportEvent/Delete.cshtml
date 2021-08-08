@@ -1,4 +1,4 @@
-﻿@model SportComplexEventViewModel
+﻿@model SportEventViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -14,35 +14,35 @@
         <div class="col">
             <dl class="row">
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.SportEvent.Title)
+                    @Html.DisplayNameFor(model => model.SportEventTitle)
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.SportEvent.Title)
+                    @Html.DisplayFor(model => model.SportEventTitle)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.SportEvent.DateOfTheEvent)
+                    @Html.DisplayNameFor(model => model.DateOfTheEvent)
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.SportEvent.DateOfTheEvent)
+                    @Html.DisplayFor(model => model.DateOfTheEvent)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.SportComplex.Title)
+                    @Html.DisplayNameFor(model => model.SportComplexTitle)
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.SportComplex.Title)
+                    @Html.DisplayFor(model => model.SportComplexTitle)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.SportComplex.Address)
+                    @Html.DisplayNameFor(model => model.Address)
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.SportComplex.Address)
+                    @Html.DisplayFor(model => model.Address)
                 </dd>
             </dl>
         </div>
     </div>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="SportEvent.SportEventId" />
+        <input type="hidden" asp-for="@Model.SportEventId" />
         <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
         <a class="btn btn-outline-secondary" role="button" asp-action="AllSportEvents">Back to List</a>
     </form>

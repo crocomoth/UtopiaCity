@@ -32,6 +32,13 @@ namespace UtopiaCity.Services.Sport
         public SportEvent GetSportEventById(string id) => _dbContext.SportEvents.FirstOrDefault(x => x.SportEventId.Equals(id));
 
         /// <summary>
+        /// Gets <see cref="SportEvent"/> by Id with it's <see cref="SportComplex"/>.
+        /// </summary>
+        /// <param name="id">Id of sport event.</param>
+        /// <returns>Sport event with it's Sport complex if it exists, otherwise null.</returns>
+        public SportEvent GetSportEventByIdWithSportComplex(string id) => _dbContext.SportEvents.Include(s => s.SportComplex).FirstOrDefault(x => x.SportEventId.Equals(id));
+
+        /// <summary>
         /// Method for adding new sport event to database.
         /// </summary>
         /// <param name="sportEvent">Sport event for adding.</param>

@@ -1,4 +1,4 @@
-﻿@model SportComplex
+﻿@model SportComplexViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -15,10 +15,10 @@
             <div class="col">
                 <dl class="row">
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.Title)
+                        @Html.DisplayNameFor(model => model.SportComplexTitle)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.Title)
+                        @Html.DisplayFor(model => model.SportComplexTitle)
                     </dd>
                     <dt class="col-sm-4">
                         @Html.DisplayNameFor(model => model.NumberOfSeats)

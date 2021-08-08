@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SportComplex>
+﻿@model IEnumerable<SportComplexViewModel>
 
 @{
     ViewData["Title"] = "AllSportComplexes";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.SportComplexTitle)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumberOfSeats)
@@ -35,7 +35,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => item.SportComplexTitle)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberOfSeats)

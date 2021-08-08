@@ -20,18 +20,22 @@ namespace UtopiaCity.Controllers.Sport
 
         public IActionResult AllSportEvents()
         {
-            var allSportEvents = _sportEventService.GetAllSportEvents();
-            var sportComplexEventViewModels = new List<SportComplexEventViewModel>();
+            List<SportEvent> allSportEvents = _sportEventService.GetAllSportEvents();
+            List<SportEventViewModel> sportEventViewModels = new List<SportEventViewModel>();
             foreach (var sportEvent in allSportEvents)
             {
-                sportComplexEventViewModels.Add(new SportComplexEventViewModel
+                sportEventViewModels.Add(new SportEventViewModel
                 {
-                    SportComplex = sportEvent.SportComplex,
-                    SportEvent = sportEvent
+                    SportEventId = sportEvent.SportEventId,
+                    SportEventTitle = sportEvent.Title,
+                    DateOfTheEvent = sportEvent.DateOfTheEvent,
+                    SportComplexId = sportEvent.SportComplexId,
+                    SportComplexTitle = sportEvent.SportComplex.Title,
+                    Address = sportEvent.SportComplex.Address
                 });
             }
 
-            return View(sportComplexEventViewModels);
+            return View(sportEventViewModels);
         }
 
         [HttpGet]
@@ -42,21 +46,27 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost]
-        public IActionResult Create(SportComplexEventViewModel sportComplexEventViewModel)
+        public IActionResult Create(SportEventViewModel sportEventViewModel)
         {
-            if (sportComplexEventViewModel == null)
+            if (sportEventViewModel == null)
             {
                 return View("Error", "You made mistakes while creating new Sport Event");
             }
 
-            var sportComplex = _sportComplexService.GetSportComplexByTitle(sportComplexEventViewModel.SportComplex.Title);
-            if (sportComplex == null)
+            //var sportComplex = _sportComplexService.GetSportComplexByTitle(sportEventViewModel.SportComplexTitle);
+            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(sportEventViewModel.SportComplexTitle);
+            if (sportComplexId == null)
             {
                 return View("Error", "Incorrect sport complex chosen." + Environment.NewLine + "Please, try again");
             }
 
-            SportEvent sportEvent = sportComplexEventViewModel.SportEvent;
-            sportEvent.SportComplexId = sportComplex.SportComplexId;
+            SportEvent sportEvent = new SportEvent
+            {
+                Title = sportEventViewModel.SportEventTitle,
+                DateOfTheEvent = sportEventViewModel.DateOfTheEvent,
+                SportComplexId = sportComplexId
+            };
+            //sportEvent.SportComplexId = sportComplex.SportComplexId;
             _sportEventService.AddSportEventToDb(sportEvent);
             return RedirectToAction(nameof(AllSportEvents));
         }
@@ -69,21 +79,25 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportEvent = _sportEventService.GetSportEventById(id);
+            SportEvent sportEvent = _sportEventService.GetSportEventByIdWithSportComplex(id);
             if (sportEvent == null)
             {
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
+            //var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
 
-            var sportComplexEventViewModel = new SportComplexEventViewModel
+            SportEventViewModel sportEventViewModel = new SportEventViewModel
             {
-                SportComplex = sportComplex,
-                SportEvent = sportEvent
+                SportEventId = sportEvent.SportEventId,
+                SportEventTitle = sportEvent.Title,
+                DateOfTheEvent = sportEvent.DateOfTheEvent,
+                SportComplexId = sportEvent.SportComplexId,
+                SportComplexTitle = sportEvent.SportComplex.Title,
+                Address = sportEvent.SportComplex.Address
             };
 
-            return View(sportComplexEventViewModel);
+            return View(sportEventViewModel);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -94,7 +108,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportEvent = _sportEventService.GetSportEventById(id);
+            SportEvent sportEvent = _sportEventService.GetSportEventById(id);
             if (sportEvent == null)
             {
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
@@ -112,40 +126,48 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportEvent = _sportEventService.GetSportEventById(id);
+            SportEvent sportEvent = _sportEventService.GetSportEventById(id);
             if (sportEvent == null)
             {
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
+            //var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
 
-            var sportComplexEventViewModel = new SportComplexEventViewModel
+            SportEventViewModel sportEventViewModel = new SportEventViewModel
             {
-                SportComplex = sportComplex,
-                SportEvent = sportEvent
+                SportEventId = sportEvent.SportEventId,
+                SportEventTitle = sportEvent.Title,
+                DateOfTheEvent = sportEvent.DateOfTheEvent,
+                SportComplexId = sportEvent.SportComplexId
             };
 
             ViewBag.SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles();
-            return View(sportComplexEventViewModel);
+            return View(sportEventViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, SportComplexEventViewModel sportComplexEventViewModel)
+        public IActionResult Edit(string id, SportEventViewModel sportEventViewModel)
         {
             if (id == null)
             {
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");
             }
-            else if (sportComplexEventViewModel == null)
+            else if (sportEventViewModel == null)
             {
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportComplex = _sportComplexService.GetSportComplexByTitle(sportComplexEventViewModel.SportComplex.Title);
+            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(sportEventViewModel.SportComplexTitle);
 
-            var sportEvent = sportComplexEventViewModel.SportEvent;
-            sportEvent.SportComplexId = sportComplex.SportComplexId;
+            SportEvent sportEvent = new SportEvent
+            {
+                SportEventId = sportEventViewModel.SportEventId,
+                Title = sportEventViewModel.SportEventTitle,
+                DateOfTheEvent = sportEventViewModel.DateOfTheEvent,
+                SportComplexId = sportComplexId
+            };
+            //sportEvent.SportComplexId = sportComplex.SportComplexId;
 
             _sportEventService.UpdateSportEventInDb(sportEvent);
             return RedirectToAction(nameof(AllSportEvents));
@@ -158,21 +180,25 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportEvent = _sportEventService.GetSportEventById(id);
+            SportEvent sportEvent = _sportEventService.GetSportEventById(id);
             if (sportEvent == null)
             {
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
             }
 
-            var sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
+            SportComplex sportComplex = _sportComplexService.GetSportComplexById(sportEvent.SportComplexId);
 
-            var sportComplexEventViewModel = new SportComplexEventViewModel
+            SportEventViewModel sportEventViewModel = new SportEventViewModel
             {
-                SportComplex = sportComplex,
-                SportEvent = sportEvent
+                SportEventId = sportEvent.SportEventId,
+                SportEventTitle = sportEvent.Title,
+                DateOfTheEvent = sportEvent.DateOfTheEvent,
+                SportComplexId = sportEvent.SportComplexId,
+                SportComplexTitle = sportComplex.Title,
+                Address = sportComplex.Address
             };
 
-            return View(sportComplexEventViewModel);
+            return View(sportEventViewModel);
         }
     }
 }
