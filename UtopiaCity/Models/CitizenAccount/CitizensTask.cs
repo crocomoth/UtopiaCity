@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UtopiaCity.Models.CitizenAccount
 {
+    /// <summary>
+    /// Represents citizens Task.
+    /// </summary>
     public class CitizensTask
     {
         [ScaffoldColumn(false)]

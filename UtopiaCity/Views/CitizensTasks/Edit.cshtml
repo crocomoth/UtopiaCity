@@ -4,6 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info" role="alert">
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
 <h4>Edit Task</h4>
 <hr />
 <div class="row">

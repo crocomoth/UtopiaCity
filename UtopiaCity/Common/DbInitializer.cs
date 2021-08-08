@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UtopiaCity.Common.CitizenAccount;
 using UtopiaCity.Common.Initializers;
 using UtopiaCity.Common.Initializers.AirportTransportSystem;
 using UtopiaCity.Common.Interfaces;
@@ -31,6 +32,8 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new SportComplexInitializer());
 
             subDbInitializers.Add(new LifeInitializer());
+
+            subDbInitializers.Add(new CitizenTaskInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)

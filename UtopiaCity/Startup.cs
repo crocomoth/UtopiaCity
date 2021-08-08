@@ -61,8 +61,8 @@ namespace UtopiaCity
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
 
-
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
+            services.AddScoped<CitizenTaskService, CitizenTaskService>();
 
             #endregion
 
