@@ -11,8 +11,8 @@ namespace UtopiaCity.Controllers.CitizenAccount
     public class CitizensAccountController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        private UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly readonly SignInManager<AppUser> _signInManager;
         public CitizensAccountController(ApplicationDbContext dbContext, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _dbContext = dbContext;
