@@ -41,6 +41,7 @@ namespace UtopiaCity
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddAutoMapper(typeof(Startup));
 
             #region Services
             services.AddScoped<EmergencyReportService, EmergencyReportService>();

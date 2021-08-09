@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.ViewModels.Sport;
@@ -10,10 +10,12 @@ namespace UtopiaCity.Controllers.Sport
     public class SportComplexController : Controller
     {
         private readonly SportComplexService _sportComplexService;
+        private readonly IMapper _mapper;
 
-        public SportComplexController(SportComplexService sportComplexService)
+        public SportComplexController(SportComplexService sportComplexService, IMapper mapper)
         {
             _sportComplexService = sportComplexService;
+            _mapper = mapper;
         }
 
         public IActionResult AllSportComplexes()
@@ -22,15 +24,7 @@ namespace UtopiaCity.Controllers.Sport
             List<SportComplexViewModel> sportComplexViewModels = new List<SportComplexViewModel>();
             foreach(SportComplex sportComplex in sportComplexes)
             {
-                sportComplexViewModels.Add(new SportComplexViewModel
-                {
-                    SportComplexId = sportComplex.SportComplexId,
-                    SportComplexTitle = sportComplex.Title,
-                    NumberOfSeats = sportComplex.NumberOfSeats,
-                    BuildDate = sportComplex.BuildDate,
-                    TypeOfSport = sportComplex.TypeOfSport,
-                    Address = sportComplex.Address
-                });
+                sportComplexViewModels.Add(_mapper.Map<SportComplexViewModel>(sportComplex));
             }
 
             return View(sportComplexViewModels);
@@ -44,16 +38,7 @@ namespace UtopiaCity.Controllers.Sport
                 return NotFound();
             }
 
-            SportComplexViewModel sportComplexViewModel = new SportComplexViewModel
-            {
-                SportComplexId = sportComplex.SportComplexId,
-                SportComplexTitle = sportComplex.Title,
-                NumberOfSeats = sportComplex.NumberOfSeats,
-                BuildDate = sportComplex.BuildDate,
-                TypeOfSport = sportComplex.TypeOfSport,
-                Address = sportComplex.Address
-            };
-
+            SportComplexViewModel sportComplexViewModel = _mapper.Map<SportComplexViewModel>(sportComplex);
             return View(sportComplexViewModel);
         }
 
@@ -68,16 +53,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "You made mistakes while creating new Sport Complex");
             }
 
-            SportComplex sportComplex = new SportComplex
-            {
-                SportComplexId = sportComplexViewModel.SportComplexId,
-                Title = sportComplexViewModel.SportComplexTitle,
-                NumberOfSeats = sportComplexViewModel.NumberOfSeats,
-                BuildDate = sportComplexViewModel.BuildDate,
-                TypeOfSport = sportComplexViewModel.TypeOfSport,
-                Address = sportComplexViewModel.Address
-            };
-
+            SportComplex sportComplex = _mapper.Map<SportComplex>(sportComplexViewModel);
             _sportComplexService.AddSportComplexToDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
@@ -91,16 +67,7 @@ namespace UtopiaCity.Controllers.Sport
                 return NotFound();
             }
 
-            SportComplexViewModel sportComplexViewModel = new SportComplexViewModel
-            {
-                SportComplexId = sportComplex.SportComplexId,
-                SportComplexTitle = sportComplex.Title,
-                NumberOfSeats = sportComplex.NumberOfSeats,
-                BuildDate = sportComplex.BuildDate,
-                TypeOfSport = sportComplex.TypeOfSport,
-                Address = sportComplex.Address
-            };
-
+            SportComplexViewModel sportComplexViewModel = _mapper.Map<SportComplexViewModel>(sportComplex);
             return View(sportComplexViewModel);
         }
 
@@ -126,16 +93,7 @@ namespace UtopiaCity.Controllers.Sport
                 return NotFound();
             }
 
-            SportComplexViewModel sportComplexViewModel = new SportComplexViewModel
-            {
-                SportComplexId = sportComplex.SportComplexId,
-                SportComplexTitle = sportComplex.Title,
-                NumberOfSeats = sportComplex.NumberOfSeats,
-                BuildDate = sportComplex.BuildDate,
-                TypeOfSport = sportComplex.TypeOfSport,
-                Address = sportComplex.Address
-            };
-
+            SportComplexViewModel sportComplexViewModel = _mapper.Map<SportComplexViewModel>(sportComplex);
             return View(sportComplexViewModel);
         }
 
@@ -147,16 +105,7 @@ namespace UtopiaCity.Controllers.Sport
                 return NotFound();
             }
 
-            SportComplex sportComplex = new SportComplex
-            {
-                SportComplexId = sportComplexViewModel.SportComplexId,
-                Title = sportComplexViewModel.SportComplexTitle,
-                NumberOfSeats = sportComplexViewModel.NumberOfSeats,
-                BuildDate = sportComplexViewModel.BuildDate,
-                TypeOfSport = sportComplexViewModel.TypeOfSport,
-                Address = sportComplexViewModel.Address
-            };
-
+            SportComplex sportComplex = _mapper.Map<SportComplex>(sportComplexViewModel);
             _sportComplexService.UpdateSportComplexInDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
