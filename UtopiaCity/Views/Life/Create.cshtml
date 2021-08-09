@@ -31,10 +31,13 @@
             <div class="form-group dropdown">
                 <label asp-for="EventType" class="control-label"></label>
                 <select asp-for="EventType" class="form-control">
-                    <option value=@((int)EventType.Unknown)>@EventType.Unknown.ToString()</option>
-                    <option value=@((int)EventType.Sport)>@EventType.Sport.ToString()</option>
-                    <option value=@((int)EventType.Weather)>@EventType.Weather.ToString()</option>
-                    <option value=@((int)EventType.News)>@EventType.News.ToString()</option>
+                    <option value=@((int)EventType.general)>@EventType.general.ToString()</option>
+                    <option value=@((int)EventType.business)>@EventType.business.ToString()</option>
+                    <option value=@((int)EventType.entertainment)>@EventType.entertainment.ToString()</option>
+                    <option value=@((int)EventType.health)>@EventType.health.ToString()</option>
+                    <option value=@((int)EventType.science)>@EventType.science.ToString()</option>
+                    <option value=@((int)EventType.sports)>@EventType.sports.ToString()</option>
+                    <option value=@((int)EventType.technology)>@EventType.technology.ToString()</option>
                 </select>
                 <span asp-validation-for="EventType" class="text-danger"></span>
             </div>
