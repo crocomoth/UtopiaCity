@@ -5,14 +5,11 @@
     <UserSecretsId>aspnet-UtopiaCity-D45A5F96-DE8D-4785-9915-4DEAA6419C9C</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Data\Migrations\20210728091250_Tickets.cs" />
-    <Compile Remove="Data\Migrations\20210728091250_Tickets.Designer.cs" />
-    <Compile Remove="Data\Migrations\20210804182109_UpdateAppUserv2.cs" />
-    <Compile Remove="Data\Migrations\20210804182109_UpdateAppUserv2.Designer.cs" />
-  </ItemGroup>
+
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.15" />
