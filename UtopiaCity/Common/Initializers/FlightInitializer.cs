@@ -30,7 +30,7 @@ namespace UtopiaCity.Common.Initializers
                 FlightNumber = 128,
                 ArrivalTime = DateTime.Now.AddHours(4),
                 DepartureTime = DateTime.Now,
-                Destination = "Moscow,Russia",
+                DestinationPoint = "Moscow,Russia",
                 Weather = "Sunny"
             };
             var flight2 = new Flight()
@@ -38,7 +38,7 @@ namespace UtopiaCity.Common.Initializers
                 FlightNumber = 256,
                 ArrivalTime = DateTime.Now.AddHours(13),
                 DepartureTime = DateTime.Now.AddHours(1),
-                Destination = "Madrid,Spain",
+                DestinationPoint = "Madrid,Spain",
                 Weather = "Rainy"
             };
             var flight3 = new Flight()
@@ -46,7 +46,7 @@ namespace UtopiaCity.Common.Initializers
                 FlightNumber = 512,
                 ArrivalTime = DateTime.Now.AddHours(5),
                 DepartureTime = DateTime.Now,
-                Destination = "Stambul,Turkey",
+                DestinationPoint = "Stambul,Turkey",
                 Weather = "Cloudy"
             };
             var flight4 = new Flight()
@@ -54,7 +54,7 @@ namespace UtopiaCity.Common.Initializers
                 FlightNumber = 223,
                 ArrivalTime = DateTime.Now.AddHours(7),
                 DepartureTime = DateTime.Now.AddHours(2),
-                Destination = "Dubai,UAE",
+                DestinationPoint = "Dubai,UAE",
                 Weather = "Windy"
             };
             var flight5 = new Flight()
@@ -62,7 +62,7 @@ namespace UtopiaCity.Common.Initializers
                 FlightNumber = 876,
                 ArrivalTime = DateTime.Now.AddHours(13),
                 DepartureTime = DateTime.Now.AddHours(3),
-                Destination = "London,UK",
+                DestinationPoint = "London,UK",
                 Weather = "Foggy"
             };
 

@@ -13,10 +13,11 @@ namespace UtopiaCity.Services.Airport
     public class FlightService
     {
         private ApplicationDbContext _dbContext;
-
-        public FlightService(ApplicationDbContext context)
+        private readonly IRouteApi _route;
+        public FlightService(ApplicationDbContext context,IRouteApi route)
         {
             _dbContext = context;
+            _route = route;
         }
 
         /// <summary>
@@ -75,6 +76,30 @@ namespace UtopiaCity.Services.Airport
         public int GetRandomFlightNumber()
         {
             return new Random().Next(100, 999);
+        }
+
+        public async Task<double> GetFlyTime(string location, string destination, string planeType)
+        {
+            var resources = await _route.GetRouteObject(location, destination);
+            var generalDistance = resources.ElementAtOrDefault(0).TravelDistance;
+            var fromDictionary = new Dictionaries.PlanesSpeedDictionary().speed;
+            double generalFlyTime = 0;
+
+            foreach(var item in fromDictionary)
+            {
+                if (item.Key == planeType)
+                {
+                    generalFlyTime = generalDistance / item.Value;
+                }
+            }
+
+            return generalFlyTime;
+        }
+
+        public DateTime GetArrivalTime(DateTime departure, string locationPoint,string destinationPoint,string planeType)
+        {
+            var overallTime= departure.AddHours(GetFlyTime(locationPoint, destinationPoint, planeType).GetAwaiter().GetResult());
+            return overallTime;
         }
     }
 }

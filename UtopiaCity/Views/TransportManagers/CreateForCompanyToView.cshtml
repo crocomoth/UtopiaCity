@@ -1,0 +1,55 @@
+﻿@model UtopiaCity.Models.Airport.TransportManagerSystem.ForCompany
+
+@{
+    ViewData["Title"] = "CreateForCompanyToView";
+}
+
+<h1>CreateForCompanyToView</h1>
+
+<h4>ForCompany</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateForCompanyToView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contacts" class="control-label"></label>
+                <input asp-for="Contacts" class="form-control" />
+                <span asp-validation-for="Contacts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AviaProvider" class="control-label"></label>
+                <input asp-for="AviaProvider" class="form-control" />
+                <span asp-validation-for="AviaProvider" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountryOfDelivery" class="control-label"></label>
+                <input asp-for="CountryOfDelivery" class="form-control" />
+                <span asp-validation-for="CountryOfDelivery" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityOfGoods" class="control-label"></label>
+                <input asp-for="QuantityOfGoods" class="form-control" />
+                <span asp-validation-for="QuantityOfGoods" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaitingTime" class="control-label"></label>
+                <input asp-for="WaitingTime" class="form-control" />
+                <span asp-validation-for="WaitingTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="CreateForCompany" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -58,6 +58,7 @@ namespace UtopiaCity
           
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
+            services.AddScoped<IRouteApi, FlightRouteApiService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>

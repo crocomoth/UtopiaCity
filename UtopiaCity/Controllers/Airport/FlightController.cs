@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,8 @@ namespace UtopiaCity.Controllers.Airport
         [HttpGet]
         public IActionResult Create()
         {
+            var dictionaryData = new Services.Airport.Dictionaries.PlanesSpeedDictionary().speed;
+            ViewData["PlaneTypes"] = new SelectList(dictionaryData);
             return View("FlightCreateView");
         }
 
@@ -49,8 +52,10 @@ namespace UtopiaCity.Controllers.Airport
         public IActionResult Create(Flight newFlight)
         {
             if (ModelState.IsValid)
-            {
+            {               
                 newFlight.FlightNumber = _flightService.GetRandomFlightNumber();
+                var arrivalTime = newFlight.ArrivalTime;
+                arrivalTime = _flightService.GetArrivalTime(newFlight.DepartureTime, newFlight.LocationPoint, newFlight.DestinationPoint, newFlight.TypeOfAircraft);
                 _flightService.AddFlight(newFlight);
                 return RedirectToAction(nameof(Index));
             }
@@ -121,5 +126,26 @@ namespace UtopiaCity.Controllers.Airport
             _flightService.DeleteFlight(flight);
             return RedirectToAction(nameof(Index));
         }
+
+        //[HttpGet]
+        //public IActionResult GetDistanceByApi()
+        //{
+        //    return View("GetDistanceByApiView");
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> GetDistanceByApi(Flight newFlight)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        newFlight.FlightNumber = _flightService.GetRandomFlightNumber();
+        //         _flightService.AddFlight(newFlight);
+        //        //var apiData= await _routeService.GetRouteObject(newFlight.LocationPoint, newFlight.DestinationPoint);                
+        //        //ViewData["FlightApiId"] = new SelectList((System.Collections.IEnumerable)apiData, "Id", "Id");
+        //        return View("GetListApiDataView");
+        //    }
+
+        //    return View("GetDistanceByApiView", newFlight);
+        //}
     }
 }

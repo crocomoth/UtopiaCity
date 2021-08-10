@@ -1,0 +1,106 @@
+﻿@model UtopiaCity.Models.Airport.Airline
+
+@{
+    ViewData["Title"] = "AirlineCreateView";
+}
+
+<h1>AirlineCreateView</h1>
+
+<h4>Airline</h4>
+<hr />
+<style>
+    .planePos1{
+        position: absolute;
+        left: 150px;
+        bottom: 400px;
+    }
+    .planePos2{
+        position: absolute;
+        left: 150px;
+        bottom: 225px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Airline CreateView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AirlineName" class="control-label"></label>
+                <input asp-for="AirlineName" class="form-control" />
+                <span asp-validation-for="AirlineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceType" class="control-label"></label>
+                <select asp-for="ServiceType" class="form-control">
+                    @foreach (var type in Enum.GetValues(typeof(TypeOfAirlineServices)))
+                    {
+                        <option value="@type">
+                            @type
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="ServiceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aircraft" class="control-label"></label>
+                <fieldset>
+                    <legend>
+                        <strong>A</strong>
+                    </legend>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane A</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane B</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane C</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane D</label>
+                </fieldset>
+                <fieldset>
+                    <legend>
+                        <strong>B</strong>
+                    </legend>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane A</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane B</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane C</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane D</label>
+                </fieldset>
+                <fieldset class="planePos1">
+                    <legend>
+                        <strong>C</strong>
+                    </legend>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane A</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane B</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane C</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane D</label>
+                </fieldset>
+                <fieldset class="planePos2">
+                    <legend>
+                        <strong>D</strong>
+                    </legend>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane A</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane B</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane C</label><br>
+                    <label><input asp-for="Aircraft" type="checkbox">Plane D</label>
+                </fieldset>
+                <span asp-validation-for="Aircraft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailableDirections" class="control-label"></label>
+                <select asp-for="AvailableDirections" class="form-control">
+                    @foreach (var type in Enum.GetValues(typeof(Directions)))
+                    {
+                        <option value="@type">
+                            @type
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="AvailableDirections" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="Create" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
