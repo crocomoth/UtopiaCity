@@ -1,18 +1,23 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
-    public partial class PublicCateringMigrations : Migration
+    public partial class PublicCatering : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "FlightWeather",
+                table: "WeatherReports",
+                nullable: true);
+
             migrationBuilder.CreateTable(
                 name: "RestaurantTypes",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,8 +29,8 @@ namespace UtopiaCity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
                     Status = table.Column<int>(nullable: false),
                     Seats = table.Column<int>(nullable: false),
                     RestaurantTypeId = table.Column<string>(nullable: true)
@@ -83,6 +88,10 @@ namespace UtopiaCity.Migrations
 
             migrationBuilder.DropTable(
                 name: "RestaurantTypes");
+
+            migrationBuilder.DropColumn(
+                name: "FlightWeather",
+                table: "WeatherReports");
         }
     }
 }

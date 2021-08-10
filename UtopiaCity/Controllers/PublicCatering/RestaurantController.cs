@@ -58,6 +58,7 @@ namespace UtopiaCity.Controllers.PublicCatering
             }
             return View("~/Views/PublicCatering/Restaurant/EditRestaurantView.cshtml", restaurant);
         }
+        
         [HttpPost]
         public async Task<IActionResult> Edit(string id, Restaurant edited)
         {

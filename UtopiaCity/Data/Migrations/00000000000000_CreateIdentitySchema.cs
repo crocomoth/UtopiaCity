@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class CreateIdentitySchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,73 +48,11 @@ namespace UtopiaCity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmergencyReport",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Report = table.Column<string>(nullable: false),
-                    ReportTime = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmergencyReport", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Flights",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ArrivalTime = table.Column<DateTime>(nullable: false),
-                    DepartureTime = table.Column<DateTime>(nullable: false),
-                    Destination = table.Column<string>(nullable: true),
-                    Weather = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Flights", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SportComplex",
-                columns: table => new
-                {
-                    SportComplexId = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    NumberOfSeats = table.Column<int>(nullable: false),
-                    BuildDate = table.Column<DateTime>(nullable: false),
-                    TypeOfSport = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SportComplex", x => x.SportComplexId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WeatherReports",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Days = table.Column<DateTime>(nullable: false),
-                    WeatherCondition = table.Column<string>(nullable: true),
-                    Temperature = table.Column<string>(nullable: true),
-                    Wind = table.Column<string>(nullable: true),
-                    Rainfall = table.Column<string>(nullable: true),
-                    Moisture = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WeatherReports", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -134,7 +73,7 @@ namespace UtopiaCity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -270,18 +209,6 @@ namespace UtopiaCity.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "EmergencyReport");
-
-            migrationBuilder.DropTable(
-                name: "Flights");
-
-            migrationBuilder.DropTable(
-                name: "SportComplex");
-
-            migrationBuilder.DropTable(
-                name: "WeatherReports");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

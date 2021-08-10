@@ -17,5 +17,6 @@ namespace UtopiaCity.Models.Airport
         public string Wind { get; set; }
         public string Rainfall { get; set; }
         public string Moisture { get; set; }
+        public string FlightWeather { get; set; }
     }
 }

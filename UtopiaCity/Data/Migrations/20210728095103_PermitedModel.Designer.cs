@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210718171059_PCsecondMigrations")]
-    partial class PCsecondMigrations
+    [Migration("20210728095103_PermitedModel")]
+    partial class PermitedModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,10 +223,9 @@ namespace UtopiaCity.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
@@ -237,12 +236,89 @@ namespace UtopiaCity.Migrations
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FlightNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Weather")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.Ticket", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Direction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlightId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PermitedModelId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RersidentAccountId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.HasIndex("PermitedModelId");
+
+                    b.HasIndex("RersidentAccountId");
+
+                    b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobilePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PayType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransportType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ForPassengers");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ForPassengerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TypeOfOrder")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForPassengerId");
+
+                    b.ToTable("TransportManagers");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.WeatherReport", b =>
@@ -273,6 +349,31 @@ namespace UtopiaCity.Migrations
                     b.ToTable("WeatherReports");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FamilyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RersidentAccount");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
                 {
                     b.Property<string>("Id")
@@ -291,73 +392,29 @@ namespace UtopiaCity.Migrations
                     b.ToTable("EmergencyReport");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.PublicCatering.Reservation", b =>
+            modelBuilder.Entity("UtopiaCity.Models.Life.Event", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("BookSeats")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("BookingDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RestaurantId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RestaurantTypeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.HasIndex("RestaurantTypeId");
-
-                    b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.PublicCatering.Restaurant", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RestaurantTypeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Seats")
+                    b.Property<int>("EventType")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RestaurantTypeId");
-
-                    b.ToTable("Restaurants");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.PublicCatering.RestaurantType", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RestaurantTypes");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
@@ -386,6 +443,84 @@ namespace UtopiaCity.Migrations
                     b.HasKey("SportComplexId");
 
                     b.ToTable("SportComplex");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.PermitedModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("GovernmentStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PermissionStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rainfall")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Season")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpeedOfWind")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeOfDay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PermitedModel");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.ScheduleModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EventName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModelName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeOfEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TimeOfStart")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ScheduleModel");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.TimelineModel.TimelineModel", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DayAndYear")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Schedule")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranscriptionOfPermission")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniqueRules")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TimelineModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -439,22 +574,26 @@ namespace UtopiaCity.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.PublicCatering.Reservation", b =>
+            modelBuilder.Entity("UtopiaCity.Models.Airport.Ticket", b =>
                 {
-                    b.HasOne("UtopiaCity.Models.PublicCatering.Restaurant", "Restaurant")
+                    b.HasOne("UtopiaCity.Models.Airport.Flight", "Flight")
                         .WithMany()
-                        .HasForeignKey("RestaurantId");
+                        .HasForeignKey("FlightId");
 
-                    b.HasOne("UtopiaCity.Models.PublicCatering.RestaurantType", "RestaurantType")
+                    b.HasOne("UtopiaCity.Models.TimelineModel.PermitedModel", "PermitedModel")
                         .WithMany()
-                        .HasForeignKey("RestaurantTypeId");
+                        .HasForeignKey("PermitedModelId");
+
+                    b.HasOne("UtopiaCity.Models.CityAdministration.RersidentAccount", "RersidentAccount")
+                        .WithMany()
+                        .HasForeignKey("RersidentAccountId");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.PublicCatering.Restaurant", b =>
+            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>
                 {
-                    b.HasOne("UtopiaCity.Models.PublicCatering.RestaurantType", "RestaurantType")
+                    b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
                         .WithMany()
-                        .HasForeignKey("RestaurantTypeId");
+                        .HasForeignKey("ForPassengerId");
                 });
 #pragma warning restore 612, 618
         }

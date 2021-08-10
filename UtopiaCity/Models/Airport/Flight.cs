@@ -13,12 +13,6 @@ namespace UtopiaCity.Models.Airport
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public int FlightNumber { get; set; }        
-    /// <summary>
-    /// Represent information about flights
-    /// </summary>
-    public class Flight
-    {
-        public int Id { get; set; }
         public DateTime ArrivalTime { get; set; }
         public DateTime DepartureTime { get; set; }
         public string Destination { get; set; }
