@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Utils;
 
 namespace UtopiaCity.Controllers.Airport
 {
@@ -43,8 +44,8 @@ namespace UtopiaCity.Controllers.Airport
         [HttpGet]
         public IActionResult Create()
         {
-            var dictionaryData = new Services.Airport.Dictionaries.PlanesSpeedDictionary().speed;
-            ViewData["PlaneTypes"] = new SelectList(dictionaryData);
+            var dictionaryData = _flightService.GetListOfPlaneTypes();
+            ViewData["TypeOfAircraft"] = new SelectList(dictionaryData);
             return View("FlightCreateView");
         }
 
@@ -52,10 +53,10 @@ namespace UtopiaCity.Controllers.Airport
         public IActionResult Create(Flight newFlight)
         {
             if (ModelState.IsValid)
-            {               
-                newFlight.FlightNumber = _flightService.GetRandomFlightNumber();
-                var arrivalTime = newFlight.ArrivalTime;
-                arrivalTime = _flightService.GetArrivalTime(newFlight.DepartureTime, newFlight.LocationPoint, newFlight.DestinationPoint, newFlight.TypeOfAircraft);
+            {
+                newFlight.FlightNumber = RandomUtil.GenerateRandomString(150).ElementAtOrDefault(10);
+                var arrivalTime = _flightService.GetArrivalTime(newFlight.DepartureTime, newFlight.LocationPoint, newFlight.DestinationPoint, newFlight.TypeOfAircraft);
+                newFlight.ArrivalTime = arrivalTime;
                 _flightService.AddFlight(newFlight);
                 return RedirectToAction(nameof(Index));
             }
@@ -96,6 +97,10 @@ namespace UtopiaCity.Controllers.Airport
 
             return View("FlightEditView", edited);
         }
+
+        // ToDo: Add jquery/ajax request to the View of the Edit method, 
+        // for making travel time data in the form dynamically changeable
+
 
         [HttpGet]
         public IActionResult Delete(string id)

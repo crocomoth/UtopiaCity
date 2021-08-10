@@ -70,14 +70,12 @@ namespace UtopiaCity.Services.Airport
         }
 
         /// <summary>
-        ///  Set the unique Flight Number
+        /// Count the general time which takes, to fly from one location to another based on special plane type
         /// </summary>
-        /// <returns>Random integer value</returns>
-        public int GetRandomFlightNumber()
-        {
-            return new Random().Next(100, 999);
-        }
-
+        /// <param name="location">location (capital city of country expected)</param>
+        /// <param name="destination">location (capital city of country expected)</param>
+        /// <param name="planeType">special type of existing aircrafts</param>
+        /// <returns>General fly time</returns>
         public async Task<double> GetFlyTime(string location, string destination, string planeType)
         {
             var resources = await _route.GetRouteObject(location, destination);
@@ -96,10 +94,35 @@ namespace UtopiaCity.Services.Airport
             return generalFlyTime;
         }
 
+        /// <summary>
+        /// Define the arrival date which based on departure time and general fly time
+        /// </summary>
+        /// <param name="departure">Departure DateTime</param>
+        /// <param name="locationPoint">location (capital city of country expected)</param>
+        /// <param name="destinationPoint">location (capital city of country expected)</param>
+        /// <param name="planeType">special type of existing aircrafts</param>
+        /// <returns>Arrival Date</returns>
         public DateTime GetArrivalTime(DateTime departure, string locationPoint,string destinationPoint,string planeType)
         {
             var overallTime= departure.AddHours(GetFlyTime(locationPoint, destinationPoint, planeType).GetAwaiter().GetResult());
             return overallTime;
+        }
+
+        /// <summary>
+        /// Gets the list of object of aircraft types
+        /// </summary>
+        /// <returns>The List of types of existing aircrafts</returns>
+        public List<string> GetListOfPlaneTypes()
+        {
+            List<string> list = new List<string>();
+            list.Add("PassengerShortLengthAircraft");
+            list.Add("PassengerAverageLengthAircraft");
+            list.Add("PassengerGreatLengthAircraft");
+            list.Add("LiftingCapacityAircraftUpTo20");
+            list.Add("LiftingCapacityAircraftUpto65");
+            list.Add("LiftingCapacityAircraftUpTo120");
+
+            return list;
         }
     }
 }

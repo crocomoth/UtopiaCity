@@ -10,7 +10,6 @@ using UtopiaCity.Models.Airport.TransportManagerSystem;
 
 namespace UtopiaCity.Controllers.Airport
 {
-    //This class was scaffolded automatically by VS, I added some changes and made updations for future contribution
     public class TransportManagersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -198,6 +197,6 @@ namespace UtopiaCity.Controllers.Airport
 
             return View("CreateForCompanyToView", company);
         }
-        // add new data-table to the Index view 
+        // TODO: add new data-table to the Index view 
     }
 }
