@@ -435,6 +435,28 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("RersidentAccount");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<DateTime>("DateCreated")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("Salt")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("SerialNumber")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("EmergencyCertificate");
+            });
+
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
                 {
                     b.Property<string>("Id")

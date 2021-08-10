@@ -15,21 +15,12 @@ namespace UtopiaCity.Common
 
         public static void RegisterSubInitializers()
         {
-            subDbInitializers.Add(new EmergencyReportInitializer());
-
-          
+            subDbInitializers.Add(new EmergencyReportInitializer());          
             subDbInitializers.Add(new TimelineEventInitializer());
-
-            // complex sets
-          
-            subDbInitializers.Add(new ResidentAccountInitializer());
-          
-            subDbInitializers.Add(new FlightInitializer());
-          
-            subDbInitializers.Add(new ForPassengerInitializer());
-          
+            subDbInitializers.Add(new ResidentAccountInitializer());         
+            subDbInitializers.Add(new FlightInitializer());          
+            subDbInitializers.Add(new ForPassengerInitializer());          
             subDbInitializers.Add(new SportComplexInitializer());
-
             subDbInitializers.Add(new LifeInitializer());
         }
 
