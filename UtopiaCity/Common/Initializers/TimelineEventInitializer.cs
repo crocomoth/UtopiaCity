@@ -15,14 +15,14 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            /*if (!context.PermitedModel.Any())
+            if (!context.PermitedModel.Any())
             {
                 return;
-            }*/
+            }
 
             context.RemoveRange(context.TimelineModel.ToList());
             
-            //context.RemoveRange(context.PermitedModel.ToList());
+            context.RemoveRange(context.PermitedModel.ToList());
 
             context.SaveChanges();
         }
@@ -78,7 +78,7 @@ namespace UtopiaCity.Common.Initializers
             }
 
             //Permited Conditons
-            /*if(!context.PermitedModel.Any())
+            if(!context.PermitedModel.Any())
             {
                 context.PermitedModel.AddRange(
                     new Models.TimelineModel.PermitedModel
@@ -112,7 +112,7 @@ namespace UtopiaCity.Common.Initializers
                     }
 
                     );
-            }*/
+            }
 
 
             context.SaveChanges();

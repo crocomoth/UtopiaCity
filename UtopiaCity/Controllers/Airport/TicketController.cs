@@ -7,7 +7,7 @@ using UtopiaCity.Models.Airport;
 
 namespace UtopiaCity.Controllers.Airport
 {
-    /*public class TicketController:Controller
+    public class TicketController:Controller
     {
         private readonly ApplicationDbContext _dbContext;
         public TicketController(ApplicationDbContext context)
@@ -69,5 +69,5 @@ namespace UtopiaCity.Controllers.Airport
             _dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-    }*/
+    }
 }

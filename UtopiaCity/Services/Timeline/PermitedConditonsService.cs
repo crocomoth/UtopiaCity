@@ -19,9 +19,9 @@ namespace UtopiaCity.Services.Timeline
         /// SHOW LIST OF EVENT
         /// </summary>
         /// <returns>LIST</returns>
-        /*public async Task<List<PermitedModel>> GetList()
+        public async Task<List<PermitedModel>> GetList()
         {
             return await _dbContext.PermitedModel.ToListAsync();
-        }*/
+        }
     }
 }
