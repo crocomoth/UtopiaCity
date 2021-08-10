@@ -58,13 +58,11 @@ namespace UtopiaCity
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
 
             services.AddScoped<FlightService, FlightService>();
-          
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
 
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
-
             #endregion
 
             services.Configure<IdentityOptions>(options =>

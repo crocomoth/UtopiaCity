@@ -32,7 +32,7 @@ namespace UtopiaCity.Services.Emergency
         /// Gets list of all reports.
         /// </summary>
         /// <returns>List of all existing reports.</returns>
-        public async Task<List<EmergencyReport>> GetEmergencyReports()
+        public virtual async Task<List<EmergencyReport>> GetEmergencyReports()
         {
             return await _dbContext.EmergencyReport.ToListAsync();
         }
