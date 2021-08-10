@@ -5,6 +5,7 @@ using UtopiaCity.Models.Airport.TransportManagerSystem;
 using UtopiaCity.Models.Emergency;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Models.CityAdministration;
+using UtopiaCity.Models.PublicCatering;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
 
@@ -30,5 +31,9 @@ namespace UtopiaCity.Data
         public DbSet<PermitedModel> PermitedModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<Event> Events { get; set; }
+        
+        public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<RestaurantType> RestaurantTypes { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

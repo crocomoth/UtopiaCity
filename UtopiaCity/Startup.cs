@@ -12,6 +12,8 @@ using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Life;
+using UtopiaCity.Services.PublicCatering.Reservation;
+using UtopiaCity.Services.PublicCatering.RestaurantType;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
 
@@ -58,6 +60,8 @@ namespace UtopiaCity
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
+            services.AddScoped<ReservationService, ReservationService>();
+            services.AddScoped<RestaurantTypeService, RestaurantTypeService>();
 
             #endregion
 

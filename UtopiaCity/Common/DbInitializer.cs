@@ -22,6 +22,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new ForPassengerInitializer());          
             subDbInitializers.Add(new SportComplexInitializer());
             subDbInitializers.Add(new LifeInitializer());
+	    subDbInitializers.Add(new PublicCateringInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)
