@@ -245,6 +245,35 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Flights");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.Ticket", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Direction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlightId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PermitedModelId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RersidentAccountId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.HasIndex("PermitedModelId");
+
+                    b.HasIndex("RersidentAccountId");
+
+                    b.ToTable("Tickets");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", b =>
                 {
                     b.Property<string>("Id")
@@ -563,6 +592,21 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.Ticket", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Airport.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightId");
+
+                    b.HasOne("UtopiaCity.Models.TimelineModel.PermitedModel", "PermitedModel")
+                        .WithMany()
+                        .HasForeignKey("PermitedModelId");
+
+                    b.HasOne("UtopiaCity.Models.CityAdministration.RersidentAccount", "RersidentAccount")
+                        .WithMany()
+                        .HasForeignKey("RersidentAccountId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>
