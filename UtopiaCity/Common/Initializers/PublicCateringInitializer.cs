@@ -19,30 +19,35 @@ namespace UtopiaCity.Common.Initializers
 
             if (!context.RestaurantTypes.Any())
             {
-                object[] restaurantType =
+                var restaurantType1 = new RestaurantType
                 {
-                    new RestaurantType
-                    {
-                        Name = "Caffe"
-                    },
-                    new RestaurantType
-                    {
-                        Name = "Bar"
-                    },
-                    new RestaurantType
-                    {
-                        Name = "Restaurant"
-                    },
-                    new RestaurantType
-                    {
-                        Name = "Eatery"
-                    },
-                    new RestaurantType
-                    {
-                        Name = "Teahouse"
-                    }
+                    Name = "Caffe"
                 };
-                context.AddRange(restaurantType);
+
+                var restaurantType2 = new RestaurantType
+                {
+                    Name = "Bar"
+                };
+
+                var restaurantType3 = new RestaurantType
+                {
+                    Name = "Restaurant"
+                };
+
+                var restaurantType4 = new RestaurantType
+                {
+                    Name = "Eatery"
+                };
+
+                var restaurantType5 = new RestaurantType
+                {
+                    Name = "Teahouse"
+                };
+                context.AddRange(restaurantType1,
+                                            restaurantType2, 
+                                            restaurantType3, 
+                                            restaurantType4, 
+                                            restaurantType5);
                 context.SaveChanges();
             }
 
@@ -95,13 +100,13 @@ namespace UtopiaCity.Common.Initializers
                     return;
                 }
             }
-            
+
             if (context.RestaurantTypes.Any())
             {
                 context.RemoveRange(context.RestaurantTypes.ToList());
                 context.SaveChanges();
             }
-            
+
             if (context.Restaurants.Any())
             {
                 context.RemoveRange(context.Restaurants.ToList());
