@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\" />
+    <Folder Include="wwwroot\images\sport-complexes\" />
   </ItemGroup>
 
 </Project>

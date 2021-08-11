@@ -59,5 +59,35 @@ namespace UtopiaCity.Services.Sport
             _dbContext.SportComplex.Update(sportComplex);
             _dbContext.SaveChanges();
         }
+
+        /// <summary>
+        /// Gets list of sport complexes' titles.
+        /// </summary>
+        /// <returns>List of all existing sport complexes' titles.</returns>
+        public List<string> GetAllSportComplexesTitles()
+        {
+            var sportComplexes = GetAllSportComplexes();
+            var titles = new List<string>();
+            foreach (var sportComplex in sportComplexes)
+            {
+                titles.Add(sportComplex.Title);
+            }
+
+            return titles;
+        }
+
+        /// <summary>
+        /// Gets <see cref="SportComplex"/> by Title.
+        /// </summary>
+        /// <param name="title">Title of sport complex.</param>
+        /// <returns>Sport complex if it exists, otherwise null.</returns>
+        public SportComplex GetSportComplexByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title));
+
+        /// <summary>
+        /// Gets <see cref="SportComplex.SportComplexId"/> by Title.
+        /// </summary>
+        /// <param name="title">Title of sport complex.</param>
+        /// <returns>Sport complex's id if it exists, otherwise null.</returns>
+        public string GetSportComplexIdByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title)).SportComplexId;
     }
 }
