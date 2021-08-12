@@ -37,6 +37,7 @@ namespace UtopiaCity
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Services
 
@@ -56,7 +57,6 @@ namespace UtopiaCity
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
 
             services.AddScoped<FlightService, FlightService>();
-          
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
 
