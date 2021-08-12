@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Services.Life;
@@ -18,6 +20,10 @@ namespace UtopiaCity.Controllers.Life
         }
         public IActionResult Index()
         {
+            var eventTypes = Enum.GetValues(typeof(EventType))
+                .Cast<EventType>()
+                .Select(x => new EventTypeItem { Id = (int)x, Name = x.ToString() });
+            ViewData["select"] = JsonConvert.SerializeObject(eventTypes);
             return View(_service.GetAll());
         }
         [HttpGet]
@@ -54,7 +60,7 @@ namespace UtopiaCity.Controllers.Life
                 .Cast<EventType>()
                 .Select(x => new EventTypeItem { Id = (int)x, Name = x.ToString() });
 
-            var selected = eventTypes.FirstOrDefault(x => x.Id.Equals((int)e.EventType));
+            var selected = Enumerable.FirstOrDefault<EventTypeItem>(eventTypes, (Func<EventTypeItem, bool>)(x => (bool)x.Id.Equals((int)e.EventType)));
 
             ViewData["select"] = new SelectList(items: eventTypes, selectedValue: selected, dataTextField: nameof(EventTypeItem.Name), dataValueField: nameof(EventTypeItem.Id));
 
@@ -121,6 +127,15 @@ namespace UtopiaCity.Controllers.Life
             }
 
             return View(e);
+        }
+        [HttpPost]
+        public IActionResult Search(EventDto dto)
+        {
+            var eventTypes = Enum.GetValues(typeof(EventType))
+                .Cast<EventType>()
+                .Select(x => new EventTypeItem { Id = (int)x, Name = x.ToString() });
+            ViewData["select"] = JsonConvert.SerializeObject(eventTypes);
+            return View("Index", _service.Search(dto).ToList());
         }
     }
 }

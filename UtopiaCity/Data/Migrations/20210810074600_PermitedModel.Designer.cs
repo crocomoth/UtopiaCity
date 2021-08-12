@@ -10,8 +10,8 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210728091250_Tickets")]
-    partial class Tickets
+    [Migration("20210810074600_PermitedModel")]
+    partial class PermitedModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -247,35 +247,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Flights");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Airport.Ticket", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Direction")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FlightId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PermitedModelId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RersidentAccountId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FlightId");
-
-                    b.HasIndex("PermitedModelId");
-
-                    b.HasIndex("RersidentAccountId");
-
-                    b.ToTable("Tickets");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", b =>
                 {
                     b.Property<string>("Id")
@@ -329,6 +300,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<DateTime>("Days")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FlightWeather")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Moisture")
                         .HasColumnType("nvarchar(max)");
 
@@ -372,6 +346,28 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RersidentAccount");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmergencyCertificate");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
@@ -572,21 +568,6 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Airport.Ticket", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Airport.Flight", "Flight")
-                        .WithMany()
-                        .HasForeignKey("FlightId");
-
-                    b.HasOne("UtopiaCity.Models.TimelineModel.PermitedModel", "PermitedModel")
-                        .WithMany()
-                        .HasForeignKey("PermitedModelId");
-
-                    b.HasOne("UtopiaCity.Models.CityAdministration.RersidentAccount", "RersidentAccount")
-                        .WithMany()
-                        .HasForeignKey("RersidentAccountId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>

@@ -1,0 +1,35 @@
+﻿<div class="container" id="lifeContainer">
+    <form asp-controller="Life" asp-action="Search">
+        <div class="row">
+            <div class="form-group col-sm">
+                <label>Searching Word</label><br />
+                <input type="text" name="SearchWord" value="" id="sword" />
+                <br />
+            </div>
+            <div class="form-group col-sm">
+                <label>From</label><br />
+                <input type="datetime-local" name="From" value="" id="sfrom" />
+                <br />
+            </div>
+            <div class="form-group col-sm">
+                <label>To</label><br />
+                <input type="datetime-local" name="To" value="" id="sto" />
+                <br />
+            </div>
+            <div class="form-group col-sm">
+                <label>Event Type</label><br />
+            <select name = "EventType" id="selectEvent" onclick="addOptions('@ViewData["select"]')">
+                <option>Select Event Type</option>
+            </select>
+                <br />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm">
+                <input type="submit" name="search" value="Search" id="search" /><br />
+            </div>
+        </div>
+
+    </form>
+</div>
