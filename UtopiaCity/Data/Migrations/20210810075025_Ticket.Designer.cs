@@ -10,8 +10,8 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210728095103_PermitedModel")]
-    partial class PermitedModel
+    [Migration("20210810075025_Ticket")]
+    partial class Ticket
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,6 +329,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<DateTime>("Days")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FlightWeather")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Moisture")
                         .HasColumnType("nvarchar(max)");
 
@@ -372,6 +375,28 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RersidentAccount");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmergencyCertificate");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>

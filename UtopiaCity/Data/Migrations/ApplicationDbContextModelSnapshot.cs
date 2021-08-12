@@ -327,6 +327,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<DateTime>("Days")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("FlightWeather")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Moisture")
                         .HasColumnType("nvarchar(max)");
 
@@ -373,26 +376,26 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
-            {
-                b.Property<string>("Id")
-                    .HasColumnType("nvarchar(450)");
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                b.Property<DateTime>("DateCreated")
-                    .HasColumnType("datetime2");
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
 
-                b.Property<string>("Name")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("Salt")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
 
-                b.Property<string>("SerialNumber")
-                    .HasColumnType("nvarchar(max)");
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.ToTable("EmergencyCertificate");
-            });
+                    b.ToTable("EmergencyCertificate");
+                });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
                 {
