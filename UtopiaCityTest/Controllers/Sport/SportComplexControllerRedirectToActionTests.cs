@@ -1,22 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using UtopiaCity.Controllers.Sport;
-using UtopiaCity.Models.Sport.Enums;
 using UtopiaCity.Services.Sport;
-using UtopiaCity.ViewModels.Sport;
 using Xunit;
 
 namespace UtopiaCityTest.Controllers.Sport
 {
-    public class SportComplexControllerRedirectToActionTests : DbContextAndServiceMocking<SportComplexService>
+    public class SportComplexControllerRedirectToActionTests : BasicClassForSportTests<SportComplexService>
     {
-        public SportComplexControllerRedirectToActionTests()
-        {
-            BasicMocking();
-        }
+        public SportComplexControllerRedirectToActionTests() : base() { }
 
         [Fact]
-        public void RedirectingByCreate_MethodPost()
+        public void RedirectingByCreate_MethodPost_ReturnsAllSportComplexesView()
         {
             //arrange
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
@@ -28,14 +22,32 @@ namespace UtopiaCityTest.Controllers.Sport
             Assert.Equal("AllSportComplexes", result.ActionName);
         }
 
-        private SportComplexViewModel SportComplexViewModelForTests = new SportComplexViewModel
+        [Fact]
+        public void RedirectByDelete_MethodPost_ReturnsAllSportComplexesView()
         {
-            SportComplexId = "1",
-            SportComplexTitle = "Title",
-            Address = "address",
-            NumberOfSeats = 100,
-            TypeOfSport = TypesOfSport.Athletics,
-            BuildDate = new DateTime(2021, 8, 10)
-        };
+            //arrange
+            _serviceMock.Setup(x => x.GetSportComplexById("1")).Returns(SportComplexForTests);
+            var controller = new SportComplexController(_serviceMock.Object, _mapper);
+
+            //act
+            RedirectToActionResult result = controller.DeleteConfirmed("1") as RedirectToActionResult;
+
+            //assert
+            Assert.Equal("AllSportComplexes", result.ActionName);
+        }
+
+        [Fact]
+        public void RedirectByEdit_MethodPost_ReturnsAllSportComplexesView()
+        {
+            //arrange
+            _serviceMock.Setup(x => x.UpdateSportComplexInDb(SportComplexForTests));
+            var controller = new SportComplexController(_serviceMock.Object, _mapper);
+
+            //act
+            RedirectToActionResult result = controller.Edit("1", SportComplexViewModelForTests) as RedirectToActionResult;
+
+            //assert
+            Assert.Equal("AllSportComplexes", result.ActionName);
+        }
     }
 }

@@ -4,21 +4,15 @@ using Xunit;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Models.Sport;
 using System.Collections.Generic;
-using UtopiaCity.ViewModels.Sport;
-using UtopiaCity.Models.Sport.Enums;
-using System;
 
 namespace UtopiaCityTest.Controllers.Sport
 {
-    public class SportComplexControllerViewResultNameTests : DbContextAndServiceMocking<SportComplexService>
+    public class SportComplexControllerViewResultNameTests : BasicClassForSportTests<SportComplexService>
     {
-        public SportComplexControllerViewResultNameTests()
-        {
-            BasicMocking();
-        }
+        public SportComplexControllerViewResultNameTests() : base() { }
 
         [Fact]
-        public void ViewSelectedByAllSportComplexes_Default()
+        public void ViewSelectedByAllSportComplexes_ReturnsDefaultView()
         {
             //arrange
             _serviceMock.Setup(x => x.GetAllSportComplexes()).Returns(() => new List<SportComplex>());
@@ -32,7 +26,7 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public void ViewSelectedByDetails_Default()
+        public void ViewSelectedByDetails_ReturnsDefaultView()
         {
             //arrrange
             _serviceMock.Setup(x => x.GetSportComplexById("id")).Returns(() => new SportComplex());
@@ -46,7 +40,7 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public void ViewSelectedByCreate_MethodGet_Default()
+        public void ViewSelectedByCreate_MethodGet_ReturnsDefaultView()
         {
             //arrange
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
@@ -58,13 +52,12 @@ namespace UtopiaCityTest.Controllers.Sport
             Assert.Null(result.ViewName);
         }
 
-        //TODO Think about this method. May be it's better to use InMemoryDb From Services
         [Fact]
-        public void ViewSelectedByDelete_MethodGet_Default()
+        public void ViewSelectedByDelete_MethodGet_ReturnsDefaultView()
         {
             //arrange
+            _serviceMock.Setup(x => x.GetSportComplexById("1")).Returns(SportComplexForTests);
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
-            controller.Create(SportComplexViewModelForTests);
 
             //act
             ViewResult result = controller.Delete("1") as ViewResult;
@@ -73,15 +66,18 @@ namespace UtopiaCityTest.Controllers.Sport
             Assert.Null(result.ViewName);
         }
 
-        //TODO Think about repeating of this object
-        private SportComplexViewModel SportComplexViewModelForTests = new SportComplexViewModel
+        [Fact]
+        public void ViewSelectedByEdit_MethodGet_ReturnsDefaultView()
         {
-            SportComplexId = "1",
-            SportComplexTitle = "Title",
-            Address = "address",
-            NumberOfSeats = 100,
-            TypeOfSport = TypesOfSport.Athletics,
-            BuildDate = new DateTime(2021, 8, 10)
-        };
+            //arrange
+            _serviceMock.Setup(x => x.GetSportComplexById("1")).Returns(SportComplexForTests);
+            var controller = new SportComplexController(_serviceMock.Object, _mapper);
+
+            //act
+            ViewResult result = controller.Edit("1") as ViewResult;
+
+            //assert
+            Assert.Null(result.ViewName);
+        }
     }
 }
