@@ -1,55 +1,26 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using UtopiaCity.Data;
-using UtopiaCity.Helpers.AutoMapper;
-using UtopiaCity.Models.Sport;
-using UtopiaCity.Models.Sport.Enums;
-using UtopiaCity.ViewModels.Sport;
 
 namespace UtopiaCityTest.Controllers.Sport
 {
-    public class BasicClassForSportTests<T> where T : class
+    public static class BasicClassForSportTests
     {
-        protected Mock<T> _serviceMock;
-        protected static IMapper _mapper;
-        protected static SportComplex SportComplexForTests;
-        protected static SportComplexViewModel SportComplexViewModelForTests;
+        public static Mock<T> DbContextMock<T>() where T : DbContext => new Mock<T>(new DbContextOptions<T>());
 
-        public BasicClassForSportTests()
+        public static Mock<K> ServiceMock<T, K>(Mock<T> context) where T : DbContext where K : class => new Mock<K>(context.Object);
+
+        public static IMapper ConfigMapper(params Profile[] profiles)
         {
-            var applicationDbContextMock = new Mock<ApplicationDbContext>(new DbContextOptions<ApplicationDbContext>());
-            _serviceMock = new Mock<T>(applicationDbContextMock.Object);
-            if (_mapper == null)
+            var mappingConfig = new MapperConfiguration(mc =>
             {
-                var mappingConfig = new MapperConfiguration(mc =>
+                foreach(Profile profile in profiles)
                 {
-                    mc.AddProfile(new SportComplexProfile());
-                    mc.AddProfile(new SportEventProfile());
-                });
+                    mc.AddProfile(profile);
+                }
+            });
 
-                IMapper mapper = mappingConfig.CreateMapper();
-                _mapper = mapper;
-            }
-
-            if (SportComplexForTests == null)
-            {
-                SportComplexForTests = new SportComplex()
-                {
-                    SportComplexId = "1",
-                    Title = "Title",
-                    Address = "address",
-                    NumberOfSeats = 100,
-                    TypeOfSport = TypesOfSport.Athletics,
-                    BuildDate = new DateTime(2021, 8, 10)
-                };
-            }
-
-            if (SportComplexViewModelForTests == null)
-            {
-                SportComplexViewModelForTests = _mapper.Map<SportComplexViewModel>(SportComplexForTests);
-            }
+            return mappingConfig.CreateMapper();
         }
     }
 }

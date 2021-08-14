@@ -1,19 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using UtopiaCity.Data;
+﻿using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
-using UtopiaCity.Models.Sport.Enums;
 using Xunit;
 using System.Linq;
+using UtopiaCityTest.Common.ObjectsForTests;
 
 namespace UtopiaCityTest.Services.Sport
 {
     public class SportComplexServiceTests : BaseServiceTest
     {
+        private readonly SportComplex _sportComplexForTests;
+        private readonly SportComplex[] _sportComplexesForTests;
+
         public SportComplexServiceTests()
         {
             Setup();
+            _sportComplexForTests = SportObjectsForTests.SportComplexForTests();
+            _sportComplexesForTests = SportObjectsForTests.ArrayOfSportComplexesForTests();
         }
 
         [Fact]
@@ -24,7 +27,7 @@ namespace UtopiaCityTest.Services.Sport
 
             using (var context = new ApplicationDbContext(options))
             {
-                context.SportComplex.AddRange(ArrayOfSportComplexesForTests());
+                context.SportComplex.AddRange(_sportComplexesForTests);
                 context.SaveChanges();
             }
 
@@ -53,7 +56,7 @@ namespace UtopiaCityTest.Services.Sport
 
             using (var context = new ApplicationDbContext(options))
             {
-                context.SportComplex.AddRange(ArrayOfSportComplexesForTests());
+                context.SportComplex.Add(_sportComplexForTests);
                 context.SaveChanges();
             }
 
@@ -78,16 +81,16 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportComplexService(context);
-                service.AddSportComplexToDb(sportComplexForTests);
+                service.AddSportComplexToDb(_sportComplexForTests);
             }
 
             using (var context = new ApplicationDbContext(options))
             {
                 //act
-                var result = context.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(sportComplexForTests.SportComplexId));
+                var result = context.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(_sportComplexForTests.SportComplexId));
 
                 //assert
-                Assert.Equal(sportComplexForTests.SportComplexId, result.SportComplexId);
+                Assert.Equal(_sportComplexForTests.SportComplexId, result.SportComplexId);
             }
         }
 
@@ -99,17 +102,17 @@ namespace UtopiaCityTest.Services.Sport
 
             using (var context = new ApplicationDbContext(options))
             {
-                context.SportComplex.Add(sportComplexForTests);
+                context.SportComplex.Add(_sportComplexForTests);
                 context.SaveChanges();
             }
 
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportComplexService(context);
-                service.RemoveSportComplexFromDb(sportComplexForTests);
+                service.RemoveSportComplexFromDb(_sportComplexForTests);
 
                 //act 
-                var result = context.SportComplex.Any(x => x.SportComplexId.Equals(sportComplexForTests.SportComplexId));
+                var result = context.SportComplex.Any(x => x.SportComplexId.Equals(_sportComplexForTests.SportComplexId));
 
                 //assert
                 Assert.Equal(bool.FalseString, result.ToString());
@@ -124,7 +127,7 @@ namespace UtopiaCityTest.Services.Sport
 
             using (var context = new ApplicationDbContext(options))
             {
-                context.SportComplex.Add(sportComplexForTests);
+                context.SportComplex.Add(_sportComplexForTests);
                 context.SaveChanges();
             }
 
@@ -133,79 +136,27 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportComplexService(context);
                 service.UpdateSportComplexInDb(new SportComplex
                 {
-                    SportComplexId = sportComplexForTests.SportComplexId,
+                    SportComplexId = _sportComplexForTests.SportComplexId,
                     Title = "New Title",
-                    BuildDate = sportComplexForTests.BuildDate,
+                    BuildDate = _sportComplexForTests.BuildDate,
                     NumberOfSeats = 100,
                     Address = "new address",
-                    TypeOfSport = sportComplexForTests.TypeOfSport,
+                    TypeOfSport = _sportComplexForTests.TypeOfSport,
                     SportEvents = null
                 });
 
                 //act
-                var result = context.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(sportComplexForTests.SportComplexId));
+                var result = context.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(_sportComplexForTests.SportComplexId));
 
                 //assert
-                Assert.Equal(sportComplexForTests.SportComplexId, result.SportComplexId);
+                Assert.Equal(_sportComplexForTests.SportComplexId, result.SportComplexId);
                 Assert.Equal("New Title", result.Title);
-                Assert.Equal(sportComplexForTests.BuildDate, result.BuildDate);
+                Assert.Equal(_sportComplexForTests.BuildDate, result.BuildDate);
                 Assert.Equal(100, result.NumberOfSeats);
                 Assert.Equal("new address", result.Address);
-                Assert.Equal(sportComplexForTests.TypeOfSport, result.TypeOfSport);
+                Assert.Equal(_sportComplexForTests.TypeOfSport, result.TypeOfSport);
                 Assert.Null(result.SportEvents);
             }
-        }
-
-        private SportComplex sportComplexForTests = new SportComplex
-        {
-            SportComplexId = "55",
-            Title = "SportComplex",
-            BuildDate = new DateTime(2001, 10, 15),
-            NumberOfSeats = 550,
-            Address = "address",
-            TypeOfSport = TypesOfSport.Basketball,
-            SportEvents = null
-        };
-
-        private SportComplex[] ArrayOfSportComplexesForTests()
-        {
-            SportComplex[] sportComplexes = new SportComplex[]
-                {
-                    new SportComplex
-                    {
-                        SportComplexId = "1",
-                        Title = "title_1",
-                        NumberOfSeats = 100,
-                        TypeOfSport = TypesOfSport.Athletics,
-                        Address = "address_1",
-                        BuildDate = new DateTime(2021, 10, 12),
-                        SportEvents = null
-                    },
-
-                    new SportComplex
-                    {
-                        SportComplexId = "2",
-                        Title = "title_2",
-                        NumberOfSeats = 200,
-                        TypeOfSport = TypesOfSport.FigureSkating,
-                        Address = "address_2",
-                        BuildDate = new DateTime(2022, 10, 12),
-                        SportEvents = null
-                    },
-
-                    new SportComplex
-                    {
-                        SportComplexId = "3",
-                        Title = "title_3",
-                        NumberOfSeats = 300,
-                        TypeOfSport = TypesOfSport.Motorsport,
-                        Address = "address_3",
-                        BuildDate = new DateTime(2023, 10, 12),
-                        SportEvents = null
-                    },
-                };
-
-            return sportComplexes;
         }
     }
 }

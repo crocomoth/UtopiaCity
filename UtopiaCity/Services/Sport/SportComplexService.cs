@@ -66,7 +66,7 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of sport complexes' titles.
         /// </summary>
         /// <returns>List of all existing sport complexes' titles.</returns>
-        public List<string> GetAllSportComplexesTitles()
+        public virtual List<string> GetAllSportComplexesTitles()
         {
             var sportComplexes = GetAllSportComplexes();
             var titles = new List<string>();
@@ -83,13 +83,13 @@ namespace UtopiaCity.Services.Sport
         /// </summary>
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
-        public SportComplex GetSportComplexByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title));
+        public virtual SportComplex GetSportComplexByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title));
 
         /// <summary>
         /// Gets <see cref="SportComplex.SportComplexId"/> by Title.
         /// </summary>
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex's id if it exists, otherwise null.</returns>
-        public string GetSportComplexIdByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title)).SportComplexId;
+        public virtual string GetSportComplexIdByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title)).SportComplexId;
     }
 }
