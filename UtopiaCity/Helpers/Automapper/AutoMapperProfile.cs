@@ -12,8 +12,6 @@ namespace UtopiaCity.Helpers.Automapper
         public AutoMapperProfile()
         {
             CreateMap<UtopiaCity.Models.Life.WeatherReport.Data, UtopiaCity.Models.Airport.WeatherReport>()
-                       .ForMember(destination => destination.Days,
-                       map => map.MapFrom(source => source.Date))
                        .ForMember(destination => destination.Id,
                        map => map.MapFrom(source => Guid.NewGuid().ToString()))
                        .ForMember(destination => destination.Moisture,
@@ -28,6 +26,14 @@ namespace UtopiaCity.Helpers.Automapper
                        map => map.MapFrom(source => source.Wind.Speed.ToString()))
                        .ForMember(destination => destination.FlightWeather,
                        map => map.MapFrom(source => ""));
+
+            CreateMap<UtopiaCity.Models.Airport.WeatherReport, UtopiaCity.Models.TimelineModel.PermitedModel>()
+                       .ForMember(destination => destination.PermissionStatus,
+                       map => map.MapFrom(source => source.FlightWeather))
+                       .ForMember(destination => destination.SpeedOfWind,
+                       map => map.MapFrom(source => source.Wind))
+                       .ForMember(destination => destination.Rainfall,
+                       map => map.MapFrom(source => source.Rainfall));
         }
     }
 }
