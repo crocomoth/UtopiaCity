@@ -8,10 +8,12 @@ namespace UtopiaCity.Controllers.CityAdministration
     public class ResidentAccountController : Controller
     {
         private readonly ResidentAccountService _residentAccountService;
+        private readonly MarriageService _marriageService;
 
-        public ResidentAccountController(ResidentAccountService residentAccountService)
+        public ResidentAccountController(ResidentAccountService residentAccountService, MarriageService marriageService)
         {
             _residentAccountService = residentAccountService;
+            _marriageService = marriageService;
         }
 
         // view list of accounts
@@ -44,7 +46,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(RersidentAccount newAccount)
+        public async Task<IActionResult> Create(ResidentAccount newAccount)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +75,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, RersidentAccount edited)
+        public async Task<IActionResult> Edit(string id, ResidentAccount edited)
         {
             if (id != edited.Id)
             {
@@ -83,6 +85,7 @@ namespace UtopiaCity.Controllers.CityAdministration
             if (ModelState.IsValid)
             {
                 await _residentAccountService.UpdateRersidentAccount(edited);
+                await _marriageService.UpdateMarriageByAccount(edited);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -114,6 +117,11 @@ namespace UtopiaCity.Controllers.CityAdministration
             {
                 // TODO rewrite?
                 return NotFound();
+            }
+
+            if (account.MarriageId != null)
+            {
+                await _marriageService.DeleteMarriage(await _marriageService.GetMarriageById(account.MarriageId));
             }
 
             await _residentAccountService.DeleteRersidentAccount(account);

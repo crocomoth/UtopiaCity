@@ -222,6 +222,7 @@ namespace UtopiaCity.Data.Migrations
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ArrivalTime")
@@ -270,6 +271,62 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherReports");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstPersonData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstPersonId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MarriageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondPersonData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecondPersonId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Marriage");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FamilyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MarriageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MarriageId");
+
+                    b.ToTable("RersidentAccount");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
@@ -367,6 +424,13 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CityAdministration.Marriage", null)
+                        .WithMany("Accounts")
+                        .HasForeignKey("MarriageId");
                 });
 #pragma warning restore 612, 618
         }
