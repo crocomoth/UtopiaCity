@@ -112,30 +112,18 @@ namespace UtopiaCity.Services.CityAdministration
 
         public async Task GetMarriageFromViewAsync(ViewModel viewModel, Marriage marriage)
         {
-            string husbandId = viewModel.FirstPersonId;
-            string wifeId = viewModel.SecondPersonId;
 
-            ResidentAccount FirstPerson = await _residentAccountService.GetRersidentAccountById(husbandId);
-            string FirstPersonName = FirstPerson.FirstName;
-            string FirstPersonFamilyName = FirstPerson.FamilyName;
-            string FirstPersonBirthDate = FirstPerson.BirthDate.ToShortDateString();
+            ResidentAccount FirstPerson = await _residentAccountService.GetRersidentAccountById(viewModel.FirstPersonId);
+            ResidentAccount SecondPerson = await _residentAccountService.GetRersidentAccountById(viewModel.SecondPersonId);
             marriage.FirstPersonId = viewModel.FirstPersonId;
-            marriage.FirstPersonData = $"{FirstPersonName} {FirstPersonFamilyName} | {FirstPersonBirthDate}";
-
-            ResidentAccount SecondPerson = await _residentAccountService.GetRersidentAccountById(wifeId);
-            string SecondPersonName = SecondPerson.FirstName;
-            string SecondPersonFamilyName = SecondPerson.FamilyName;
-            string SecondPersonBirthDate = SecondPerson.BirthDate.ToShortDateString();
-            marriage.SecondPersonId = viewModel.SecondPersonId;
-            marriage.SecondPersonData = $"{SecondPersonName} {SecondPersonFamilyName} | {SecondPersonBirthDate}";
+            marriage.FirstPersonData = $"{FirstPerson.FirstName} {FirstPerson.FamilyName} | {FirstPerson.BirthDate.ToShortDateString()}";
+            marriage.SecondPersonId = SecondPerson.Id;
+            marriage.SecondPersonData = $"{SecondPerson.FirstName} {SecondPerson.FamilyName} | {SecondPerson.BirthDate.ToShortDateString()}";
             marriage.MarriageDate = viewModel.MarriageDate;
-
             await UpdateMarriage(marriage);
-
             FirstPerson.MarriageId = marriage.Id;
-            await _residentAccountService.UpdateRersidentAccount(FirstPerson);
-
             SecondPerson.MarriageId = marriage.Id;
+            await _residentAccountService.UpdateRersidentAccount(FirstPerson);
             await _residentAccountService.UpdateRersidentAccount(SecondPerson);
         }
 
