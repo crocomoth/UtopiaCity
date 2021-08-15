@@ -221,7 +221,7 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount.ResidentAccount", b =>
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount.RersidentAccount", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -243,7 +243,7 @@ namespace UtopiaCity.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ResidentAccount");
+                    b.ToTable("RersidentAccount");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>

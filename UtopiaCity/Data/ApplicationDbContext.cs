@@ -30,5 +30,6 @@ namespace UtopiaCity.Data
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Marriage> Marriage { get; set; }
     }
 }

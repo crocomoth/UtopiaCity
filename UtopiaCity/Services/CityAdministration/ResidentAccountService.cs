@@ -25,7 +25,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// <returns>Account if it exists, otherwise null.</returns>
         public async Task<ResidentAccount> GetResidentAccountById(string id)
         {
-            return await _dbContext.ResidentAccount.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            return await _dbContext.ResidentAccount.Include(a => a.Marriage).FirstAsync(a => a.Id == id);
         }
 
         /// <summary>
@@ -34,10 +34,10 @@ namespace UtopiaCity.Services.CityAdministration
         /// <returns>List of all existing accounts.</returns>
         public async Task<List<ResidentAccount>> GetResidentAccounts()
         {
-            return await _dbContext.ResidentAccount.ToListAsync();
+            return await _dbContext.ResidentAccount.Include(a => a.Marriage).ToListAsync();
         }
 
-        /// <summary>
+        /// <summary> 
         /// Method to add new accounts.
         /// </summary>
         /// <param name="account">Account to add.</param>

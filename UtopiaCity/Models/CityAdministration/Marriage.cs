@@ -1,28 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UtopiaCity.Models.CityAdministration
 {
-    public class ResidentAccount
+    public class Marriage
     {
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        [ScaffoldColumn(false)]
+        public string FirstPersonId { get; set; }
 
         [Required]
-        public string FamilyName { get; set; }
+        [ScaffoldColumn(false)]
+        public string SecondPersonId { get; set; }
+        public string FirstPersonData { get; set; }
+        public string SecondPersonData { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
-        public string Gender { get; set; }
-
-        [ScaffoldColumn(false)]
-        public string MarriageId { get; set; }
-        public Marriage Marriage { get; set; }
+        public DateTime MarriageDate { get; set; }
     }
 }

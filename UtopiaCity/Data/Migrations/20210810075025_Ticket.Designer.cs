@@ -262,7 +262,7 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<string>("PermitedModelId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ResidentAccountId")
+                    b.Property<string>("RersidentAccountId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -271,7 +271,7 @@ namespace UtopiaCity.Data.Migrations
 
                     b.HasIndex("PermitedModelId");
 
-                    b.HasIndex("ResidentAccountId");
+                    b.HasIndex("RersidentAccountId");
 
                     b.ToTable("Tickets");
                 });
@@ -352,7 +352,7 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -374,7 +374,7 @@ namespace UtopiaCity.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ResidentAccount");
+                    b.ToTable("RersidentAccount");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
@@ -609,9 +609,9 @@ namespace UtopiaCity.Data.Migrations
                         .WithMany()
                         .HasForeignKey("PermitedModelId");
 
-                    b.HasOne("UtopiaCity.Models.CityAdministration.ResidentAccount", "ResidentAccount")
+                    b.HasOne("UtopiaCity.Models.CityAdministration.RersidentAccount", "RersidentAccount")
                         .WithMany()
-                        .HasForeignKey("ResidentAccountId");
+                        .HasForeignKey("RersidentAccountId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>

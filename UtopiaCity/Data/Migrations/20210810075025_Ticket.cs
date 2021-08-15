@@ -13,7 +13,7 @@ namespace UtopiaCity.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     FlightId = table.Column<string>(nullable: true),
                     PermitedModelId = table.Column<string>(nullable: true),
-                    ResidentAccountId = table.Column<string>(nullable: true),
+                    RersidentAccountId = table.Column<string>(nullable: true),
                     Direction = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -32,9 +32,9 @@ namespace UtopiaCity.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tickets_ResidentAccount_ResidentAccountId",
-                        column: x => x.ResidentAccountId,
-                        principalTable: "ResidentAccount",
+                        name: "FK_Tickets_RersidentAccount_RersidentAccountId",
+                        column: x => x.RersidentAccountId,
+                        principalTable: "RersidentAccount",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -50,9 +50,9 @@ namespace UtopiaCity.Data.Migrations
                 column: "PermitedModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_ResidentAccountId",
+                name: "IX_Tickets_RersidentAccountId",
                 table: "Tickets",
-                column: "ResidentAccountId");
+                column: "RersidentAccountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

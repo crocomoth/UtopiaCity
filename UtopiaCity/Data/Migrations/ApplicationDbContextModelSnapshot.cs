@@ -350,6 +350,34 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstPersonData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstPersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MarriageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondPersonData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecondPersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Marriage");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
                 {
                     b.Property<string>("Id")
@@ -370,7 +398,12 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MarriageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MarriageId");
 
                     b.ToTable("ResidentAccount");
                 });
@@ -617,6 +650,13 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
                         .WithMany()
                         .HasForeignKey("ForPassengerId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CityAdministration.Marriage", "Marriage")
+                        .WithMany()
+                        .HasForeignKey("MarriageId");
                 });
 #pragma warning restore 612, 618
         }

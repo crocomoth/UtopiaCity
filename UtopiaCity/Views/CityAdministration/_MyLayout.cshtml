@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "City Administration";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3" style="background-color:white; padding:0">
+            <ul style="list-style-type:none;">
+                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="CityAdministrationHome" asp-action="Index">Home</a></li>
+                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="ResidentAccount" asp-action="Index">Residents accounts</a></li>
+                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="Marriage" asp-action="Index">Marriage</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9" style="background-color:white; align-content:center;">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+@RenderSection("Scripts", required: false)
