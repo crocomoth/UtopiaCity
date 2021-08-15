@@ -24,7 +24,7 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RersidentAccount",
+                name: "ResidentAccount",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -36,9 +36,9 @@ namespace UtopiaCity.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RersidentAccount", x => x.Id);
+                    table.PrimaryKey("PK_ResidentAccount", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RersidentAccount_Marriage_MarriageId",
+                        name: "FK_ResidentAccount_Marriage_MarriageId",
                         column: x => x.MarriageId,
                         principalTable: "Marriage",
                         principalColumn: "Id",
@@ -46,15 +46,15 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RersidentAccount_MarriageId",
-                table: "RersidentAccount",
+                name: "IX_ResidentAccount_MarriageId",
+                table: "ResidentAccount",
                 column: "MarriageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RersidentAccount");
+                name: "ResidentAccount");
 
             migrationBuilder.DropTable(
                 name: "Marriage");

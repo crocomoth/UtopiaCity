@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Helpers\**" />
+    <Content Remove="Helpers\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <None Remove="Helpers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20210813090711_Marrige_v2.cs" />
     <Compile Remove="Data\Migrations\20210813090711_Marrige_v2.Designer.cs" />
     <Compile Remove="Data\Migrations\20210813095819_Marriage_v3.cs" />
@@ -28,7 +35,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\CityAdministration\" />
-    <Folder Include="Helpers\Automapper\" />
   </ItemGroup>
 
 </Project>

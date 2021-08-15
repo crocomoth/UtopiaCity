@@ -78,12 +78,12 @@ namespace UtopiaCity.Services.CityAdministration
 
         public async Task ClearAccountMarriageId(Marriage marriage)
         {
-            var FirstPerson = await _residentAccountService.GetRersidentAccountById(marriage.FirstPersonId);
-            var SecondPerson = await _residentAccountService.GetRersidentAccountById(marriage.SecondPersonId);
+            var FirstPerson = await _residentAccountService.GetResidentAccountById(marriage.FirstPersonId);
+            var SecondPerson = await _residentAccountService.GetResidentAccountById(marriage.SecondPersonId);
             FirstPerson.MarriageId = null;
             SecondPerson.MarriageId = null;
-            await _residentAccountService.UpdateRersidentAccount(FirstPerson);
-            await _residentAccountService.UpdateRersidentAccount(SecondPerson);
+            await _residentAccountService.UpdateResidentAccount(FirstPerson);
+            await _residentAccountService.UpdateResidentAccount(SecondPerson);
         }
 
         public async Task<ViewModel> GetViewModel(string id, Marriage marriage)
@@ -94,7 +94,7 @@ namespace UtopiaCity.Services.CityAdministration
                 FirstPersonId = marriage.FirstPersonId,
                 SecondPersonId = marriage.SecondPersonId,
                 MarriageDate = marriage.MarriageDate,
-                ResidentAccounts = await _residentAccountService.GetRersidentAccounts()
+                ResidentAccounts = await _residentAccountService.GetResidentAccounts()
             };
 
             return viewModel;
@@ -104,7 +104,7 @@ namespace UtopiaCity.Services.CityAdministration
         {
             ViewModel viewModel = new ViewModel
             {
-                ResidentAccounts = await _residentAccountService.GetRersidentAccounts(),
+                ResidentAccounts = await _residentAccountService.GetResidentAccounts(),
                 MarriageDate = DateTime.Now
             };
             return viewModel;
@@ -113,8 +113,8 @@ namespace UtopiaCity.Services.CityAdministration
         public async Task GetMarriageFromViewAsync(ViewModel viewModel, Marriage marriage)
         {
 
-            ResidentAccount FirstPerson = await _residentAccountService.GetRersidentAccountById(viewModel.FirstPersonId);
-            ResidentAccount SecondPerson = await _residentAccountService.GetRersidentAccountById(viewModel.SecondPersonId);
+            ResidentAccount FirstPerson = await _residentAccountService.GetResidentAccountById(viewModel.FirstPersonId);
+            ResidentAccount SecondPerson = await _residentAccountService.GetResidentAccountById(viewModel.SecondPersonId);
             marriage.FirstPersonId = viewModel.FirstPersonId;
             marriage.FirstPersonData = $"{FirstPerson.FirstName} {FirstPerson.FamilyName} | {FirstPerson.BirthDate.ToShortDateString()}";
             marriage.SecondPersonId = SecondPerson.Id;
@@ -123,8 +123,8 @@ namespace UtopiaCity.Services.CityAdministration
             await UpdateMarriage(marriage);
             FirstPerson.MarriageId = marriage.Id;
             SecondPerson.MarriageId = marriage.Id;
-            await _residentAccountService.UpdateRersidentAccount(FirstPerson);
-            await _residentAccountService.UpdateRersidentAccount(SecondPerson);
+            await _residentAccountService.UpdateResidentAccount(FirstPerson);
+            await _residentAccountService.UpdateResidentAccount(SecondPerson);
         }
 
         public async Task UpdateMarriageByAccount(ResidentAccount account)

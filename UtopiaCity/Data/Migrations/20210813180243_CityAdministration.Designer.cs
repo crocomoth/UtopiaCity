@@ -328,7 +328,7 @@ namespace UtopiaCity.Data.Migrations
 
                     b.HasIndex("MarriageId");
 
-                    b.ToTable("RersidentAccount");
+                    b.ToTable("ResidentAccount");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>

@@ -23,18 +23,18 @@ namespace UtopiaCity.Services.CityAdministration
         /// </summary>
         /// <param name="id">Id of account.</param>
         /// <returns>Account if it exists, otherwise null.</returns>
-        public async Task<ResidentAccount> GetRersidentAccountById(string id)
+        public async Task<ResidentAccount> GetResidentAccountById(string id)
         {
-            return await _dbContext.RersidentAccount.Include(a => a.Marriage).FirstAsync(a => a.Id == id);
+            return await _dbContext.ResidentAccount.Include(a => a.Marriage).FirstAsync(a => a.Id == id);
         }
 
         /// <summary>
         /// Gets list of all accounts.
         /// </summary>
         /// <returns>List of all existing accounts.</returns>
-        public async Task<List<ResidentAccount>> GetRersidentAccounts()
+        public async Task<List<ResidentAccount>> GetResidentAccounts()
         {
-            return await _dbContext.RersidentAccount.Include(a => a.Marriage).ToListAsync();
+            return await _dbContext.ResidentAccount.Include(a => a.Marriage).ToListAsync();
         }
 
         /// <summary> 
@@ -42,7 +42,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// </summary>
         /// <param name="account">Account to add.</param>
         /// <returns>Task to await for.</returns>
-        public async Task AddRersidentAccount(ResidentAccount account)
+        public async Task AddResidentAccount(ResidentAccount account)
         {
             _dbContext.Add(account);
             await _dbContext.SaveChangesAsync();
@@ -53,7 +53,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// </summary>
         /// <param name="account">Account to update.</param>
         /// <returns>Task to await for.</returns>
-        public async Task UpdateRersidentAccount(ResidentAccount account)
+        public async Task UpdateResidentAccount(ResidentAccount account)
         {
             _dbContext.Update(account);
             await _dbContext.SaveChangesAsync();
@@ -64,7 +64,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// </summary>
         /// <param name="account">Account to delete</param>
         /// <returns>Task to await for.</returns>
-        public async Task DeleteRersidentAccount(ResidentAccount account)
+        public async Task DeleteResidentAccount(ResidentAccount account)
         {
             _dbContext.Remove(account);
             await _dbContext.SaveChangesAsync();

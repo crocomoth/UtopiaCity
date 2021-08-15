@@ -10,18 +10,18 @@ namespace UtopiaCity.Common.Initializers
     {
         public void ClearSet(ApplicationDbContext context)
         {
-            if (!context.RersidentAccount.Any())
+            if (!context.ResidentAccount.Any())
             {
                 return;
             }
 
-            context.RemoveRange(context.RersidentAccount.ToList());
+            context.RemoveRange(context.ResidentAccount.ToList());
             context.SaveChanges();
         }
 
         public void InitializeSet(ApplicationDbContext context)
         {
-            if (context.RersidentAccount.Any())
+            if (context.ResidentAccount.Any())
             {
                 return;
             }
