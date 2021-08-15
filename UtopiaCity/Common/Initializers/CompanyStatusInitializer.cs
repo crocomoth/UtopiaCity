@@ -27,16 +27,19 @@ namespace UtopiaCity.Common.Initializers
 
             var status1 = new CompanyStatus
             {
+                Id = "1",
                 Name = "Open"
             };
 
             var status2 = new CompanyStatus
             {
+                Id = "2",
                 Name = "Close"
             };
 
             var status3 = new CompanyStatus
             {
+                Id = "3",
                 Name = "Stopped"
             };
 

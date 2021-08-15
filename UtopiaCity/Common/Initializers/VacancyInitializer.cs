@@ -8,51 +8,57 @@ using UtopiaCity.Models.Business;
 
 namespace UtopiaCity.Common.Initializers
 {
-    public class EmployeeInitializer : ISubDbInitializer
+    public class VacancyInitializer : ISubDbInitializer
     {
         public void ClearSet(ApplicationDbContext context)
         {
-            if (!context.Employees.Any())
+            if (!context.Vacancies.Any())
             {
                 return;
             }
+
+            context.RemoveRange(context.Vacancies.ToList());
+            context.SaveChanges();
         }
 
         public void InitializeSet(ApplicationDbContext context)
         {
-            if (context.Employees.Any())
+            if (context.Vacancies.Any())
             {
                 return;
             }
 
-            var employee1 = new Employee
+            var vacancy1 = new Vacancy
             {
                 Id = "1",
-                FIO = "Abaev Azamat",
                 ProfessionId = "1",
-                Salary = 450000,
+                Salary = 407000,
+                Requirement = "Some text",
+                Discription = "Discription text",
                 CompanyId = "1"
             };
 
-            var employee2 = new Employee
+            var vacancy2 = new Vacancy
             {
                 Id = "2",
-                FIO = "Adilova Dana",
                 ProfessionId = "3",
-                Salary = 412000,
+                Salary = 401000,
+                Requirement = "Some text",
+                Discription = "Discription text",
                 CompanyId = "2"
             };
 
-            var employee3 = new Employee
+            var vacancy3 = new Vacancy
             {
                 Id = "3",
-                FIO = "Galimov Gibrat",
                 ProfessionId = "3",
-                Salary = 405000,
+                Salary = 412000,
+                Requirement = "Some text",
+                Discription = "Discription text",
                 CompanyId = "1"
             };
 
-            context.AddRange(employee1, employee2, employee3);
+            context.AddRange(vacancy1, vacancy2, vacancy3);
             context.SaveChanges();
         }
     }

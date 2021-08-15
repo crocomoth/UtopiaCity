@@ -30,18 +30,21 @@ namespace UtopiaCity.Common.Initializers
 
             var bank1 = new Bank
             {
+                Id = "1",
                 Name = "Al-Hilal bank",
                 BIK = "HLALKZKZ"
             };
 
             var bank2 = new Bank
             {
+                Id = "2",
                 Name = "Kaspi bank",
                 BIK = "KASPKZKZ"
             };
 
             var bank3 = new Bank
             {
+                Id = "3",
                 Name = "Halyk bank",
                 BIK = "HALKKZKZ"
             };
