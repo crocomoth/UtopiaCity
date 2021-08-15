@@ -65,6 +65,9 @@ namespace UtopiaCity
             services.AddScoped<CompanyStatusService, CompanyStatusService>();
 
             services.AddScoped<CompanyAppService, CompanyAppService>();
+            services.AddScoped<VacancyAppService, VacancyAppService>();
+            services.AddScoped<ProfessionAppService, ProfessionAppService>();
+            services.AddScoped<EmployeeAppService, EmployeeAppService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>

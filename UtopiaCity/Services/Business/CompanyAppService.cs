@@ -32,7 +32,6 @@ namespace UtopiaCity.Services.Business
 
         public async Task Create(Company company)
         {
-            company.IIK.ToUpper();
             dbContext.Add(company);
             await dbContext.SaveChangesAsync();
         }

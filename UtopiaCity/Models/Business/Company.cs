@@ -26,5 +26,9 @@ namespace UtopiaCity.Models.Business
 
         public string CompanyStatusId { get; set; }
         public CompanyStatus CompanyStatus { get; set; }
+
+        public ICollection<Vacancy> Vacancies { get; set; }
+
+        public ICollection<Employee> Employees { get; set; }
     }
 }

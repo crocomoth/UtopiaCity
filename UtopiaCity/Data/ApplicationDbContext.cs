@@ -37,5 +37,10 @@ namespace UtopiaCity.Data
         public DbSet<CompanyStatus> CompanyStatuses { get; set; }
 
         public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Vacancy> Vacancies { get; set; }
+        public DbSet<Profession> Professions { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
     }
 }

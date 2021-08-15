@@ -22,7 +22,7 @@
                 <input asp-for="CEO" class="form-control" />
                 <span asp-validation-for="CEO" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="IIK" class="control-label"></label>
                 <input asp-for="IIK" class="form-control" />
                 <span asp-validation-for="IIK" class="text-danger"></span>
@@ -31,7 +31,7 @@
                 <label asp-for="BIN" class="control-label"></label>
                 <input asp-for="BIN" class="form-control" />
                 <span asp-validation-for="BIN" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="BankId" class="control-label"></label>
                 <select asp-for="BankId" class ="form-control" asp-items="ViewBag.BankId"></select>

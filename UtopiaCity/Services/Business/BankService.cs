@@ -29,14 +29,14 @@ namespace UtopiaCity.Services.Business
 
         public async Task Create(Bank bank)
         {
-            bank.BIK.ToUpper();
+            bank.BIK = bank.BIK.ToUpper();
             _dbContext.Add(bank);
             await _dbContext.SaveChangesAsync();
         }
 
         public async Task Update(Bank bank)
         {
-            bank.BIK.ToUpper();
+            bank.BIK = bank.BIK.ToUpper();
             _dbContext.Update(bank);
             await _dbContext.SaveChangesAsync();
         }

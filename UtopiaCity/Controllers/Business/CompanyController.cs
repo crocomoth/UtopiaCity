@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Models.Business;
 using UtopiaCity.Services.Business;
+using UtopiaCity.Utils;
 
 namespace UtopiaCity.Controllers.Business
 {
@@ -36,6 +37,8 @@ namespace UtopiaCity.Controllers.Business
         {
             if (ModelState.IsValid)
             {
+                company.IIK = "KZ" + RandomUtil.GenerateRandomString(18);
+                company.BIN = RandomUtil.GenerateRandomString(12);
                 await _companyAppService.Create(company);
                 return RedirectToAction(nameof(Index));
             }
