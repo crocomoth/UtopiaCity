@@ -39,6 +39,7 @@ namespace UtopiaCityTest.Services.Sport
                 var result = service.GetAllSportComplexes();
 
                 //assert
+                Assert.NotNull(result);
                 Assert.Equal(3, result.Count);
                 Assert.Collection(result,
                     item => { Assert.Equal("1", item.SportComplexId); },
@@ -68,6 +69,7 @@ namespace UtopiaCityTest.Services.Sport
                 var result = service.GetSportComplexById("1");
 
                 //assert
+
                 Assert.Equal("1", result.SportComplexId);
             }
         }
@@ -90,6 +92,7 @@ namespace UtopiaCityTest.Services.Sport
                 var result = context.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(_sportComplexForTests.SportComplexId));
 
                 //assert
+                Assert.NotNull(result);
                 Assert.Equal(_sportComplexForTests.SportComplexId, result.SportComplexId);
             }
         }
@@ -149,6 +152,7 @@ namespace UtopiaCityTest.Services.Sport
                 var result = context.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(_sportComplexForTests.SportComplexId));
 
                 //assert
+                Assert.NotNull(result);
                 Assert.Equal(_sportComplexForTests.SportComplexId, result.SportComplexId);
                 Assert.Equal("New Title", result.Title);
                 Assert.Equal(_sportComplexForTests.BuildDate, result.BuildDate);

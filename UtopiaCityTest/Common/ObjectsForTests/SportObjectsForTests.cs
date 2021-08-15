@@ -82,7 +82,6 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                 SportEventId = "1",
                 Title = "title_1",
                 DateOfTheEvent = new DateTime(2021, 11, 12),
-                SportComplex = SportComplexForTests(),
                 SportComplexId = "1"
             };
         }
@@ -109,7 +108,6 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                     SportEventId = "1",
                     Title = "title_1",
                     DateOfTheEvent = new DateTime(2021, 11, 12),
-                    SportComplex = SportComplexForTests(),
                     SportComplexId = "1"
                 },
 
@@ -118,8 +116,7 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                     SportEventId = "2",
                     Title = "title_2",
                     DateOfTheEvent = new DateTime(2021, 11, 12),
-                    SportComplex = SportComplexForTests(),
-                    SportComplexId = "1"
+                    SportComplexId = "2"
                 },
 
                 new SportEvent
@@ -127,8 +124,7 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                     SportEventId = "3",
                     Title = "title_3",
                     DateOfTheEvent = new DateTime(2021, 11, 12),
-                    SportComplex = SportComplexForTests(),
-                    SportComplexId = "1"
+                    SportComplexId = "3"
                 }
             };
 
