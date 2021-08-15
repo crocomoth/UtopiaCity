@@ -8,10 +8,10 @@ namespace UtopiaCity.Models.CityAdministration
     {
         public IEnumerable<ResidentAccount> ResidentAccounts { get; set; }
 
-        [Required(ErrorMessage = "Account can not be empty")]
+        [Required(ErrorMessage = "Person data can't be empty")]
         public string FirstPersonId { get; set; }
 
-        [Required(ErrorMessage = "Account can not be empty")]
+        [Required(ErrorMessage = "Person data can't be empty")]
         public string SecondPersonId { get; set; }
 
         public string MarriageId { get; set; }

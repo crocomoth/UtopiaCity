@@ -4,14 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210813180243_CityAdministration_3")]
-    partial class CityAdministration_3
+    [Migration("20210813180243_CityAdministration")]
+    partial class CityAdministration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

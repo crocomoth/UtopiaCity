@@ -3,7 +3,7 @@ using System;
 
 namespace UtopiaCity.Data.Migrations
 {
-    public partial class CityAdministration_3 : Migration
+    public partial class CityAdministration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
