@@ -1,22 +1,25 @@
+@using Microsoft.AspNetCore.Mvc.Localization
 @model IEnumerable<UtopiaCity.Models.PublicCatering.Restaurant>
+@inject IViewLocalizer _localizer
 
 @{
     ViewData["Title"] = "RestaurantListView";
 }
 
-<h1>Our Restaurants!</h1>
+
+<h1>@_localizer["OurRestaurants"]</h1>
 
 <p>
-    <a asp-action="Create">Add new restaurant</a>
+    <a asp-action="Create">@_localizer["AddNewRestaurant"]</a>
 </p>
 <p>
-    <a asp-controller="Reservation" asp-action="Index">Your booking list</a>
+    <a asp-controller="Reservation" asp-action="Index">@_localizer["YourBookingList"]</a>
 </p>
 <p>
-    <a asp-controller="RestaurantType" asp-action="Create">Add new type of restaurant</a>
+    <a asp-controller="RestaurantType" asp-action="Create">@_localizer["AddNewTypeOfRestaurant"]</a>
 </p>
 <p>
-    <a asp-controller="RestaurantType" asp-action="Index">List of type</a>
+    <a asp-controller="RestaurantType" asp-action="Index">@_localizer["ListOfType"]</a>
 </p>
 
 @if (!Model.Any())
@@ -55,10 +58,10 @@ else
                     @Html.DisplayFor(modelItem => item.RestaurantType.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                    <a asp-controller="Reservation" asp-action="Create" asp-route-id="@item.Id">Booking</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">@_localizer["Edit"]</a> | 
+                    <a asp-action="Details" asp-route-id="@item.Id">@_localizer["Details"]</a> | 
+                    <a asp-action="Delete" asp-route-id="@item.Id">@_localizer["Delete"]</a> |  
+                    <a asp-controller="Reservation" asp-action="Create" asp-route-id="@item.Id">@_localizer["Booking"]</a> 
                 </td>
             </tr>
         }
