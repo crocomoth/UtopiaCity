@@ -26,7 +26,7 @@ namespace UtopiaCity.Data
         public DbSet<TransportManager> TransportManagers { get; set; }
         public DbSet<PermitedModel> PermitedModel { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<RersidentAccount> RersidentAccount { get; set; }
+        public DbSet<ResidentAccount> ResidentAccount { get; set; }
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<Event> Events { get; set; }

@@ -323,7 +323,7 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -345,7 +345,7 @@ namespace UtopiaCity.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RersidentAccount");
+                    b.ToTable("ResidentAccount");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>

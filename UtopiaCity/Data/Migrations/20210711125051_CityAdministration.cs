@@ -8,7 +8,7 @@ namespace UtopiaCity.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "RersidentAccount",
+                name: "ResidentAccount",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -19,14 +19,14 @@ namespace UtopiaCity.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RersidentAccount", x => x.Id);
+                    table.PrimaryKey("PK_ResidentAccount", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RersidentAccount");
+                name: "ResidentAccount");
         }
     }
 }

@@ -5,11 +5,11 @@ using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity.Controllers.CityAdministration
 {
-    public class RersidentAccountController : Controller
+    public class ResidentAccountController : Controller
     {
         private readonly ResidentAccountService _residentAccountService;
 
-        public RersidentAccountController(ResidentAccountService residentAccountService)
+        public ResidentAccountController(ResidentAccountService residentAccountService)
         {
             _residentAccountService = residentAccountService;
         }
@@ -17,7 +17,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         // view list of accounts
         public async Task<IActionResult> Index()
         {
-            return View("Index", await _residentAccountService.GetRersidentAccounts());
+            return View("Index", await _residentAccountService.GetResidentAccounts());
         }
 
         // get specific item by id
@@ -28,7 +28,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return NotFound();
             }
 
-            var account = await _residentAccountService.GetRersidentAccountById(id);
+            var account = await _residentAccountService.GetResidentAccountById(id);
             if (account == null)
             {
                 NotFound();
@@ -44,11 +44,11 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(RersidentAccount newAccount)
+        public async Task<IActionResult> Create(ResidentAccount newAccount)
         {
             if (ModelState.IsValid)
             {
-                await _residentAccountService.AddRersidentAccount(newAccount);
+                await _residentAccountService.AddResidentAccount(newAccount);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -63,7 +63,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return NotFound();
             }
 
-            var account = await _residentAccountService.GetRersidentAccountById(id);
+            var account = await _residentAccountService.GetResidentAccountById(id);
             if (account == null)
             {
                 return NotFound();
@@ -73,7 +73,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, RersidentAccount edited)
+        public async Task<IActionResult> Edit(string id, ResidentAccount edited)
         {
             if (id != edited.Id)
             {
@@ -82,7 +82,7 @@ namespace UtopiaCity.Controllers.CityAdministration
 
             if (ModelState.IsValid)
             {
-                await _residentAccountService.UpdateRersidentAccount(edited);
+                await _residentAccountService.UpdateResidentAccount(edited);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -97,7 +97,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return NotFound();
             }
 
-            var account = await _residentAccountService.GetRersidentAccountById(id);
+            var account = await _residentAccountService.GetResidentAccountById(id);
             if (account == null)
             {
                 return NotFound();
@@ -109,14 +109,14 @@ namespace UtopiaCity.Controllers.CityAdministration
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var account = await _residentAccountService.GetRersidentAccountById(id);
+            var account = await _residentAccountService.GetResidentAccountById(id);
             if (account == null)
             {
                 // TODO rewrite?
                 return NotFound();
             }
 
-            await _residentAccountService.DeleteRersidentAccount(account);
+            await _residentAccountService.DeleteResidentAccount(account);
             return RedirectToAction(nameof(Index));
         }
     }

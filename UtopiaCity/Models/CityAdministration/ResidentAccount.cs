@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UtopiaCity.Models.CityAdministration
 {
-    public class RersidentAccount
+    public class ResidentAccount
     {
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
