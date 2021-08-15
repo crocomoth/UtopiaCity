@@ -2,7 +2,7 @@
 
 namespace UtopiaCity.Data.Migrations
 {
-    public partial class Tickets : Migration
+    public partial class Ticket : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
