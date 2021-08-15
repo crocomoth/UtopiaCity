@@ -25,8 +25,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Common\" />
-  </ItemGroup>
-
 </Project>
