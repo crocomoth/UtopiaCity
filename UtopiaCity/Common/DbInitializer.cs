@@ -26,6 +26,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new CompanyStatusInitializer());
             subDbInitializers.Add(new CompanyInitializer());
             subDbInitializers.Add(new ProfessionInitializer());
+            subDbInitializers.Add(new EmployeeInitializer());
             
 
             // complex sets
