@@ -6,9 +6,9 @@ namespace UtopiaCityTest.Controllers.Sport
 {
     public static class BasicClassForSportTests
     {
-        public static Mock<T> DbContextMock<T>() where T : DbContext => new Mock<T>(new DbContextOptions<T>());
+        public static Mock<T> CreateDbContextMock<T>() where T : DbContext => new Mock<T>(new DbContextOptions<T>());
 
-        public static Mock<K> ServiceMock<T, K>(Mock<T> context) where T : DbContext where K : class => new Mock<K>(context.Object);
+        public static Mock<K> CreateServiceMock<T, K>(Mock<T> context) where T : DbContext where K : class => new Mock<K>(context.Object);
 
         public static IMapper ConfigMapper(params Profile[] profiles)
         {

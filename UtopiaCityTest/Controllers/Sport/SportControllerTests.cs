@@ -15,15 +15,15 @@ namespace UtopiaCityTest.Controllers.Sport
         public void ModelObjectType()
         {
             //arrange
-            var applicationDbContextMock = BasicClassForSportTests.DbContextMock<ApplicationDbContext>();
+            var applicationDbContextMock = BasicClassForSportTests.CreateDbContextMock<ApplicationDbContext>();
 
-            var sportComplexServiceMock = BasicClassForSportTests.ServiceMock<ApplicationDbContext, SportComplexService>(applicationDbContextMock);
+            var sportComplexServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportComplexService>(applicationDbContextMock);
             sportComplexServiceMock.Setup(x => x.GetAllSportComplexes()).Returns(new List<SportComplex>());
 
-            var sportEventServiceMock = BasicClassForSportTests.ServiceMock<ApplicationDbContext, SportEventService>(applicationDbContextMock);
+            var sportEventServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportEventService>(applicationDbContextMock);
             sportEventServiceMock.Setup(x => x.GetAllSportEvents()).Returns(new List<SportEvent>());
 
-            var lifeServiceMock = BasicClassForSportTests.ServiceMock<ApplicationDbContext, LifeService>(applicationDbContextMock);
+            var lifeServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, LifeService>(applicationDbContextMock);
 
             var controller = new SportController(sportComplexServiceMock.Object, sportEventServiceMock.Object, lifeServiceMock.Object);
 

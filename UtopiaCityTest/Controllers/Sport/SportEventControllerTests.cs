@@ -26,9 +26,9 @@ namespace UtopiaCityTest.Controllers.Sport
 
         public SportEventControllerTests()
         {
-            _dbContext = BasicClassForSportTests.DbContextMock<ApplicationDbContext>();
-            _sportComplexService = BasicClassForSportTests.ServiceMock<ApplicationDbContext, SportComplexService>(_dbContext);
-            _sportEventService = BasicClassForSportTests.ServiceMock<ApplicationDbContext, SportEventService>(_dbContext);
+            _dbContext = BasicClassForSportTests.CreateDbContextMock<ApplicationDbContext>();
+            _sportComplexService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportComplexService>(_dbContext);
+            _sportEventService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportEventService>(_dbContext);
             _mapper = BasicClassForSportTests.ConfigMapper(new SportComplexProfile(), new SportEventProfile());
             _sportComplexForTests = SportObjectsForTests.SportComplexForTests();
             _sportEventForTests = SportObjectsForTests.SportEventForTests();
