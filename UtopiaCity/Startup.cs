@@ -43,20 +43,14 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
-          
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
-          
             services.AddScoped<SportComplexService, SportComplexService>();
-
+            services.AddScoped<SportEventService, SportEventService>();
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
-
             services.AddScoped<TimelineService, TimelineService>();
-
             services.AddScoped<ScheduleService, ScheduleService>();
-
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
-
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
