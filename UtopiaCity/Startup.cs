@@ -14,6 +14,8 @@ using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
+using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Services.CitizenAccount;
 
 namespace UtopiaCity
 {
@@ -32,7 +34,7 @@ namespace UtopiaCity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -53,6 +55,8 @@ namespace UtopiaCity
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
 
+            services.AddScoped<CitizensAccountService, CitizensAccountService>();
+            services.AddScoped<CitizenTaskService, CitizenTaskService>();
             #endregion
 
             services.Configure<IdentityOptions>(options =>

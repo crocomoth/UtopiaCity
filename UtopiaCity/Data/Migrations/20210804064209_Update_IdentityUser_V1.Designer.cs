@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210804064209_Update_IdentityUser_V1")]
+    partial class Update_IdentityUser_V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,9 +335,6 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<DateTime>("Days")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FlightWeather")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Moisture")
                         .HasColumnType("nvarchar(max)");
 
@@ -401,28 +400,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RersidentAccount");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SerialNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmergencyCertificate");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyReport", b =>
@@ -494,29 +471,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("SportComplexId");
 
                     b.ToTable("SportComplex");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
-                {
-                    b.Property<string>("SportEventId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateOfTheEvent")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SportComplexId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SportEventId");
-
-                    b.HasIndex("SportComplexId");
-
-                    b.ToTable("SportEvents");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.TimelineModel.PermitedModel", b =>
@@ -601,14 +555,14 @@ namespace UtopiaCity.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<string>("Age")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -692,19 +646,11 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("ForPassengerId");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
-                        .WithMany("SportEvents")
-                        .HasForeignKey("SportComplexId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                        
             modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
                 {
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
                 });
 #pragma warning restore 612, 618
         }

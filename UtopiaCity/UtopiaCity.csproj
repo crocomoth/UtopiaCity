@@ -5,6 +5,8 @@
     <UserSecretsId>aspnet-UtopiaCity-D45A5F96-DE8D-4785-9915-4DEAA6419C9C</UserSecretsId>
   </PropertyGroup>
 
+
+
   <ItemGroup>
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
