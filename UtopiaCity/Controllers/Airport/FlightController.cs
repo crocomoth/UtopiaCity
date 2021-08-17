@@ -1,15 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Services.Airport;
 
 namespace UtopiaCity.Controllers.Airport
 {
-    public class FlightController:Controller
+    public class FlightController : Controller
     {
         private FlightService _flightService;
 
