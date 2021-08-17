@@ -7,6 +7,7 @@ using UtopiaCity.Models.Life;
 using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
+using UtopiaCity.Models.CitizenAccount;
 
 namespace UtopiaCity.Data
 {
@@ -16,22 +17,33 @@ namespace UtopiaCity.Data
             : base(options)
         {
         }
-        public DbSet<EmergencyReport> EmergencyReport { get; set; }       
-        public DbSet<SportComplex> SportComplex { get; set; }      
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SportEvent>()
+                .HasOne(s => s.SportComplex)
+                .WithMany(e => e.SportEvents)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<EmergencyCertificate> EmergencyCertificate { get; set; }
+        public DbSet<EmergencyReport> EmergencyReport { get; set; }
+        public DbSet<SportComplex> SportComplex { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<WeatherReport> WeatherReports { get; set; }
         public DbSet<ForPassenger> ForPassengers { get; set; }
         public DbSet<TransportManager> TransportManagers { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
-        
-        public DbSet<RersidentAccount> RersidentAccount { get; set; }
-
-        public DbSet<TimelineModel> TimelineModel { get; set; }
-
         public DbSet<PermitedModel> PermitedModel { get; set; }
-
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<RersidentAccount> RersidentAccount { get; set; }
+        public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
-
         public DbSet<Event> Events { get; set; }
+        public DbSet<SportEvent> SportEvents { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<CitizensTask> CitizensTasks { get; set; }
+
     }
 }
