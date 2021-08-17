@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.Business;
 using UtopiaCity.Models.Airport.TransportManagerSystem;
 using UtopiaCity.Models.Emergency;
 using UtopiaCity.Models.Life;
@@ -41,6 +42,19 @@ namespace UtopiaCity.Data
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<Event> Events { get; set; }
+
+
+        public DbSet<Bank> Banks { get; set; }
+
+        public DbSet<CompanyStatus> CompanyStatuses { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Vacancy> Vacancies { get; set; }
+        public DbSet<Profession> Professions { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+
         public DbSet<SportEvent> SportEvents { get; set; }
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<CitizensTask> CitizensTasks { get; set; }
