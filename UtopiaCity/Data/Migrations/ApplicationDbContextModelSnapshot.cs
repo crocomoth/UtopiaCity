@@ -698,15 +698,17 @@ namespace UtopiaCity.Data.Migrations
                         .WithMany("SportEvents")
                         .HasForeignKey("SportComplexId")
                         .OnDelete(DeleteBehavior.Cascade);
-                        
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
 
-                });
+                    modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
+                        {
+                            b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
+                                .WithMany()
+                                .HasForeignKey("UserId");
+
+                        });
 #pragma warning restore 612, 618
-        }
+                });
+    }
     }
 }
+
