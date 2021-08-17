@@ -12,7 +12,7 @@ namespace UtopiaCity.Controllers.CitizenAccount
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AppUser> _userManager;
-        private readonly readonly SignInManager<AppUser> _signInManager;
+        private readonly SignInManager<AppUser> _signInManager;
         
         public CitizensAccountController(ApplicationDbContext dbContext, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {

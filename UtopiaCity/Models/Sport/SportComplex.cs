@@ -35,5 +35,6 @@ namespace UtopiaCity.Models.Sport
         public string Address { get; set; }
 
         public List<SportEvent> SportEvents { get; set; }
+        public List<SportTicket> SportTickets { get; set; }
     }
 }
