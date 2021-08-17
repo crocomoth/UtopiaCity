@@ -10,23 +10,23 @@ namespace UtopiaCity.Common.Initializers
     {
         public void ClearSet(ApplicationDbContext context)
         {
-            if (!context.RersidentAccount.Any())
+            if (!context.ResidentAccount.Any())
             {
                 return;
             }
 
-            context.RemoveRange(context.RersidentAccount.ToList());
+            context.RemoveRange(context.ResidentAccount.ToList());
             context.SaveChanges();
         }
 
         public void InitializeSet(ApplicationDbContext context)
         {
-            if (context.RersidentAccount.Any())
+            if (context.ResidentAccount.Any())
             {
                 return;
             }
 
-            var account1 = new RersidentAccount
+            var account1 = new ResidentAccount
             {
                 FirstName = "Marina",
                 FamilyName = "Abramova",
@@ -34,7 +34,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Female"
             };
 
-            var account2 = new RersidentAccount
+            var account2 = new ResidentAccount
             {
                 FirstName = "Konstantin",
                 FamilyName = "Alekseev",
@@ -42,7 +42,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Male"
             };
 
-            var account3 = new RersidentAccount
+            var account3 = new ResidentAccount
             {
                 FirstName = "Julija",
                 FamilyName = "Alehina",
@@ -50,7 +50,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Female"
             };
 
-            var account4 = new RersidentAccount
+            var account4 = new ResidentAccount
             {
                 FirstName = "Daniil",
                 FamilyName = "Andreev",
@@ -58,7 +58,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Male"
             };
 
-            var account5 = new RersidentAccount
+            var account5 = new ResidentAccount
             {
                 FirstName = "Kirill",
                 FamilyName = "Artamonov",
@@ -66,7 +66,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Male"
             };
 
-            var account6 = new RersidentAccount
+            var account6 = new ResidentAccount
             {
                 FirstName = "Ksenija",
                 FamilyName = "Belova",
@@ -74,7 +74,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Female"
             };
 
-            var account7 = new RersidentAccount
+            var account7 = new ResidentAccount
             {
                 FirstName = "Artjom",
                 FamilyName = "Birjukov",
@@ -82,7 +82,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Male"
             };
 
-            var account8 = new RersidentAccount
+            var account8 = new ResidentAccount
             {
                 FirstName = "Diana",
                 FamilyName = "Makarova",
@@ -90,7 +90,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Female"
             };
 
-            var account9 = new RersidentAccount
+            var account9 = new ResidentAccount
             {
                 FirstName = "Dmitrij",
                 FamilyName = "Poljakov",
@@ -98,7 +98,7 @@ namespace UtopiaCity.Common.Initializers
                 Gender = "Male"
             };
 
-            var account10 = new RersidentAccount
+            var account10 = new ResidentAccount
             {
                 FirstName = "Elizaveta",
                 FamilyName = "Sokolova",

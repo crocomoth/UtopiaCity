@@ -1,0 +1,53 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Marriage</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstPersonId" class="control-label">First Person</label>
+                <select asp-for="FirstPersonId" class="form-control">
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Male") && (a.MarriageId == null)))
+                    {
+                        <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
+                    }
+                </select>
+                <span asp-validation-for="FirstPersonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondPersonId" class="control-label">Second Person</label>
+                <select asp-for="SecondPersonId" class="form-control">
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Female") && (a.MarriageId == null)))
+                    {
+                        <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
+                    }
+                </select>
+                <span asp-validation-for="SecondPersonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarriageDate" class="control-label"></label>
+                <input asp-for="MarriageDate" class="form-control" />
+                <span asp-validation-for="MarriageDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

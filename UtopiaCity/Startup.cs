@@ -44,6 +44,7 @@ namespace UtopiaCity
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
+            services.AddScoped<MarriageService, MarriageService>();
             services.AddScoped<SportComplexService, SportComplexService>();
             services.AddScoped<SportEventService, SportEventService>();
             services.AddScoped<FlightService, FlightService>();
