@@ -15,6 +15,8 @@ using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
+using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Services.CitizenAccount;
 
 namespace UtopiaCity
 {
@@ -33,7 +35,7 @@ namespace UtopiaCity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -42,23 +44,19 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
-          
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
-          
+            services.AddScoped<MarriageService, MarriageService>();
             services.AddScoped<SportComplexService, SportComplexService>();
-
+            services.AddScoped<SportEventService, SportEventService>();
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
-
             services.AddScoped<TimelineService, TimelineService>();
-
             services.AddScoped<ScheduleService, ScheduleService>();
-
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
-
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
+
 
             services.AddScoped<BankService, BankService>();
 
@@ -68,6 +66,10 @@ namespace UtopiaCity
             services.AddScoped<VacancyAppService, VacancyAppService>();
             services.AddScoped<ProfessionAppService, ProfessionAppService>();
             services.AddScoped<EmployeeAppService, EmployeeAppService>();
+
+            services.AddScoped<CitizensAccountService, CitizensAccountService>();
+            services.AddScoped<CitizenTaskService, CitizenTaskService>();
+
             #endregion
 
             services.Configure<IdentityOptions>(options =>
