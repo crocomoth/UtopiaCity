@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,7 +35,7 @@ namespace UtopiaCityTest.Services
 
             using(var context = new ApplicationDbContext(localOptions))
             {
-                var service = new EmergencyReportService(context);
+                var service = new EmergencyReportService(context, new Mock<IMemoryCache>().Object);
 
                 // act
                 var result = await service.GetEmergencyReports();
@@ -53,7 +55,7 @@ namespace UtopiaCityTest.Services
             // arrange
             using (var context = new ApplicationDbContext(options))
             {
-                var service = new EmergencyReportService(context);
+                var service = new EmergencyReportService(context, new Mock<IMemoryCache>().Object);
 
                 // act
                 var result = await service.GetEmergencyReports();
@@ -73,7 +75,7 @@ namespace UtopiaCityTest.Services
             // arrange
             using (var context = new ApplicationDbContext(options))
             {
-                var service = new EmergencyReportService(context);
+                var service = new EmergencyReportService(context, new Mock<IMemoryCache>().Object);
 
                 // act
                 var result = await service.GetEmergencyReports();

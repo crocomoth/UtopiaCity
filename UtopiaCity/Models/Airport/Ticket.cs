@@ -11,11 +11,11 @@ namespace UtopiaCity.Models.Airport
 
         public string FlightId { get; set; }
         public string PermitedModelId { get; set; }
-        public string RersidentAccountId { get; set; }
+        public string ResidentAccountId { get; set; }
         public string Direction { get; set; }
 
         public Flight Flight { get; set; }
         public PermitedModel PermitedModel { get; set; }
-        public RersidentAccount RersidentAccount { get; set; }
+        public ResidentAccount ResidentAccount { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using UtopiaCity.Models.CityAdministration;
 namespace UtopiaCity.Services.CityAdministration
 {
     /// <summary>
-    /// Class to handle basic CRUD operations for <see cref="RersidentAccount"/>
+    /// Class to handle basic CRUD operations for <see cref="ResidentAccount"/>
     /// </summary>
     public class ResidentAccountService
     {
@@ -19,30 +19,30 @@ namespace UtopiaCity.Services.CityAdministration
         }
 
         /// <summary>
-        /// Gets <see cref="RersidentAccount"/> by Id.
+        /// Gets <see cref="ResidentAccount"/> by Id.
         /// </summary>
         /// <param name="id">Id of account.</param>
         /// <returns>Account if it exists, otherwise null.</returns>
-        public async Task<RersidentAccount> GetRersidentAccountById(string id)
+        public async Task<ResidentAccount> GetResidentAccountById(string id)
         {
-            return await _dbContext.RersidentAccount.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            return await _dbContext.ResidentAccount.Include(a => a.Marriage).FirstAsync(a => a.Id == id);
         }
 
         /// <summary>
         /// Gets list of all accounts.
         /// </summary>
         /// <returns>List of all existing accounts.</returns>
-        public async Task<List<RersidentAccount>> GetRersidentAccounts()
+        public async Task<List<ResidentAccount>> GetResidentAccounts()
         {
-            return await _dbContext.RersidentAccount.ToListAsync();
+            return await _dbContext.ResidentAccount.Include(a => a.Marriage).ToListAsync();
         }
 
-        /// <summary>
+        /// <summary> 
         /// Method to add new accounts.
         /// </summary>
         /// <param name="account">Account to add.</param>
         /// <returns>Task to await for.</returns>
-        public async Task AddRersidentAccount(RersidentAccount account)
+        public async Task AddResidentAccount(ResidentAccount account)
         {
             _dbContext.Add(account);
             await _dbContext.SaveChangesAsync();
@@ -53,7 +53,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// </summary>
         /// <param name="account">Account to update.</param>
         /// <returns>Task to await for.</returns>
-        public async Task UpdateRersidentAccount(RersidentAccount account)
+        public async Task UpdateResidentAccount(ResidentAccount account)
         {
             _dbContext.Update(account);
             await _dbContext.SaveChangesAsync();
@@ -64,7 +64,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// </summary>
         /// <param name="account">Account to delete</param>
         /// <returns>Task to await for.</returns>
-        public async Task DeleteRersidentAccount(RersidentAccount account)
+        public async Task DeleteResidentAccount(ResidentAccount account)
         {
             _dbContext.Remove(account);
             await _dbContext.SaveChangesAsync();
