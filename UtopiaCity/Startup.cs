@@ -56,19 +56,16 @@ namespace UtopiaCity
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
-
-
+            services.AddScoped<IRouteApi, FlightRouteApiService>();
             services.AddScoped<BankService, BankService>();
-
             services.AddScoped<CompanyStatusService, CompanyStatusService>();
-
             services.AddScoped<CompanyAppService, CompanyAppService>();
             services.AddScoped<VacancyAppService, VacancyAppService>();
             services.AddScoped<ProfessionAppService, ProfessionAppService>();
             services.AddScoped<EmployeeAppService, EmployeeAppService>();
-
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
+
 
             #endregion
 

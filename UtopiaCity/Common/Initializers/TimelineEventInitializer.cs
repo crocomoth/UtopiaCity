@@ -83,8 +83,9 @@ namespace UtopiaCity.Common.Initializers
                 context.PermitedModel.AddRange(
                     new Models.TimelineModel.PermitedModel
                     {
+                        PermissionDate = DateTime.Now,
                         Season = "Winter",
-                        SpeedOfWind = 10,
+                        SpeedOfWind = "10",
                         GovernmentStatus = false,
                         Rainfall = "rain",
                         TimeOfDay = "night",
@@ -93,8 +94,9 @@ namespace UtopiaCity.Common.Initializers
 
                     new Models.TimelineModel.PermitedModel
                     {
+                        PermissionDate=DateTime.Now.AddDays(2),
                         Season = "Winter",
-                        SpeedOfWind = 9,
+                        SpeedOfWind = "9",
                         GovernmentStatus = false,
                         Rainfall = "rain",
                         TimeOfDay = "night",
@@ -103,8 +105,9 @@ namespace UtopiaCity.Common.Initializers
 
                     new Models.TimelineModel.PermitedModel
                     {
+                        PermissionDate=DateTime.Now.AddDays(1),
                         Season = "Summer",
-                        SpeedOfWind = 7,
+                        SpeedOfWind = "7",
                         GovernmentStatus = true,
                         Rainfall = "none",
                         TimeOfDay = "day",

@@ -10,6 +10,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.PermissionDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Season)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermissionDate)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Season)
             </td>

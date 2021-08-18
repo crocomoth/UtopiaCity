@@ -223,6 +223,29 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.Airline", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Aircraft")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AirlineName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvailableDirections")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Airlines");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
                 {
                     b.Property<string>("Id")
@@ -235,11 +258,17 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<DateTime>("DepartureTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Destination")
+                    b.Property<string>("DestinationPoint")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FlightNumber")
                         .HasColumnType("int");
+
+                    b.Property<string>("LocationPoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeOfAircraft")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Weather")
                         .HasColumnType("nvarchar(max)");
@@ -278,6 +307,35 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Tickets");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.ForCompany", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AviaProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contacts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryOfDelivery")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuantityOfGoods")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WaitingTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ForCompanies");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", b =>
                 {
                     b.Property<string>("Id")
@@ -310,6 +368,9 @@ namespace UtopiaCity.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ForCompanyId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ForPassengerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -317,6 +378,8 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ForCompanyId");
 
                     b.HasIndex("ForPassengerId");
 
@@ -326,16 +389,27 @@ namespace UtopiaCity.Data.Migrations
             modelBuilder.Entity("UtopiaCity.Models.Airport.WeatherReport", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Days")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DirectionFrom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DirectionTo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FlightWeather")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FlightWeather")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Moisture")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PermitedModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Rainfall")
                         .HasColumnType("nvarchar(max)");
@@ -350,6 +424,8 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PermitedModelId");
 
                     b.ToTable("WeatherReports");
                 });
@@ -699,6 +775,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<bool>("GovernmentStatus")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("PermissionDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PermissionStatus")
                         .HasColumnType("nvarchar(max)");
 
@@ -708,8 +787,8 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<string>("Season")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SpeedOfWind")
-                        .HasColumnType("int");
+                    b.Property<string>("SpeedOfWind")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TimeOfDay")
                         .HasColumnType("nvarchar(max)");
@@ -858,11 +937,21 @@ namespace UtopiaCity.Data.Migrations
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.TransportManagerSystem.TransportManager", b =>
                 {
+                    b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForCompany", "ForCompany")
+                        .WithMany()
+                        .HasForeignKey("ForCompanyId");
+
                     b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
                         .WithMany()
                         .HasForeignKey("ForPassengerId");
                 });
 
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.WeatherReport", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.TimelineModel.PermitedModel", "PermitedModel")
+                        .WithMany()
+                        .HasForeignKey("PermitedModelId");
 
             modelBuilder.Entity("UtopiaCity.Models.Business.Company", b =>
                 {
@@ -915,8 +1004,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-
                 });
 #pragma warning restore 612, 618
         }

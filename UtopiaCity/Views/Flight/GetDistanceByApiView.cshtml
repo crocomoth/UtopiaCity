@@ -1,0 +1,55 @@
+﻿@model UtopiaCity.Models.Airport.Flight
+
+@{
+    ViewData["Title"] = "GetDistanceByApi";
+}
+
+<h1>GetDistanceByApi</h1>
+
+<h4>Flight</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Get DistanceByApi">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FlightNumber" class="control-label"></label>
+                <input asp-for="FlightNumber" class="form-control" />
+                <span asp-validation-for="FlightNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArrivalTime" class="control-label"></label>
+                <input asp-for="ArrivalTime" class="form-control" />
+                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartureTime" class="control-label"></label>
+                <input asp-for="DepartureTime" class="form-control" />
+                <span asp-validation-for="DepartureTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationPoint" class="control-label"></label>
+                <input asp-for="DestinationPoint" class="form-control" />
+                <span asp-validation-for="DestinationPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationPoint" class="control-label"></label>
+                <input asp-for="LocationPoint" class="form-control" />
+                <span asp-validation-for="LocationPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weather" class="control-label"></label>
+                <input asp-for="Weather" class="form-control" />
+                <span asp-validation-for="Weather" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="GetDistanceByApi" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetListApiData">Back to List</a>
+</div>
+

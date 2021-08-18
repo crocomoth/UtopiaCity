@@ -11,14 +11,14 @@
         <form asp-action="Creating Flights">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Destination" class="control-label"></label>
-                <input asp-for="Destination" class="form-control" />
-                <span asp-validation-for="Destination" class="text-danger"></span>
+                <label asp-for="LocationPoint" class="control-label"></label>
+                <input asp-for="LocationPoint" class="form-control" />
+                <span asp-validation-for="LocationPoint" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ArrivalTime" class="control-label"></label>
-                <input asp-for="ArrivalTime" class="form-control" />
-                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                <label asp-for="DestinationPoint" class="control-label"></label>
+                <input asp-for="DestinationPoint" class="form-control" />
+                <span asp-validation-for="DestinationPoint" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DepartureTime" class="control-label"></label>
@@ -29,6 +29,11 @@
                 <label asp-for="Weather" class="control-label"></label>
                 <input asp-for="Weather" class="form-control" />
                 <span asp-validation-for="Weather" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfAircraft" class="control-label"></label>
+                <select asp-for="TypeOfAircraft" class="form-control" asp-items="ViewBag.TypeOfAircraft"></select>
+                <span asp-validation-for="TypeOfAircraft" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" asp-action="Create" value="Create" class="btn btn-primary" />
