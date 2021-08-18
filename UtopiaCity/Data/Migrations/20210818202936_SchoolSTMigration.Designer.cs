@@ -3,13 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210818202936_SchoolSTMigration")]
+    partial class SchoolSTMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,9 +405,6 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<string>("FlightWeather")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FlightWeather")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Moisture")
                         .HasColumnType("nvarchar(max)");
 
@@ -430,16 +431,11 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
-
             modelBuilder.Entity("UtopiaCity.Models.Business.Bank", b =>
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
-
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
-
 
                     b.Property<string>("BIK")
                         .IsRequired()
@@ -505,30 +501,10 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Business.Employee", b =>
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReminderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CitizensTasks");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
-
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
-
 
                     b.Property<string>("CompanyId")
                         .HasColumnType("nvarchar(450)");
@@ -595,7 +571,34 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Vacancies");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.RersidentAccount", b =>
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReminderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CitizensTasks");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstPersonData")
                         .HasColumnType("nvarchar(max)");
@@ -620,7 +623,6 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
-
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -713,6 +715,34 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.SchoolModel.SchoolStudent", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AdmissionYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudyYear")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("recordCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("recordEdited")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SchoolStudent");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
@@ -946,12 +976,12 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("ForPassengerId");
                 });
 
-
             modelBuilder.Entity("UtopiaCity.Models.Airport.WeatherReport", b =>
                 {
                     b.HasOne("UtopiaCity.Models.TimelineModel.PermitedModel", "PermitedModel")
                         .WithMany()
                         .HasForeignKey("PermitedModelId");
+                });
 
             modelBuilder.Entity("UtopiaCity.Models.Business.Company", b =>
                 {
@@ -984,6 +1014,14 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.Business.Profession", "Profession")
                         .WithMany("Vacancies")
                         .HasForeignKey("ProfessionId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
                 {
@@ -999,40 +1037,6 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("SportComplexId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.SchoolModel.SchoolStudent", b =>
-            {
-                b.Property<string>("Id")
-                    .HasColumnType("nvarchar(450)");
-
-                b.Property<int>("AdmissionYear")
-                    .HasColumnType("int");
-
-                b.Property<string>("FirstName")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("LastName")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<int>("StudyYear")
-                    .HasColumnType("int");
-
-                b.Property<DateTime>("recordCreated")
-                    .HasColumnType("datetime2");
-
-                b.Property<DateTime?>("recordEdited")
-                    .HasColumnType("datetime2");
-
-                b.HasKey("Id");
-
-                b.ToTable("SchoolStudent");
-            });
 #pragma warning restore 612, 618
         }
     }

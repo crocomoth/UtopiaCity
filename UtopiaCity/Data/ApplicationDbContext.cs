@@ -9,6 +9,7 @@ using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
 using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Models.SchoolModel;
 
 namespace UtopiaCity.Data
 {
@@ -55,5 +56,6 @@ namespace UtopiaCity.Data
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<CitizensTask> CitizensTasks { get; set; }
         public DbSet<Marriage> Marriage { get; set; }
+        public DbSet<SchoolStudent> SchoolStudent { get; set; }
     }
 }
