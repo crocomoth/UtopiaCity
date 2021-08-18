@@ -13,12 +13,17 @@ namespace UtopiaCity.Controllers.Emergency
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            return View("TestView");
+        }
+
         [HttpPost]
-        public ActionResult SomeAction(string name)
+        public ActionResult SomeAction()
         {
             var result = _context.EmergencyCertificate.ToList();
 
-            return PartialView("EmergencyCertificatePartial", result);
+            return Ok("From server");
         }
     }
 }

@@ -44,6 +44,8 @@ namespace UtopiaCity
             services.AddRazorPages();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            services.Configure<AppConfig>(Configuration.GetSection("AppConfig"));
+
             services.AddMemoryCache();
 
             #region Services

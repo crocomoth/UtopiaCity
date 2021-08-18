@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-UtopiaCity-D45A5F96-DE8D-4785-9915-4DEAA6419C9C</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20210818120102_temporary.cs" />
+    <Compile Remove="Data\Migrations\20210818120102_temporary.Designer.cs" />
+  </ItemGroup>
+
 
 
   <ItemGroup>

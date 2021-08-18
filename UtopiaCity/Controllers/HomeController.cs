@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
+using UtopiaCity.Common;
 using UtopiaCity.Models;
 
 namespace UtopiaCity.Controllers
@@ -8,10 +10,12 @@ namespace UtopiaCity.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IOptions<AppConfig> _options;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IOptions<AppConfig> options)
         {
             _logger = logger;
+            _options = options;
         }
 
         public IActionResult Index()
