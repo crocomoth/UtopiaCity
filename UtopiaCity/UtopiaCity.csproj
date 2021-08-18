@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\Models\Emergency\" />
     <Folder Include="Services\Common\" />
   </ItemGroup>
 

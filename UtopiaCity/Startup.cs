@@ -14,6 +14,8 @@ using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace UtopiaCity
 {
@@ -34,9 +36,12 @@ namespace UtopiaCity
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddControllersWithViews().AddViewLocalization().AddDataAnnotationsLocalization();
             services.AddRazorPages();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddMemoryCache();
 
             #region Services
 
@@ -117,6 +122,19 @@ namespace UtopiaCity
                     }
                 }
             }
+
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("ru")
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             if (env.IsDevelopment())
             {

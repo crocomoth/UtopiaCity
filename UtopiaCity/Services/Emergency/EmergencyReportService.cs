@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
@@ -12,10 +14,12 @@ namespace UtopiaCity.Services.Emergency
     public class EmergencyReportService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMemoryCache _cache;
 
-        public EmergencyReportService(ApplicationDbContext dbContext)
+        public EmergencyReportService(ApplicationDbContext dbContext, IMemoryCache cache)
         {
             _dbContext = dbContext;
+            _cache = cache;
         }
 
         /// <summary>
@@ -25,7 +29,18 @@ namespace UtopiaCity.Services.Emergency
         /// <returns>Report if it exists, otherwise null.</returns>
         public async Task<EmergencyReport> GetEmergencyReportById(string id)
         {
-            return await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            if (_cache.TryGetValue(id, out EmergencyReport report))
+            {
+                return report;
+            }
+
+            var notCachedReport = await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            _cache.Set(id, notCachedReport, new MemoryCacheEntryOptions()
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+            });
+            //await _cache.GetOrCreateAsync(id, async (ICacheEntry e) => await _dbContext.EmergencyReport.FirstOrDefaultAsync(x => x.Id.Equals(id)));
+            return notCachedReport;
         }
 
         /// <summary>
@@ -45,7 +60,14 @@ namespace UtopiaCity.Services.Emergency
         public async Task AddEmergencyReport(EmergencyReport report)
         {
             _dbContext.Add(report);
-            await _dbContext.SaveChangesAsync();
+            int result = await _dbContext.SaveChangesAsync();
+            if (result > 0)
+            {
+                _cache.Set(report.Id, report, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+                });
+            }
         }
 
         /// <summary>
