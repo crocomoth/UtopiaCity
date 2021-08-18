@@ -1,0 +1,25 @@
+﻿<p>
+    <a class="btn btn-sm btn-light" asp-controller="Bank" asp-action="Index">Bank</a>
+    <a class="btn btn-sm btn-light" asp-controller="CompanyStatus" asp-action="Index">Company status</a>
+    <a class="btn btn-sm btn-light" asp-controller="Company" asp-action="Index">Company</a>
+    <a class="btn btn-sm btn-light" asp-controller="Vacancy" asp-action="Index">Vacancy</a>
+    <a class="btn btn-sm btn-light" asp-controller="Profession" asp-action="Index">Profession</a>
+    <a class="btn btn-sm btn-light" asp-controller="Employee" asp-action="Index">Employee</a>
+</p>
+
+
+<div class="row">
+    <div class="card" style="width: 14rem;">
+        <img src="~/images/business/createCompany1.png" class="card-img-top" style="width: 220px" alt="...">
+        <div class="card-body">
+            <a class="btn btn-primary" asp-controller="Company" asp-action="Create">Create new company</a>
+        </div>
+    </div>
+
+    <div class="card" style="width: 14rem; margin-left: 10px">
+        <img src="~/images/business/companyStatus.png" class="card-img-top" style="width: 220px" alt="...">
+        <div class="card-body">
+            <a href="#" class="btn btn-primary">Change company status</a>
+        </div>
+    </div>
+</div>
