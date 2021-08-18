@@ -1,4 +1,5 @@
 ﻿using System;
+using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.Sport.Enums;
 using UtopiaCity.ViewModels.Sport;
@@ -129,6 +130,108 @@ namespace UtopiaCityTest.Common.ObjectsForTests
             };
 
             return sportEvents;
+        }
+
+        public static SportTicket SportTicketForTests()
+        {
+            return new SportTicket
+            {
+                TicketId = "1",
+                SportComplexId = "1",
+                SportEventId = "1",
+                ResidentAccountId = "1"
+            };
+        }
+
+        public static SportTicket[] ArrayOfSportTicketsForTests()
+        {
+            return new SportTicket[]
+            {
+                new SportTicket
+                {
+                    TicketId = "1",
+                    SportComplexId = "1",
+                    SportEventId = "1",
+                    ResidentAccountId = "1"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "2",
+                    SportComplexId = "1",
+                    SportEventId = "1",
+                    ResidentAccountId = "1"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "3",
+                    SportComplexId = "2",
+                    SportEventId = "2",
+                    ResidentAccountId = "2"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "4",
+                    SportComplexId = "3",
+                    SportEventId = "3",
+                    ResidentAccountId = "3"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "5",
+                    SportComplexId = "2",
+                    SportEventId = "2",
+                    ResidentAccountId = "2"
+                }
+            };
+        }
+
+        public static RersidentAccount ResidentAccountForTests()
+        {
+            return new RersidentAccount
+            {
+                Id = "1",
+                BirthDate = new DateTime(2000, 01, 1),
+                FirstName = "FirstName_1",
+                FamilyName = "FamilyName_1",
+                Gender = "Male"
+            };
+        }
+
+        public static RersidentAccount[] ArrayOfResidentsAccountsForTests()
+        {
+            return new RersidentAccount[]
+            {
+                new RersidentAccount
+                {
+                    Id = "1",
+                    BirthDate = new DateTime(2001, 01, 1),
+                    FirstName = "FirstName_1",
+                    FamilyName = "FamilyName_1",
+                    Gender = "Male"
+                },
+
+                new RersidentAccount
+                {
+                    Id = "2",
+                    BirthDate = new DateTime(2002, 02, 2),
+                    FirstName = "FirstName_2",
+                    FamilyName = "FamilyName_2",
+                    Gender = "Male"
+                },
+
+                new RersidentAccount
+                {
+                    Id = "3",
+                    BirthDate = new DateTime(2003, 03, 3),
+                    FirstName = "FirstName_3",
+                    FamilyName = "FamilyName_3",
+                    Gender = "Male"
+                }
+            };
         }
     }
 }
