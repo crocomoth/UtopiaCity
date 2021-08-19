@@ -13,7 +13,10 @@ using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.HousingSystem;
 using UtopiaCity.Services.Life;
+using UtopiaCity.Services.PublicCatering.Reservation;
+using UtopiaCity.Services.PublicCatering.RestaurantType;
 using UtopiaCity.Services.Sport;
+using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity
 {
@@ -36,16 +39,31 @@ namespace UtopiaCity
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
+          
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
+          
             services.AddScoped<SportComplexService, SportComplexService>();
+
+            services.AddScoped<FlightService, FlightService>();
+            services.AddScoped<WeatherReportService, WeatherReportService>();
+
+            services.AddScoped<TimelineService, TimelineService>();
+
+            services.AddScoped<ScheduleService, ScheduleService>();
+
+            services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
+
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<HousingSystemService, HousingSystemService>(); 
             services.AddScoped<LifeService, LifeService>();
+            services.AddScoped<ReservationService, ReservationService>();
+            services.AddScoped<RestaurantTypeService, RestaurantTypeService>();
 
             #endregion
 

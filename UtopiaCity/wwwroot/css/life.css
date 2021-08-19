@@ -1,0 +1,44 @@
+﻿#lifeTable thead {
+    background: #a7b1b1;
+}
+#lifeTable tbody {
+    background: #cde6e7;
+}
+#lifeTable thead th:first-child {
+    border-radius:10px 0 0 0;  
+}
+#lifeTable thead th:last-child {
+    border-radius: 0 10px 0 0;
+}
+#lifeTable tbody tr:last-child td:first-child{
+    border-radius: 0 0 0 10px;
+}
+#lifeTable tbody tr:last-child td:last-child{
+    border-radius: 0 0 10px 0;
+}
+#lifeTable tr {
+    border-bottom: solid 3px;
+}
+#lifeTable tr:last-child {
+    border-bottom: none;
+}
+#lifeContainer {
+    background: #cde6e7;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: blue;
+    padding: 15px;
+    margin: 5px;
+}
+#lifeContainer input {
+    border-radius:10px;
+}
+#lifeContainer input[type=submit] {
+    background-color: dodgerblue;
+    color: black;
+}
+#lifeContainer select {
+    border-radius: 10px;
+}
+

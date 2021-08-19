@@ -31,7 +31,7 @@ namespace UtopiaCity.Controllers.Emergency
             var report = await _emergencyReportService.GetEmergencyReportById(id);
             if (report == null)
             {
-                NotFound();
+                return NotFound();
             }
 
             return View("DetailsEmergencyReportView", report);
