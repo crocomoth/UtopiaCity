@@ -40,7 +40,7 @@ namespace UtopiaCity.Data
         public DbSet<PermitedModel> PermitedModel { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Airline> Airlines { get; set; }
-        public DbSet<RersidentAccount> RersidentAccount { get; set; }
+        public DbSet<ResidentAccount> RersidentAccount { get; set; }
         public DbSet<ResidentAccount> ResidentAccount { get; set; }
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
@@ -55,5 +55,7 @@ namespace UtopiaCity.Data
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<CitizensTask> CitizensTasks { get; set; }
         public DbSet<Marriage> Marriage { get; set; }
+
+        public DbSet<Resume> Resumes { get; set; }
     }
 }

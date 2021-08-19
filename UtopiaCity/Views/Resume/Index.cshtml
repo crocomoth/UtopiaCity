@@ -1,0 +1,64 @@
+﻿@model IEnumerable<UtopiaCity.Models.Business.Resume>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ResidentAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkExperienceDateStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkExperienceDateEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UntilNow)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResidentAccount.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkExperienceDateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkExperienceDateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UntilNow)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
