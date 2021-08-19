@@ -37,7 +37,7 @@ namespace UtopiaCity.Services.Airport
         public Flight GetFlightById(string id)
         {
             return _dbContext.Flights.FirstOrDefault(x => x.Id.Equals(id));
-        } 
+        }
 
         /// <summary>
         /// Create a new flight, by adding it to the database
