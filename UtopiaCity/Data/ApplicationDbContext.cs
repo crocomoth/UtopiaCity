@@ -25,6 +25,21 @@ namespace UtopiaCity.Data
                 .WithMany(e => e.SportEvents)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<SportTicket>()
+                .HasOne(s => s.SportComplex)
+                .WithMany(t => t.SportTickets)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<SportTicket>()
+                .HasOne(s => s.SportEvent)
+                .WithMany(s => s.SportTickets)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SportTicket>()
+                .HasOne(r => r.AppUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -44,6 +59,6 @@ namespace UtopiaCity.Data
         public DbSet<SportEvent> SportEvents { get; set; }
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<CitizensTask> CitizensTasks { get; set; }
-
+        public DbSet<SportTicket> SportTickets { get; set; }
     }
 }
