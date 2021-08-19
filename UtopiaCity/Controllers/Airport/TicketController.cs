@@ -17,7 +17,7 @@ namespace UtopiaCity.Controllers.Airport
 
         public IActionResult Index()
         {
-            var ticket = _dbContext.Tickets.Include(t => t.Flight).Include(t => t.PermitedModel).Include(t => t.RersidentAccount);
+            var ticket = _dbContext.Tickets.Include(t => t.Flight).Include(t => t.PermitedModel).Include(t => t.ResidentAccount);
             return View("TicketsListView", ticket.ToList());
         }
 
@@ -25,10 +25,10 @@ namespace UtopiaCity.Controllers.Airport
         public IActionResult Create()
         {
             SelectList flights = new SelectList(_dbContext.Flights, "Id", "FlightNumber");
-            SelectList accounts = new SelectList(_dbContext.RersidentAccount, "Id", "FirstName");
+            SelectList accounts = new SelectList(_dbContext.ResidentAccount, "Id", "FirstName");
             SelectList permissions = new SelectList(_dbContext.PermitedModel, "Id", "PermissionStatus");
             ViewBag.Flights = flights;
-            ViewBag.RersidentAccount = accounts;
+            ViewBag.ResidentAccount = accounts;
             ViewBag.PermitedModel = permissions;
             return View("TicketsCreateView");
         }
@@ -52,7 +52,7 @@ namespace UtopiaCity.Controllers.Airport
             var ticket = _dbContext.Tickets
                                            .Include(t => t.Flight)
                                            .Include(t => t.PermitedModel)
-                                           .Include(t => t.RersidentAccount)
+                                           .Include(t => t.ResidentAccount)
                                            .FirstOrDefault(m => m.Id == id);
             if (ticket is null)
             {

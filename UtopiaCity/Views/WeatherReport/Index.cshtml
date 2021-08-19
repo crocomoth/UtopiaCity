@@ -13,22 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Days)
+                @Html.DisplayNameFor(model => model.PermitedModel.PermissionDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WeatherCondition)
+                @Html.DisplayNameFor(model => model.DirectionTo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Temperature)
+                @Html.DisplayNameFor(model => model.DirectionFrom)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Wind)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rainfall)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Moisture)
+                @Html.DisplayNameFor(model => model.FlightWeather)
             </th>
             <th></th>
         </tr>
@@ -37,24 +31,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Days)
+                @Html.DisplayFor(modelItem => item.PermitedModel.PermissionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WeatherCondition)
+                @Html.DisplayFor(modelItem => item.DirectionTo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Temperature)
+                @Html.DisplayFor(modelItem => item.DirectionFrom)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Wind)
+                @Html.DisplayFor(modelItem => item.FlightWeather)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rainfall)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Moisture)
-            </td>
-            <td>
+                <a asp-action="Dispatcher" asp-route-id="@item.Id">Check Permission</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

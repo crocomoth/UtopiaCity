@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Flight)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RersidentAccount)
+                @Html.DisplayNameFor(model => model.ResidentAccount)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PermitedModel)
@@ -35,7 +35,7 @@
                     <a asp-controller="Flight" asp-action="Index">@Html.DisplayFor(modelItem => item.Flight.FlightNumber)</a>
                 </td>
                 <td>
-                    <a asp-controller="RersidentAccount" asp-action="Index">@Html.DisplayFor(modelItem => item.RersidentAccount.FirstName)</a>
+                    <a asp-controller="ResidentAccount" asp-action="Index">@Html.DisplayFor(modelItem => item.ResidentAccount.FirstName)</a>
                 </td>
                 <td>
                     <a asp-controller="PermitedConditions" asp-action="Index">@Html.DisplayFor(modelItem => item.PermitedModel.PermissionStatus)</a>

@@ -3,6 +3,7 @@ using System.Linq;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Utils;
 
 namespace UtopiaCity.Common.Initializers
 {
@@ -27,42 +28,47 @@ namespace UtopiaCity.Common.Initializers
             }
             var flight1 = new Flight()
             {
-                FlightNumber = 128,
+                FlightNumber = RandomUtil.GenerateRandomString(200).ElementAt(1),
                 ArrivalTime = DateTime.Now.AddHours(4),
                 DepartureTime = DateTime.Now,
-                Destination = "Moscow,Russia",
+                LocationPoint = "Moscow",
+                DestinationPoint = "Stambul",
                 Weather = "Sunny"
             };
             var flight2 = new Flight()
             {
-                FlightNumber = 256,
+                FlightNumber = RandomUtil.GenerateRandomString(100).ElementAt(2),
                 ArrivalTime = DateTime.Now.AddHours(13),
                 DepartureTime = DateTime.Now.AddHours(1),
-                Destination = "Madrid,Spain",
+                LocationPoint = "Moscow",
+                DestinationPoint = "Madrid",
                 Weather = "Rainy"
             };
             var flight3 = new Flight()
             {
-                FlightNumber = 512,
+                FlightNumber = RandomUtil.GenerateRandomString(150).ElementAt(4),
                 ArrivalTime = DateTime.Now.AddHours(5),
                 DepartureTime = DateTime.Now,
-                Destination = "Stambul,Turkey",
+                LocationPoint="Madrid",
+                DestinationPoint = "Stambul",
                 Weather = "Cloudy"
             };
             var flight4 = new Flight()
             {
-                FlightNumber = 223,
+                FlightNumber = RandomUtil.GenerateRandomString(300).ElementAt(26),
                 ArrivalTime = DateTime.Now.AddHours(7),
                 DepartureTime = DateTime.Now.AddHours(2),
-                Destination = "Dubai,UAE",
+                LocationPoint="Moscow",
+                DestinationPoint = "Dubai",
                 Weather = "Windy"
             };
             var flight5 = new Flight()
             {
-                FlightNumber = 876,
+                FlightNumber = RandomUtil.GenerateRandomString(150).ElementAt(54),
                 ArrivalTime = DateTime.Now.AddHours(13),
                 DepartureTime = DateTime.Now.AddHours(3),
-                Destination = "London,UK",
+                LocationPoint="Stambul",
+                DestinationPoint = "London",
                 Weather = "Foggy"
             };
 

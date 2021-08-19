@@ -1,0 +1,23 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.Resource>
+
+@{
+    ViewData["Title"] = "GetListApiDataView";
+}
+
+<h1>GetListApiDataView</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelDistance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelDuration)
+            </th>
+        </tr>
+    </thead>
+</table>

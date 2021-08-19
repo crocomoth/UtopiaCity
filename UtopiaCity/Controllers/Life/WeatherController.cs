@@ -36,7 +36,7 @@ namespace UtopiaCity.Controllers.Life
                 var data = await WeatherReportApi.GetReportClosestToDateAsync(date);
                 if (data != null)
                 {
-                    return _mapper.Map<UtopiaCity.Models.Airport.WeatherReport>(data);
+                    return _mapper.Map<Models.Airport.WeatherReport>(data);
                 }
                 else
                 {

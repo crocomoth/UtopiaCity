@@ -1,9 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
+using UtopiaCity.Helpers.Automapper;
+using UtopiaCity.Helpers.WeatherReportApi;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.TimelineModel;
 
 namespace UtopiaCity.Services.Airport
 {
@@ -13,10 +18,12 @@ namespace UtopiaCity.Services.Airport
     public class WeatherReportService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public WeatherReportService(ApplicationDbContext context)
+        public WeatherReportService(ApplicationDbContext context,IMapper mapper)
         {
             _dbContext = context;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -25,7 +32,7 @@ namespace UtopiaCity.Services.Airport
         /// <returns>List of reports</returns>
         public List<WeatherReport> GetWeatherReportsList()
         {
-            return _dbContext.WeatherReports.ToList();
+            return _dbContext.WeatherReports.Include(x => x.PermitedModel).ToList();
         }
 
         /// <summary>
@@ -69,21 +76,62 @@ namespace UtopiaCity.Services.Airport
         }
 
         /// <summary>
-        /// Checks if requested datetime exist or not
+        /// Gets Weather data report permission by using DateTime
         /// </summary>
-        /// <param name="reportTime">Model to check</param>
-        /// <returns>Requested model otherwise null</returns>
-        public WeatherReport GetReportDateTimeValidation(WeatherReport reportTime)
+        /// <param name="currentDate">DateTime to use</param>
+        /// <returns>Existing permission of Boolean type</returns>
+        public bool GetPermitedWeatherReport(DateTime currentDate)
         {
-            var specialReport= _dbContext.WeatherReports.FirstOrDefault(x => x.Days.Equals(reportTime.Days));
-            if (specialReport is null)
+            var weatherData = WeatherReportApi.GetReportClosestToDateAsync(currentDate).GetAwaiter().GetResult();
+            if(weatherData != null)
             {
-                return reportTime;
+               var mappedData= _mapper.Map<WeatherReport>(weatherData);
+               return GetPermissionByWeatherConditions(mappedData);
             }
             else
             {
-                return null;
-            }            
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Additional method for validating data from third-party-api and context
+        /// </summary>
+        /// <param name="weatherData">Object to map for</param>
+        /// <returns>Bool : True if properties match conditions, otherwise false </returns>
+        private bool GetPermissionByWeatherConditions(WeatherReport weatherData)
+        {
+            var mappedApiData = _mapper.Map<PermitedModel>(weatherData);
+            var dataFromContext = _dbContext.PermitedModel.FirstOrDefault();
+
+            static int? NullableTryParseInt(string someString)
+            {
+                int value;
+                return int.TryParse(someString, out value) ? (int?)value : null;
+            }
+
+            var speedOfWindApi = NullableTryParseInt(mappedApiData.SpeedOfWind);
+            var speedOfWindContext = NullableTryParseInt(dataFromContext.SpeedOfWind);
+            if (speedOfWindApi > speedOfWindContext)
+            {
+                return false;
+            }
+
+            var rainfallApi = NullableTryParseInt(mappedApiData.Rainfall);
+            var rainfallContext = NullableTryParseInt(dataFromContext.Rainfall);
+            if (rainfallApi > rainfallContext)
+            {
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+
+            //ToDo: Refactoring,
+            //Add more properties, 
+            //Create better validation
         }
     }
 }

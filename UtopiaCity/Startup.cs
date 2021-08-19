@@ -10,6 +10,7 @@ using UtopiaCity.Common;
 using UtopiaCity.Data;
 using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Services.Business;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
@@ -44,6 +45,7 @@ namespace UtopiaCity
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
+            services.AddScoped<MarriageService, MarriageService>();
             services.AddScoped<SportComplexService, SportComplexService>();
             services.AddScoped<SportEventService, SportEventService>();
             services.AddScoped<FlightService, FlightService>();
@@ -54,9 +56,17 @@ namespace UtopiaCity
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
-
+            services.AddScoped<IRouteApi, FlightRouteApiService>();
+            services.AddScoped<BankService, BankService>();
+            services.AddScoped<CompanyStatusService, CompanyStatusService>();
+            services.AddScoped<CompanyAppService, CompanyAppService>();
+            services.AddScoped<VacancyAppService, VacancyAppService>();
+            services.AddScoped<ProfessionAppService, ProfessionAppService>();
+            services.AddScoped<EmployeeAppService, EmployeeAppService>();
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
+
+
             #endregion
 
             services.Configure<IdentityOptions>(options =>
