@@ -1,0 +1,16 @@
+﻿﻿﻿.sportComplexImage {
+    width: 350px;
+}
+
+.carousel .carousel-indicators li {
+    background-color: #adedfa;
+}
+
+    .carousel .carousel-indicators li.active {
+        background-color: #33dcfe;
+    }
+
+.sportDivPaddings {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
