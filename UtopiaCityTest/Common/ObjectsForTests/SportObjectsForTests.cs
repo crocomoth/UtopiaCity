@@ -237,5 +237,18 @@ namespace UtopiaCityTest.Common.ObjectsForTests
 				}
 			};
         }
+
+        public SportTicketViewModel SportTicketViewModelForTests()
+        {
+            return new SportTicketViewModel()
+            {
+                SportEventTitle = "title_1",
+                DateOfTheEvent = new DateTime(2021, 1, 1),
+                SportComplexTitle = "title_1",
+                Address = "address_1",
+                VisitorName = "name_1",
+                VisitorSurname = "surname_1"
+            };
+        }
     }
 }
