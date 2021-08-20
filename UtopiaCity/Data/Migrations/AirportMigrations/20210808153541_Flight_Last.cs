@@ -10,9 +10,9 @@ namespace UtopiaCity.Data.Migrations
                 name: "TravelDistance",
                 table: "Flights");
 
-            migrationBuilder.DropColumn(
-                name: "TravelDuration",
-                table: "Flights");
+//            migrationBuilder.DropColumn(
+//                name: "TravelDuration",
+//                table: "Flights");
 
             migrationBuilder.AddColumn<string>(
                 name: "TypeOfAircraft",
@@ -33,12 +33,12 @@ namespace UtopiaCity.Data.Migrations
                 nullable: false,
                 defaultValue: 0.0);
 
-            migrationBuilder.AddColumn<int>(
-                name: "TravelDuration",
-                table: "Flights",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+//            migrationBuilder.AddColumn<int>(
+//                name: "TravelDuration",
+//                table: "Flights",
+//                type: "int",
+//                nullable: false,
+//                defaultValue: 0);
         }
     }
 }
