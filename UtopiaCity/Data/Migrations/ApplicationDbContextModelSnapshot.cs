@@ -460,7 +460,7 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Professions");
-                });
+                }));
 
             modelBuilder.Entity("UtopiaCity.Models.Business.Resume", b =>
                 {
@@ -927,17 +927,17 @@ namespace UtopiaCity.Data.Migrations
                 });
 
 
-                    modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
-                        {
-                            b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
-                                .WithMany()
-                                .HasForeignKey("UserId");
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
-                        });
+                });
 
 #pragma warning restore 612, 618
-                });
+        }
     }
-    }
+    
 }
 

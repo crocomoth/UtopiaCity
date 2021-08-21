@@ -21,11 +21,15 @@ namespace UtopiaCity.Services.Business
             _residentAccountService = residentAccountService;
         }
 
-        public async Task<List<Resume>> GetAll()
+        public async Task<List<Resume>> GetAll(string filter)
         {
             return await _dbContext.Resumes
                 .Include(s => s.ResidentAccount)
-                .Include(x => x.Profession).ToListAsync();
+                .Include(s => s.Profession)
+                .Where(s => string.IsNullOrEmpty(filter) ? true : s.Profession.Name.ToLower().Contains(filter.ToLower())  
+                    || s.Salary.ToString().Contains(filter)  
+                    || s.ResidentAccount.FirstName.ToLower().Contains(filter.ToLower())
+                    || s.ResidentAccount.FamilyName.ToLower().Contains(filter.ToLower())).ToListAsync();
         }
 
         public async Task<Resume> GetById(string id)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Models.Business;
 using UtopiaCity.Services.Business;
+using UtopiaCity.Services.Business.Dtos;
 
 namespace UtopiaCity.Controllers.Business
 {
@@ -17,9 +18,9 @@ namespace UtopiaCity.Controllers.Business
             _resumeAppService = resumeAppService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filter)
         {
-            return View("Index", await _resumeAppService.GetAll());
+            return View("Index", await _resumeAppService.GetAll(filter));
         }
 
         [HttpGet]
