@@ -1,0 +1,24 @@
+﻿@model UtopiaCity.Models.TimelineModel.CollectionDataModel.CollectionDataModel;
+@{
+    ViewData["Title"] = "ViewModelResult";
+}
+<h1>ViewModelResult</h1>
+
+@*
+    <h2>@Model._flights</h2>
+*@
+@foreach (var item in Model._flights)
+{
+    <li>
+        @Html.DisplayFor(modelItem => item.ArrivalTime)
+    </li>
+}
+
+<p></p>
+@foreach (var item in Model._events)
+{
+    <li>
+        @Html.DisplayFor(modelItem => item.Description)
+    </li>
+}
+
