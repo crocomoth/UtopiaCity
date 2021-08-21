@@ -7,6 +7,7 @@ using UtopiaCity.Models.Life;
 using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
+using UtopiaCity.Models.Energy;
 
 namespace UtopiaCity.Data
 {
@@ -30,5 +31,6 @@ namespace UtopiaCity.Data
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<EnergyCalculations> EnergyCalculations { get; set; }
     }
 }
