@@ -67,5 +67,9 @@ namespace UtopiaCity.Services.Sport
             _dbContext.Update(sportEvent);
             _dbContext.SaveChanges();
         }
+
+        public virtual List<string> GetAllSportEventsTitles() => _dbContext.SportEvents.Select(x => x.Title).ToList();
+
+        public virtual string GetSportEventIdByTitle(string title) => _dbContext.SportEvents.FirstOrDefault(x => x.Title.Equals(title)).SportEventId;
     }
 }

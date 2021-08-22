@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
+using UtopiaCity.Services.Sport;
 using UtopiaCityTest.Common.ObjectsForTests;
 using Xunit;
 
@@ -15,7 +17,8 @@ namespace UtopiaCityTest.Services.Sport
         private readonly SportComplex[] _sportComplexesForTests;
         private readonly SportEvent _sportEventForTests;
         private readonly SportEvent[] _sportEventsForTests;
-        private readonly AppUser _appUserForTests;
+        private readonly Task<AppUser> _appUserForTests;
+        private readonly Task<AppUser> _appUserForCitizenAccountService;
         private readonly AppUser[] _appUsersForTests;
 
         public SportTicketServiceTests()
@@ -51,59 +54,59 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportTicketService(context);
 
                 //act
-                var result = service.GetAllSportTicketsWithRelationalData();
+                var result = service.GetAllSportTickets();
 
                 //assert
                 Assert.Collection(result,
                     item =>
                     {
-                        Assert.Equal(_sportTicketsForTests[0].TicketId, item.SportTicketId);
+                        Assert.Equal(_sportTicketsForTests[0].TicketId, item.TicketId);
                         Assert.Equal(_sportTicketsForTests[0].SportComplexId, item.SportComplexId);
                         Assert.Equal(_sportTicketsForTests[0].SportEventId, item.SportEventId);
                         Assert.Equal(_sportTicketsForTests[0].AppUserId, item.AppUserId);
                         Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent());
-                        Assert.NotNull(item.ResidentAccount);
+                        Assert.NotNull(item.SportEvent);
+                        Assert.NotNull(item.AppUser);
                     },
                     item =>
                     {
-                        Assert.Equal(_sportTicketsForTests[0].TicketId, item.SportTicketId);
-                        Assert.Equal(_sportTicketsForTests[0].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[0].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[0].AppUserId, item.AppUserId);
+                        Assert.Equal(_sportTicketsForTests[1].TicketId, item.TicketId);
+                        Assert.Equal(_sportTicketsForTests[1].SportComplexId, item.SportComplexId);
+                        Assert.Equal(_sportTicketsForTests[1].SportEventId, item.SportEventId);
+                        Assert.Equal(_sportTicketsForTests[1].AppUserId, item.AppUserId);
                         Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent());
-                        Assert.NotNull(item.ResidentAccount);
+                        Assert.NotNull(item.SportEvent);
+                        Assert.NotNull(item.AppUser);
                     },
                     item =>
                     {
-                        Assert.Equal(_sportTicketsForTests[0].TicketId, item.SportTicketId);
-                        Assert.Equal(_sportTicketsForTests[0].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[0].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[0].AppUserId, item.AppUserId);
+                        Assert.Equal(_sportTicketsForTests[2].TicketId, item.TicketId);
+                        Assert.Equal(_sportTicketsForTests[2].SportComplexId, item.SportComplexId);
+                        Assert.Equal(_sportTicketsForTests[2].SportEventId, item.SportEventId);
+                        Assert.Equal(_sportTicketsForTests[2].AppUserId, item.AppUserId);
                         Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent());
-                        Assert.NotNull(item.ResidentAccount);
+                        Assert.NotNull(item.SportEvent);
+                        Assert.NotNull(item.AppUser);
                     },
                     item =>
                     {
-                        Assert.Equal(_sportTicketsForTests[0].TicketId, item.SportTicketId);
-                        Assert.Equal(_sportTicketsForTests[0].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[0].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[0].AppUserId, item.AppUserId);
+                        Assert.Equal(_sportTicketsForTests[3].TicketId, item.TicketId);
+                        Assert.Equal(_sportTicketsForTests[3].SportComplexId, item.SportComplexId);
+                        Assert.Equal(_sportTicketsForTests[3].SportEventId, item.SportEventId);
+                        Assert.Equal(_sportTicketsForTests[3].AppUserId, item.AppUserId);
                         Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent());
-                        Assert.NotNull(item.ResidentAccount);
+                        Assert.NotNull(item.SportEvent);
+                        Assert.NotNull(item.AppUser);
                     },
                     item =>
                     {
-                        Assert.Equal(_sportTicketsForTests[0].TicketId, item.SportTicketId);
-                        Assert.Equal(_sportTicketsForTests[0].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[0].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[0].AppUserId, item.AppUserId);
+                        Assert.Equal(_sportTicketsForTests[4].TicketId, item.TicketId);
+                        Assert.Equal(_sportTicketsForTests[4].SportComplexId, item.SportComplexId);
+                        Assert.Equal(_sportTicketsForTests[4].SportEventId, item.SportEventId);
+                        Assert.Equal(_sportTicketsForTests[4].AppUserId, item.AppUserId);
                         Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent());
-                        Assert.NotNull(item.ResidentAccount);
+                        Assert.NotNull(item.SportEvent);
+                        Assert.NotNull(item.AppUser);
                     }
                 );
             }
@@ -121,7 +124,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests);
+                context.AppUser.Add(_appUserForTests.Result);
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SaveChanges();
             }
@@ -131,7 +134,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportTicketService(context);
 
                 //act
-                var result = service.GetSportTicketByIdWithRelationalData("1");
+                var result = service.GetSportTicketById("1");
 
                 //assert
                 Assert.NotNull(result);
@@ -157,7 +160,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests);
+                context.AppUser.Add(_appUserForTests.Result);
                 context.SaveChanges();
             }
 
@@ -172,9 +175,9 @@ namespace UtopiaCityTest.Services.Sport
                 //assert
                 Assert.NotNull(result);
                 Assert.Equal("1", result.TicketId);
-                Assert.NotNull(result.SportComplex);
-                Assert.NotNull(result.SportEvent);
-                Assert.NotNull(result.AppUser);
+                Assert.Null(result.SportComplex);
+                Assert.Null(result.SportEvent);
+                Assert.Null(result.AppUser);
             }
 
             TearDown();
@@ -191,7 +194,7 @@ namespace UtopiaCityTest.Services.Sport
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SportComplex.AddRange(_sportComplexesForTests);
                 context.SportEvents.AddRange(_sportEventsForTests);
-                context.AppUser.AddRange(_appUserForTests);
+                context.AppUser.AddRange(_appUsersForTests);
                 context.SaveChanges();
             }
 
@@ -207,7 +210,7 @@ namespace UtopiaCityTest.Services.Sport
                 });
 
                 //act
-                var result = context.SportTickets.FirstOrDefault(x => x.TicketId.Equals(_sportTicketForTests));
+                var result = context.SportTickets.FirstOrDefault(x => x.TicketId.Equals(_sportTicketForTests.TicketId));
 
                 //assert
                 Assert.NotNull(result);
@@ -215,9 +218,9 @@ namespace UtopiaCityTest.Services.Sport
                 Assert.Equal("2", result.SportComplexId);
                 Assert.Equal("2", result.SportEventId);
                 Assert.Equal("3", result.AppUserId);
-                Assert.NotNull(result.SportComplex);
-                Assert.NotNull(result.SportEvent);
-                Assert.NotNull(result.AppUser);
+                Assert.Null(result.SportComplex);
+                Assert.Null(result.SportEvent);
+                Assert.Null(result.AppUser);
             }
 
             TearDown();
@@ -233,7 +236,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests);
+                context.AppUser.Add(_appUserForTests.Result);
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SaveChanges();
             }
@@ -241,7 +244,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportTicketService(context);
-                service.DeleteSportTicketFromDb(_sportTicketForTests);
+                service.RemoveSportTicketFromDb(_sportTicketForTests);
 
                 //act
                 var result = context.SportTickets.FirstOrDefault(x => x.TicketId.Equals(_sportTicketForTests.TicketId));

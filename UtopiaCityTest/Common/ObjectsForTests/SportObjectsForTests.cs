@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.Sport.Enums;
@@ -189,7 +190,7 @@ namespace UtopiaCityTest.Common.ObjectsForTests
             };
         }
 
-        public static AppUser AppUserForTests()
+        public async static Task<AppUser> AppUserForTests()
         {
             return new AppUser
             {
@@ -238,10 +239,11 @@ namespace UtopiaCityTest.Common.ObjectsForTests
 			};
         }
 
-        public SportTicketViewModel SportTicketViewModelForTests()
+        public static SportTicketViewModel SportTicketViewModelForTests()
         {
             return new SportTicketViewModel()
             {
+                SportTicketId = "1",
                 SportEventTitle = "title_1",
                 DateOfTheEvent = new DateTime(2021, 1, 1),
                 SportComplexTitle = "title_1",
