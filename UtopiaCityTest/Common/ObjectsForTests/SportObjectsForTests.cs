@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
@@ -237,6 +238,46 @@ namespace UtopiaCityTest.Common.ObjectsForTests
 				    Balance = 3.3
 				}
 			};
+        }
+
+        public async static Task<List<CitizensTask>> TaskListOfCitizensTask()
+        {
+            var list = new List<CitizensTask>()
+            {
+                new CitizensTask()
+                {
+                    Id = "1",
+                    Description = "title_1",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "1"
+                },
+
+                new CitizensTask()
+                {
+                    Id = "1",
+                    Description = "title_2",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "1"
+                },
+
+                new CitizensTask()
+                {
+                    Id = "2",
+                    Description = "title_2",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "2"
+                },
+
+                new CitizensTask()
+                {
+                    Id = "3",
+                    Description = "title_3",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "3"
+                },
+            };
+
+            return list;
         }
 
         public static SportTicketViewModel SportTicketViewModelForTests()

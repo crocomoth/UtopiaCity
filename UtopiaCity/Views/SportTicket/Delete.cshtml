@@ -11,29 +11,47 @@
     <h4>SportTicket</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.SportEventTitle)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.SportEventTitle)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.DateOfTheEvent)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.DateOfTheEvent)
+        </dd>
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.SportComplexTitle)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SportEventTitle)
-        </dd class>
-        <dt class = "col-sm-2">
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.SportComplexTitle)
+        </dd>
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Address)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfTheEvent)
-        </dd class>
-        <dt class = "col-sm-2">
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.VisitorName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.VisitorName)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.VisitorSurname)
+        </dt>
+        <dd class="col-sm-8">
             @Html.DisplayFor(model => model.VisitorSurname)
-        </dd class>
+        </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="SportTicketId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="AllSportTickets">Back to List</a>
+        <a class="btn btn-outline-secondary" role="button" asp-action="AllSportTickets">Back to List</a>
     </form>
 </div>

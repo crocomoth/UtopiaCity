@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
+using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.CitizenAccount;
 using UtopiaCity.Services.Sport;
@@ -17,23 +19,30 @@ namespace UtopiaCity.Controllers.Sport
         private readonly SportComplexService _sportComplexService;
         private readonly SportEventService _sportEventService;
         private readonly CitizensAccountService _appUserService;
+        private readonly CitizenTaskService _citizenTaskService;
         private readonly IMapper _mapper;
         private readonly string _userId;
 
         public SportTicketController(SportTicketService sportTicketService, SportComplexService sportComplexService, SportEventService sportEventService,
-            CitizensAccountService appUserService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+            CitizensAccountService appUserService, CitizenTaskService citizenTaskService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _sportTicketService = sportTicketService;
             _sportComplexService = sportComplexService;
             _sportEventService = sportEventService;
             _appUserService = appUserService;
+            _citizenTaskService = citizenTaskService;
             _mapper = mapper;
             _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         public IActionResult AllSportTickets()
         {
-            List<SportTicket> sportTickets = _sportTicketService.GetAllSportTickets();
+            List<SportTicket> sportTickets = _sportTicketService.GetAllSportTickets(_userId);
+            if (sportTickets == null)
+            {
+                return View("Error", "Some problems. Please, try again");
+            }
+
             var sportTicketsViewModels = new List<SportTicketViewModel>();
             foreach (var sportTicket in sportTickets)
             {
@@ -46,13 +55,17 @@ namespace UtopiaCity.Controllers.Sport
         [HttpGet]
         public IActionResult Create(string id)
         {
-            //ViewBag.SportEventsTitles = _sportEventService.GetAllSportEventsTitles();
             if(id == null)
             {
                 return View("Error", "Incorrect Id. Please, try again");
             }
 
             SportEvent sportEvent = _sportEventService.GetSportEventByIdWithSportComplex(id);
+            if (sportEvent == null)
+            {
+                return View("Error", "Some problems. Please, try again");
+            }
+
             SportTicket sportTicket = new SportTicket
             {
                 SportComplexId = sportEvent.SportComplex.SportComplexId,
@@ -62,7 +75,7 @@ namespace UtopiaCity.Controllers.Sport
                 SportEvent = sportEvent,
                 AppUser = _appUserService.GetUserById(_userId).Result
             };
-            //Try use AJAX without viewModel
+
             var sportTicketViewModel = _mapper.Map<SportTicketViewModel>(sportTicket);
             return View(sportTicketViewModel);
         }
@@ -87,12 +100,20 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect sport event chosen." + Environment.NewLine + "Please, try again");
             }
 
-            //string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var sportTicket = _mapper.Map<SportTicket>(sportTicketViewModel);
             sportTicket.SportComplexId = sportComplexId;
             sportTicket.SportEventId = sportEventId;
             sportTicket.AppUserId = _userId;
             _sportTicketService.AddSportTicketToDb(sportTicket);
+
+            CitizensTask citizensTask = new CitizensTask
+            {
+                UserId = _userId,
+                Description = sportTicketViewModel.SportEventTitle,
+                ReminderDate = sportTicketViewModel.DateOfTheEvent
+            };
+
+            _citizenTaskService.AddCitizenTask(citizensTask);
             return RedirectToAction(nameof(AllSportTickets));
         }
 
@@ -128,60 +149,17 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Sport ticket not found." + Environment.NewLine + "Please, try again");
             }
 
+            var task = _citizenTaskService.GetTasksByReminderDate(_userId)
+                .Result
+                .FirstOrDefault(x => x.Description.Equals(sportTicket.SportEvent.Title));
             _sportTicketService.RemoveSportTicketFromDb(sportTicket);
+            if (task != null)
+            {
+                _citizenTaskService.DeleteCitizenTask(task);
+            }
+
             return RedirectToAction(nameof(AllSportTickets));
         }
-
-        /*[HttpGet]
-        public IActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again");
-            }
-
-            SportTicket sportTicket = _sportTicketService.GetSportTicketById(id);
-            if (sportTicket == null)
-            {
-                return View("Error", "Sport ticket not found." + Environment.NewLine + "Please, try again");
-            }
-
-            var sportTicketViewModel = _mapper.Map<SportTicketViewModel>(sportTicket);
-            return View(sportTicketViewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(string id, SportTicketViewModel sportTicketViewModel)
-        {
-            if (id == null)
-            {
-                return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again");
-            }
-            else if (sportTicketViewModel == null)
-            {
-                return View("Error", "You made mistakers while creating new Sport Ticket. Please, try again");
-            }
-
-            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(sportTicketViewModel.SportComplexTitle);
-            if (sportComplexId == null)
-            {
-                return View("Error", "Incorrect sport complex chosen." + Environment.NewLine + "Please, try again");
-            }
-
-            string sportEventId = _sportEventService.GetSportEventIdByTitle(sportTicketViewModel.SportEventTitle);
-            if (sportEventId == null)
-            {
-                return View("Error", "Incorrect sport event chosen." + Environment.NewLine + "Please, try again");
-            }
-
-            //string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var sportTicket = _mapper.Map<SportTicket>(sportTicketViewModel);
-            sportTicket.SportComplexId = sportComplexId;
-            sportTicket.SportEventId = sportEventId;
-            sportTicket.AppUserId = _userId;
-            _sportTicketService.UpdateSportTicketInDb(sportTicket);
-            return RedirectToAction(nameof(AllSportTickets));
-        }*/
 
         public IActionResult Details(string id)
         {

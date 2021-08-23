@@ -36,7 +36,8 @@ namespace UtopiaCity.Services.Sport
         /// </summary>
         /// <param name="id">Id of sport event.</param>
         /// <returns>Sport event with it's Sport complex if it exists, otherwise null.</returns>
-        public virtual SportEvent GetSportEventByIdWithSportComplex(string id) => _dbContext.SportEvents.Include(s => s.SportComplex).FirstOrDefault(x => x.SportEventId.Equals(id));
+        public virtual SportEvent GetSportEventByIdWithSportComplex(string id) => _dbContext.SportEvents.Include(s => s.SportComplex)
+            .FirstOrDefault(x => x.SportEventId.Equals(id));
 
         /// <summary>
         /// Method for adding new sport event to database.
@@ -68,8 +69,18 @@ namespace UtopiaCity.Services.Sport
             _dbContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Gets list of sport events' titles.
+        /// </summary>
+        /// <returns>List of all existing sport events' titles.</returns>
         public virtual List<string> GetAllSportEventsTitles() => _dbContext.SportEvents.Select(x => x.Title).ToList();
 
-        public virtual string GetSportEventIdByTitle(string title) => _dbContext.SportEvents.FirstOrDefault(x => x.Title.Equals(title)).SportEventId;
+        /// <summary>
+        /// Gets <see cref="SportEvent.SportEventId"/> by Title.
+        /// </summary>
+        /// <param name="title">Title of sport event.</param>
+        /// <returns>Sport event's id if it exists, otherwise null.</returns>
+        public virtual string GetSportEventIdByTitle(string title) => _dbContext.SportEvents.
+            FirstOrDefault(x => x.Title.Equals(title)).SportEventId;
     }
 }

@@ -18,7 +18,6 @@ namespace UtopiaCityTest.Services.Sport
         private readonly SportEvent _sportEventForTests;
         private readonly SportEvent[] _sportEventsForTests;
         private readonly Task<AppUser> _appUserForTests;
-        private readonly Task<AppUser> _appUserForCitizenAccountService;
         private readonly AppUser[] _appUsersForTests;
 
         public SportTicketServiceTests()
@@ -54,7 +53,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportTicketService(context);
 
                 //act
-                var result = service.GetAllSportTickets();
+                var result = service.GetAllSportTickets("1");
 
                 //assert
                 Assert.Collection(result,
@@ -74,36 +73,6 @@ namespace UtopiaCityTest.Services.Sport
                         Assert.Equal(_sportTicketsForTests[1].SportComplexId, item.SportComplexId);
                         Assert.Equal(_sportTicketsForTests[1].SportEventId, item.SportEventId);
                         Assert.Equal(_sportTicketsForTests[1].AppUserId, item.AppUserId);
-                        Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent);
-                        Assert.NotNull(item.AppUser);
-                    },
-                    item =>
-                    {
-                        Assert.Equal(_sportTicketsForTests[2].TicketId, item.TicketId);
-                        Assert.Equal(_sportTicketsForTests[2].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[2].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[2].AppUserId, item.AppUserId);
-                        Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent);
-                        Assert.NotNull(item.AppUser);
-                    },
-                    item =>
-                    {
-                        Assert.Equal(_sportTicketsForTests[3].TicketId, item.TicketId);
-                        Assert.Equal(_sportTicketsForTests[3].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[3].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[3].AppUserId, item.AppUserId);
-                        Assert.NotNull(item.SportComplex);
-                        Assert.NotNull(item.SportEvent);
-                        Assert.NotNull(item.AppUser);
-                    },
-                    item =>
-                    {
-                        Assert.Equal(_sportTicketsForTests[4].TicketId, item.TicketId);
-                        Assert.Equal(_sportTicketsForTests[4].SportComplexId, item.SportComplexId);
-                        Assert.Equal(_sportTicketsForTests[4].SportEventId, item.SportEventId);
-                        Assert.Equal(_sportTicketsForTests[4].AppUserId, item.AppUserId);
                         Assert.NotNull(item.SportComplex);
                         Assert.NotNull(item.SportEvent);
                         Assert.NotNull(item.AppUser);

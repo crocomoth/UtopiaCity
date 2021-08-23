@@ -4,6 +4,9 @@ using UtopiaCity.Models.CitizenAccount;
 
 namespace UtopiaCity.Models.Sport
 {
+    /// <summary>
+    /// Represents sport ticket.
+    /// </summary>
     public class SportTicket
     {
         [Key]
