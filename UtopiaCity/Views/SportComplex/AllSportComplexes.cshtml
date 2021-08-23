@@ -28,6 +28,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Available)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,6 +52,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Available)
                 </td>
                 <td>
                     <a class="btn btn-outline-success btn-sm" role="button" asp-action="Edit" asp-route-id="@item.SportComplexId">Edit</a> |
