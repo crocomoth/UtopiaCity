@@ -60,5 +60,6 @@ namespace UtopiaCity.Data
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<CitizensTask> CitizensTasks { get; set; }
         public DbSet<SportTicket> SportTickets { get; set; }
+        public DbSet<RequestToAdministration> RequestsToAdministration { get; set; }
     }
 }
