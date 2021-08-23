@@ -52,7 +52,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for removing sport event from database.
         /// </summary>
-        /// <param name="sportEvent">Sport event for adding.</param>
+        /// <param name="sportEvent">Sport event for removing.</param>
         public virtual void RemoveSportEventFromDb(SportEvent sportEvent)
         {
             _dbContext.Remove(sportEvent);
@@ -62,7 +62,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for updating sport event in database.
         /// </summary>
-        /// <param name="sportEvent">Sport event for adding.</param>
+        /// <param name="sportEvent">Sport event for updating.</param>
         public virtual void UpdateSportEventInDb(SportEvent sportEvent)
         {
             _dbContext.Update(sportEvent);

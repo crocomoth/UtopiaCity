@@ -35,7 +35,7 @@ namespace UtopiaCity.Common.Initializers
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Football,
                     Address = "Fleet street",
-                    Available = true
+                    Available = false
                 },
 
                 new SportComplex
@@ -45,7 +45,7 @@ namespace UtopiaCity.Common.Initializers
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Motorsport,
                     Address = "Seventh North street",
-                    Available = true
+                    Available = false
                 },
 
                 new SportComplex
@@ -65,7 +65,7 @@ namespace UtopiaCity.Common.Initializers
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Athletics,
                     Address = "5th Avenue",
-                    Available = true
+                    Available = false
                 }
             };
 

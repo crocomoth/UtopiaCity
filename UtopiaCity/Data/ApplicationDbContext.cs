@@ -40,6 +40,11 @@ namespace UtopiaCity.Data
                 .WithMany()
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<RequestToAdministration>()
+                .HasOne(s => s.SportComplex)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
 

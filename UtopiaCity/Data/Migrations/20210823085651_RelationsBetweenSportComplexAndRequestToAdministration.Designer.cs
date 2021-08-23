@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210823085651_RelationsBetweenSportComplexAndRequestToAdministration")]
+    partial class RelationsBetweenSportComplexAndRequestToAdministration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -766,7 +768,7 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
                         .WithMany()
                         .HasForeignKey("SportComplexId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>

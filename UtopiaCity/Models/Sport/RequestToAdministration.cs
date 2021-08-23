@@ -24,7 +24,8 @@ namespace UtopiaCity.Models.Sport
         [Required]
         public bool IsReviewed { get; set; }
 
-        [Required]
+        [ForeignKey("SportComplex")]
         public string SportComplexId { get; set; }
+        public SportComplex SportComplex { get; set; }
     }
 }
