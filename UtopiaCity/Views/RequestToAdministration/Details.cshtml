@@ -1,0 +1,60 @@
+﻿@model RequestToAdministrationViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>RequestToAdministration</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfRequest)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfRequest)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SportComplexTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SportComplexTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TypeOfSport)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TypeOfSport)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Available)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Available)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsApproved)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsReviewed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsReviewed)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-primary" role="button"  asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-outline-secondary" role="button" asp-action="AllRequestsToAdministration">All Requests To The Administration</a>
+</div>

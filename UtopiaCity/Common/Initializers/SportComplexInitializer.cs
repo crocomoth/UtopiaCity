@@ -24,7 +24,8 @@ namespace UtopiaCity.Common.Initializers
                     NumberOfSeats = 1000,
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Swimming,
-                    Address = "5th Avenue"
+                    Address = "5th Avenue",
+                    Available = false
                 },
 
                 new SportComplex
@@ -33,7 +34,8 @@ namespace UtopiaCity.Common.Initializers
                     NumberOfSeats = 10000,
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Football,
-                    Address = "Fleet street"
+                    Address = "Fleet street",
+                    Available = false
                 },
 
                 new SportComplex
@@ -42,7 +44,8 @@ namespace UtopiaCity.Common.Initializers
                     NumberOfSeats = 50000,
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Motorsport,
-                    Address = "Seventh North street"
+                    Address = "Seventh North street",
+                    Available = false
                 },
 
                 new SportComplex
@@ -51,7 +54,8 @@ namespace UtopiaCity.Common.Initializers
                     NumberOfSeats = 1000,
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.FigureSkating,
-                    Address = "Mountain street"
+                    Address = "Mountain street",
+                    Available = false
                 },
 
                 new SportComplex
@@ -60,7 +64,8 @@ namespace UtopiaCity.Common.Initializers
                     NumberOfSeats = 5000,
                     BuildDate = DateTime.Now,
                     TypeOfSport = TypesOfSport.Athletics,
-                    Address = "5th Avenue"
+                    Address = "5th Avenue",
+                    Available = false
                 }
             };
 

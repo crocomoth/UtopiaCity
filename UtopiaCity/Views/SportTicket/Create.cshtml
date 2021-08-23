@@ -1,0 +1,59 @@
+﻿@model SportTicketViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SportTicket</h4>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-group mb-3">
+                <label asp-for="SportComplexTitle" class="input-group-text"></label>
+                <input asp-for="SportComplexTitle" class="form-control" readonly/>
+                <span asp-validation-for="SportComplexTitle" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="Address" class="input-group-text"></label>
+                <input asp-for="Address" class="form-control" readonly/>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="SportEventTitle" class="input-group-text"></label>
+                <input asp-for="SportEventTitle" class="form-control" readonly/>
+                <span asp-validation-for="SportEventTitle" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="DateOfTheEvent" class="input-group-text"></label>
+                <input asp-for="DateOfTheEvent" class="form-control" readonly/>
+                <span asp-validation-for="DateOfTheEvent" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="VisitorName" class="input-group-text"></label>
+                <input asp-for="VisitorName" class="form-control" readonly/>
+                <span asp-validation-for="VisitorName" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="VisitorSurname" class="input-group-text"></label>
+                <input asp-for="VisitorSurname" class="form-control" readonly/>
+                <span asp-validation-for="VisitorSurname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agree" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a role="button" class="btn btn-outline-secondary" asp-action="AllSportTickets">My tickets</a> | 
+    <a role="button" class="btn btn-outline-secondary" asp-controller="SportEvent" asp-action="AllSportEvents">Sport Events</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
