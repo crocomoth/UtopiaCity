@@ -14,6 +14,7 @@ namespace UtopiaCity.Helpers.WeatherReportApi
     public class WeatherReportApi
     {
         private const string _url = "http://api.openweathermap.org/data/2.5/forecast?id=1526384&units=metric&appid=5b98e225e9b8afbfa5fb5b1cf47fcffe";
+
         public static async Task<List<UtopiaCity.Models.Life.WeatherReport.Data>> Get30DayReportAsync()
         {
             using (var http = new HttpClient())
