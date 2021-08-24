@@ -10,7 +10,6 @@ using UtopiaCity.Models.Airport.TransportManagerSystem;
 
 namespace UtopiaCity.Controllers.Airport
 {
-    //This class was scaffolded automatically by VS, I added some changes and made updations for future contribution
     public class TransportManagersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,7 +22,7 @@ namespace UtopiaCity.Controllers.Airport
         // GET Method Index
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TransportManagers.Include(t => t.ForPassenger);
+            var applicationDbContext = _context.TransportManagers.Include(t => t.ForPassenger).Include(t=>t.ForCompany);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,25 +36,27 @@ namespace UtopiaCity.Controllers.Airport
 
             var transportManager = await _context.TransportManagers
                 .Include(t => t.ForPassenger)
+                .Include(t=>t.ForCompany)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (transportManager == null)
             {
                 return NotFound();
             }
 
-            return View(transportManager);
+            return PartialView("DetailsPartialView", transportManager);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
             ViewData["ForPassengerId"] = new SelectList(_context.ForPassengers, "Id", "Id");
-            return View();
+            ViewData["ForCompanyId"] = new SelectList(_context.ForCompanies, "Id", "Id");
+            return PartialView("CreatePartialView");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TypeOfOrder,ForPassengerId")] TransportManager transportManager)
+        public async Task<IActionResult> Create([Bind("Id,TypeOfOrder,ForPassengerId,ForCompanyId")] TransportManager transportManager)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +65,8 @@ namespace UtopiaCity.Controllers.Airport
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ForPassengerId"] = new SelectList(_context.ForPassengers, "Id", "Id", transportManager.ForPassengerId);
-            return View(transportManager);
+            ViewData["ForCompanyId"] = new SelectList(_context.ForCompanies, "Id", "Id", transportManager.ForCompanyId);
+            return PartialView("CreatePartialView", transportManager);
         }
 
         [HttpGet]
@@ -81,12 +83,13 @@ namespace UtopiaCity.Controllers.Airport
                 return NotFound();
             }
             ViewData["ForPassengerId"] = new SelectList(_context.ForPassengers, "Id", "Id", transportManager.ForPassengerId);
-            return View(transportManager);
+            ViewData["ForCompanyId"] = new SelectList(_context.ForCompanies, "Id", "Id", transportManager.ForCompanyId);
+            return PartialView("EditPartialView", transportManager);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,TypeOfOrder,ForPassengerId")] TransportManager transportManager)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,TypeOfOrder,ForPassengerId,ForCompanyId")] TransportManager transportManager)
         {
             if (id != transportManager.Id)
             {
@@ -114,7 +117,8 @@ namespace UtopiaCity.Controllers.Airport
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ForPassengerId"] = new SelectList(_context.ForPassengers, "Id", "Id", transportManager.ForPassengerId);
-            return View(transportManager);
+            ViewData["ForCompanyId"] = new SelectList(_context.ForCompanies, "Id", "Id", transportManager.ForCompanyId);
+            return PartialView("EditPartialView", transportManager);
         }
 
         [HttpGet]
@@ -127,16 +131,17 @@ namespace UtopiaCity.Controllers.Airport
 
             var transportManager = await _context.TransportManagers
                 .Include(t => t.ForPassenger)
+                .Include(t=>t.ForCompany)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (transportManager == null)
             {
                 return NotFound();
             }
 
-            return View(transportManager);
+            return PartialView("DeletePartialView", transportManager);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeletePartialView")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
@@ -153,6 +158,8 @@ namespace UtopiaCity.Controllers.Airport
 
         // GET Methods for Buttons
         public IActionResult GetPassengerDirection() => View("GetPassengerDirectionView");
+
+        public IActionResult GetCompanyDirection() => View("GetCompanyDirectionView");
     
         [HttpGet]
         public IActionResult CreateForPassengerTo()=> View("CreateForPassengerToView");
@@ -160,6 +167,10 @@ namespace UtopiaCity.Controllers.Airport
         [HttpGet]
         public IActionResult CreateForPassengerFrom()=> View("CreateForPassengerFromView");
 
+        [HttpGet]
+        public IActionResult CreateForCompanyTo() => View("CreateForCompanyToView");
+        [HttpGet]
+        public IActionResult CreateForCompanyFrom() => View("CreateForCompanyFromView");
 
 
         [HttpPost]
@@ -175,7 +186,17 @@ namespace UtopiaCity.Controllers.Airport
             return View("CreateForPassengerToView", passenger);
         }
 
-        // TODO: create ForCompany model, add methods to the controller , add new migration "ForCompany" ,
-        // add new data-table to the Index view, try to make pagination
+        public async Task<IActionResult> CreateForCompany(ForCompany company)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(company);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View("CreateForCompanyToView", company);
+        }
+        // TODO: add new data-table to the Index view 
     }
 }

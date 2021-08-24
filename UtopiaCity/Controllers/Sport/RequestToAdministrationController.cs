@@ -25,7 +25,7 @@ namespace UtopiaCity.Controllers.Sport
         public IActionResult AllRequestsToAdministration()
         {
             List<RequestToAdministration> allRequests = _requestToAdministrationService.GetAllRequestsToAdministration();
-            List<RequestToAdministrationViewModel> viewModels = CreatingRequestToAdministationViewModel(allRequests);
+            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
             ViewBag.SportComplexesIds = _sportComplexService.GetAllSportComplexesIds();
             ViewBag.IsMainPage = true;
             return View(viewModels);
@@ -34,7 +34,7 @@ namespace UtopiaCity.Controllers.Sport
         public IActionResult AllRequestsToAdministrationByDate(DateTime date)
         {
             List<RequestToAdministration> allRequests = _requestToAdministrationService.GetRequestsToAdministrationByDate(date);
-            List<RequestToAdministrationViewModel> viewModels = CreatingRequestToAdministationViewModel(allRequests);
+            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
             ViewBag.IsMainPage = false;
             return View("AllRequestsToAdministration", viewModels);
         }
@@ -42,7 +42,7 @@ namespace UtopiaCity.Controllers.Sport
         public IActionResult AllRequestsToAdministrationBySportComplexId(string id)
         {
             List<RequestToAdministration> allRequests = _requestToAdministrationService.GetRequestsToAdministrationBySportComplexId(id);
-            List<RequestToAdministrationViewModel> viewModels = CreatingRequestToAdministationViewModel(allRequests);
+            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
             ViewBag.IsMainPage = false;
             return View("AllRequestsToAdministration", viewModels);
         }
@@ -183,17 +183,6 @@ namespace UtopiaCity.Controllers.Sport
 
             var requestViewModel = _mapper.Map<RequestToAdministrationViewModel>(request);
             return View(requestViewModel);
-        }
-
-        private List<RequestToAdministrationViewModel> CreatingRequestToAdministationViewModel(List<RequestToAdministration> allRequests)
-        {
-            var requestsViewModel = new List<RequestToAdministrationViewModel>();
-            foreach (var request in allRequests)
-            {
-                requestsViewModel.Add(_mapper.Map<RequestToAdministrationViewModel>(request));
-            }
-
-            return requestsViewModel;
         }
     }
 }

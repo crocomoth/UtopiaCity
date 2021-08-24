@@ -1,0 +1,46 @@
+﻿@model UtopiaCity.Models.Airport.Airline
+
+@{
+    ViewData["Title"] = "AirlineEditView";
+}
+
+<h1>AirlineEditView</h1>
+
+<h4>Airline</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Airline EditView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="AirlineName" class="control-label"></label>
+                <input asp-for="AirlineName" class="form-control" />
+                <span asp-validation-for="AirlineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceType" class="control-label"></label>
+                <input asp-for="ServiceType" class="form-control" />
+                <span asp-validation-for="ServiceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aircraft" class="control-label"></label>
+                <input asp-for="Aircraft" class="form-control" />
+                <span asp-validation-for="Aircraft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailableDirections" class="control-label"></label>
+                <input asp-for="AvailableDirections" class="form-control" />
+                <span asp-validation-for="AvailableDirections" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="Edit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

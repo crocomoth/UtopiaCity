@@ -23,7 +23,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         public IActionResult Index()
         {
             List<RequestToAdministration> allRequests = _requestToAdministrationService.GetAllRequestsToAdministration();
-            List<RequestToAdministrationViewModel> viewModels = CreatingRequestToAdministationViewModel(allRequests);
+            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
             return View("~/Views/CityAdministration/RequestsConfirmation/Index.cshtml", viewModels);
         }
 
@@ -83,17 +83,6 @@ namespace UtopiaCity.Controllers.CityAdministration
             var request = _mapper.Map<RequestToAdministration>(requestViewModel);
             _requestToAdministrationService.UpdateRequestInDb(request);
             return RedirectToAction(nameof(Index));
-        }
-
-        private List<RequestToAdministrationViewModel> CreatingRequestToAdministationViewModel(List<RequestToAdministration> allRequests)
-        {
-            var requestsViewModel = new List<RequestToAdministrationViewModel>();
-            foreach (var request in allRequests)
-            {
-                requestsViewModel.Add(_mapper.Map<RequestToAdministrationViewModel>(request));
-            }
-
-            return requestsViewModel;
         }
     }
 }

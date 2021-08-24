@@ -1,0 +1,41 @@
+﻿@model UtopiaCity.Models.Airport.WeatherReport
+
+@{
+    ViewData["Title"] = "DispatcherCheckView";
+}
+
+<h1>DispatcherCheckView</h1>
+
+<div>
+    <h4>WeatherReport</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PermitedModel.PermissionDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PermitedModel.PermissionDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DirectionFrom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DirectionFrom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DirectionTo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DirectionTo)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <form asp-action="Dispatcher">
+        <div class="form-group">
+            <input type="submit" asp-action="Dispatcher" value="Check Flight Permission" class="btn btn-primary" />
+        </div>                   
+    </form>
+    <a asp-action="Index">Back to List</a>
+</div>

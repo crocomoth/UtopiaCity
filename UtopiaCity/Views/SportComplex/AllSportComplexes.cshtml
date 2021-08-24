@@ -9,7 +9,10 @@
 <p>
     <a class="btn btn-outline-primary" role="button" asp-action="Create">Create New</a> |
     <a class="btn btn-outline-dark" role="button" asp-controller="SportEvent" asp-action="AllSportEvents">Sport Events</a>
-    <a class="btn btn-outline-secondary" role="button" asp-controller="RequestToAdministration" asp-action="AllRequestsToAdministration">Requests To The Administration</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-outline-secondary" role="button" asp-controller="RequestToAdministration" asp-action="AllRequestsToAdministration">Requests To The Administration</a>
+    }
 </p>
 <table class="table table-hover">
     <thead>
