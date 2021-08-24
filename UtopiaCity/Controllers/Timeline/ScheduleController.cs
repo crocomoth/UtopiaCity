@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.TimelineModel.CollectionDataModel;
 using UtopiaCity.Services.Timeline;
@@ -9,14 +8,15 @@ namespace UtopiaCity.Controllers.Timeline
 {
     public class ScheduleController : Controller
     {
-        private readonly ScheduleService _scheduleService;
-        private readonly TimelineService _timelineService;
+        ///private readonly ScheduleService _scheduleService;
+        ///private readonly TimelineService _timelineService;
         ApplicationDbContext _context;
+        //public ScheduleController(ScheduleService scheduleService, TimelineService timelineService, ApplicationDbContext context)
 
-        public ScheduleController(ScheduleService scheduleService, TimelineService timelineService, ApplicationDbContext context)
+        public ScheduleController(ApplicationDbContext context)
         {
-            _scheduleService = scheduleService;
-            _timelineService = timelineService;
+            //_scheduleService = scheduleService;
+            //_timelineService = timelineService;
             _context = context;
         }
 
@@ -26,12 +26,11 @@ namespace UtopiaCity.Controllers.Timeline
         //    return View("ScheduleListView", await _scheduleService.GetFlights());
         //}
 
-        public ViewResult Index(string name) => View(new CommonModel
+        public ViewResult Index(string name) => View("Index", new CommonModel
         {
             Flight = _context.Flights
             .Where(i => i.Weather == name)
             .OrderBy(i => i.Id)
         });
-
     }
 }

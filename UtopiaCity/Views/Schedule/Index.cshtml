@@ -1,9 +1,25 @@
 ﻿@model UtopiaCity.Models.TimelineModel.CollectionDataModel.CommonModel
-
+@using UtopiaCity.Controllers.Timeline
 <h1>Hello from CommonModel</h1>
+
+<div class="row m-1 p-1">
+    <div class="col-3">
+        <a href="@Url.Action("Index", "Schedule", new {name="Sunny" }, null)">Sunny</a>
+    </div>
+    <div class="col-3">
+        <a href="@Url.Action("Index", "Schedule", new {name="Rainy" }, null)">Rainy</a>
+    </div>
+    <div class="col-3">
+        <a href="@Url.Action("Index", "Schedule", new {name="Cloudy" }, null)">Cloudy</a>
+    </div>
+    <div class="col-3">
+        <a href="@Url.Action("Index", "Schedule", new {name="Foggy" }, null)">Foggy</a>
+    </div>
+</div>
 
 @foreach (var item in Model.Flight)
 {
     <li>@item.FlightNumber</li>
     <li>@item.Weather</li>
 }
+
