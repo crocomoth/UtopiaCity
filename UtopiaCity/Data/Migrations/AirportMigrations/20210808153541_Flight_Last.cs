@@ -6,9 +6,9 @@ namespace UtopiaCity.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "TravelDistance",
-                table: "Flights");
+//            migrationBuilder.DropColumn(
+//                name: "TravelDistance",
+//                table: "Flights");
 
 //            migrationBuilder.DropColumn(
 //                name: "TravelDuration",
@@ -26,12 +26,12 @@ namespace UtopiaCity.Data.Migrations
                 name: "TypeOfAircraft",
                 table: "Flights");
 
-            migrationBuilder.AddColumn<double>(
-                name: "TravelDistance",
-                table: "Flights",
-                type: "float",
-                nullable: false,
-                defaultValue: 0.0);
+//            migrationBuilder.AddColumn<double>(
+//                name: "TravelDistance",
+//                table: "Flights",
+//                type: "float",
+//                nullable: false,
+//                defaultValue: 0.0);
 
 //            migrationBuilder.AddColumn<int>(
 //                name: "TravelDuration",

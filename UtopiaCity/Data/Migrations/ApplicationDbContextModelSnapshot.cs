@@ -379,6 +379,34 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("CitizensTasks");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+            {
+                b.Property<string>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("nvarchar(450)");
+
+                b.Property<string>("FirstPersonData")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("FirstPersonId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime>("MarriageDate")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("SecondPersonData")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("SecondPersonId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                b.ToTable("Marriage");
+            });
+
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
                 {
                     b.Property<string>("Id")
