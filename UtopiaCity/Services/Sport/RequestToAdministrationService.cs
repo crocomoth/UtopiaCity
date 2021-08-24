@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
+using UtopiaCity.ViewModels.Sport;
 
 namespace UtopiaCity.Services.Sport
 {
@@ -84,6 +86,23 @@ namespace UtopiaCity.Services.Sport
         {
             _dbContext.RequestsToAdministration.Remove(request);
             _dbContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Method for mapping <see cref="RequestToAdministration"/> model into <see cref="RequestToAdministrationViewModel"/> view model.
+        /// </summary>
+        /// <param name="allRequests">Requests for mapping from model to viewModel<./param>
+        /// <param name="mapper">Mapper for mapping model to viewModel</param>
+        /// <returns>List of <see cref="RequestToAdministrationViewModel"/></returns>
+        public List<RequestToAdministrationViewModel> CreatingRequestToAdministationViewModel(List<RequestToAdministration> allRequests, IMapper mapper)
+        {
+            var requestsViewModel = new List<RequestToAdministrationViewModel>();
+            foreach (var request in allRequests)
+            {
+                requestsViewModel.Add(mapper.Map<RequestToAdministrationViewModel>(request));
+            }
+
+            return requestsViewModel;
         }
     }
 }
