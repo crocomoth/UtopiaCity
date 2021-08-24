@@ -1,0 +1,9 @@
+﻿@model UtopiaCity.Models.TimelineModel.CollectionDataModel.CommonModel
+
+<h1>Hello from CommonModel</h1>
+
+@foreach (var item in Model.Flight)
+{
+    <li>@item.FlightNumber</li>
+    <li>@item.Weather</li>
+}
