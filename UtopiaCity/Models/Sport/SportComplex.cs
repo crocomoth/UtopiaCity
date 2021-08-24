@@ -34,6 +34,10 @@ namespace UtopiaCity.Models.Sport
         [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct address")]
         public string Address { get; set; }
 
+        [Required]
+        public bool Available { get; set; }
+
         public List<SportEvent> SportEvents { get; set; }
+        public List<SportTicket> SportTickets { get; set; }
     }
 }
