@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.ViewModels.Sport;
@@ -24,27 +23,27 @@ namespace UtopiaCity.Controllers.Sport
 
         public IActionResult AllRequestsToAdministration()
         {
-            List<RequestToAdministration> allRequests = _requestToAdministrationService.GetAllRequestsToAdministration();
-            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
+            var allRequests = _requestToAdministrationService.GetAllRequestsToAdministration();
+            var requestToAdministrationViewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
             ViewBag.SportComplexesIds = _sportComplexService.GetAllSportComplexesIds();
-            ViewBag.IsMainPage = true;
-            return View(viewModels);
+            ViewBag.IsAllRequestToAdministrationPrinted = true;
+            return View(requestToAdministrationViewModels);
         }
 
         public IActionResult AllRequestsToAdministrationByDate(DateTime date)
         {
-            List<RequestToAdministration> allRequests = _requestToAdministrationService.GetRequestsToAdministrationByDate(date);
-            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
-            ViewBag.IsMainPage = false;
-            return View("AllRequestsToAdministration", viewModels);
+            var allRequests = _requestToAdministrationService.GetRequestsToAdministrationByDate(date);
+            var requestToAdministrationViewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
+            ViewBag.IsAllRequestToAdministrationPrinted = false;
+            return View("AllRequestsToAdministration", requestToAdministrationViewModels);
         }
 
         public IActionResult AllRequestsToAdministrationBySportComplexId(string id)
         {
-            List<RequestToAdministration> allRequests = _requestToAdministrationService.GetRequestsToAdministrationBySportComplexId(id);
-            List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
-            ViewBag.IsMainPage = false;
-            return View("AllRequestsToAdministration", viewModels);
+            var allRequests = _requestToAdministrationService.GetRequestsToAdministrationBySportComplexId(id);
+            var requestToAdministrationViewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
+            ViewBag.IsAllRequestToAdministrationPrinted = false;
+            return View("AllRequestsToAdministration", requestToAdministrationViewModels);
         }
 
         [HttpGet]
@@ -147,11 +146,11 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Some problems with the sport complex data. Please, try again");
             }
 
-            if (requestViewModel.IsApproved && !sportComplex.Available)
+            if (requestViewModel.IsApproved)
             {
                 sportComplex.Available = true;
             }
-            else if (!requestViewModel.IsApproved && sportComplex.Available)
+            else
             {
                 sportComplex.Available = false;
             }

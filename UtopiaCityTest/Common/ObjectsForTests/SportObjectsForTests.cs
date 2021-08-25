@@ -206,38 +206,38 @@ namespace UtopiaCityTest.Common.ObjectsForTests
 
         public static AppUser[] ArrayOfAppUsersForTests()
         {
-			return new AppUser[]
-			{
-				new AppUser
-				{
-					Id = "1",
-				    Name = "Name_1",
-				    Surname = "Surname_1",
-				    DateOfBirth = new DateTime(2001, 1, 1),
-				    Gender = Gender.Male,
+            return new AppUser[]
+            {
+                new AppUser
+                {
+                    Id = "1",
+                    Name = "Name_1",
+                    Surname = "Surname_1",
+                    DateOfBirth = new DateTime(2001, 1, 1),
+                    Gender = Gender.Male,
                     Balance = 1.1
-				},
+                },
 
-				new AppUser
-				{
-					Id = "2",
-				    Name = "Name_2",
+                new AppUser
+                {
+                    Id = "2",
+                    Name = "Name_2",
                     Surname = "Surname_2",
-				    DateOfBirth = new DateTime(2002, 2, 2),
-				    Gender = Gender.Male,
-				    Balance = 2.2
-				},
+                    DateOfBirth = new DateTime(2002, 2, 2),
+                    Gender = Gender.Male,
+                    Balance = 2.2
+                },
 
-				new AppUser
-				{
-					Id = "3",
-				    Name = "Name_3",
-				    Surname = "Surname_3",
-				    DateOfBirth = new DateTime(2003, 3, 3),
-				    Gender = Gender.Male,
-				    Balance = 3.3
-				}
-			};
+                new AppUser
+                {
+                    Id = "3",
+                    Name = "Name_3",
+                    Surname = "Surname_3",
+                    DateOfBirth = new DateTime(2003, 3, 3),
+                    Gender = Gender.Male,
+                    Balance = 3.3
+                }
+            };
         }
 
         public async static Task<List<CitizensTask>> TaskListOfCitizensTask()

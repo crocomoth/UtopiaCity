@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
+using UtopiaCity.Common;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.CitizenAccount;
@@ -32,7 +32,7 @@ namespace UtopiaCity.Controllers.Sport
             _appUserService = appUserService;
             _citizenTaskService = citizenTaskService;
             _mapper = mapper;
-            _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            _userId = GetInformationAboutAuthenticatedUser.GetAuthenticatedUsersId(httpContextAccessor);
         }
 
         public IActionResult AllSportTickets()
