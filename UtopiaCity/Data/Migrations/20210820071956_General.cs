@@ -14,14 +14,6 @@ namespace UtopiaCity.Data.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_ResidentAccount_Marriage_MarriageId",
-                table: "ResidentAccount",
-                column: "MarriageId",
-                principalTable: "Marriage",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
