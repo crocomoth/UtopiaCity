@@ -225,29 +225,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Airport.Airline", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Aircraft")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AirlineName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AvailableDirections")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServiceType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Airlines");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Airport.ArrivingPassenger", b =>
                 {
                     b.Property<string>("Id")
