@@ -56,5 +56,6 @@ namespace UtopiaCity.Data
         public DbSet<Marriage> Marriage { get; set; }
         public DbSet<PermitedModel> PermitedModel { get; set; }
         public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<ArrivingPassenger> ArrivingPassengers { get; set; }
     }
 }

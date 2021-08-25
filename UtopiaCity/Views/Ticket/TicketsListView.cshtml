@@ -55,7 +55,15 @@
         <input type="submit" value="Send Passenger" class="btn btn-primary" />
     </div>
 </a>
+<a asp-controller="Passenger" asp-action="CreateArrivingPassengers">
+    <div class="form-group">
+        <input type="submit" value="Accept New Passenger" class="btn btn-primary" />
+    </div>
+</a>
 <p>
-    <a asp-controller="Passenger" asp-action="ListOfDeparted">List Of Departed</a>
+    <a asp-controller="Passenger" asp-action="ListOfDeparted">List Of Departed Passengers</a>
+</p>
+<p>
+    <a asp-controller="Passenger" asp-action="ListOfArrivals">List Of Arriving Passengers</a>
 </p>
 

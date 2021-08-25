@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Services.CityAdministration;
 
 namespace UtopiaCity.Controllers.Airport
 {
@@ -13,17 +14,18 @@ namespace UtopiaCity.Controllers.Airport
     {
         private readonly PassengerService _passengerService;
         private readonly TicketService _ticketService;
+        private readonly ResidentAccountService _residentService;
 
-        public PassengerController(PassengerService service,TicketService ticket)
+        public PassengerController(PassengerService service,TicketService ticket,ResidentAccountService residentService)
         {
             _passengerService = service;
             _ticketService = ticket;
+            _residentService = residentService;
         }
 
-        public IActionResult ListOfDeparted()
-        {
-            return View("ListOfDepartedView", _passengerService.GetListOfPassengers());
-        }
+        public IActionResult ListOfDeparted() => View("ListOfDepartedView", _passengerService.GetListOfPassengers());
+
+        public IActionResult ListOfArrivals() => View("ListOfArrivalsView", _passengerService.GetArrivingPassengers());
 
         public IActionResult Details(string id)
         {
@@ -38,6 +40,60 @@ namespace UtopiaCity.Controllers.Airport
             }
 
             return View("PassengerDetailsView", passenger);
+        }
+
+        [HttpGet]
+        public IActionResult DetailsArrived(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+
+            var arrived = _passengerService.GetArrivingPassengerById(id);
+            if(arrived is null)
+            {
+                return NotFound();
+            }
+
+            return View("DetailsArrivedView", arrived);
+        }
+
+        [HttpPost,ActionName("DetailsArrived")]
+        public IActionResult DetailsArrivedConfirmation(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+            var passenger = _passengerService.GetArrivingPassengerById(id);
+            if (ModelState.IsValid)
+            {                
+                var newResident = _passengerService.GetNewResidentFromArrivedPassegers(passenger);
+                _residentService.AddResidentAccount(newResident).GetAwaiter().GetResult();
+                return RedirectToAction(nameof(ListOfArrivals));
+            }
+
+            return View("DetailsArrivedView", passenger);
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateArrivingPassengers()
+        {
+            return View("CreateArrivingPassengersView");
+        }
+
+        [HttpPost]
+        public IActionResult CreateArrivingPassengers(ArrivingPassenger arriving)
+        {
+            if (ModelState.IsValid)
+            {
+                _passengerService.AddArrivingPassenger(arriving);
+                return RedirectToAction(nameof(ListOfArrivals));
+            }
+
+            return View("CreateArrivingPassengersView", arriving);
         }
 
         [HttpGet]

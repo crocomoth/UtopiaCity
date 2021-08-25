@@ -53,6 +53,12 @@ namespace UtopiaCity.Services.Airport
             return _dbContext.Tickets.Find(id);
         }
 
+        //ToDo:create abstract method for each selectlist
+        //This method isnt working well
+        //public SelectList GetSelectListOfContextObjects<T>(T obj, string dataValueField, string dataTextField) where T : class
+        //{
+        //    return new SelectList((System.Collections.IEnumerable)_dbContext.Find<T>(obj), dataValueField, dataTextField);
+        //}
         public SelectList GetSelectListOfContextFlights(string dataValueField, string dataTextField)
         {
             var list = new SelectList(_dbContext.Flights, dataValueField, dataTextField);
@@ -67,6 +73,6 @@ namespace UtopiaCity.Services.Airport
         {
             var list = new SelectList(_dbContext.PermitedModel, dataValueField, dataTextField);
             return list;
-        }
+        }     
     }
 }

@@ -53,8 +53,6 @@ namespace UtopiaCity
             services.AddScoped<TimelineService, TimelineService>();
             services.AddScoped<ScheduleService, ScheduleService>();
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
-            services.AddScoped<FlightService, FlightService>();
-            services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
             services.AddScoped<IRouteApi, FlightRouteApiService>();
             services.AddScoped<BankService, BankService>();

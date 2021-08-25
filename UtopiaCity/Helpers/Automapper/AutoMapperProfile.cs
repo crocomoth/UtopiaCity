@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.CityAdministration;
+using UtopiaCity.Models.TimelineModel;
 
 namespace UtopiaCity.Helpers.Automapper
 {
@@ -27,13 +30,25 @@ namespace UtopiaCity.Helpers.Automapper
                        .ForMember(destination => destination.FlightWeather,
                        map => map.MapFrom(source => ""));
 
-            CreateMap<UtopiaCity.Models.Airport.WeatherReport, UtopiaCity.Models.TimelineModel.PermitedModel>()
+            CreateMap<WeatherReport, PermitedModel>()
                        .ForMember(destination => destination.PermissionStatus,
                        map => map.MapFrom(source => source.FlightWeather))
                        .ForMember(destination => destination.SpeedOfWind,
                        map => map.MapFrom(source => source.Wind))
                        .ForMember(destination => destination.Rainfall,
                        map => map.MapFrom(source => source.Rainfall));
+
+            CreateMap<ArrivingPassenger, ResidentAccount>()
+                       .ForMember(destination => destination.FirstName,
+                       map => map.MapFrom(source => source.PassengerFirstName))
+                       .ForMember(destination => destination.FamilyName,
+                       map => map.MapFrom(source => source.PassengerFamilyName))
+                       .ForMember(destination => destination.BirthDate,
+                       map => map.MapFrom(source => source.PassengerBirthDate))
+                       .ForMember(destination => destination.Gender,
+                       map => map.MapFrom(source => source.PassengerGender))
+                       .ForMember(destination => destination.Marriage,
+                       map => map.MapFrom(source => source.PassengerMarriageStatus));
         }
     }
 }
