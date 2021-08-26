@@ -5,6 +5,7 @@ using UtopiaCity.Common.Initializers.AirportTransportSystem;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
+
 namespace UtopiaCity.Common
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new ProfessionInitializer());
             subDbInitializers.Add(new EmployeeInitializer());
             subDbInitializers.Add(new VacancyInitializer());
-            subDbInitializers.Add(new ClinicInitializer());
+            subDbInitializers.Add(new ClinicVisitInitializer());
 
 
 

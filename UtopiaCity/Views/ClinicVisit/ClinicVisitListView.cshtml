@@ -1,10 +1,10 @@
-﻿@model IEnumerable<UtopiaCity.Models.Clinic.ClinicReport>
+﻿@model IEnumerable<UtopiaCity.Models.Clinic.ClinicVisit>
 
 @{
-    ViewData["Title"] = "ClinicReportListView";
+    ViewData["Title"] = "ClinicVisitListView";
 }
 
-<h1>ClinicReportListView</h1>
+<h1>ClinicVisitListView</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Report)
+                @Html.DisplayNameFor(model => model.Visit)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReportTime)
+                @Html.DisplayNameFor(model => model.VisitTime)
             </th>
             <th></th>
         </tr>
@@ -25,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Report)
+                @Html.DisplayFor(modelItem => item.Visit)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReportTime)
+                @Html.DisplayFor(modelItem => item.VisitTime)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

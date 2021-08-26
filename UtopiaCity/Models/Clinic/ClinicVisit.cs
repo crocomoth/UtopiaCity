@@ -10,7 +10,7 @@ namespace UtopiaCity.Models.Clinic
     /// <summary>
     /// Represents clinic report.
     /// </summary>
-    public class ClinicReport
+    public class ClinicVisit
     {
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,13 +20,13 @@ namespace UtopiaCity.Models.Clinic
         /// Report test or data.
         /// </summary>
         [Required]
-        public string Report { get; set; }
+        public string Visit { get; set; }
 
         /// <summary>
         /// Time when report event happened.
         /// </summary>
         [Required]
-        [Display(Name = "Report Time")]
-        public DateTime ReportTime { get; set; }
+        [Display(Name = "Visit Time")]
+        public DateTime VisitTime { get; set; }
     }
 }

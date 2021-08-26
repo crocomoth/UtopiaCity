@@ -55,6 +55,6 @@ namespace UtopiaCity.Data
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<CitizensTask> CitizensTasks { get; set; }
         public DbSet<Marriage> Marriage { get; set; }
-        public DbSet<UtopiaCity.Models.Clinic.ClinicReport> ClinicReport { get; set; }
+        public DbSet<ClinicVisit> ClinicVisit { get; set; }
     }
 }

@@ -8,45 +8,45 @@ using UtopiaCity.Models.Clinic;
 
 namespace UtopiaCity.Common.Initializers
 {
-    public class ClinicInitializer : ISubDbInitializer
+    public class ClinicVisitInitializer : ISubDbInitializer
     {
         public void ClearSet(ApplicationDbContext context)
         {
-            if (!context.ClinicReport.Any())
+            if (!context.ClinicVisit.Any())
             {
                 return;
             }
 
-            context.RemoveRange(context.ClinicReport.ToList());
+            context.RemoveRange(context.ClinicVisit.ToList());
             context.SaveChanges();
         }
 
         public void InitializeSet(ApplicationDbContext context)
         {
-            if (context.ClinicReport.Any())
+            if (context.ClinicVisit.Any())
             {
                 return;
             }
 
-            var clinicreport1 = new ClinicReport
+            var visit1 = new ClinicVisit
             {
-                Report = "Report 1",
-                ReportTime = DateTime.Now
+                Visit = "Visit 1",
+                VisitTime = DateTime.Now
             };
 
-            var clinicreport2 = new ClinicReport
+            var visit2 = new ClinicVisit
             {
-                Report = "Report 2",
-                ReportTime = DateTime.Now
+                Visit = "Visit 2",
+                VisitTime = DateTime.Now
             };
 
-            var clinicreport3 = new ClinicReport
+            var visit3 = new ClinicVisit
             {
-                Report = "Report 3",
-                ReportTime = DateTime.Now
+                Visit = "Visit 3",
+                VisitTime = DateTime.Now
             };
 
-            context.AddRange(clinicreport1, clinicreport2, clinicreport3);
+            context.AddRange(visit1, visit2, visit3);
             context.SaveChanges();
         }
     }

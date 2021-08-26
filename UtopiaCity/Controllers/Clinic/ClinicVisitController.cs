@@ -8,19 +8,19 @@ using UtopiaCity.Services.Clinic;
 
 namespace UtopiaCity.Controllers.Clinic
 {
-    public class ClinicReportController : Controller
+    public class ClinicVisitController : Controller
     {
-        private readonly ClinicReportService _clinicReportService;
+        private readonly ClinicVisitService _clinicVisitService;
 
-        public ClinicReportController(ClinicReportService clinicReportService)
+        public ClinicVisitController(ClinicVisitService clinicVisitService)
         {
-            _clinicReportService = clinicReportService;
+            _clinicVisitService = clinicVisitService;
         }
 
         // view list of reports
         public async Task<IActionResult> Index()
         {
-            return View("ClinicReportListView", await _clinicReportService.GetClinicReports());
+            return View("ClinicVisitListView", await _clinicVisitService.GetClinicVisits());
         }
 
         // get specific item by id
@@ -31,31 +31,31 @@ namespace UtopiaCity.Controllers.Clinic
                 return NotFound();
             }
 
-            var report = await _clinicReportService.GetClinicReportById(id);
-            if (report == null)
+            var visit = await _clinicVisitService.GetClinicVisitById(id);
+            if (visit == null)
             {
                 return NotFound();
             }
 
-            return View("DetailsClinicReportView", report);
+            return View("DetailsClinicVisitView", visit);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View("CreateClinicReportView");
+            return View("CreateClinicVisitView");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ClinicReport newReport)
+        public async Task<IActionResult> Create(ClinicVisit newVisit)
         {
             if (ModelState.IsValid)
             {
-                await _clinicReportService.AddClinicReport(newReport);
+                await _clinicVisitService.AddClinicVisit(newVisit);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("CreateClinicReportView", newReport);
+            return View("CreateClinicVisitView", newVisit);
         }
 
         [HttpGet]
@@ -66,17 +66,17 @@ namespace UtopiaCity.Controllers.Clinic
                 return NotFound();
             }
 
-            var report = await _clinicReportService.GetClinicReportById(id);
-            if (report == null)
+            var visit = await _clinicVisitService.GetClinicVisitById(id);
+            if (visit == null)
             {
                 return NotFound();
             }
 
-            return View("EditClinicReportView", report);
+            return View("EditClinicVisitView", visit);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, ClinicReport edited)
+        public async Task<IActionResult> Edit(string id, ClinicVisit edited)
         {
             if (id != edited.Id)
             {
@@ -85,11 +85,11 @@ namespace UtopiaCity.Controllers.Clinic
 
             if (ModelState.IsValid)
             {
-                await _clinicReportService.UpdateClinicReport(edited);
+                await _clinicVisitService.UpdateClinicVisit(edited);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View("EditClinicReportView", edited);
+            return View("EditClinicVisitView", edited);
         }
 
         [HttpGet]
@@ -100,26 +100,26 @@ namespace UtopiaCity.Controllers.Clinic
                 return NotFound();
             }
 
-            var report = await _clinicReportService.GetClinicReportById(id);
-            if (report == null)
+            var visit = await _clinicVisitService.GetClinicVisitById(id);
+            if (visit == null)
             {
                 return NotFound();
             }
 
-            return View("DeleteClinicReportView", report);
+            return View("DeleteClinicVisitView", visit);
         }
 
-        [HttpPost, ActionName("DeleteClinicReportView")]
+        [HttpPost, ActionName("DeleteClinicVisitView")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var report = await _clinicReportService.GetClinicReportById(id);
-            if (report == null)
+            var visit = await _clinicVisitService.GetClinicVisitById(id);
+            if (visit == null)
             {
                 // TODO rewrite?
                 return NotFound();
             }
 
-            await _clinicReportService.DeleteClinicReport(report);
+            await _clinicVisitService.DeleteClinicVisit(visit);
             return RedirectToAction(nameof(Index));
         }
 
