@@ -7,7 +7,12 @@
 <h1>AllSportComplexes</h1>
 
 <p>
-    <a class="btn btn-outline-primary" role="button" asp-action="Create">Create New</a>
+    <a class="btn btn-outline-primary" role="button" asp-action="Create">Create New</a> |
+    <a class="btn btn-outline-dark" role="button" asp-controller="SportEvent" asp-action="AllSportEvents">Sport Events</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-outline-secondary" role="button" asp-controller="RequestToAdministration" asp-action="AllRequestsToAdministration">Requests To The Administration</a>
+    }
 </p>
 <table class="table table-hover">
     <thead>
@@ -26,6 +31,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Available)
             </th>
             <th></th>
         </tr>
@@ -48,6 +56,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Available)
                 </td>
                 <td>
                     <a class="btn btn-outline-success btn-sm" role="button" asp-action="Edit" asp-route-id="@item.SportComplexId">Edit</a> |

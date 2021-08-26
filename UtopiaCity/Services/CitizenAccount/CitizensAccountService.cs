@@ -21,7 +21,7 @@ namespace UtopiaCity.Services.CitizenAccount
         /// </summary>
         /// <param name="id">Id of User.</param>
         /// <returns>User if it exists, otherwise null.</returns>
-        public async Task<AppUser> GetUserById(string id)
+        public virtual async Task<AppUser> GetUserById(string id)
         {
             return (AppUser)await _dbContext.Users.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
