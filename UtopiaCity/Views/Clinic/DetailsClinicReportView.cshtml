@@ -1,0 +1,30 @@
+﻿@model UtopiaCity.Models.Clinic.ClinicReport
+
+@{
+    ViewData["Title"] = "DetailsClinicReportView";
+}
+
+<h1>DetailsClinicReportView</h1>
+
+<div>
+    <h4>ClinicReport</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Report)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Report)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReportTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReportTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
