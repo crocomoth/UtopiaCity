@@ -82,10 +82,6 @@ namespace UtopiaCity.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -137,8 +133,6 @@ namespace UtopiaCity.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -356,56 +350,33 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("WeatherReports");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("FirstPersonData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstPersonId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReminderDate")
+                    b.Property<DateTime>("MarriageDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("SecondPersonData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecondPersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CitizensTasks");
+                    b.ToTable("Marriage");
                 });
-
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
-            {
-                b.Property<string>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("nvarchar(450)");
-
-                b.Property<string>("FirstPersonData")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("FirstPersonId")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("MarriageDate")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("SecondPersonData")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("SecondPersonId")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("Id");
-
-                b.ToTable("Marriage");
-            });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
                 {
@@ -502,35 +473,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Sport.RequestToAdministration", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateOfRequest")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsReviewed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SportComplexId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SportComplexId");
-
-                    b.ToTable("RequestsToAdministration");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
                 {
                     b.Property<string>("SportComplexId")
@@ -540,9 +482,6 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Available")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("BuildDate")
                         .HasColumnType("datetime2");
@@ -560,58 +499,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("SportComplexId");
 
                     b.ToTable("SportComplex");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
-                {
-                    b.Property<string>("SportEventId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateOfTheEvent")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SportComplexId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SportEventId");
-
-                    b.HasIndex("SportComplexId");
-
-                    b.ToTable("SportEvents");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportTicket", b =>
-                {
-                    b.Property<string>("TicketId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SportComplexId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SportEventId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("TicketId");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("SportComplexId");
-
-                    b.HasIndex("SportEventId");
-
-                    b.ToTable("SportTickets");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.TimelineModel.PermitedModel", b =>
@@ -692,28 +579,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("TimelineModel");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.AppUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<double>("Balance")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("AppUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -787,54 +652,11 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("ForPassengerId");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.RequestToAdministration", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
-                        .WithMany()
-                        .HasForeignKey("SportComplexId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
                 {
                     b.HasOne("UtopiaCity.Models.CityAdministration.Marriage", "Marriage")
                         .WithMany()
                         .HasForeignKey("MarriageId");
-                });
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
-                        .WithMany("SportEvents")
-                        .HasForeignKey("SportComplexId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Sport.SportTicket", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
-                        .WithMany("SportTickets")
-                        .HasForeignKey("SportComplexId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("UtopiaCity.Models.Sport.SportEvent", "SportEvent")
-                        .WithMany("SportTickets")
-                        .HasForeignKey("SportEventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
