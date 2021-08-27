@@ -5,7 +5,6 @@ using UtopiaCity.Common.Initializers.AirportTransportSystem;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
-
 namespace UtopiaCity.Common
 {
     /// <summary>
