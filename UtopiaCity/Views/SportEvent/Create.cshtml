@@ -17,12 +17,12 @@
                 <input asp-for="@Model.SportEventTitle" class="form-control" />
                 <span asp-validation-for="@Model.SportEventTitle" class="text-danger"></span>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group mb-4">
                 <label asp-for="@Model.DateOfTheEvent" class="input-group-text"></label>
                 <input asp-for="@Model.DateOfTheEvent" class="form-control" />
                 <span asp-validation-for="@Model.DateOfTheEvent" class="text-danger"></span>
             </div>
-            <div class="input-group mb-3">
+            <div class="input-group mb-4">
                 <label asp-for="@Model.SportComplexTitle" class="input-group-text"></label>
                 <select asp-for="@Model.SportComplexTitle" class="form-control">
                     @foreach (var sportComplexTitle in ViewBag.SportComplexesTitles)
