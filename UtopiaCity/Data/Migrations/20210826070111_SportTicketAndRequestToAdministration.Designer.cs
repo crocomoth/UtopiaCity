@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210826070111_SportTicketAndRequestToAdministration")]
+    partial class SportTicketAndRequestToAdministration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1097,34 +1099,6 @@ namespace UtopiaCity.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
-
-            modelBuilder.Entity("UtopiaCity.Models.SchoolModel.SchoolStudent", b =>
-            {
-                b.Property<string>("Id")
-                    .HasColumnType("nvarchar(450)");
-
-                b.Property<int>("AdmissionYear")
-                    .HasColumnType("int");
-
-                b.Property<string>("FirstName")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("LastName")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<int>("StudyYear")
-                    .HasColumnType("int");
-
-                b.Property<DateTime>("recordCreated")
-                    .HasColumnType("datetime2");
-
-                b.Property<DateTime?>("recordEdited")
-                    .HasColumnType("datetime2");
-
-                b.HasKey("Id");
-
-                b.ToTable("SchoolStudent");
-            });
 #pragma warning restore 612, 618
         }
     }

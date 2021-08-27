@@ -1,0 +1,60 @@
+﻿@model RequestToAdministrationViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>RequestToAdministration</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-group mb-3">
+                <label asp-for="Description" class="input-group-text"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="@Model.SportComplexTitle" class="input-group-text"></label>
+                <select asp-for="@Model.SportComplexTitle" class="form-control">
+                    @foreach (var sportComplexTitle in ViewBag.SportComplexesTitles)
+                    {
+                        <option value="@sportComplexTitle">
+                            @sportComplexTitle
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.SportComplexTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="@Model.Available" disabled/> @Html.DisplayNameFor(model => model.Available)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="@Model.IsApproved" disabled/> @Html.DisplayNameFor(model => model.IsApproved)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="@Model.IsReviewed" disabled/> @Html.DisplayNameFor(model => model.IsReviewed)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-secondary" role="button" asp-action="AllRequestsToAdministration">All Requests To The Administration</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

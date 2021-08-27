@@ -33,7 +33,7 @@ namespace UtopiaCity.Services.CitizenAccount
         /// Gets list of all citizen task order by reminder date.
         /// </summary>
         /// <returns>List of all existing citizen tasks.</returns>
-        public async Task<List<CitizensTask>> GetTasksByReminderDate(string userId)
+        public virtual async Task<List<CitizensTask>> GetTasksByReminderDate(string userId)
         {
             return await _dbContext.CitizensTasks.Where(x => x.UserId == userId).OrderBy(x => x.ReminderDate).ToListAsync();
         }
