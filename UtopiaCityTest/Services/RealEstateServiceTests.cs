@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Caching.Memory;
 using UtopiaCity.Data;
 using UtopiaCity.Models.HousingSystem;
 using UtopiaCity.Services.HousingSystem;
@@ -11,6 +9,7 @@ namespace UtopiaCityTest.Services
 {
     public class RealEstateServiceTests : BaseServiceTest
     {
+        private IMemoryCache _cache;
         public RealEstateServiceTests()
         {
             Setup();
@@ -22,7 +21,6 @@ namespace UtopiaCityTest.Services
             //arrange
             var localOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "UtopiaCityTest").Options;
-
             using (var context = new ApplicationDbContext(localOptions))
             {
                 context.RealEstate.Add(new RealEstate { Street = "Test7", EstateType = RealEstateType.Apartment, CompletionYear = 2005, Number = "F7" });
@@ -34,7 +32,7 @@ namespace UtopiaCityTest.Services
 
             using (var context = new ApplicationDbContext(localOptions))
             {
-                var service = new RealEstateService(context);
+                var service = new RealEstateService(context, _cache);
 
                 //act
                 var result = await service.GetRealEstates();
@@ -54,7 +52,7 @@ namespace UtopiaCityTest.Services
             //arrange
             using (var context = new ApplicationDbContext(options))
             {
-                var service = new RealEstateService(context);
+                var service = new RealEstateService(context, _cache);
 
                 //act
                 var result = await service.GetRealEstates();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UtopiaCity.Migrations
 {
-    public partial class Initial_MK : Migration
+    public partial class FKSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -461,6 +461,28 @@ namespace UtopiaCity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ResidentAccount",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    FamilyName = table.Column<string>(nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    Gender = table.Column<string>(nullable: true),
+                    MarriageId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ResidentAccount", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ResidentAccount_Marriage_MarriageId",
+                        column: x => x.MarriageId,
+                        principalTable: "Marriage",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WeatherReports",
                 columns: table => new
                 {
@@ -562,6 +584,28 @@ namespace UtopiaCity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RealEstate",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Street = table.Column<string>(nullable: false),
+                    Number = table.Column<string>(nullable: false),
+                    ResidentAccountId = table.Column<string>(nullable: true),
+                    CompletionYear = table.Column<int>(nullable: false),
+                    EstateType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RealEstate", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RealEstate_ResidentAccount_ResidentAccountId",
+                        column: x => x.ResidentAccountId,
+                        principalTable: "ResidentAccount",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -586,48 +630,9 @@ namespace UtopiaCity.Migrations
                         principalTable: "PermitedModel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ResidentAccount",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    FamilyName = table.Column<string>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    Gender = table.Column<string>(nullable: true),
-                    MarriageId = table.Column<string>(nullable: true),
-                    RealEstateId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ResidentAccount", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ResidentAccount_Marriage_MarriageId",
-                        column: x => x.MarriageId,
-                        principalTable: "Marriage",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RealEstate",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Street = table.Column<string>(nullable: true),
-                    Number = table.Column<string>(nullable: true),
-                    OwnerId = table.Column<string>(nullable: true),
-                    CompletionYear = table.Column<int>(nullable: false),
-                    EstateType = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RealEstate", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RealEstate_ResidentAccount_OwnerId",
-                        column: x => x.OwnerId,
+                        name: "FK_Tickets_ResidentAccount_ResidentAccountId",
+                        column: x => x.ResidentAccountId,
                         principalTable: "ResidentAccount",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -698,19 +703,14 @@ namespace UtopiaCity.Migrations
                 column: "ProfessionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RealEstate_OwnerId",
+                name: "IX_RealEstate_ResidentAccountId",
                 table: "RealEstate",
-                column: "OwnerId");
+                column: "ResidentAccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ResidentAccount_MarriageId",
                 table: "ResidentAccount",
                 column: "MarriageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ResidentAccount_RealEstateId",
-                table: "ResidentAccount",
-                column: "RealEstateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SportEvents_SportComplexId",
@@ -756,30 +756,10 @@ namespace UtopiaCity.Migrations
                 name: "IX_WeatherReports_PermitedModelId",
                 table: "WeatherReports",
                 column: "PermitedModelId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Tickets_ResidentAccount_ResidentAccountId",
-                table: "Tickets",
-                column: "ResidentAccountId",
-                principalTable: "ResidentAccount",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_ResidentAccount_RealEstate_RealEstateId",
-                table: "ResidentAccount",
-                column: "RealEstateId",
-                principalTable: "RealEstate",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_RealEstate_ResidentAccount_OwnerId",
-                table: "RealEstate");
-
             migrationBuilder.DropTable(
                 name: "Airlines");
 
@@ -812,6 +792,9 @@ namespace UtopiaCity.Migrations
 
             migrationBuilder.DropTable(
                 name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "RealEstate");
 
             migrationBuilder.DropTable(
                 name: "ScheduleModel");
@@ -847,6 +830,9 @@ namespace UtopiaCity.Migrations
                 name: "Flights");
 
             migrationBuilder.DropTable(
+                name: "ResidentAccount");
+
+            migrationBuilder.DropTable(
                 name: "ForCompanies");
 
             migrationBuilder.DropTable(
@@ -862,19 +848,13 @@ namespace UtopiaCity.Migrations
                 name: "PermitedModel");
 
             migrationBuilder.DropTable(
+                name: "Marriage");
+
+            migrationBuilder.DropTable(
                 name: "Banks");
 
             migrationBuilder.DropTable(
                 name: "CompanyStatuses");
-
-            migrationBuilder.DropTable(
-                name: "ResidentAccount");
-
-            migrationBuilder.DropTable(
-                name: "Marriage");
-
-            migrationBuilder.DropTable(
-                name: "RealEstate");
         }
     }
 }

@@ -1,16 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Models.HousingSystem;
+using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.HousingSystem;
+using UtopiaCity.ViewModels.HousingSystem;
 
 namespace UtopiaCity.Controllers.HousingSystem
 {
     public class HousingSystemController : Controller
     {
         private readonly RealEstateService _realEstateService;
-        public HousingSystemController(RealEstateService realEstateService)
+        private readonly IMailService _mailService;
+        private readonly IMapper _mapper;
+        private readonly ResidentAccountService _residentAccountService;
+
+        public HousingSystemController(RealEstateService realEstateService, IMailService mailService,
+            IMapper mapper, ResidentAccountService residentAccountService)
         {
-            this._realEstateService = realEstateService;
+            _realEstateService = realEstateService;
+            _mailService = mailService;
+            _mapper = mapper;
+            _residentAccountService = residentAccountService;
         }
 
         public async Task<IActionResult> Index()
@@ -35,21 +49,59 @@ namespace UtopiaCity.Controllers.HousingSystem
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View("CreateRealEstateView");
+            var residents = await _residentAccountService.GetResidentAccounts();
+
+            var viewModel = new AddRealEstateViewModel
+            {
+                Residents = residents.Select(x => x.FirstName + " " + x.FamilyName).ToList()
+            };
+
+            var items = new List<SelectListItem>();
+            foreach (string accountNames in viewModel.Residents)
+            {
+                items.Add(new SelectListItem() { Text = $"{accountNames}", Value = $"{accountNames}" });
+            }
+            ViewBag.SelectList = items;
+            //List<SelectListItem> items = new List<SelectListItem>();
+            //foreach (string accountNames in viewModel.Residents)
+            //{
+            //    items.Add(new SelectListItem() { Text = $"{accountNames}", Value = $"{accountNames}" });
+            //}
+            //SelectList selectList = new SelectList(items, "Text");
+            //ViewBag.Zb = selectList;
+            ModelState.Clear();
+            return View("CreateRealEstateView", viewModel);
         }
 
+        //var options = new List<SelectListItem>();
+
+        //foreach (string resident in viewModel.Residents)
+        //{
+        //    options.Add(new SelectListItem { Text = $"{resident}", Value = $"{resident}" });
+        //}
+
+        //SelectList residentNames = new SelectList(viewModel.Residents, "FirstName", "FamilyName");
+        //ViewBag.ResidentNames = residentNames;
         [HttpPost]
-        public async Task<IActionResult> Create(RealEstate newEstate)
+        public async Task<IActionResult> Create(AddRealEstateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await _realEstateService.AddRealEstate(newEstate);
-                return RedirectToAction(nameof(Index));
-            }
+                // Send the email
+                // Send the message
+                _mailService.SendMessage("madiyarkoishibekov@gmail.com",
+                        $"{viewModel.Number + " " + viewModel.Street}",
+                        $"City Administration");
 
-            return View("CreateRealEstateView", newEstate);
+                ViewBag.UserMessage = "Real Estate is Created!";
+                ModelState.Clear();
+
+            }
+            RealEstate newEstate = _mapper.Map<RealEstate>(viewModel);
+            await _realEstateService.AddRealEstate(newEstate);
+            return View("CreateRealEstateView", viewModel);
         }
 
         [HttpGet]

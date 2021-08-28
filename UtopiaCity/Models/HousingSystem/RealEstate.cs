@@ -16,13 +16,15 @@ namespace UtopiaCity.Models.HousingSystem
         [Required]
         [Display(Name = "House Number")]
         public string Number { get; set; }
-        public ResidentAccount Owner { get; set; }
+        [ForeignKey("ResidentAccount")]
+        [Display(Name = "Owner")]
+        public string ResidentAccountId { get; set; }
+        public virtual ResidentAccount ResidentAccount { get; set; }
         [Required]
         [Display(Name = "Completion year")]
         public int CompletionYear { get; set; }
         [Display(Name = "Estate type")]
         public RealEstateType EstateType { get; set; }
-        public ICollection<ResidentAccount> Residents { get; set; } 
     }
     public enum RealEstateType
     {

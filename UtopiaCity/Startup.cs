@@ -67,6 +67,7 @@ namespace UtopiaCity
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
             services.AddScoped<RealEstateService, RealEstateService>();
+            services.AddTransient<IMailService, NullMailService>();
 
             #endregion
 

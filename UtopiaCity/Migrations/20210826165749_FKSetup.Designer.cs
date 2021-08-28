@@ -10,8 +10,8 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210820081809_Initial_MK")]
-    partial class Initial_MK
+    [Migration("20210826165749_FKSetup")]
+    partial class FKSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -645,14 +645,9 @@ namespace UtopiaCity.Migrations
                     b.Property<string>("MarriageId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RealEstateId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MarriageId");
-
-                    b.HasIndex("RealEstateId");
 
                     b.ToTable("ResidentAccount");
                 });
@@ -700,6 +695,7 @@ namespace UtopiaCity.Migrations
             modelBuilder.Entity("UtopiaCity.Models.HousingSystem.RealEstate", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CompletionYear")
@@ -709,17 +705,19 @@ namespace UtopiaCity.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Number")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OwnerId")
+                    b.Property<string>("ResidentAccountId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Street")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("ResidentAccountId");
 
                     b.ToTable("RealEstate");
                 });
@@ -1032,17 +1030,13 @@ namespace UtopiaCity.Migrations
                     b.HasOne("UtopiaCity.Models.CityAdministration.Marriage", "Marriage")
                         .WithMany()
                         .HasForeignKey("MarriageId");
-
-                    b.HasOne("UtopiaCity.Models.HousingSystem.RealEstate", null)
-                        .WithMany("Residents")
-                        .HasForeignKey("RealEstateId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.HousingSystem.RealEstate", b =>
                 {
-                    b.HasOne("UtopiaCity.Models.CityAdministration.ResidentAccount", "Owner")
+                    b.HasOne("UtopiaCity.Models.CityAdministration.ResidentAccount", "ResidentAccount")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("ResidentAccountId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
