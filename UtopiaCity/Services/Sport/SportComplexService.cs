@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
-using UtopiaCity.ViewModels.Sport;
 
 namespace UtopiaCity.Services.Sport
 {
@@ -45,7 +43,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for removing sport complex from database.
         /// </summary>
-        /// <param name="sportComplex">Sport complex for adding.</param>
+        /// <param name="sportComplex">Sport complex for removing.</param>
         public virtual void RemoveSportComplexFromDb(SportComplex sportComplex)
         {
             _dbContext.Remove(sportComplex);
@@ -55,7 +53,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for updating sport complex in database.
         /// </summary>
-        /// <param name="sportComplex">Sport complex for adding.</param>
+        /// <param name="sportComplex">Sport complex for updating.</param>
         public virtual void UpdateSportComplexInDb(SportComplex sportComplex)
         {
             _dbContext.SportComplex.Update(sportComplex);
@@ -91,5 +89,21 @@ namespace UtopiaCity.Services.Sport
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex's id if it exists, otherwise null.</returns>
         public virtual string GetSportComplexIdByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title)).SportComplexId;
+
+        /// <summary>
+        /// Gets list of sport complexes' ids.
+        /// </summary>
+        /// <returns>List of all existing sport complexes' ids.</returns>
+        public virtual List<string> GetAllSportComplexesIds()
+        {
+            var sportComplexes = GetAllSportComplexes();
+            var ids = new List<string>();
+            foreach (var sportComplex in sportComplexes)
+            {
+                ids.Add(sportComplex.SportComplexId);
+            }
+
+            return ids;
+        }
     }
 }

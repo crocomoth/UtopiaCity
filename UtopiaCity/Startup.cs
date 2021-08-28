@@ -49,13 +49,13 @@ namespace UtopiaCity
             services.AddScoped<MarriageService, MarriageService>();
             services.AddScoped<SportComplexService, SportComplexService>();
             services.AddScoped<SportEventService, SportEventService>();
+            services.AddScoped<SportTicketService, SportTicketService>();
+            services.AddScoped<RequestToAdministrationService, RequestToAdministrationService>();
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<TimelineService, TimelineService>();
             services.AddScoped<ScheduleService, ScheduleService>();
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
-            services.AddScoped<FlightService, FlightService>();
-            services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
             services.AddScoped<IRouteApi, FlightRouteApiService>();
             services.AddScoped<BankService, BankService>();
@@ -66,6 +66,10 @@ namespace UtopiaCity
             services.AddScoped<EmployeeAppService, EmployeeAppService>();
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
+            services.AddScoped<ResumeAppService, ResumeAppService>();
+            services.AddScoped<TicketService, TicketService>();
+            services.AddScoped<PassengerService, PassengerService>();
+
             services.AddScoped<RealEstateService, RealEstateService>();
             services.AddTransient<IMailService, NullMailService>();
 

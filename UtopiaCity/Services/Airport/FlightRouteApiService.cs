@@ -12,8 +12,8 @@ namespace UtopiaCity.Services.Airport
 {
     public class FlightRouteApiService : IRouteApi
     {
-        private static readonly HttpClient client;
-        static FlightRouteApiService()
+        private readonly HttpClient client;
+        public FlightRouteApiService()
         {
             client = new HttpClient()
             {
