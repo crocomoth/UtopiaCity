@@ -629,10 +629,113 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
+
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professions");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Business.Resume", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProfessionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ResidentAccountId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Salary")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("UntilNow")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("WorkExperienceDateEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("WorkExperienceDateStart")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfessionId");
+
+                    b.HasIndex("ResidentAccountId");
+
+                    b.ToTable("Resumes");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Business.Vacancy", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Discription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfessionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Requirement")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Salary")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("ProfessionId");
+
+                    b.ToTable("Vacancies");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReminderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CitizensTasks");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
 
                     b.Property<string>("FirstPersonData")
                         .HasColumnType("nvarchar(max)");
@@ -751,6 +854,35 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Sport.RequestToAdministration", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateOfRequest")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReviewed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SportComplexId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SportComplexId");
+
+                    b.ToTable("RequestsToAdministration");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportComplex", b =>
                 {
                     b.Property<string>("SportComplexId")
@@ -760,6 +892,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Available")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("BuildDate")
                         .HasColumnType("datetime2");
@@ -800,6 +935,35 @@ namespace UtopiaCity.Data.Migrations
                     b.HasIndex("SportComplexId");
 
                     b.ToTable("SportEvents");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Sport.SportTicket", b =>
+                {
+                    b.Property<string>("TicketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SportComplexId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SportEventId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("TicketId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("SportComplexId");
+
+                    b.HasIndex("SportEventId");
+
+                    b.ToTable("SportTickets");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.TimelineModel.PermitedModel", b =>
@@ -1022,6 +1186,17 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("ProfessionId");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Business.Resume", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Business.Profession", "Profession")
+                        .WithMany()
+                        .HasForeignKey("ProfessionId");
+
+                    b.HasOne("UtopiaCity.Models.CityAdministration.ResidentAccount", "ResidentAccount")
+                        .WithMany()
+                        .HasForeignKey("ResidentAccountId");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Business.Vacancy", b =>
                 {
                     b.HasOne("UtopiaCity.Models.Business.Company", "Company")
@@ -1047,12 +1222,41 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("MarriageId");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Sport.RequestToAdministration", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
+                        .WithMany()
+                        .HasForeignKey("SportComplexId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Sport.SportEvent", b =>
                 {
                     b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
                         .WithMany("SportEvents")
                         .HasForeignKey("SportComplexId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Sport.SportTicket", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UtopiaCity.Models.Sport.SportComplex", "SportComplex")
+                        .WithMany("SportTickets")
+                        .HasForeignKey("SportComplexId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("UtopiaCity.Models.Sport.SportEvent", "SportEvent")
+                        .WithMany("SportTickets")
+                        .HasForeignKey("SportEventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
