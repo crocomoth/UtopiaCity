@@ -67,7 +67,7 @@ namespace UtopiaCity
             services.AddScoped<EmployeeAppService, EmployeeAppService>();
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
-
+            services.AddScoped<ResumeAppService, ResumeAppService>();
 
             #endregion
 
