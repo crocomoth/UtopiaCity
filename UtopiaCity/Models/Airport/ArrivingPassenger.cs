@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace UtopiaCity.Models.Airport
 {
-    public class Flight
+    public class ArrivingPassenger
     {
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-        public int FlightNumber { get; set; }
-        public DateTime ArrivalTime { get; set; }
-        public DateTime DepartureTime { get; set; }
-        public string DestinationPoint { get; set; }
-        public string LocationPoint { get; set; }
-        public string TypeOfAircraft { get; set; }
-        public string Weather { get; set; }
+        public string PassengerFirstName { get; set; }
+        public string PassengerFamilyName { get; set; }
+        public DateTime PassengerBirthDate { get; set; }
+        public string PassengerGender { get; set; }
+        public string PassengerStatus { get; set; }
+        public string PassengerMarriageStatus { get; set; }
     }
 }

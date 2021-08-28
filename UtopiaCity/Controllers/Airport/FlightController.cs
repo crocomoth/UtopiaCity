@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Services.Airport;
 using UtopiaCity.Utils;
 
 namespace UtopiaCity.Controllers.Airport
 {
-    public class FlightController : Controller
+    public class FlightController: Controller
     {
         private FlightService _flightService;
 
@@ -40,8 +44,7 @@ namespace UtopiaCity.Controllers.Airport
         [HttpGet]
         public IActionResult Create()
         {
-            var dictionaryData = _flightService.GetListOfPlaneTypes();
-            ViewData["TypeOfAircraft"] = new SelectList(dictionaryData);
+            ViewData["TypeOfAircraft"] = new SelectList(_flightService.GetListOfPlaneTypes());
             return View("FlightCreateView");
         }
 
@@ -50,7 +53,7 @@ namespace UtopiaCity.Controllers.Airport
         {
             if (ModelState.IsValid)
             {
-                newFlight.FlightNumber = RandomUtil.GenerateRandomString(150).ElementAtOrDefault(10);
+                newFlight.FlightNumber = RandomUtil.GenerateRandomString(150).FirstOrDefault();
                 var arrivalTime = _flightService.GetArrivalTime(newFlight.DepartureTime, newFlight.LocationPoint, newFlight.DestinationPoint, newFlight.TypeOfAircraft);
                 newFlight.ArrivalTime = arrivalTime;
                 _flightService.AddFlight(newFlight);
@@ -126,27 +129,6 @@ namespace UtopiaCity.Controllers.Airport
 
             _flightService.DeleteFlight(flight);
             return RedirectToAction(nameof(Index));
-        }
-
-        //[HttpGet]
-        //public IActionResult GetDistanceByApi()
-        //{
-        //    return View("GetDistanceByApiView");
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> GetDistanceByApi(Flight newFlight)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        newFlight.FlightNumber = _flightService.GetRandomFlightNumber();
-        //         _flightService.AddFlight(newFlight);
-        //        //var apiData= await _routeService.GetRouteObject(newFlight.LocationPoint, newFlight.DestinationPoint);                
-        //        //ViewData["FlightApiId"] = new SelectList((System.Collections.IEnumerable)apiData, "Id", "Id");
-        //        return View("GetListApiDataView");
-        //    }
-
-        //    return View("GetDistanceByApiView", newFlight);
-        //}
+        }       
     }
 }
