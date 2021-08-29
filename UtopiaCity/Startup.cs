@@ -70,6 +70,8 @@ namespace UtopiaCity
             services.AddScoped<TicketService, TicketService>();
             services.AddScoped<PassengerService, PassengerService>();
             services.AddScoped<ClinicVisitService, ClinicVisitService>();
+            services.AddScoped<CitizenFriendsService, CitizenFriendsService>();
+
 
             #endregion
 

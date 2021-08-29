@@ -28,6 +28,14 @@
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Content Remove="Views\CitizenFriends\IndexWaiting11.cshtml" />
+    <Content Remove="Views\CitizensAccount\EditAppUserView.cshtml" />
+    <Content Remove="Views\CitizensAccount\Index.cshtml" />
+    <Content Remove="Views\CitizensAccount\ShowUserCabinet.cshtml" />
+  </ItemGroup>
+
   <ItemGroup>
 	<PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
@@ -46,6 +54,14 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\CitizenFriends\FindUser.cshtml" />
+    <None Include="Views\CitizenFriends\FindUserAsync.cshtml" />
+    <None Include="Views\CitizenFriends\IndexFriends.cshtml" />
+    <None Include="Views\CitizenFriends\_IndexPartial.cshtml" />
+    <None Include="Views\CitizenFriends\_ViewStart.cshtml" />
   </ItemGroup>
 
 </Project>

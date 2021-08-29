@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using static UtopiaCity.Controllers.CitizenAccount.CitizensTasksController; 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,7 +8,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/life.css">
-    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
 </head>
 <body>
     <header>
@@ -31,7 +31,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="EmergencyReport" asp-action="Index">Emergency Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sport" asp-action="Index">Sport</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SportComplex" asp-action="AllSportComplexes">Sport Complexes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Flight" asp-action="Index">Travelling</a>
@@ -42,32 +42,33 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="TimelineBasic" asp-action="Index">Timeline</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ClinicVisit" asp-action="Index">Clinic Visits</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="TransportManagers" asp-action="Index">AirportTransportSystem</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CityAdministrationHome" asp-action="Index">City Administration</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="RersidentAccount" asp-action="Index">City Administration</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Life" asp-action="Index">Life</a>
                         </li>
                         <li class="nav-item">
-
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Business" asp-action="Index">Business</a>
-
                             <a class="nav-link text-dark" asp-area="" asp-controller="CitizensAccount" asp-action="Index">Citizen's Account</a>
-
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+
+    <div class="row justify-content-start">
+        <div class="col-2 ml-3">
+            <partial name="_ShowUserCabinetPartial" />
+        </div>
+        <div class="col-7">
             @RenderBody()
-        </main>
+        </div>
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
