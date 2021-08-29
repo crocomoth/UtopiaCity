@@ -64,26 +64,10 @@ namespace UtopiaCity.Controllers.HousingSystem
                 items.Add(new SelectListItem() { Text = $"{accountNames}", Value = $"{accountNames}" });
             }
             ViewBag.SelectList = items;
-            //List<SelectListItem> items = new List<SelectListItem>();
-            //foreach (string accountNames in viewModel.Residents)
-            //{
-            //    items.Add(new SelectListItem() { Text = $"{accountNames}", Value = $"{accountNames}" });
-            //}
-            //SelectList selectList = new SelectList(items, "Text");
-            //ViewBag.Zb = selectList;
             ModelState.Clear();
             return View("CreateRealEstateView", viewModel);
         }
 
-        //var options = new List<SelectListItem>();
-
-        //foreach (string resident in viewModel.Residents)
-        //{
-        //    options.Add(new SelectListItem { Text = $"{resident}", Value = $"{resident}" });
-        //}
-
-        //SelectList residentNames = new SelectList(viewModel.Residents, "FirstName", "FamilyName");
-        //ViewBag.ResidentNames = residentNames;
         [HttpPost]
         public async Task<IActionResult> Create(AddRealEstateViewModel viewModel)
         {
