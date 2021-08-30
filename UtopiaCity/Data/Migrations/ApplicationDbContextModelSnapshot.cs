@@ -575,99 +575,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Professions");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.Business.Vacancy", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CompanyId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Discription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfessionId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Requirement")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Salary")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("ProfessionId");
-
-                    b.ToTable("Vacancies");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.CitizensTask", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReminderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CitizensTasks");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Friend", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FirstUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("FriendsStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecondUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FirstUserId");
-
-                    b.HasIndex("SecondUserId");
-
-                    b.ToTable("Friend");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
-
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Professions");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.Business.Resume", b =>
                 {
                     b.Property<string>("Id")
@@ -754,12 +661,35 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("CitizensTasks");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Friend", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("FirstUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("FriendsStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecondUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FirstUserId");
+
+                    b.HasIndex("SecondUserId");
+
+                    b.ToTable("Friend");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstPersonData")
                         .HasColumnType("nvarchar(max)");
