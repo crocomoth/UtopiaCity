@@ -7,50 +7,66 @@ namespace UtopiaCity.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<double>(
-                name: "Balance",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "DateOfBirth",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "Gender",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Surname",
-                table: "AspNetUsers",
-                nullable: true);
-
             migrationBuilder.CreateTable(
-                name: "Airlines",
+                name: "ArrivingPassengers",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    AirlineName = table.Column<string>(nullable: true),
-                    ServiceType = table.Column<string>(nullable: true),
-                    Aircraft = table.Column<string>(nullable: true),
-                    AvailableDirections = table.Column<string>(nullable: true)
+                    PassengerFirstName = table.Column<string>(nullable: true),
+                    PassengerFamilyName = table.Column<string>(nullable: true),
+                    PassengerBirthDate = table.Column<DateTime>(nullable: false),
+                    PassengerGender = table.Column<string>(nullable: true),
+                    PassengerStatus = table.Column<string>(nullable: true),
+                    PassengerMarriageStatus = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Airlines", x => x.Id);
+                    table.PrimaryKey("PK_ArrivingPassengers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: true),
+                    Gender = table.Column<int>(nullable: true),
+                    Balance = table.Column<double>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,23 +83,16 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CitizensTasks",
+                name: "ClinicVisit",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: false),
-                    ReminderDate = table.Column<DateTime>(nullable: false)
+                    Visit = table.Column<string>(nullable: false),
+                    VisitTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CitizensTasks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CitizensTasks_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_ClinicVisit", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,7 +272,8 @@ namespace UtopiaCity.Data.Migrations
                     NumberOfSeats = table.Column<int>(nullable: false),
                     BuildDate = table.Column<DateTime>(nullable: false),
                     TypeOfSport = table.Column<int>(nullable: false),
-                    Address = table.Column<string>(nullable: false)
+                    Address = table.Column<string>(nullable: false),
+                    Available = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -283,6 +293,132 @@ namespace UtopiaCity.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TimelineModel", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CitizensTasks",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
+                    ReminderDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CitizensTasks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CitizensTasks_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -389,6 +525,28 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RequestsToAdministration",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    DateOfRequest = table.Column<DateTime>(nullable: false),
+                    IsApproved = table.Column<bool>(nullable: false),
+                    IsReviewed = table.Column<bool>(nullable: false),
+                    SportComplexId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestsToAdministration", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RequestsToAdministration_SportComplex_SportComplexId",
+                        column: x => x.SportComplexId,
+                        principalTable: "SportComplex",
+                        principalColumn: "SportComplexId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SportEvents",
                 columns: table => new
                 {
@@ -464,6 +622,35 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Resumes",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ResidentAccountId = table.Column<string>(nullable: true),
+                    ProfessionId = table.Column<string>(nullable: true),
+                    Salary = table.Column<int>(nullable: false),
+                    WorkExperienceDateStart = table.Column<DateTime>(nullable: true),
+                    WorkExperienceDateEnd = table.Column<DateTime>(nullable: true),
+                    UntilNow = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Resumes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Resumes_Professions_ProfessionId",
+                        column: x => x.ProfessionId,
+                        principalTable: "Professions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Resumes_ResidentAccount_ResidentAccountId",
+                        column: x => x.ResidentAccountId,
+                        principalTable: "ResidentAccount",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -496,6 +683,104 @@ namespace UtopiaCity.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SportTickets",
+                columns: table => new
+                {
+                    TicketId = table.Column<string>(nullable: false),
+                    SportComplexId = table.Column<string>(nullable: false),
+                    SportEventId = table.Column<string>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SportTickets", x => x.TicketId);
+                    table.ForeignKey(
+                        name: "FK_SportTickets_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SportTickets_SportComplex_SportComplexId",
+                        column: x => x.SportComplexId,
+                        principalTable: "SportComplex",
+                        principalColumn: "SportComplexId");
+                    table.ForeignKey(
+                        name: "FK_SportTickets_SportEvents_SportEventId",
+                        column: x => x.SportEventId,
+                        principalTable: "SportEvents",
+                        principalColumn: "SportEventId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Passengers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    PassengerName = table.Column<string>(nullable: true),
+                    ProgressStatus = table.Column<string>(nullable: true),
+                    PassengerStatus = table.Column<string>(nullable: true),
+                    TicketId = table.Column<string>(nullable: true),
+                    ResidentAccountId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Passengers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Passengers_ResidentAccount_ResidentAccountId",
+                        column: x => x.ResidentAccountId,
+                        principalTable: "ResidentAccount",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Passengers_Tickets_TicketId",
+                        column: x => x.TicketId,
+                        principalTable: "Tickets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CitizensTasks_UserId",
                 table: "CitizensTasks",
@@ -522,14 +807,54 @@ namespace UtopiaCity.Data.Migrations
                 column: "ProfessionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Passengers_ResidentAccountId",
+                table: "Passengers",
+                column: "ResidentAccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Passengers_TicketId",
+                table: "Passengers",
+                column: "TicketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestsToAdministration_SportComplexId",
+                table: "RequestsToAdministration",
+                column: "SportComplexId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ResidentAccount_MarriageId",
                 table: "ResidentAccount",
                 column: "MarriageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Resumes_ProfessionId",
+                table: "Resumes",
+                column: "ProfessionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resumes_ResidentAccountId",
+                table: "Resumes",
+                column: "ResidentAccountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SportEvents_SportComplexId",
                 table: "SportEvents",
                 column: "SportComplexId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SportTickets_AppUserId",
+                table: "SportTickets",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SportTickets_SportComplexId",
+                table: "SportTickets",
+                column: "SportComplexId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SportTickets_SportEventId",
+                table: "SportTickets",
+                column: "SportEventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_FlightId",
@@ -575,10 +900,28 @@ namespace UtopiaCity.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Airlines");
+                name: "ArrivingPassengers");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
                 name: "CitizensTasks");
+
+            migrationBuilder.DropTable(
+                name: "ClinicVisit");
 
             migrationBuilder.DropTable(
                 name: "EmergencyCertificate");
@@ -593,13 +936,19 @@ namespace UtopiaCity.Data.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
+                name: "Passengers");
+
+            migrationBuilder.DropTable(
+                name: "RequestsToAdministration");
+
+            migrationBuilder.DropTable(
+                name: "Resumes");
+
+            migrationBuilder.DropTable(
                 name: "ScheduleModel");
 
             migrationBuilder.DropTable(
-                name: "SportEvents");
-
-            migrationBuilder.DropTable(
-                name: "Tickets");
+                name: "SportTickets");
 
             migrationBuilder.DropTable(
                 name: "TimelineModel");
@@ -614,13 +963,16 @@ namespace UtopiaCity.Data.Migrations
                 name: "WeatherReports");
 
             migrationBuilder.DropTable(
-                name: "SportComplex");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Flights");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
-                name: "ResidentAccount");
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "SportEvents");
 
             migrationBuilder.DropTable(
                 name: "ForCompanies");
@@ -635,10 +987,16 @@ namespace UtopiaCity.Data.Migrations
                 name: "Professions");
 
             migrationBuilder.DropTable(
+                name: "Flights");
+
+            migrationBuilder.DropTable(
                 name: "PermitedModel");
 
             migrationBuilder.DropTable(
-                name: "Marriage");
+                name: "ResidentAccount");
+
+            migrationBuilder.DropTable(
+                name: "SportComplex");
 
             migrationBuilder.DropTable(
                 name: "Banks");
@@ -646,29 +1004,8 @@ namespace UtopiaCity.Data.Migrations
             migrationBuilder.DropTable(
                 name: "CompanyStatuses");
 
-            migrationBuilder.DropColumn(
-                name: "Discriminator",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "Balance",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "DateOfBirth",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "Gender",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "Name",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "Surname",
-                table: "AspNetUsers");
+            migrationBuilder.DropTable(
+                name: "Marriage");
         }
     }
 }
