@@ -1,0 +1,53 @@
+﻿@model SportTicketViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SportTicket</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.SportEventTitle)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.SportEventTitle)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.DateOfTheEvent)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.DateOfTheEvent)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.SportComplexTitle)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.SportComplexTitle)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.VisitorName)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.VisitorName)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.VisitorSurname)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.VisitorSurname)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-secondary" role="button" asp-action="AllSportTickets">Back to List</a>
+</div>

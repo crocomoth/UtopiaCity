@@ -71,3 +71,31 @@
     <h5 class="mr-3">You can also look through our Sport Events:</h5>
     <a role="button" class="btn btn-sm btn-outline-primary" asp-controller="SportEvent" asp-action="AllSportEvents">Our Sport Events</a>
 </div>
+
+<hr />
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h5 class="mr-3">Requests to the city administration:</h5>
+        <a role="button" class="btn btn-sm btn-outline-primary" asp-controller="RequestToAdministration" asp-action="AllRequestsToAdministration">
+            Requests To The Administration
+        </a>
+    }
+    else
+    {
+        <h5 class="mr-3">Not authenticated persons can not look through requests to the administration</h5>
+    }
+</div>
+
+<hr />
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h5 class="mr-3">My Sport Tickets</h5>
+        <a role="button" class="btn btn-sm btn-outline-primary" asp-controller="SportTicket" asp-action="AllSportTickets">Tickets</a>
+    }
+    else
+    {
+        <h5 class="mr-3">Not authenticated persons can not buy tickets</h5>
+    }
+</div>

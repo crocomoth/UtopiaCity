@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.Sport.Enums;
 using UtopiaCity.ViewModels.Sport;
@@ -129,6 +132,166 @@ namespace UtopiaCityTest.Common.ObjectsForTests
             };
 
             return sportEvents;
+        }
+
+        public static SportTicket SportTicketForTests()
+        {
+            return new SportTicket
+            {
+                TicketId = "1",
+                SportComplexId = "1",
+                SportEventId = "1",
+                AppUserId = "1"
+            };
+        }
+
+        public static SportTicket[] ArrayOfSportTicketsForTests()
+        {
+            return new SportTicket[]
+            {
+                new SportTicket
+                {
+                    TicketId = "1",
+                    SportComplexId = "1",
+                    SportEventId = "1",
+                    AppUserId = "1"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "2",
+                    SportComplexId = "1",
+                    SportEventId = "1",
+                    AppUserId = "1"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "3",
+                    SportComplexId = "2",
+                    SportEventId = "2",
+                    AppUserId = "2"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "4",
+                    SportComplexId = "3",
+                    SportEventId = "3",
+                    AppUserId = "3"
+                },
+
+                new SportTicket
+                {
+                    TicketId = "5",
+                    SportComplexId = "2",
+                    SportEventId = "2",
+                    AppUserId = "2"
+                }
+            };
+        }
+
+        public async static Task<AppUser> AppUserForTests()
+        {
+            return new AppUser
+            {
+                Id = "1",
+                Name = "Name_1",
+                Surname = "Surname_1",
+                DateOfBirth = new DateTime(2001, 1, 1),
+                Gender = Gender.Male,
+                Balance = 1.1
+            };
+        }
+
+        public static AppUser[] ArrayOfAppUsersForTests()
+        {
+            return new AppUser[]
+            {
+                new AppUser
+                {
+                    Id = "1",
+                    Name = "Name_1",
+                    Surname = "Surname_1",
+                    DateOfBirth = new DateTime(2001, 1, 1),
+                    Gender = Gender.Male,
+                    Balance = 1.1
+                },
+
+                new AppUser
+                {
+                    Id = "2",
+                    Name = "Name_2",
+                    Surname = "Surname_2",
+                    DateOfBirth = new DateTime(2002, 2, 2),
+                    Gender = Gender.Male,
+                    Balance = 2.2
+                },
+
+                new AppUser
+                {
+                    Id = "3",
+                    Name = "Name_3",
+                    Surname = "Surname_3",
+                    DateOfBirth = new DateTime(2003, 3, 3),
+                    Gender = Gender.Male,
+                    Balance = 3.3
+                }
+            };
+        }
+
+        public async static Task<List<CitizensTask>> TaskListOfCitizensTask()
+        {
+            var list = new List<CitizensTask>()
+            {
+                new CitizensTask()
+                {
+                    Id = "1",
+                    Description = "title_1",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "1"
+                },
+
+                new CitizensTask()
+                {
+                    Id = "1",
+                    Description = "title_2",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "1"
+                },
+
+                new CitizensTask()
+                {
+                    Id = "2",
+                    Description = "title_2",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "2"
+                },
+
+                new CitizensTask()
+                {
+                    Id = "3",
+                    Description = "title_3",
+                    ReminderDate = new DateTime(2021, 11, 12),
+                    UserId = "3"
+                },
+            };
+
+            return list;
+        }
+
+        public static SportTicketViewModel SportTicketViewModelForTests()
+        {
+            return new SportTicketViewModel()
+            {
+                SportTicketId = "1",
+                SportEventTitle = "title_1",
+                DateOfTheEvent = new DateTime(2021, 1, 1),
+                SportComplexTitle = "title_1",
+                Address = "address_1",
+                VisitorName = "name_1",
+                VisitorSurname = "surname_1"
+            };
         }
     }
 }
