@@ -19,10 +19,8 @@ namespace UtopiaCityTest.Controllers.Sport
         private readonly Mock<SportEventService> _sportEventService;
         private readonly Mock<SportComplexService> _sportComplexService;
         private readonly IMapper _mapper;
-        private readonly SportComplex _sportComplexForTests;
         private readonly SportEvent _sportEventForTests;
         private readonly SportEventViewModel _sportEventViewModelForTests;
-        private readonly SportEvent[] _sportEventsForTests;
 
         public SportEventControllerTests()
         {
@@ -30,10 +28,8 @@ namespace UtopiaCityTest.Controllers.Sport
             _sportComplexService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportComplexService>(_dbContext);
             _sportEventService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportEventService>(_dbContext);
             _mapper = BasicClassForSportTests.ConfigMapper(new SportComplexProfile(), new SportEventProfile());
-            _sportComplexForTests = SportObjectsForTests.SportComplexForTests();
             _sportEventForTests = SportObjectsForTests.SportEventForTests();
             _sportEventViewModelForTests = SportObjectsForTests.SportEventViewModelForTests();
-            _sportEventsForTests = SportObjectsForTests.ArrayOfSportEventsForTests();
         }
 
         #region ViewResultViewNameAndModelObjectTypesTests
