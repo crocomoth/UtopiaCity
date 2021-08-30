@@ -24,7 +24,7 @@ namespace UtopiaCity.Services.CitizenAccount
         /// </summary>
         /// <param name="id">Id of citizen task.</param>
         /// <returns>Citizen task if it exists, otherwise null.</returns>
-        public async Task<CitizensTask> GetTaskById(string id)
+        public virtual async Task<CitizensTask> GetTaskById(string id)
         {
             return await _dbContext.CitizensTasks.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
@@ -43,7 +43,7 @@ namespace UtopiaCity.Services.CitizenAccount
         /// </summary>
         /// <param name="citizensTask">Citizen task to add.</param>
         /// <returns>Task to await for.</returns>
-        public async Task AddCitizenTask(CitizensTask citizensTask)
+        public virtual async Task AddCitizenTask(CitizensTask citizensTask)
         {
             _dbContext.Add(citizensTask);
             await _dbContext.SaveChangesAsync();
@@ -54,7 +54,7 @@ namespace UtopiaCity.Services.CitizenAccount
         /// </summary>
         /// <param name="citizensTask">Citizen task to update.</param>
         /// <returns>Task to await for.</returns>
-        public async Task UpdateCitizenTask(CitizensTask citizensTask)
+        public virtual async Task UpdateCitizenTask(CitizensTask citizensTask)
         {
             _dbContext.Update(citizensTask);
             await _dbContext.SaveChangesAsync();
@@ -65,7 +65,7 @@ namespace UtopiaCity.Services.CitizenAccount
         /// </summary>
         /// <param name="citizensTask">Citizen task to delete</param>
         /// <returns>Task to await for.</returns>
-        public async Task DeleteCitizenTask(CitizensTask citizensTask)
+        public virtual async Task DeleteCitizenTask(CitizensTask citizensTask)
         {
             _dbContext.Remove(citizensTask);
             await _dbContext.SaveChangesAsync();

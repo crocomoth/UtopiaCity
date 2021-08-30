@@ -1,31 +1,28 @@
 ﻿@using UtopiaCity.Models.CitizenAccount
 @model UtopiaCity.Models.CitizenAccount.AppUser
 
-@{
-    ViewData["Title"] = "EditUserView";
-}
+@{ ViewData["Title"] = "EditUserView"; }
 
-<h1>EditAppUserInfo</h1>
+<h1>Edit AppUser Info</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
+                <input asp-for="Surname" class="form-control"/>
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control"/>
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div>
@@ -43,7 +40,7 @@
 
 
 <div>
-    <a asp-action="ShowUserCabinet">Back to Cabinet</a>
+    <a asp-action="Index" asp-controller="CitizensAccount">Back to Cabinet</a>
 </div>
 
 @section Scripts {

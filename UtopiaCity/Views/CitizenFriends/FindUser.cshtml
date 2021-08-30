@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "FindUser";
+}
+
+<div class="col-2 ml-3">
+    <partial name="_IndexPartial" />
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info" role="alert">
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
+
+<h1>Find User</h1>
+<form asp-action="FindUser" method="post">
+    <label>Enter Username</label><br />
+    <input type="text" name="username" /><br /><br />
+
+    <div class="form-group">
+        <input type="submit" value="Find User" class="btn btn-primary" />
+    </div>
+</form>

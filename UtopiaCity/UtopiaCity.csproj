@@ -45,8 +45,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
     <Folder Include="Services\Common\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\CitizenFriends\FindUser.cshtml" />
+    <None Include="Views\CitizenFriends\FindUserAsync.cshtml" />
+    <None Include="Views\CitizenFriends\IndexFriends.cshtml" />
+    <None Include="Views\CitizenFriends\IndexRejected.cshtml" />
+    <None Include="Views\CitizenFriends\IndexWaiting.cshtml" />
+    <None Include="Views\CitizenFriends\_IndexPartial.cshtml" />
+    <None Include="Views\CitizenFriends\_ViewStart.cshtml" />
   </ItemGroup>
 
 </Project>
