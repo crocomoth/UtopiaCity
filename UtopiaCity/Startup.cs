@@ -17,6 +17,7 @@ using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Services.CitizenAccount;
+using UtopiaCity.Services.Energy;
 
 namespace UtopiaCity
 {
@@ -65,6 +66,7 @@ namespace UtopiaCity
             services.AddScoped<EmployeeAppService, EmployeeAppService>();
             services.AddScoped<CitizensAccountService, CitizensAccountService>();
             services.AddScoped<CitizenTaskService, CitizenTaskService>();
+            services.AddScoped<EnergyCalculationsService, EnergyCalculationsService>();
 
 
             #endregion
