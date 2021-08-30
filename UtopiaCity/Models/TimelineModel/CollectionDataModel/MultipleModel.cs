@@ -3,7 +3,7 @@ using UtopiaCity.Models.Airport;
 
 namespace UtopiaCity.Models.TimelineModel.CollectionDataModel
 {
-    public class CommonModel
+    public class MultipleModel
     {
         public IEnumerable<Flight> Flight { get; set; }
     }

@@ -2,33 +2,22 @@
 using System.Linq;
 using UtopiaCity.Data;
 using UtopiaCity.Models.TimelineModel.CollectionDataModel;
-using UtopiaCity.Services.Timeline;
+using UtopiaCity.Services.Airport;
 
 namespace UtopiaCity.Controllers.Timeline
 {
     public class ScheduleController : Controller
     {
-        ///private readonly ScheduleService _scheduleService;
-        ///private readonly TimelineService _timelineService;
-        ApplicationDbContext _context;
-        //public ScheduleController(ScheduleService scheduleService, TimelineService timelineService, ApplicationDbContext context)
+        private readonly FlightService _flightService;
 
-        public ScheduleController(ApplicationDbContext context)
+        public ScheduleController(FlightService flightService)
         {
-            //_scheduleService = scheduleService;
-            //_timelineService = timelineService;
-            _context = context;
+            _flightService = flightService;
         }
 
-        //LIST
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View("ScheduleListView", await _scheduleService.GetFlights());
-        //}
-
-        public ViewResult Index(string name) => View("Index", new CommonModel
+        public ViewResult Index(string name) => View("Index", new MultipleModel
         {
-            Flight = _context.Flights
+            Flight = (System.Collections.Generic.IEnumerable<Models.Airport.Flight>)((System.Collections.Generic.IEnumerable<Models.Airport.Flight>)_flightService.GetFlightList())
             .Where(i => i.Weather == name)
             .OrderBy(i => i.Id)
         });
