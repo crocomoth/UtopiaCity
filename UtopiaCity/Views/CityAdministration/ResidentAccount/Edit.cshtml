@@ -37,6 +37,41 @@
                 </select>
             </div>
             <div class="form-group">
+                <label asp-for="BirthPlace" class="control-label"></label>
+                <input asp-for="BirthPlace" class="form-control" />
+                <span asp-validation-for="BirthPlace" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationAddress" class="control-label"></label>
+                <input asp-for="RegistrationAddress" class="form-control" />
+                <span asp-validation-for="RegistrationAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalRecords" class="control-label"></label>
+                <input asp-for="MedicalRecords" class="form-control" />
+                <span asp-validation-for="MedicalRecords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Property" class="control-label"></label>
+                <input asp-for="Property" class="form-control" />
+                <span asp-validation-for="Property" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotorTransport" class="control-label"></label>
+                <input asp-for="MotorTransport" class="form-control" />
+                <span asp-validation-for="MotorTransport" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
