@@ -1,0 +1,12 @@
+﻿@using UtopiaCity.Models.TimelineModel.CollectionDataModel
+@using UtopiaCity.Controllers.Timeline
+
+<div class="breadcrumb">
+    @{
+        ViewBag.Breadcrumbs = new List<Breadcrums>()
+{
+        new Breadcrums("Home", nameof(TimelineBasicController.Index), "Home", true),
+        new Breadcrums("Override Test", nameof(OverrideBreadcrumbController.Index), "OverrideBreadcrumbExample", false)
+    };
+    }
+</div>
