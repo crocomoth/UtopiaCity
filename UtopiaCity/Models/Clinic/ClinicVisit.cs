@@ -16,6 +16,26 @@ namespace UtopiaCity.Models.Clinic
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+        /// <summary>
+        /// Choose whether person is insured or not.
+        /// </summary>
+        [Required]
+        public string Insurance { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        public DateTime DoB { get; set; }
+
+        public long PhoneNumber { get; set; }
+
+        public string Doctor { get; set; }
+
         /// <summary>
         /// Report test or data.
         /// </summary>
