@@ -719,6 +719,24 @@ namespace UtopiaCity.Migrations
                     b.ToTable("ResidentAccount");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Clinic.ClinicVisit", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Visit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("VisitTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClinicVisit");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Emergency.EmergencyCertificate", b =>
                 {
                     b.Property<string>("Id")
