@@ -17,6 +17,7 @@ using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Services.CitizenAccount;
+using UtopiaCity.Services.Clinic;
 
 namespace UtopiaCity
 {
@@ -68,7 +69,7 @@ namespace UtopiaCity
             services.AddScoped<ResumeAppService, ResumeAppService>();
             services.AddScoped<TicketService, TicketService>();
             services.AddScoped<PassengerService, PassengerService>();
-
+            services.AddScoped<ClinicVisitService, ClinicVisitService>();
 
             #endregion
 
