@@ -43,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
     <Folder Include="Services\Common\" />
     <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
