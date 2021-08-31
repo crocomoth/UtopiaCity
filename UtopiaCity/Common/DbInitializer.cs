@@ -30,7 +30,6 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new EmployeeInitializer());
             subDbInitializers.Add(new VacancyInitializer());
             subDbInitializers.Add(new ResumeInitializer());
-            
             subDbInitializers.Add(new ClinicVisitInitializer());
 
 
