@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210831131015_RealEstateDebut")]
+    partial class RealEstateDebut
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -661,30 +663,6 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("CitizensTasks");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Friend", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FirstUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("FriendsStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecondUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FirstUserId");
-
-                    b.HasIndex("SecondUserId");
-
-                    b.ToTable("Friend");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
                 {
                     b.Property<string>("Id")
@@ -1215,17 +1193,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Friend", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "FirstUser")
-                        .WithMany()
-                        .HasForeignKey("FirstUserId");
-
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "SecondUser")
-                        .WithMany()
-                        .HasForeignKey("SecondUserId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
