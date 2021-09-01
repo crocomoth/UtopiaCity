@@ -23,6 +23,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new ForPassengerInitializer());          
             subDbInitializers.Add(new SportComplexInitializer());
             subDbInitializers.Add(new LifeInitializer());
+            subDbInitializers.Add(new RealEstateInitializer());
             subDbInitializers.Add(new BankInitializer());
             subDbInitializers.Add(new CompanyStatusInitializer());
             subDbInitializers.Add(new CompanyInitializer());
