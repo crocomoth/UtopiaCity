@@ -24,8 +24,6 @@
     <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
-    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
-    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,16 +44,8 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\CitizenFriends\FindUser.cshtml" />
-    <None Include="Views\CitizenFriends\FindUserAsync.cshtml" />
-    <None Include="Views\CitizenFriends\IndexFriends.cshtml" />
-    <None Include="Views\CitizenFriends\IndexRejected.cshtml" />
-    <None Include="Views\CitizenFriends\IndexWaiting.cshtml" />
-    <None Include="Views\CitizenFriends\_IndexPartial.cshtml" />
-    <None Include="Views\CitizenFriends\_ViewStart.cshtml" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
 
 </Project>
