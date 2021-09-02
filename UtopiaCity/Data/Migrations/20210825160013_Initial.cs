@@ -7,52 +7,6 @@ namespace UtopiaCity.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: "");
-
-            migrationBuilder.AddColumn<double>(
-                name: "Balance",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "DateOfBirth",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "Gender",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Surname",
-                table: "AspNetUsers",
-                nullable: true);
-
-            migrationBuilder.CreateTable(
-                name: "Airlines",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    AirlineName = table.Column<string>(nullable: true),
-                    ServiceType = table.Column<string>(nullable: true),
-                    Aircraft = table.Column<string>(nullable: true),
-                    AvailableDirections = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Airlines", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Banks",
                 columns: table => new
