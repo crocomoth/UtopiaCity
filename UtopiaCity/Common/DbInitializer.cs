@@ -24,7 +24,6 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new SportComplexInitializer());
             subDbInitializers.Add(new LifeInitializer());
             subDbInitializers.Add(new RealEstateInitializer());
-
             subDbInitializers.Add(new BankInitializer());
             subDbInitializers.Add(new CompanyStatusInitializer());
             subDbInitializers.Add(new CompanyInitializer());
@@ -32,11 +31,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new EmployeeInitializer());
             subDbInitializers.Add(new VacancyInitializer());
             subDbInitializers.Add(new ResumeInitializer());
-            
             subDbInitializers.Add(new ClinicVisitInitializer());
-
-
-
             subDbInitializers.Add(new SportEventInitializer());
             subDbInitializers.Add(new CitizenTaskInitializer());
         }
