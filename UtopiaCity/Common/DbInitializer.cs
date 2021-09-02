@@ -34,6 +34,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new ClinicVisitInitializer());
             subDbInitializers.Add(new SportEventInitializer());
             subDbInitializers.Add(new CitizenTaskInitializer());
+            subDbInitializers.Add(new FireMessageInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)

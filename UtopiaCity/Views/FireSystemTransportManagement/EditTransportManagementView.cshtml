@@ -1,0 +1,49 @@
+﻿@model UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees.TransportManagement
+
+@{
+    ViewData["Title"] = "EditTransportManagementView";
+}
+
+<h1>EditTransportManagementView</h1>
+
+<h4>TransportManagement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditTransportManagementView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TypeOfFireCar" class="control-label"></label>
+                <input asp-for="TypeOfFireCar" class="form-control" />
+                <span asp-validation-for="TypeOfFireCar" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FirePump" /> @Html.DisplayNameFor(model => model.FirePump)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ContainerForStoringFireExtinguishingAgents" /> @Html.DisplayNameFor(model => model.ContainerForStoringFireExtinguishingAgents)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FireFightingEquipment" class="control-label"></label>
+                <input asp-for="FireFightingEquipment" class="form-control" />
+                <span asp-validation-for="FireFightingEquipment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

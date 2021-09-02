@@ -11,6 +11,8 @@ using UtopiaCity.Models.TimelineModel;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Clinic;
 using UtopiaCity.Models.HousingSystem;
+using UtopiaCity.Models.FireSystem;
+using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
 
 namespace UtopiaCity.Data
 {
@@ -82,5 +84,9 @@ namespace UtopiaCity.Data
         public DbSet<ArrivingPassenger> ArrivingPassengers { get; set; }
         public DbSet<ClinicVisit> ClinicVisit { get; set; }
         public DbSet<RealEstate> RealEstate { get; set; }
+        public DbSet<FireMessage> FireMessages { get; set; }
+        public DbSet<FireSafetyCheck> FireSafetyChecks { get; set; }
+        public DbSet<TransportManagement> TransportsManagements { get; set; }
+        public DbSet<EmployeeManagement> EmployeesManagement { get; set; }
     }
 }

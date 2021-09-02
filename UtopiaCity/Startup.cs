@@ -19,6 +19,7 @@ using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Services.CitizenAccount;
 using UtopiaCity.Services.Clinic;
 using UtopiaCity.Services.HousingSystem;
+using UtopiaCity.Services.FireSystem;
 
 namespace UtopiaCity
 {
@@ -71,6 +72,9 @@ namespace UtopiaCity
             services.AddScoped<TicketService, TicketService>();
             services.AddScoped<PassengerService, PassengerService>();
             services.AddScoped<ClinicVisitService, ClinicVisitService>();
+            services.AddScoped<FireMessageService, FireMessageService>();
+            services.AddScoped<EmployeeManagementService, EmployeeManagementService>();
+            services.AddScoped<TransportManagementService, TransportManagementService>();
 
             services.AddScoped<RealEstateService, RealEstateService>();
             services.AddTransient<IMailService, NullMailService>();
