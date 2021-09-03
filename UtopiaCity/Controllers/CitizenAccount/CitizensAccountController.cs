@@ -20,30 +20,30 @@ namespace UtopiaCity.Controllers.CitizenAccount
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult ShowUserCabinet()
-        {
-            return View();
-        }
 
         public async Task<IActionResult> IndexAsync()
         {
             AppUser user = await _userManager.GetUserAsync(User);
-            return View(user);
+            return View(nameof(IndexAsync), user);
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditAsync()
+        public async Task<IActionResult> EditAsync(string id)
         {
-            AppUser report = await _userManager.GetUserAsync(User);
-
-            if (report == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            return View("EditAppUserView", report);
+            AppUser userForEdit = await _userManager.GetUserAsync(User);
+
+            if (userForEdit == null)
+            {
+                return NotFound();
+            }
+            return View(userForEdit);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, AppUser edited)
+        public async Task<IActionResult> EditAsync(string id, AppUser edited)
         {
             if (id != edited.Id)
             {
@@ -57,9 +57,9 @@ namespace UtopiaCity.Controllers.CitizenAccount
                 user.Gender = edited.Gender;
                 user.DateOfBirth = edited.DateOfBirth;
                 await _dbContext.SaveChangesAsync();
-                return RedirectToAction(nameof(ShowUserCabinet));
+                return RedirectToAction("Index");
             }
-            return View("EditAppUserView", edited);
+            return View(nameof(EditAsync), edited);
         }
 
         [HttpGet]

@@ -20,7 +20,6 @@ namespace UtopiaCity.Controllers.CitizenAccount
             _citizenTaskService = citizenTaskService;
         }
 
-        // GET: CitizensTasks
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
