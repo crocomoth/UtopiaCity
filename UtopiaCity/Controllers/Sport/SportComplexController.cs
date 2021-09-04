@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.ViewModels.Sport;
@@ -18,9 +19,9 @@ namespace UtopiaCity.Controllers.Sport
             _mapper = mapper;
         }
 
-        public IActionResult AllSportComplexes()
+        public async Task<IActionResult> AllSportComplexes()
         {
-            List<SportComplex> sportComplexes = _sportComplexService.GetAllSportComplexes();
+            List<SportComplex> sportComplexes = await Task.Run(() => _sportComplexService.GetAllSportComplexes());
             List<SportComplexViewModel> sportComplexViewModels = new List<SportComplexViewModel>();
             foreach (SportComplex sportComplex in sportComplexes)
             {
@@ -30,9 +31,9 @@ namespace UtopiaCity.Controllers.Sport
             return View(sportComplexViewModels);
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
-            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
             if (sportComplex == null)
             {
                 return NotFound();
@@ -46,7 +47,7 @@ namespace UtopiaCity.Controllers.Sport
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(SportComplexViewModel sportComplexViewModel)
+        public async Task<IActionResult> Create(SportComplexViewModel sportComplexViewModel)
         {
             if (sportComplexViewModel == null)
             {
@@ -54,14 +55,14 @@ namespace UtopiaCity.Controllers.Sport
             }
 
             SportComplex sportComplex = _mapper.Map<SportComplex>(sportComplexViewModel);
-            _sportComplexService.AddSportComplexToDb(sportComplex);
+            await Task.Run(() => _sportComplexService.AddSportComplexToDb(sportComplex));
             return RedirectToAction(nameof(AllSportComplexes));
         }
 
         [HttpGet]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
             if (sportComplex == null)
             {
                 return NotFound();
@@ -72,22 +73,22 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
             if (sportComplex == null)
             {
                 return NotFound();
             }
 
-            _sportComplexService.RemoveSportComplexFromDb(sportComplex);
+            await Task.Run(() => _sportComplexService.RemoveSportComplexFromDb(sportComplex));
             return RedirectToAction(nameof(AllSportComplexes));
         }
 
         [HttpGet]
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            SportComplex sportComplex = _sportComplexService.GetSportComplexById(id);
+            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
             if (sportComplex == null)
             {
                 return NotFound();
@@ -98,7 +99,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, SportComplexViewModel sportComplexViewModel)
+        public async Task<IActionResult> Edit(string id, SportComplexViewModel sportComplexViewModel)
         {
             if (id != sportComplexViewModel.SportComplexId)
             {
@@ -106,7 +107,7 @@ namespace UtopiaCity.Controllers.Sport
             }
 
             SportComplex sportComplex = _mapper.Map<SportComplex>(sportComplexViewModel);
-            _sportComplexService.UpdateSportComplexInDb(sportComplex);
+            await Task.Run(() => _sportComplexService.UpdateSportComplexInDb(sportComplex));
             return RedirectToAction(nameof(AllSportComplexes));
         }
     }

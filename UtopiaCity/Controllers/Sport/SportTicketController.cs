@@ -113,7 +113,7 @@ namespace UtopiaCity.Controllers.Sport
                 ReminderDate = sportTicketViewModel.DateOfTheEvent
             };
 
-            _citizenTaskService.AddCitizenTask(citizensTask);
+            _ = _citizenTaskService.AddCitizenTask(citizensTask);
             return RedirectToAction(nameof(AllSportTickets));
         }
 
@@ -155,7 +155,7 @@ namespace UtopiaCity.Controllers.Sport
             _sportTicketService.RemoveSportTicketFromDb(sportTicket);
             if (task != null)
             {
-                _citizenTaskService.DeleteCitizenTask(task);
+                _=_citizenTaskService.DeleteCitizenTask(task);
             }
 
             return RedirectToAction(nameof(AllSportTickets));
