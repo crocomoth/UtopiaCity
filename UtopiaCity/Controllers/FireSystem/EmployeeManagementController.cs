@@ -8,7 +8,6 @@ using UtopiaCity.Services.FireSystem;
 
 namespace UtopiaCity.Controllers.FireSystem
 {
-
     public class EmployeeManagementController : Controller
     {
         private readonly EmployeeManagementService _employeeManagementService;

@@ -19,12 +19,12 @@ namespace UtopiaCity.Services.FireSystem
 
         public async Task<FireMessage> GetFireMessageById(string id)
         {
-            return await _dbContext.FireMessages.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            return await _dbContext.FireMessage.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         public virtual async Task<List<FireMessage>> GetFireMessages()
         {
-            return await _dbContext.FireMessages.ToListAsync();
+            return await _dbContext.FireMessage.ToListAsync();
         }
 
         public async Task AddFireMessage(FireMessage message)

@@ -6,25 +6,24 @@ using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 using UtopiaCity.Models.FireSystem;
 
-
 namespace UtopiaCity.Common.Initializers
 {
     public class FireMessageInitializer : ISubDbInitializer
     {
         public void ClearSet(ApplicationDbContext context)
         {
-            if (!context.FireMessages.Any())
+            if (!context.FireMessage.Any())
             {
                 return;
             }
 
-            context.RemoveRange(context.FireMessages.ToList());
+            context.RemoveRange(context.FireMessage.ToList());
             context.SaveChanges();
         }
 
         public void InitializeSet(ApplicationDbContext context)
         {
-            if (context.FireMessages.Any())
+            if (context.FireMessage.Any())
             {
                 return;
             }

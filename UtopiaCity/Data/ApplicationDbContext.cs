@@ -84,9 +84,9 @@ namespace UtopiaCity.Data
         public DbSet<ArrivingPassenger> ArrivingPassengers { get; set; }
         public DbSet<ClinicVisit> ClinicVisit { get; set; }
         public DbSet<RealEstate> RealEstate { get; set; }
-        public DbSet<FireMessage> FireMessages { get; set; }
-        public DbSet<FireSafetyCheck> FireSafetyChecks { get; set; }
-        public DbSet<TransportManagement> TransportsManagements { get; set; }
+        public DbSet<FireMessage> FireMessage { get; set; }
+        public DbSet<FireSafetyCheck> FireSafetyCheck { get; set; }
+        public DbSet<TransportManagement> TransportsManagement { get; set; }
         public DbSet<EmployeeManagement> EmployeesManagement { get; set; }
     }
 }

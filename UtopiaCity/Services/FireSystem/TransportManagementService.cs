@@ -19,12 +19,12 @@ namespace UtopiaCity.Services.FireSystem
 
         public async Task<TransportManagement> GetTrasportById(string id)
         {
-            return await _dbContext.TransportsManagements.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            return await _dbContext.TransportsManagement.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         public virtual async Task<List<TransportManagement>> GetTrasports()
         {
-            return await _dbContext.TransportsManagements.ToListAsync();
+            return await _dbContext.TransportsManagement.ToListAsync();
         }
 
         public async Task AddTransport(TransportManagement transport)
