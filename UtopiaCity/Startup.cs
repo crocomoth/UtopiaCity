@@ -75,7 +75,7 @@ namespace UtopiaCity
             services.AddScoped<FireMessageService, FireMessageService>();
             services.AddScoped<EmployeeManagementService, EmployeeManagementService>();
             services.AddScoped<TransportManagementService, TransportManagementService>();
-
+            services.AddScoped<CitizenFriendsService, CitizenFriendsService>();
             services.AddScoped<RealEstateService, RealEstateService>();
             services.AddTransient<IMailService, NullMailService>();
 
