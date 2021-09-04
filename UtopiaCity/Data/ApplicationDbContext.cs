@@ -83,5 +83,6 @@ namespace UtopiaCity.Data
         public DbSet<ClinicVisit> ClinicVisit { get; set; }
         public DbSet<Friend> Friend { get; set; }
         public DbSet<RealEstate> RealEstate { get; set; }
+        public DbSet<CheckedFlight> CheckedFlights { get; set; }
     }
 }

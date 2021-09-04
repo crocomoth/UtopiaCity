@@ -49,6 +49,22 @@ namespace UtopiaCity.Helpers.Automapper
                        map => map.MapFrom(source => source.PassengerGender))
                        .ForMember(destination => destination.Marriage,
                        map => map.MapFrom(source => source.PassengerMarriageStatus));
+
+            CreateMap<Flight, CheckedFlight>()
+                       .ForMember(destination => destination.CheckedArrivalTime,
+                       map => map.MapFrom(source => source.ArrivalTime))
+                       .ForMember(destination => destination.CheckedDepartureTime,
+                       map => map.MapFrom(source => source.DepartureTime))
+                       .ForMember(destination => destination.CheckedLocationPoint,
+                       map => map.MapFrom(source => source.LocationPoint))
+                       .ForMember(destination => destination.CheckedDestinationPoint,
+                       map => map.MapFrom(source => source.DestinationPoint))
+                       .ForMember(destination => destination.CheckedFlightNumber,
+                       map => map.MapFrom(source => source.FlightNumber))
+                       .ForMember(destination => destination.CheckedTypeOfAircraft,
+                       map => map.MapFrom(source => source.TypeOfAircraft))
+                       .ForMember(destination => destination.CheckedWeather,
+                       map => map.MapFrom(source => source.Weather));
         }
     }
 }

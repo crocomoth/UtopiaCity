@@ -72,6 +72,7 @@ namespace UtopiaCity
             services.AddScoped<PassengerService, PassengerService>();
             services.AddScoped<ClinicVisitService, ClinicVisitService>();
             services.AddScoped<CitizenFriendsService, CitizenFriendsService>();
+            services.AddScoped<CheckedFlightService, CheckedFlightService>();
 
 
             services.AddScoped<RealEstateService, RealEstateService>();
