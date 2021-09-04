@@ -16,5 +16,7 @@ namespace UtopiaCity.Models.Airport.TransportManagerSystem
         public string ForPassengerId { get; set; }
         public ForPassenger ForPassenger { get; set; }
 
+        public string ForCompanyId { get; set; }
+        public ForCompany ForCompany { get; set; }
     }
 }

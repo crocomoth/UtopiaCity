@@ -1,62 +1,104 @@
 ﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.TimelineModel>
-
+@addTagHelper *, UtopiaCity
 @{
-    ViewData["Title"] = "ListTimelineView";
+    string name = "Timeline-22";
+    ViewData["Title"] = name;
 }
 
-<h1>ListTimelineView</h1>
+<h1>Главная Timeline-22</h1>
+
+<data></data>
+<div class="clock"></div>
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+            clockUpdate();
+            setInterval(clockUpdate, 1000);
+        })
+
+        function clockUpdate() {
+            var date = new Date();
+            $('.clock').css({ 'color': '#212529', 'font-size': '16px' });
+            function addZero(x) {
+                if (x < 10) {
+                    return x = '0' + x;
+                } else {
+                    return x;
+                }
+            }
+
+            function twelveHour(x) {
+                if (x > 24) {
+                    return x = x - 24;
+                } else if (x == 0) {
+                    return x = 24;
+                } else {
+                    return x;
+                }
+            }
+
+            var h = addZero(twelveHour(date.getHours()));
+            var m = addZero(date.getMinutes());
+            var s = addZero(date.getSeconds());
+
+            $('.clock').text(h + ':' + m + ':' + s)
+        }</script>
+}
+
 <ul class="navbar-nav flex-grow-1">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">ScheduleListView</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">Расписание</a>
 
-        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">PermitedConditonsView</a>
-        
+        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">Разрешенные условия</a>
+
+        <a class="nav-link text-dark" asp-area="" asp-controller="OverrideBreadcrumb" asp-action="Index">Хлебные Крошки</a>
     </li>
 </ul>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DayAndYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TranscriptionOfPermission)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UniqueRules)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DayAndYear)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Schedule)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TranscriptionOfPermission)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UniqueRules)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DayAndYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Schedule)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TranscriptionOfPermission)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UniqueRules)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DayAndYear)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Schedule)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TranscriptionOfPermission)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UniqueRules)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

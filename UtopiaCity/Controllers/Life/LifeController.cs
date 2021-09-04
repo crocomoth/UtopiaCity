@@ -13,7 +13,7 @@ namespace UtopiaCity.Controllers.Life
 {
     public class LifeController : Controller
     {
-        private readonly LifeService _service;
+        private readonly LifeService _service;                // Implement the DI pattern 
         public LifeController(LifeService service)
         {
             _service = service;

@@ -1,0 +1,56 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Marriage</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MarriageId" />
+            <div class="form-group">
+                <label asp-for="FirstPersonId" class="control-label">Husband</label>
+                <select asp-for="FirstPersonId" class="form-control">
+                    @{var account1 = Model.ResidentAccounts.Where(a => a.Id == Model.FirstPersonId).FirstOrDefault();}
+                    <option value="@account1.Id">@account1.FirstName @account1.FamilyName | @account1.BirthDate.ToShortDateString()</option>
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Male") && (a.MarriageId == null)))
+                    {
+                        <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondPersonId" class="control-label">Wife</label>
+                <select asp-for="SecondPersonId" class="form-control">
+                    @{var account2 = Model.ResidentAccounts.Where(a => a.Id == Model.SecondPersonId).FirstOrDefault();}
+                    <option option value="@account2.Id">@account2.FirstName @account2.FamilyName | @account2.BirthDate.ToShortDateString()</option>
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Female") && (a.MarriageId == null)))
+                    {
+                        <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarriageDate" class="control-label"></label>
+                <input asp-for="MarriageDate" class="form-control" />
+                <span asp-validation-for="MarriageDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

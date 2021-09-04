@@ -4,40 +4,38 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.CityAdministration;
+using UtopiaCity.Models.TimelineModel;
+using UtopiaCity.Services.Airport;
 
 namespace UtopiaCity.Controllers.Airport
 {
     public class TicketController:Controller
     {
-        private readonly ApplicationDbContext _dbContext;
-        public TicketController(ApplicationDbContext context)
+        private readonly TicketService _ticketService;
+        public TicketController(TicketService ticket)
         {
-            _dbContext = context;
+            _ticketService = ticket;
         }
 
         public IActionResult Index()
         {
-            var ticket = _dbContext.Tickets.Include(t => t.Flight).Include(t => t.PermitedModel).Include(t => t.RersidentAccount);
-            return View("TicketsListView", ticket.ToList());
+            return View("TicketsListView", _ticketService.GetTicketsComplex());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            SelectList flights = new SelectList(_dbContext.Flights, "Id", "FlightNumber");
-            SelectList accounts = new SelectList(_dbContext.RersidentAccount, "Id", "FirstName");
-            SelectList permissions = new SelectList(_dbContext.PermitedModel, "Id", "PermissionStatus");
-            ViewBag.Flights = flights;
-            ViewBag.RersidentAccount = accounts;
-            ViewBag.PermitedModel = permissions;
+            ViewBag.Flights = _ticketService.GetSelectListOfContextFlights("Id", "FlightNumber");
+            ViewBag.ResidentAccount = _ticketService.GetSelectListOfContextResidents("Id", "FirstName");
+            ViewBag.PermitedModel = _ticketService.GetSelectListOfContextPermissions("Id", "PermissionStatus");
             return View("TicketsCreateView");
         }
 
         [HttpPost]
         public IActionResult Create(Ticket ticket)
         {
-            _dbContext.Tickets.Add(ticket);
-            _dbContext.SaveChanges();
+            _ticketService.AddTickets(ticket);
             return RedirectToAction(nameof(Index));
         }
 
@@ -49,11 +47,7 @@ namespace UtopiaCity.Controllers.Airport
                 return NotFound();
             }
 
-            var ticket = _dbContext.Tickets
-                                           .Include(t => t.Flight)
-                                           .Include(t => t.PermitedModel)
-                                           .Include(t => t.RersidentAccount)
-                                           .FirstOrDefault(m => m.Id == id);
+            var ticket = _ticketService.GetTicketComplexById(id);
             if (ticket is null)
             {
                 return NotFound();
@@ -64,9 +58,8 @@ namespace UtopiaCity.Controllers.Airport
         [HttpPost, ActionName("TicketsDeleteView")]
         public IActionResult DeleteConfirmed(string id)
         {
-            var ticket = _dbContext.Tickets.Find(id);
-            _dbContext.Tickets.Remove(ticket);
-            _dbContext.SaveChanges();
+            var ticket = _ticketService.FindTicketById(id);
+            _ticketService.DeleteTicket(ticket);
             return RedirectToAction(nameof(Index));
         }
     }

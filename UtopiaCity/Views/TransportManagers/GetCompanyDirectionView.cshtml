@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "GetCompanyDirectionView";
+}
+
+<h1>Choose Direction</h1>
+<h4>Where do you need?</h4>
+<a asp-action="CreateForCompanyTo">
+    <div class="form-group">
+        <input type="submit" value="to Airport" class="btn btn-primary" />
+    </div>
+</a>
+<a asp-action="CreateForCompanyFrom">
+    <div class="form-group">
+        <input type="submit" value="from Airport to another country" class="btn btn-primary" />
+    </div>
+</a>
+<p>
+    <a asp-action="Index">To Order List</a>
+</p>

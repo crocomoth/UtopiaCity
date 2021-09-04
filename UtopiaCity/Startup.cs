@@ -6,18 +6,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 using UtopiaCity.Common;
 using UtopiaCity.Data;
 using UtopiaCity.Services.CityAdministration;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Services.Business;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.Life;
-using UtopiaCity.Services.PublicCatering.Reservation;
-using UtopiaCity.Services.PublicCatering.RestaurantType;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
+using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Services.CitizenAccount;
+using UtopiaCity.Services.Clinic;
+using UtopiaCity.Services.HousingSystem;
 
 namespace UtopiaCity
 {
@@ -33,12 +34,10 @@ namespace UtopiaCity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddControllersWithViews().AddViewLocalization();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -47,25 +46,36 @@ namespace UtopiaCity
             #region Services
 
             services.AddScoped<EmergencyReportService, EmergencyReportService>();
-          
             services.AddScoped<ResidentAccountService, ResidentAccountService>();
-          
+            services.AddScoped<MarriageService, MarriageService>();
             services.AddScoped<SportComplexService, SportComplexService>();
-
+            services.AddScoped<SportEventService, SportEventService>();
+            services.AddScoped<SportTicketService, SportTicketService>();
+            services.AddScoped<RequestToAdministrationService, RequestToAdministrationService>();
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
-
             services.AddScoped<TimelineService, TimelineService>();
-
             services.AddScoped<ScheduleService, ScheduleService>();
-
             services.AddScoped<PermitedConditonsService, PermitedConditonsService>();
-
-            services.AddScoped<FlightService, FlightService>();
-            services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<LifeService, LifeService>();
-            services.AddScoped<ReservationService, ReservationService>();
-            services.AddScoped<RestaurantTypeService, RestaurantTypeService>();
+            services.AddScoped<IRouteApi, FlightRouteApiService>();
+            services.AddScoped<BankService, BankService>();
+            services.AddScoped<CompanyStatusService, CompanyStatusService>();
+            services.AddScoped<CompanyAppService, CompanyAppService>();
+            services.AddScoped<VacancyAppService, VacancyAppService>();
+            services.AddScoped<ProfessionAppService, ProfessionAppService>();
+            services.AddScoped<EmployeeAppService, EmployeeAppService>();
+            services.AddScoped<CitizensAccountService, CitizensAccountService>();
+            services.AddScoped<CitizenTaskService, CitizenTaskService>();
+            services.AddScoped<ResumeAppService, ResumeAppService>();
+            services.AddScoped<TicketService, TicketService>();
+            services.AddScoped<PassengerService, PassengerService>();
+            services.AddScoped<ClinicVisitService, ClinicVisitService>();
+            services.AddScoped<CitizenFriendsService, CitizenFriendsService>();
+
+
+            services.AddScoped<RealEstateService, RealEstateService>();
+            services.AddTransient<IMailService, NullMailService>();
 
             #endregion
 
@@ -105,17 +115,6 @@ namespace UtopiaCity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var supportedCultures = new[]
-            {
-                new CultureInfo("en"),
-                new CultureInfo("ru")
-            };
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            });
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

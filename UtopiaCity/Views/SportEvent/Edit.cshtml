@@ -1,0 +1,52 @@
+﻿@model SportEventViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>SportEvent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.SportEventId" />
+            <input type="hidden" asp-for="@Model.SportComplexId" />
+            <div class="input-group mb-3">
+                <label asp-for="@Model.SportEventTitle" class="input-group-text"></label>
+                <input asp-for="@Model.SportEventTitle" class="form-control" />
+                <span asp-validation-for="@Model.SportEventTitle" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="@Model.DateOfTheEvent" class="input-group-text"></label>
+                <input asp-for="@Model.DateOfTheEvent" class="form-control" />
+                <span asp-validation-for="@Model.DateOfTheEvent" class="text-danger"></span>
+            </div>
+            <div class="input-group mb-3">
+                <label asp-for="@Model.SportComplexTitle" class="input-group-text"></label>
+                <select asp-for="@Model.SportComplexTitle" class="form-control">
+                    @foreach (var sportComplexTitle in ViewBag.SportComplexesTitles)
+                    {
+                        <option value="@sportComplexTitle">
+                            @sportComplexTitle
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.SportComplexTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-secondary" role="button" asp-action="AllSportEvents">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

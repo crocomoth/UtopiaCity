@@ -12,10 +12,12 @@ namespace UtopiaCity.Models.Airport
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-        public int FlightNumber { get; set; }        
+        public int FlightNumber { get; set; }
         public DateTime ArrivalTime { get; set; }
         public DateTime DepartureTime { get; set; }
-        public string Destination { get; set; }
+        public string DestinationPoint { get; set; }
+        public string LocationPoint { get; set; }
+        public string TypeOfAircraft { get; set; }
         public string Weather { get; set; }
     }
 }

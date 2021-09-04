@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SportEventViewModel>
+
+@{
+    ViewData["Title"] = "AllSportEvents";
+}
+
+<h1>AllSportEvents</h1>
+
+<p>
+    <a class="btn btn-outline-primary" role="button" asp-action="Create">Create New</a> |
+    <a class="btn btn-outline-dark" role="button" asp-controller="SportComplex" asp-action="AllSportComplexes">Sport Complexes</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SportEventTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfTheEvent)
+            </th>
+            <th>
+                Sport Complex
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SportEventTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfTheEvent)
+                </td>
+                <td>
+                    <a asp-controller="SportComplex" asp-action="Details" asp-route-id="@item.SportComplexId">@item.SportComplexTitle</a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-success btn-sm" role="button" asp-action="Edit" asp-route-id="@item.SportEventId">Edit</a> |
+                    <a class="btn btn-outline-info btn-sm" role="button" asp-action="Details" asp-route-id="@item.SportEventId">Details</a> |
+                    <a class="btn btn-outline-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.SportEventId">Delete</a> |
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-outline-warning btn-sm" role="button" asp-controller="SportTicket" asp-action="Create" asp-route-id="@item.SportEventId">Buy Ticket</a>
+                    }
+                    else 
+                    {
+                        <p>Tickets are avaiable for authenticated users</p>    
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

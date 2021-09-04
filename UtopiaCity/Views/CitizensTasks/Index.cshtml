@@ -1,0 +1,26 @@
+﻿@model IEnumerable<UtopiaCity.Models.CitizenAccount.CitizensTask>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Task List</h1>
+<p>
+    <a asp-action="Create">Create New Task</a>
+</p>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card border-primary mb-3" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="card-header">@item.Description</div>
+                    <p class="card-text">@item.ReminderDate</p>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

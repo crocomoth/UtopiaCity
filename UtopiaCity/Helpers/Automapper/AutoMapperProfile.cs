@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using UtopiaCity.Models.Airport;
+using UtopiaCity.Models.CityAdministration;
+using UtopiaCity.Models.TimelineModel;
 
 namespace UtopiaCity.Helpers.Automapper
 {
@@ -12,8 +15,6 @@ namespace UtopiaCity.Helpers.Automapper
         public AutoMapperProfile()
         {
             CreateMap<UtopiaCity.Models.Life.WeatherReport.Data, UtopiaCity.Models.Airport.WeatherReport>()
-                       .ForMember(destination => destination.Days,
-                       map => map.MapFrom(source => source.Date))
                        .ForMember(destination => destination.Id,
                        map => map.MapFrom(source => Guid.NewGuid().ToString()))
                        .ForMember(destination => destination.Moisture,
@@ -28,6 +29,26 @@ namespace UtopiaCity.Helpers.Automapper
                        map => map.MapFrom(source => source.Wind.Speed.ToString()))
                        .ForMember(destination => destination.FlightWeather,
                        map => map.MapFrom(source => ""));
+
+            CreateMap<WeatherReport, PermitedModel>()
+                       .ForMember(destination => destination.PermissionStatus,
+                       map => map.MapFrom(source => source.FlightWeather))
+                       .ForMember(destination => destination.SpeedOfWind,
+                       map => map.MapFrom(source => source.Wind))
+                       .ForMember(destination => destination.Rainfall,
+                       map => map.MapFrom(source => source.Rainfall));
+
+            CreateMap<ArrivingPassenger, ResidentAccount>()
+                       .ForMember(destination => destination.FirstName,
+                       map => map.MapFrom(source => source.PassengerFirstName))
+                       .ForMember(destination => destination.FamilyName,
+                       map => map.MapFrom(source => source.PassengerFamilyName))
+                       .ForMember(destination => destination.BirthDate,
+                       map => map.MapFrom(source => source.PassengerBirthDate))
+                       .ForMember(destination => destination.Gender,
+                       map => map.MapFrom(source => source.PassengerGender))
+                       .ForMember(destination => destination.Marriage,
+                       map => map.MapFrom(source => source.PassengerMarriageStatus));
         }
     }
 }

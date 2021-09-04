@@ -6,31 +6,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
-    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
-    <Compile Update="Resources\Controllers\PublicCatering\RestaurantListView.en.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>RestaurantListView.en.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Controllers\PublicCatering\RestaurantListView.ru.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>RestaurantListView.ru.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Views\PublicCatering\Restaurant\RestaurantsListView.en.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>RestaurantListView.en.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Views\PublicCatering\Restaurant\RestaurantsListView.ru.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>RestaurantListView.ru.resx</DependentUpon>
-    </Compile>
+    <Compile Remove="Data\Migrations\20210819055244_SportTicket.cs" />
+    <Compile Remove="Data\Migrations\20210819055244_SportTicket.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210819122726_FromTimelineDev.cs" />
+    <Compile Remove="Data\Migrations\20210819122726_FromTimelineDev.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823044711_AddedAvailablePropertyForSportComplex.cs" />
+    <Compile Remove="Data\Migrations\20210823044711_AddedAvailablePropertyForSportComplex.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823074243_RequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823074243_RequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823085651_RelationsBetweenSportComplexAndRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823085651_RelationsBetweenSportComplexAndRequestToAdministration.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.16" />
@@ -46,22 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Controllers\PublicCatering\RestaurantListView.en.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RestaurantListView.en.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Controllers\PublicCatering\RestaurantListView.ru.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RestaurantListView.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\PublicCatering\Restaurant\RestaurantsListView.en.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RestaurantsListView.en.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\PublicCatering\Restaurant\RestaurantsListView.ru.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RestaurantsListView.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Folder Include="Services\Common\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,11 @@ using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Services.Airport;
+using UtopiaCity.Utils;
 
 namespace UtopiaCity.Controllers.Airport
 {
-    public class FlightController:Controller
+    public class FlightController: Controller
     {
         private FlightService _flightService;
 
@@ -42,6 +44,7 @@ namespace UtopiaCity.Controllers.Airport
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["TypeOfAircraft"] = new SelectList(_flightService.GetListOfPlaneTypes());
             return View("FlightCreateView");
         }
 
@@ -50,7 +53,9 @@ namespace UtopiaCity.Controllers.Airport
         {
             if (ModelState.IsValid)
             {
-                newFlight.FlightNumber = _flightService.GetRandomFlightNumber();
+                newFlight.FlightNumber = RandomUtil.GenerateRandomString(150).FirstOrDefault();
+                var arrivalTime = _flightService.GetArrivalTime(newFlight.DepartureTime, newFlight.LocationPoint, newFlight.DestinationPoint, newFlight.TypeOfAircraft);
+                newFlight.ArrivalTime = arrivalTime;
                 _flightService.AddFlight(newFlight);
                 return RedirectToAction(nameof(Index));
             }
@@ -92,6 +97,10 @@ namespace UtopiaCity.Controllers.Airport
             return View("FlightEditView", edited);
         }
 
+        // ToDo: Add jquery/ajax request to the View of the Edit method, 
+        // for making travel time data in the form dynamically changeable
+
+
         [HttpGet]
         public IActionResult Delete(string id)
         {
@@ -120,6 +129,6 @@ namespace UtopiaCity.Controllers.Airport
 
             _flightService.DeleteFlight(flight);
             return RedirectToAction(nameof(Index));
-        }
+        }       
     }
 }
