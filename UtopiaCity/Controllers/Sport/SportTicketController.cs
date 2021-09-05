@@ -36,9 +36,9 @@ namespace UtopiaCity.Controllers.Sport
             _userId = GetInformationAboutAuthenticatedUser.GetAuthenticatedUsersId(httpContextAccessor);
         }
 
-        public IActionResult AllSportTickets()
+        public async Task<IActionResult> AllSportTickets()
         {
-            List<SportTicket> sportTickets = _sportTicketService.GetAllSportTickets(_userId);
+            List<SportTicket> sportTickets = await _sportTicketService.GetAllSportTickets(_userId);
             if (sportTickets == null)
             {
                 return View("Error", "Some problems. Please, try again");
@@ -111,7 +111,7 @@ namespace UtopiaCity.Controllers.Sport
             sportTicket.SportComplexId = sportComplexId;
             sportTicket.SportEventId = sportEventId;
             sportTicket.AppUserId = _userId;
-            _sportTicketService.AddSportTicketToDb(sportTicket);
+            await _sportTicketService.AddSportTicketToDb(sportTicket);
 
             CitizensTask citizensTask = new CitizensTask
             {
@@ -125,14 +125,14 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again");
             }
 
-            SportTicket sportTicket = _sportTicketService.GetSportTicketById(id);
+            SportTicket sportTicket = await _sportTicketService.GetSportTicketById(id);
             if (sportTicket == null)
             {
                 return View("Error", "Sport ticket not found." + Environment.NewLine + "Please, try again");
@@ -150,7 +150,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again");
             }
 
-            SportTicket sportTicket = _sportTicketService.GetSportTicketById(id);
+            SportTicket sportTicket = await _sportTicketService.GetSportTicketById(id);
             if (sportTicket == null)
             {
                 return View("Error", "Sport ticket not found." + Environment.NewLine + "Please, try again");
@@ -158,7 +158,7 @@ namespace UtopiaCity.Controllers.Sport
 
             var tasks = await _citizenTaskService.GetTasksByReminderDate(_userId);
             var task = tasks.FirstOrDefault(x => x.Description.Equals(sportTicket.SportEvent.Title));
-            _sportTicketService.RemoveSportTicketFromDb(sportTicket);
+            await _sportTicketService.RemoveSportTicketFromDb(sportTicket);
             if (task != null)
             {
                 await _citizenTaskService.DeleteCitizenTask(task);
@@ -167,14 +167,14 @@ namespace UtopiaCity.Controllers.Sport
             return RedirectToAction(nameof(AllSportTickets));
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again");
             }
 
-            SportTicket sportTicket = _sportTicketService.GetSportTicketById(id);
+            SportTicket sportTicket = await _sportTicketService.GetSportTicketById(id);
             if (sportTicket == null)
             {
                 return View("Error", "Sport ticket not found." + Environment.NewLine + "Please, try again");

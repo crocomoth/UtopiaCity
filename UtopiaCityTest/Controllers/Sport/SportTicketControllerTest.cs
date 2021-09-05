@@ -62,12 +62,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void AllSportTickets_ModelObjectType_List_ReturnsDefaultView()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetAllSportTickets("1")).Returns(new List<SportTicket>());
+            _sportTicketService.Setup(x => x.GetAllSportTickets("1")).ReturnsAsync(new List<SportTicket>());
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.AllSportTickets() as ViewResult;
+            ViewResult result = controller.AllSportTickets().GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.NotNull(result);
@@ -99,12 +99,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodGet_ModelObjectType_SportTicketViewModel_ReturnsDefaultView()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).Returns(_sportTicketForTests);
+            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Delete("1") as ViewResult;
+            ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.NotNull(result);
@@ -116,12 +116,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Details_ModelObjectType_SportTicketViewModel_ReturnsDefaultView()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).Returns(_sportTicketForTests);
+            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Details("1") as ViewResult;
+            ViewResult result = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.NotNull(result);
@@ -154,7 +154,7 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportTicketForTests.SportEvent = _sportEventForTests;
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).Returns(_sportTicketForTests);
+            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
             _sportTicketService.Setup(x => x.RemoveSportTicketFromDb(_sportTicketForTests));
             _citizensTaskService.Setup(x => x.GetTasksByReminderDate("1")).ReturnsAsync(_citizensTasks);
             _appUserAccountService.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
@@ -175,12 +175,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void AllSportTickets_IdNull_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetAllSportTickets("1")).Returns(default(List<SportTicket>));
+            _sportTicketService.Setup(x => x.GetAllSportTickets("1")).ReturnsAsync(default(List<SportTicket>));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.AllSportTickets() as ViewResult;
+            ViewResult result = controller.AllSportTickets().GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -268,7 +268,7 @@ namespace UtopiaCityTest.Controllers.Sport
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Delete(null) as ViewResult;
+            ViewResult result = controller.Delete(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -278,12 +278,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodGet_SportTicketNull_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).Returns(default(SportTicket));
+            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Delete("1") as ViewResult;
+            ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -307,7 +307,7 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodPost_SportTicketNull_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).Returns(default(SportTicket));
+            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
@@ -326,7 +326,7 @@ namespace UtopiaCityTest.Controllers.Sport
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Details(null) as ViewResult;
+            ViewResult result = controller.Details(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -336,12 +336,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Details_SportTicketNull_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).Returns(default(SportTicket));
+            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Details("1") as ViewResult;
+            ViewResult result = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
