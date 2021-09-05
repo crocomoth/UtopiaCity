@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CityAdministration;
+using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Services.CityAdministration;
 using UtopiaCityTest.Services;
 using Xunit;
@@ -25,9 +26,9 @@ namespace UtopiaCityTest.CityAdministration.Services
 
             using (var context = new ApplicationDbContext(localOptions))
             {
-                context.ResidentAccount.Add(new ResidentAccount { Id = "1", FirstName = "Daniil", FamilyName = "Andreev", BirthDate = new DateTime(1984, 08, 14), Gender = "Male" });
-                context.ResidentAccount.Add(new ResidentAccount { Id = "2", FirstName = "Ksenija", FamilyName = "Belova", BirthDate = new DateTime(2001, 12, 30), Gender = "Female" });
-                context.ResidentAccount.Add(new ResidentAccount { Id = "3", FirstName = "Diana", FamilyName = "Makarova", BirthDate = new DateTime(1986, 07, 25), Gender = "Female" });
+                context.ResidentAccount.Add(new ResidentAccount { Id = "1", FirstName = "Daniil", FamilyName = "Andreev", BirthDate = new DateTime(1984, 08, 14), Gender = Gender.Male });
+                context.ResidentAccount.Add(new ResidentAccount { Id = "2", FirstName = "Ksenija", FamilyName = "Belova", BirthDate = new DateTime(2001, 12, 30), Gender = Gender.Female });
+                context.ResidentAccount.Add(new ResidentAccount { Id = "3", FirstName = "Diana", FamilyName = "Makarova", BirthDate = new DateTime(1986, 07, 25), Gender = Gender.Female });
 
                 context.SaveChanges();
             }

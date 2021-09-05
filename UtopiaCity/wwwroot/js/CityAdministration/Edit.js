@@ -40,7 +40,7 @@ document.forms["accountForm"].addEventListener("submit", e => {
     const firstName = form.elements["firstName"].value;
     const familyName = form.elements["familyName"].value;
     const birthDate = form.elements["birthDate"].value;
-    const gender = form.elements["gender"].value;
+    const gender = form.elements["gender"].value == "0" ? 0 : 1;
     const marriageId = form.elements["marriageId"].value == "" ? null : form.elements["marriageId"].value;
     const birthPlace = form.elements["birthPlace"].value;
     const registrationAddress = form.elements["registrationAddress"].value;

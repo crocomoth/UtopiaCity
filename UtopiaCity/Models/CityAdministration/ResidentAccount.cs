@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UtopiaCity.Models.CitizenAccount;
 
 namespace UtopiaCity.Models.CityAdministration
 {
@@ -19,7 +20,7 @@ namespace UtopiaCity.Models.CityAdministration
         [Column(TypeName = "date"), Required]
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; }
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [ScaffoldColumn(false)]
         public string MarriageId { get; set; }

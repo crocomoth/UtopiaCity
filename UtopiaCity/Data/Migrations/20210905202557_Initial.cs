@@ -485,7 +485,7 @@ namespace UtopiaCity.Data.Migrations
                     FamilyName = table.Column<string>(nullable: false),
                     BirthDate = table.Column<DateTime>(type: "date", nullable: false),
                     BirthPlace = table.Column<string>(nullable: true),
-                    Gender = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: false),
                     MarriageId = table.Column<string>(nullable: true),
                     RegistrationAddress = table.Column<string>(nullable: true),
                     Property = table.Column<string>(nullable: true),
