@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.ViewModels.Sport;
@@ -25,67 +26,71 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of all requests to the city administration.
         /// </summary>
         /// <returns>List of all existing requests to the city administration.</returns>
-        public List<RequestToAdministration> GetAllRequestsToAdministration() => _dbContext.RequestsToAdministration
-            .Include(x => x.SportComplex).ToList();
+        public async Task<List<RequestToAdministration>> GetAllRequestsToAdministration()
+            => await _dbContext.RequestsToAdministration
+                .Include(x => x.SportComplex)
+                .ToListAsync();
 
         /// <summary>
         /// Gets list of all requests to the city administation by sport complex's id>.
         /// </summary>
         /// <param name="sportComplexId">Id of sport complex</param>
         /// <returns>List of all existing requests to the city administration.</returns>
-        public List<RequestToAdministration> GetRequestsToAdministrationBySportComplexId(string sportComplexId) => _dbContext
-            .RequestsToAdministration
-            .Include(x => x.SportComplex)
-            .Where(x => x.SportComplexId.Equals(sportComplexId))
-            .ToList();
+        public async Task<List<RequestToAdministration>> GetRequestsToAdministrationBySportComplexId(string sportComplexId)
+            => await _dbContext.RequestsToAdministration
+                .Include(x => x.SportComplex)
+                .Where(x => x.SportComplexId.Equals(sportComplexId))
+                .ToListAsync();
 
         /// <summary>
         /// Gets list of all requests to the city administation by the date>.
         /// </summary>
         /// <param name="date">Date of request</param>
         /// <returns>List of all existing requests to the city administration.</returns>
-        public List<RequestToAdministration> GetRequestsToAdministrationByDate(DateTime date) => _dbContext.RequestsToAdministration
-            .Include(x => x.SportComplex)
-            .Where(x => x.DateOfRequest.Date.Equals(date))
-            .ToList();
+        public async Task<List<RequestToAdministration>> GetRequestsToAdministrationByDate(DateTime date)
+            => await _dbContext.RequestsToAdministration
+                .Include(x => x.SportComplex)
+                .Where(x => x.DateOfRequest.Date.Equals(date))
+                .ToListAsync();
 
         /// <summary>
         /// Gets <see cref="RequestToAdministration"/> by Id.
         /// </summary>
         /// <param name="requestId">Id of request.</param>
         /// <returns>Request to the administration if it exists, otherwise null.</returns>
-        public RequestToAdministration GetRequestToAdministrationById(string requestId) => _dbContext.RequestsToAdministration
-            .Include(x => x.SportComplex)
-            .FirstOrDefault(x => x.Id.Equals(requestId));
+        public async Task<RequestToAdministration> GetRequestToAdministrationById(string requestId)
+            => await _dbContext.RequestsToAdministration
+                .Include(x => x.SportComplex)
+                .FirstOrDefaultAsync(x => x.Id.Equals(requestId));
 
         /// <summary>
         /// Method for adding new request to the administration to database.
         /// </summary>
         /// <param name="request">Request to the administation for adding.</param>
-        public void AddRequestToDb(RequestToAdministration request)
+        public async Task AddRequestToDb(RequestToAdministration request)
         {
             _dbContext.RequestsToAdministration.Add(request);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Method for updating request to the administration in database.
         /// </summary>
         /// <param name="request">Request to the administation for updating.</param>
-        public void UpdateRequestInDb(RequestToAdministration request)
+        public async Task UpdateRequestInDb(RequestToAdministration request)
         {
             _dbContext.RequestsToAdministration.Update(request);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Method for removing request to the administration from database.
         /// </summary>
         /// <param name="request">Request to the administation for removing.</param>
-        public void RemoveRequestFromDb(RequestToAdministration request)
+        public async Task RemoveRequestFromDb(RequestToAdministration request)
         {
             _dbContext.RequestsToAdministration.Remove(request);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
