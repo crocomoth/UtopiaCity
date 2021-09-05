@@ -22,7 +22,7 @@ namespace UtopiaCityTest.Controllers.Sport
             sportComplexServiceMock.Setup(x => x.GetAllSportComplexes()).ReturnsAsync(new List<SportComplex>());
 
             var sportEventServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportEventService>(applicationDbContextMock);
-            sportEventServiceMock.Setup(x => x.GetAllSportEvents()).Returns(new List<SportEvent>());
+            sportEventServiceMock.Setup(x => x.GetAllSportEvents()).ReturnsAsync(new List<SportEvent>());
 
             var lifeServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, LifeService>(applicationDbContextMock);
 

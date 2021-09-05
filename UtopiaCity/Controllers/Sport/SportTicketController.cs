@@ -61,7 +61,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect Id. Please, try again");
             }
 
-            SportEvent sportEvent = _sportEventService.GetSportEventByIdWithSportComplex(id);
+            SportEvent sportEvent = await _sportEventService.GetSportEventByIdWithSportComplex(id);
             if (sportEvent == null)
             {
                 return View("Error", "Some problems. Please, try again");
@@ -101,7 +101,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Incorrect sport complex chosen." + Environment.NewLine + "Please, try again");
             }
 
-            string sportEventId = _sportEventService.GetSportEventIdByTitle(sportTicketViewModel.SportEventTitle);
+            string sportEventId = await _sportEventService.GetSportEventIdByTitle(sportTicketViewModel.SportEventTitle);
             if (sportEventId == null)
             {
                 return View("Error", "Incorrect sport event chosen." + Environment.NewLine + "Please, try again");

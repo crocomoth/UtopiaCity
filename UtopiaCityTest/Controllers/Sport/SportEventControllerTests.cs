@@ -37,11 +37,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void AllSportEvents_ModelObjectType_List_ReturnsDefaultView()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetAllSportEvents()).Returns(new System.Collections.Generic.List<SportEvent>());
+            _sportEventService.Setup(x => x.GetAllSportEvents()).ReturnsAsync(new List<SportEvent>());
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.AllSportEvents() as ViewResult;
+            ViewResult result = controller.AllSportEvents().GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<List<SportEventViewModel>>(result.ViewData.Model);
@@ -68,11 +68,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodGet_ModelObjectType_SportEventViewModel_ReturnsDefaultPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).Returns(_sportEventForTests);
+            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(_sportEventForTests);
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Delete("1") as ViewResult;
+            ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<SportEventViewModel>(result.Model);
@@ -83,7 +83,7 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Edit_MethodGet_ModelObjectType_SportEventViewModel_ViewBagType_ListOfStrings_ReturnsDefaultPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventById("1")).Returns(_sportEventForTests);
+            _sportEventService.Setup(x => x.GetSportEventById("1")).ReturnsAsync(_sportEventForTests);
             _sportComplexService.Setup(x => x.GetAllSportComplexesTitles()).ReturnsAsync(new List<string>());
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
@@ -100,11 +100,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Details_ModelObjectType_SportEventViewModel_ReturnsDefaultPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).Returns(_sportEventForTests);
+            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(_sportEventForTests);
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Details("1") as ViewResult;
+            ViewResult result = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<SportEventViewModel>(result.Model);
@@ -131,12 +131,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodPost_RedirectsToAllSportEvents()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventById("1")).Returns(_sportEventForTests);
+            _sportEventService.Setup(x => x.GetSportEventById("1")).ReturnsAsync(_sportEventForTests);
             _sportEventService.Setup(x => x.RemoveSportEventFromDb(_sportEventForTests));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            RedirectToActionResult result = controller.DeleteConfirmed("1") as RedirectToActionResult;
+            RedirectToActionResult result = controller.DeleteConfirmed("1").GetAwaiter().GetResult() as RedirectToActionResult;
 
             //assert
             Assert.Equal("AllSportEvents", result.ActionName);
@@ -192,7 +192,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Delete(null) as ViewResult;
+            ViewResult result = controller.Delete(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -202,11 +202,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodGet_SportEventNull_ReturnsErrorPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).Returns(default(SportEvent));
+            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(default(SportEvent));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Delete("1") as ViewResult;
+            ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -219,7 +219,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.DeleteConfirmed(null) as ViewResult;
+            ViewResult result = controller.DeleteConfirmed(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -229,11 +229,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodPost_SportEventNull_ReturnsErrorPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventById("1")).Returns(default(SportEvent));
+            _sportEventService.Setup(x => x.GetSportEventById("1")).ReturnsAsync(default(SportEvent));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.DeleteConfirmed("1") as ViewResult;
+            ViewResult result = controller.DeleteConfirmed("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -256,7 +256,7 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Edit_MethodGet_SportEventNull_ReturnsErrorPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventById("1")).Returns(default(SportEvent));
+            _sportEventService.Setup(x => x.GetSportEventById("1")).ReturnsAsync(default(SportEvent));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
@@ -313,7 +313,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Details(null) as ViewResult;
+            ViewResult result = controller.Details(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -323,11 +323,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Details_SportEventNull_ReturnsErrorPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).Returns(default(SportEvent));
+            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(default(SportEvent));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Details("1") as ViewResult;
+            ViewResult result = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);

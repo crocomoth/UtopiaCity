@@ -80,8 +80,8 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportEventForTests.SportComplex = _sportComplexForTests;
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).Returns(_sportEventForTests);
-            _sportEventService.Setup(x => x.GetAllSportEventsTitles()).Returns(new List<string>());
+            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(_sportEventForTests);
+            _sportEventService.Setup(x => x.GetAllSportEventsTitles()).ReturnsAsync(new List<string>());
             _appUserAccountService.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
@@ -135,7 +135,7 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
-            _sportEventService.Setup(x => x.GetSportEventIdByTitle("title_1")).Returns("1");
+            _sportEventService.Setup(x => x.GetSportEventIdByTitle("title_1")).ReturnsAsync("1");
             _appUserAccountService.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
             _sportTicketService.Setup(x => x.AddSportTicketToDb(_sportTicketForTests));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
@@ -204,7 +204,7 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodGet_SportEventNull_ReturnsErrorPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).Returns(default(SportEvent));
+            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(default(SportEvent));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
@@ -234,7 +234,7 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
-            _sportEventService.Setup(x => x.GetSportEventIdByTitle("title_1")).Returns(default(string));
+            _sportEventService.Setup(x => x.GetSportEventIdByTitle("title_1")).ReturnsAsync(default(string));
             var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 

@@ -22,7 +22,7 @@ namespace UtopiaCity.Controllers.Sport
         public async Task<IActionResult> Index()
         {
             ViewBag.SportComplexes = await _sportComplexService.GetAllSportComplexes();
-            ViewBag.SportEvents = _sportEventService.GetAllSportEvents();
+            ViewBag.SportEvents = await _sportEventService.GetAllSportEvents();
             //ViewBag.SportAchievements = _lifeService.GetByEventType(EventType.Sport);
             return View();
         }
