@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UtopiaCity.Common;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
@@ -53,7 +54,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Create(string id)
+        public async Task<IActionResult> Create(string id)
         {
             if(id == null)
             {
@@ -66,6 +67,12 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Some problems. Please, try again");
             }
 
+            var appUser = await _appUserService.GetUserById(_userId);
+            if (appUser == null)
+            {
+                return View("Error", "App user not found. Please, try again");
+            }
+
             SportTicket sportTicket = new SportTicket
             {
                 SportComplexId = sportEvent.SportComplex.SportComplexId,
@@ -73,7 +80,7 @@ namespace UtopiaCity.Controllers.Sport
                 AppUserId = _userId,
                 SportComplex = sportEvent.SportComplex,
                 SportEvent = sportEvent,
-                AppUser = _appUserService.GetUserById(_userId).Result
+                AppUser = appUser
             };
 
             var sportTicketViewModel = _mapper.Map<SportTicketViewModel>(sportTicket);
@@ -81,14 +88,14 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost]
-        public IActionResult Create(SportTicketViewModel sportTicketViewModel)
+        public async Task<IActionResult> Create(SportTicketViewModel sportTicketViewModel)
         {
             if (sportTicketViewModel == null)
             {
                 return View("Error", "You made mistakers while creating new Sport Ticket. Please, try again");
             }
 
-            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(sportTicketViewModel.SportComplexTitle);
+            string sportComplexId = await _sportComplexService.GetSportComplexIdByTitle(sportTicketViewModel.SportComplexTitle);
             if (sportComplexId == null)
             {
                 return View("Error", "Incorrect sport complex chosen." + Environment.NewLine + "Please, try again");
@@ -113,7 +120,7 @@ namespace UtopiaCity.Controllers.Sport
                 ReminderDate = sportTicketViewModel.DateOfTheEvent
             };
 
-            _ = _citizenTaskService.AddCitizenTask(citizensTask);
+            await _citizenTaskService.AddCitizenTask(citizensTask);
             return RedirectToAction(nameof(AllSportTickets));
         }
 
@@ -136,7 +143,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (id == null)
             {
@@ -149,13 +156,12 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Sport ticket not found." + Environment.NewLine + "Please, try again");
             }
 
-            var task = _citizenTaskService.GetTasksByReminderDate(_userId)
-                .Result
-                .FirstOrDefault(x => x.Description.Equals(sportTicket.SportEvent.Title));
+            var tasks = await _citizenTaskService.GetTasksByReminderDate(_userId);
+            var task = tasks.FirstOrDefault(x => x.Description.Equals(sportTicket.SportEvent.Title));
             _sportTicketService.RemoveSportTicketFromDb(sportTicket);
             if (task != null)
             {
-                _=_citizenTaskService.DeleteCitizenTask(task);
+                await _citizenTaskService.DeleteCitizenTask(task);
             }
 
             return RedirectToAction(nameof(AllSportTickets));

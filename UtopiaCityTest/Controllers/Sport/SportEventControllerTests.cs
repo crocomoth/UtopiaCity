@@ -52,11 +52,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodGet_ModelObjectType_Null_ViewData_ListOfStrings_ReturnsDefaultView()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetAllSportComplexesTitles()).Returns(new List<string>());
+            _sportComplexService.Setup(x => x.GetAllSportComplexesTitles()).ReturnsAsync(new List<string>());
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Create() as ViewResult;
+            ViewResult result = controller.Create().GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<List<string>>(result.ViewData["SportComplexesTitles"]);
@@ -84,11 +84,11 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportEventService.Setup(x => x.GetSportEventById("1")).Returns(_sportEventForTests);
-            _sportComplexService.Setup(x => x.GetAllSportComplexesTitles()).Returns(new List<string>());
+            _sportComplexService.Setup(x => x.GetAllSportComplexesTitles()).ReturnsAsync(new List<string>());
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Edit("1") as ViewResult;
+            ViewResult result = controller.Edit("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<List<string>>(result.ViewData["SportComplexesTitles"]);
@@ -116,12 +116,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodPost_RedirectsToAllSportEvents()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).Returns("1");
+            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
             _sportEventService.Setup(x => x.AddSportEventToDb(_sportEventForTests));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            RedirectToActionResult result = controller.Create(_sportEventViewModelForTests) as RedirectToActionResult;
+            RedirectToActionResult result = controller.Create(_sportEventViewModelForTests).GetAwaiter().GetResult() as RedirectToActionResult;
 
             //assert
             Assert.Equal("AllSportEvents", result.ActionName);
@@ -146,12 +146,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Edit_MethodPost_RedirectsToAllSportEvents()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).Returns("1");
+            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
             _sportEventService.Setup(x => x.UpdateSportEventInDb(_sportEventForTests));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            RedirectToActionResult result = controller.Edit("1", _sportEventViewModelForTests) as RedirectToActionResult;
+            RedirectToActionResult result = controller.Edit("1", _sportEventViewModelForTests).GetAwaiter().GetResult() as RedirectToActionResult;
 
             //assert
             Assert.Equal("AllSportEvents", result.ActionName);
@@ -165,7 +165,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Create(null) as ViewResult;
+            ViewResult result = controller.Create(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -175,11 +175,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodPost_SportComplexIdNull_ReturnsErrorPage()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).Returns(default(string));
+            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync(default(string));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Create(_sportEventViewModelForTests) as ViewResult;
+            ViewResult result = controller.Create(_sportEventViewModelForTests).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -246,7 +246,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Edit(null) as ViewResult;
+            ViewResult result = controller.Edit(null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -260,7 +260,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Edit("1") as ViewResult;
+            ViewResult result = controller.Edit("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -273,7 +273,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Edit(null, _sportEventViewModelForTests) as ViewResult;
+            ViewResult result = controller.Edit(null, _sportEventViewModelForTests).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -286,7 +286,7 @@ namespace UtopiaCityTest.Controllers.Sport
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Edit("1", null) as ViewResult;
+            ViewResult result = controller.Edit("1", null).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);
@@ -296,11 +296,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Edit_MethodPost_SportComplexIdNull_ReturnsErrorPage()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).Returns(default(string));
+            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync(default(string));
             var controller = new SportEventController(_sportEventService.Object, _sportComplexService.Object, _mapper);
 
             //act
-            ViewResult result = controller.Edit("1", _sportEventViewModelForTests) as ViewResult;
+            ViewResult result = controller.Edit("1", _sportEventViewModelForTests).GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.Equal("Error", result.ViewName);

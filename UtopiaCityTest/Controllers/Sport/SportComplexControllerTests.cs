@@ -32,14 +32,14 @@ namespace UtopiaCityTest.Controllers.Sport
 
         #region ViewResultViewNameAndModelObjectTypesTests
         [Fact]
-        public async void AllSportComplexes_ModelObjectType_List_ReturnsDefaultView()
+        public void AllSportComplexes_ModelObjectType_List_ReturnsDefaultView()
         {
             //arrange
-            _serviceMock.Setup(x => x.GetAllSportComplexes()).Returns(() => new List<SportComplex>());
+            _serviceMock.Setup(x => x.GetAllSportComplexes()).ReturnsAsync(() => new List<SportComplex>());
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            ViewResult result = await controller.AllSportComplexes() as ViewResult;
+            ViewResult result = controller.AllSportComplexes().GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<List<SportComplexViewModel>>(result.ViewData.Model);
@@ -47,14 +47,14 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public async void Details_ModelObjectType_SportComplexViewModel_ReturnsDefaultView()
+        public void Details_ModelObjectType_SportComplexViewModel_ReturnsDefaultView()
         {
             //arrange
-            _serviceMock.Setup(x => x.GetSportComplexById("id")).Returns(() => new SportComplex());
+            _serviceMock.Setup(x => x.GetSportComplexById("id")).ReturnsAsync(() => new SportComplex());
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            ViewResult result = await controller.Details("id") as ViewResult;
+            ViewResult result = controller.Details("id").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<SportComplexViewModel>(result.ViewData.Model);
@@ -76,14 +76,14 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public async void Delete_MethodGet_ModelObjectType_SportComplexViewModel_ReturnsDefaultView()
+        public void Delete_MethodGet_ModelObjectType_SportComplexViewModel_ReturnsDefaultView()
         {
             //arrange
-            _serviceMock.Setup(x => x.GetSportComplexById("1")).Returns(_sportComplexForTests);
+            _serviceMock.Setup(x => x.GetSportComplexById("1")).ReturnsAsync(_sportComplexForTests);
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            ViewResult result = await controller.Delete("1") as ViewResult;
+            ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<SportComplexViewModel>(result.ViewData.Model);
@@ -91,14 +91,14 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public async void Edit_MethodGet_ModelObjectType_SportComplexViewModel_ReturnsDefaultView()
+        public void Edit_MethodGet_ModelObjectType_SportComplexViewModel_ReturnsDefaultView()
         {
             //arrange
-            _serviceMock.Setup(x => x.GetSportComplexById("1")).Returns(_sportComplexForTests);
+            _serviceMock.Setup(x => x.GetSportComplexById("1")).ReturnsAsync(_sportComplexForTests);
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            ViewResult result = await controller.Edit("1") as ViewResult;
+            ViewResult result = controller.Edit("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
             Assert.IsType<SportComplexViewModel>(result.ViewData.Model);
@@ -107,41 +107,41 @@ namespace UtopiaCityTest.Controllers.Sport
         #endregion
         #region RedirectToActionTests
         [Fact]
-        public async void Create_MethodPost_RedirectsToAllSportComplexesView()
+        public void Create_MethodPost_RedirectsToAllSportComplexesView()
         {
             //arrange
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            RedirectToActionResult result = await controller.Create(_sportComplexViewModelForTests) as RedirectToActionResult;
+            RedirectToActionResult result = controller.Create(_sportComplexViewModelForTests).GetAwaiter().GetResult() as RedirectToActionResult;
 
             //assert
             Assert.Equal("AllSportComplexes", result.ActionName);
         }
 
         [Fact]
-        public async void Delete_MethodPost_RedirectsToAllSportComplexesView()
+        public void Delete_MethodPost_RedirectsToAllSportComplexesView()
         {
             //arrange
-            _serviceMock.Setup(x => x.GetSportComplexById("1")).Returns(_sportComplexForTests);
+            _serviceMock.Setup(x => x.GetSportComplexById("1")).ReturnsAsync(_sportComplexForTests);
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            RedirectToActionResult result = await controller.DeleteConfirmed("1") as RedirectToActionResult;
+            RedirectToActionResult result = controller.DeleteConfirmed("1").GetAwaiter().GetResult() as RedirectToActionResult;
 
             //assert
             Assert.Equal("AllSportComplexes", result.ActionName);
         }
 
         [Fact]
-        public async void Edit_MethodPost_RedirectsToAllSportComplexesView()
+        public void Edit_MethodPost_RedirectsToAllSportComplexesView()
         {
             //arrange
             _serviceMock.Setup(x => x.UpdateSportComplexInDb(_sportComplexForTests));
             var controller = new SportComplexController(_serviceMock.Object, _mapper);
 
             //act
-            RedirectToActionResult result = await controller.Edit("1", _sportComplexViewModelForTests) as RedirectToActionResult;
+            RedirectToActionResult result = controller.Edit("1", _sportComplexViewModelForTests).GetAwaiter().GetResult() as RedirectToActionResult;
 
             //assert
             Assert.Equal("AllSportComplexes", result.ActionName);

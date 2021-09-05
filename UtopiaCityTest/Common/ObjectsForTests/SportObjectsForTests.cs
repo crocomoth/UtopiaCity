@@ -39,43 +39,41 @@ namespace UtopiaCityTest.Common.ObjectsForTests
 
         public static SportComplex[] ArrayOfSportComplexesForTests()
         {
-            SportComplex[] sportComplexes = new SportComplex[]
+            return new SportComplex[]
+            {
+                new SportComplex
                 {
-                    new SportComplex
-                    {
-                        SportComplexId = "1",
-                        Title = "title_1",
-                        NumberOfSeats = 100,
-                        TypeOfSport = TypesOfSport.Athletics,
-                        Address = "address_1",
-                        BuildDate = new DateTime(2021, 10, 12),
-                        SportEvents = null
-                    },
+                    SportComplexId = "1",
+                    Title = "title_1",
+                    NumberOfSeats = 100,
+                    TypeOfSport = TypesOfSport.Athletics,
+                    Address = "address_1",
+                    BuildDate = new DateTime(2021, 10, 12),
+                    SportEvents = null
+                },
 
-                    new SportComplex
-                    {
-                        SportComplexId = "2",
-                        Title = "title_2",
-                        NumberOfSeats = 200,
-                        TypeOfSport = TypesOfSport.FigureSkating,
-                        Address = "address_2",
-                        BuildDate = new DateTime(2022, 10, 12),
-                        SportEvents = null
-                    },
+                new SportComplex
+                {
+                    SportComplexId = "2",
+                    Title = "title_2",
+                    NumberOfSeats = 200,
+                    TypeOfSport = TypesOfSport.FigureSkating,
+                    Address = "address_2",
+                    BuildDate = new DateTime(2022, 10, 12),
+                    SportEvents = null
+                },
 
-                    new SportComplex
-                    {
-                        SportComplexId = "3",
-                        Title = "title_3",
-                        NumberOfSeats = 300,
-                        TypeOfSport = TypesOfSport.Motorsport,
-                        Address = "address_3",
-                        BuildDate = new DateTime(2023, 10, 12),
-                        SportEvents = null
-                    }
-                };
-
-            return sportComplexes;
+                new SportComplex
+                {
+                    SportComplexId = "3",
+                    Title = "title_3",
+                    NumberOfSeats = 300,
+                    TypeOfSport = TypesOfSport.Motorsport,
+                    Address = "address_3",
+                    BuildDate = new DateTime(2023, 10, 12),
+                    SportEvents = null
+                }
+            };
         }
 
         public static SportEvent SportEventForTests()
@@ -104,7 +102,7 @@ namespace UtopiaCityTest.Common.ObjectsForTests
 
         public static SportEvent[] ArrayOfSportEventsForTests()
         {
-            SportEvent[] sportEvents = new SportEvent[]
+            return new SportEvent[]
             {
                 new SportEvent
                 {
@@ -130,8 +128,6 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                     SportComplexId = "3"
                 }
             };
-
-            return sportEvents;
         }
 
         public static SportTicket SportTicketForTests()
@@ -191,7 +187,7 @@ namespace UtopiaCityTest.Common.ObjectsForTests
             };
         }
 
-        public async static Task<AppUser> AppUserForTests()
+        public static AppUser AppUserForTests()
         {
             return new AppUser
             {
@@ -240,9 +236,9 @@ namespace UtopiaCityTest.Common.ObjectsForTests
             };
         }
 
-        public async static Task<List<CitizensTask>> TaskListOfCitizensTask()
+        public static List<CitizensTask> ListOfCitizensTask()
         {
-            var list = new List<CitizensTask>()
+            return new List<CitizensTask>()
             {
                 new CitizensTask()
                 {
@@ -276,8 +272,6 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                     UserId = "3"
                 },
             };
-
-            return list;
         }
 
         public static SportTicketViewModel SportTicketViewModelForTests()

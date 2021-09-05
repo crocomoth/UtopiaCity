@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
@@ -17,7 +16,7 @@ namespace UtopiaCityTest.Services.Sport
         private readonly SportComplex[] _sportComplexesForTests;
         private readonly SportEvent _sportEventForTests;
         private readonly SportEvent[] _sportEventsForTests;
-        private readonly Task<AppUser> _appUserForTests;
+        private readonly AppUser _appUserForTests;
         private readonly AppUser[] _appUsersForTests;
 
         public SportTicketServiceTests()
@@ -93,7 +92,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests.Result);
+                context.AppUser.Add(_appUserForTests);
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SaveChanges();
             }
@@ -129,7 +128,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests.Result);
+                context.AppUser.Add(_appUserForTests);
                 context.SaveChanges();
             }
 
@@ -205,7 +204,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests.Result);
+                context.AppUser.Add(_appUserForTests);
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SaveChanges();
             }

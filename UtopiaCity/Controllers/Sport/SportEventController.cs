@@ -5,6 +5,7 @@ using UtopiaCity.Models.Sport;
 using UtopiaCity.ViewModels.Sport;
 using UtopiaCity.Services.Sport;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace UtopiaCity.Controllers.Sport
 {
@@ -34,21 +35,21 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles();
+            ViewBag.SportComplexesTitles = await _sportComplexService.GetAllSportComplexesTitles();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(SportEventViewModel sportEventViewModel)
+        public async Task<IActionResult> Create(SportEventViewModel sportEventViewModel)
         {
             if (sportEventViewModel == null)
             {
                 return View("Error", "You made mistakes while creating new Sport Event");
             }
 
-            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(sportEventViewModel.SportComplexTitle);
+            string sportComplexId = await _sportComplexService.GetSportComplexIdByTitle(sportEventViewModel.SportComplexTitle);
             if (sportComplexId == null)
             {
                 return View("Error", "Incorrect sport complex chosen." + Environment.NewLine + "Please, try again");
@@ -97,7 +98,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -111,12 +112,12 @@ namespace UtopiaCity.Controllers.Sport
             }
 
             SportEventViewModel sportEventViewModel = _mapper.Map<SportEventViewModel>(sportEvent);
-            ViewBag.SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles();
+            ViewBag.SportComplexesTitles = await _sportComplexService.GetAllSportComplexesTitles();
             return View(sportEventViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, SportEventViewModel sportEventViewModel)
+        public async Task<IActionResult> Edit(string id, SportEventViewModel sportEventViewModel)
         {
             if (id == null)
             {
@@ -127,7 +128,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Sport event not found." + Environment.NewLine + "Please, try again.");
             }
 
-            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(sportEventViewModel.SportComplexTitle);
+            string sportComplexId = await _sportComplexService.GetSportComplexIdByTitle(sportEventViewModel.SportComplexTitle);
             if (sportComplexId == null)
             {
                 return View("Error", "Incorrect ID." + Environment.NewLine + "Please, try again.");

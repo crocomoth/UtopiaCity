@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.ViewModels.Sport;
@@ -21,11 +22,11 @@ namespace UtopiaCity.Controllers.Sport
             _mapper = mapper;
         }
 
-        public IActionResult AllRequestsToAdministration()
+        public async Task<IActionResult> AllRequestsToAdministration()
         {
             var allRequests = _requestToAdministrationService.GetAllRequestsToAdministration();
             var requestToAdministrationViewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
-            ViewBag.SportComplexesIds = _sportComplexService.GetAllSportComplexesIds();
+            ViewBag.SportComplexesIds = await _sportComplexService.GetAllSportComplexesIds();
             ViewBag.IsAllRequestToAdministrationPrinted = true;
             return View(requestToAdministrationViewModels);
         }
@@ -47,21 +48,21 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.SportComplexesTitles = _sportComplexService.GetAllSportComplexesTitles();
+            ViewBag.SportComplexesTitles = await _sportComplexService.GetAllSportComplexesTitles();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(RequestToAdministrationViewModel requestViewModel)
+        public async Task<IActionResult> Create(RequestToAdministrationViewModel requestViewModel)
         {
             if (!ModelState.IsValid || requestViewModel == null)
             {
                 return View("Error", "Some problems with the input information. Please, try again");
             }
 
-            string sportComplexId = _sportComplexService.GetSportComplexIdByTitle(requestViewModel.SportComplexTitle);
+            string sportComplexId = await _sportComplexService.GetSportComplexIdByTitle(requestViewModel.SportComplexTitle);
             if (sportComplexId == null)
             {
                 return View("Error", "Some problems with the sport complex data. Please, try again");
@@ -129,7 +130,7 @@ namespace UtopiaCity.Controllers.Sport
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, RequestToAdministrationViewModel requestViewModel)
+        public async Task<IActionResult> Edit(string id, RequestToAdministrationViewModel requestViewModel)
         {
             if (id == null)
             {
@@ -140,7 +141,7 @@ namespace UtopiaCity.Controllers.Sport
                 return View("Error", "Some errors in input data. Please, try again");
             }
 
-            SportComplex sportComplex = _sportComplexService.GetSportComplexByTitle(requestViewModel.SportComplexTitle);
+            SportComplex sportComplex = await _sportComplexService.GetSportComplexByTitle(requestViewModel.SportComplexTitle);
             if (sportComplex == null)
             {
                 return View("Error", "Some problems with the sport complex data. Please, try again");
@@ -161,7 +162,7 @@ namespace UtopiaCity.Controllers.Sport
             }
 
             requestViewModel.SportComplexId = sportComplex.SportComplexId;
-            _sportComplexService.UpdateSportComplexInDb(sportComplex);
+            await _sportComplexService.UpdateSportComplexInDb(sportComplex);
             var request = _mapper.Map<RequestToAdministration>(requestViewModel);
             _requestToAdministrationService.UpdateRequestInDb(request);
             return RedirectToAction(nameof(AllRequestsToAdministration));
