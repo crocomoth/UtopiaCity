@@ -76,7 +76,7 @@
 
 <div>
     <br />
-    <h6>Items per page</h6>
+    <h6>Items per page: @Model.PagingInfo.ItemsPerPage</h6>
 </div>
 
 <select onchange="location = this.value">
@@ -85,5 +85,5 @@
     <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=4">4</option>
     <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=6">6</option>
     <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=8">8</option>
-    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=10">10</option>
+    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=50">50</option>
 </select>

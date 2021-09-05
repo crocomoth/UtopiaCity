@@ -675,7 +675,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MarriageDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("SecondPersonData")
                         .HasColumnType("nvarchar(max)");
@@ -696,7 +696,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("BirthPlace")
                         .HasColumnType("nvarchar(max)");

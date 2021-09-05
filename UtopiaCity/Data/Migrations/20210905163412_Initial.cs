@@ -210,7 +210,7 @@ namespace UtopiaCity.Data.Migrations
                     SecondPersonId = table.Column<string>(nullable: false),
                     FirstPersonData = table.Column<string>(nullable: true),
                     SecondPersonData = table.Column<string>(nullable: true),
-                    MarriageDate = table.Column<DateTime>(nullable: false)
+                    MarriageDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -483,9 +483,16 @@ namespace UtopiaCity.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     FamilyName = table.Column<string>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "date", nullable: false),
+                    BirthPlace = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
-                    MarriageId = table.Column<string>(nullable: true)
+                    MarriageId = table.Column<string>(nullable: true),
+                    RegistrationAddress = table.Column<string>(nullable: true),
+                    Property = table.Column<string>(nullable: true),
+                    MotorTransport = table.Column<string>(nullable: true),
+                    MedicalRecords = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

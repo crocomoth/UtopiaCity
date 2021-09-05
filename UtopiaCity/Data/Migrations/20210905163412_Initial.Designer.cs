@@ -10,8 +10,8 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210830191509_CityAdministration")]
-    partial class CityAdministration
+    [Migration("20210905163412_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -677,7 +677,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MarriageDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("SecondPersonData")
                         .HasColumnType("nvarchar(max)");
@@ -698,7 +698,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("BirthPlace")
                         .HasColumnType("nvarchar(max)");

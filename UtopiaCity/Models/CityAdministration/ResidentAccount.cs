@@ -16,8 +16,7 @@ namespace UtopiaCity.Models.CityAdministration
         [Required]
         public string FamilyName { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "date"), Required]
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; }
         public string Gender { get; set; }

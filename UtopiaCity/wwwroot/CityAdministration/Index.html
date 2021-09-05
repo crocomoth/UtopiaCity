@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Account List</title>
+</head>
+<body>
+    <div class="container-fluid" style="padding:100px;">
+        <button type="button" class="btn btn-primary" style="width:100px" onclick="window.location.href = '/'">Home</button>
+        <h2>Accounts List using WebAPI</h2>
+        <button type="button" class="btn btn-primary" style="width:100px;" onclick="window.location.href = '/CityAdministration/Edit.html?Id=0'">Create</button>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-striped col-md-12" style="margin-left:0px; margin-right:0px;">
+                    <thead><tr><th>First name</th><th>Birth Date</th><th style="width:270px">Marriage</th><th>Email</th><th>Phone</th><th style="width:200px"></th></tr></thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/CityAdministration/Index.js"></script>
+    <script>
+        GetAccounts();
+    </script>
+</body>
+</html>

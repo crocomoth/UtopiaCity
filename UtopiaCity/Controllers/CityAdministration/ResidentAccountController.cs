@@ -18,7 +18,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         // view list of accounts
-        public async Task<IActionResult> Index(int accountsPage = 1, int pageSize = 6)
+        public async Task<IActionResult> Index(int accountsPage = 1, int pageSize = 50)
         {
             var accounts = await _residentAccountService.GetResidentAccounts();
             return View("~/Views/CityAdministration/ResidentAccount/Index.cshtml", new AccountsListViewModel{ Accounts = accounts.OrderBy(a => a.FirstName)

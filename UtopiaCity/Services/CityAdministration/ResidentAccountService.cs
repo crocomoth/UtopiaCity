@@ -34,7 +34,7 @@ namespace UtopiaCity.Services.CityAdministration
         /// <returns>List of all existing accounts.</returns>
         public async Task<List<ResidentAccount>> GetResidentAccounts()
         {
-            return await _dbContext.ResidentAccount.Include(a => a.Marriage).ToListAsync();
+            return await _dbContext.ResidentAccount.AsNoTracking().Include(a => a.Marriage).ToListAsync();
         }
 
         /// <summary> 
