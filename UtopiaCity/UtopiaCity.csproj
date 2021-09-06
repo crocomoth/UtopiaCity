@@ -44,7 +44,7 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\" />
-    <Folder Include="Data\Migrations\" />
+	<Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
 

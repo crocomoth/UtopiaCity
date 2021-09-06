@@ -10,7 +10,7 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210905202557_Initial")]
+    [Migration("20210830113416_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -677,7 +677,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MarriageDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecondPersonData")
                         .HasColumnType("nvarchar(max)");
@@ -698,13 +698,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("BirthPlace")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FamilyName")
                         .IsRequired()
@@ -714,26 +708,11 @@ namespace UtopiaCity.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MarriageId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MedicalRecords")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MotorTransport")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Property")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegistrationAddress")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
