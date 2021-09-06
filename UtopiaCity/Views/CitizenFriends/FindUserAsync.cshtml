@@ -1,12 +1,13 @@
 ﻿@model UtopiaCity.Models.CitizenAccount.AppUser
 
 @{
-    ViewData["Title"] = "IndexAsync";
+    ViewData["Title"] = "FindUserAsync";
 }
+<div class="col-2 ml-3">
+    <partial name="_IndexPartial" />
+</div>
 
 <div>
-    <h4>Info about appUser</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.UserName)
@@ -27,28 +28,20 @@
             @Html.DisplayFor(model => model.Surname)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Gender)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Gender)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Balance)
+            @Html.DisplayNameFor(model => model.DateOfBirth)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Balance)
+            @Html.DisplayFor(model => model.DateOfBirth)
         </dd>
     </dl>
 </div>
-
 <div>
-    <a asp-action="DeleteAppUser" class="btn btn-danger">Delete account</a>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="ShowUserCabinet">Back to Cabinet</a>
+    <a asp-action="AddUserToFriendsListWaiting" asp-route-id="@Model.Id">Add to friends?</a> |
+    <a asp-action="Index">Back to friends list</a>
 </div>
