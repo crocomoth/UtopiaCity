@@ -11,6 +11,7 @@ using UtopiaCity.Models.TimelineModel;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Clinic;
 using UtopiaCity.Models.HousingSystem;
+using UtopiaCity.Models.TV;
 
 namespace UtopiaCity.Data
 {
@@ -83,5 +84,7 @@ namespace UtopiaCity.Data
         public DbSet<ClinicVisit> ClinicVisit { get; set; }
         public DbSet<Friend> Friend { get; set; }
         public DbSet<RealEstate> RealEstate { get; set; }
+        public DbSet<TvShow> TvShows { get; set; }
+        public DbSet<CelebrityList> CelebrityList { get; set; }
     }
 }
