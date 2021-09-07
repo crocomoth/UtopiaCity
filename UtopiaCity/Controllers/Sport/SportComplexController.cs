@@ -21,7 +21,7 @@ namespace UtopiaCity.Controllers.Sport
 
         public async Task<IActionResult> AllSportComplexes()
         {
-            List<SportComplex> sportComplexes = await Task.Run(() => _sportComplexService.GetAllSportComplexes());
+            List<SportComplex> sportComplexes = await  _sportComplexService.GetAllSportComplexes();
             List<SportComplexViewModel> sportComplexViewModels = new List<SportComplexViewModel>();
             foreach (SportComplex sportComplex in sportComplexes)
             {
@@ -33,10 +33,10 @@ namespace UtopiaCity.Controllers.Sport
 
         public async Task<IActionResult> Details(string id)
         {
-            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
+            SportComplex sportComplex = await _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
-                return NotFound();
+                return View("Error", "Invalid id");
             }
 
             SportComplexViewModel sportComplexViewModel = _mapper.Map<SportComplexViewModel>(sportComplex);
@@ -55,17 +55,22 @@ namespace UtopiaCity.Controllers.Sport
             }
 
             SportComplex sportComplex = _mapper.Map<SportComplex>(sportComplexViewModel);
-            await Task.Run(() => _sportComplexService.AddSportComplexToDb(sportComplex));
+            await _sportComplexService.AddSportComplexToDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
+            if (string.IsNullOrEmpty(id))
+            {
+                return View("Error", "Invalid id");
+            }
+
+            SportComplex sportComplex = await _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
-                return NotFound();
+                return View("Error", "Sport complex not found");
             }
 
             SportComplexViewModel sportComplexViewModel = _mapper.Map<SportComplexViewModel>(sportComplex);
@@ -75,23 +80,33 @@ namespace UtopiaCity.Controllers.Sport
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
-            if (sportComplex == null)
+            if (string.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return View("Error", "Invalid id");
             }
 
-            await Task.Run(() => _sportComplexService.RemoveSportComplexFromDb(sportComplex));
+            SportComplex sportComplex = await _sportComplexService.GetSportComplexById(id);
+            if (sportComplex == null)
+            {
+                return View("Error", "Sport complex not found");
+            }
+
+            await _sportComplexService.RemoveSportComplexFromDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            SportComplex sportComplex = await Task.Run(() => _sportComplexService.GetSportComplexById(id));
+            if (string.IsNullOrEmpty(id))
+            {
+                return View("Error", "Invalid id");
+            }
+
+            SportComplex sportComplex = await _sportComplexService.GetSportComplexById(id);
             if (sportComplex == null)
             {
-                return NotFound();
+                return View("Error", "Sport complex not found");
             }
 
             SportComplexViewModel sportComplexViewModel = _mapper.Map<SportComplexViewModel>(sportComplex);
@@ -101,13 +116,21 @@ namespace UtopiaCity.Controllers.Sport
         [HttpPost]
         public async Task<IActionResult> Edit(string id, SportComplexViewModel sportComplexViewModel)
         {
-            if (id != sportComplexViewModel.SportComplexId)
+            if (string.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return View("Error", "Invalid id");
+            }
+            else if (sportComplexViewModel == null)
+            {
+                return View("Error", "Invalid sport complex");
+            }
+            else if (id != sportComplexViewModel.SportComplexId)
+            {
+                return View("Error", "Not equals ids");
             }
 
             SportComplex sportComplex = _mapper.Map<SportComplex>(sportComplexViewModel);
-            await Task.Run(() => _sportComplexService.UpdateSportComplexInDb(sportComplex));
+            await _sportComplexService.UpdateSportComplexInDb(sportComplex);
             return RedirectToAction(nameof(AllSportComplexes));
         }
     }

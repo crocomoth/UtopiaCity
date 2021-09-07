@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
+using System.Linq;
 using UtopiaCity.Controllers.Sport;
 using UtopiaCity.Data;
+using UtopiaCity.Models.Life;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
@@ -25,6 +27,7 @@ namespace UtopiaCityTest.Controllers.Sport
             sportEventServiceMock.Setup(x => x.GetAllSportEvents()).ReturnsAsync(new List<SportEvent>());
 
             var lifeServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, LifeService>(applicationDbContextMock);
+            lifeServiceMock.Setup(x => x.Search(new EventDto { EventType = (int)EventType.sports })).Returns(new List<Event>().AsQueryable);
 
             var controller = new SportController(sportComplexServiceMock.Object, sportEventServiceMock.Object, lifeServiceMock.Object);
 
@@ -34,6 +37,7 @@ namespace UtopiaCityTest.Controllers.Sport
             //assert
             Assert.IsType<List<SportComplex>>(viewResult.ViewData["SportComplexes"]);
             Assert.IsType<List<SportEvent>>(viewResult.ViewData["SportEvents"]);
+            Assert.IsType<List<Event>>(viewResult.ViewData["SportAchievements"]);
         }
     }
 }
