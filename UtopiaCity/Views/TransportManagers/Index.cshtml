@@ -24,13 +24,19 @@
         <tr>
             <td>@c.TypeOfOrder</td>
             <td>@c.ForPassengerId</td>
+            <td>@c.ForPassenger.FullName</td>
+            <td>@c.ForPassenger.MobilePhone</td>
+            <td>@c.ForPassenger.PayType</td>
+            <td>@c.ForPassenger.Address</td>
             <td>
                 @Html.ActionLink("Details", "Details", "TransportManagers", new { id = c.Id },
                     new { @class = "viewDialog", data_dialog_title = "Order Details" }) |
                 @Html.ActionLink("Edit", "Edit", "TransportManagers", new { id = c.Id },
                     new { @class = "viewDialog", data_dialog_title = "Edit Order" }) |
                 @Html.ActionLink("Delete", "Delete", "TransportManagers", new { id = c.Id },
-                    new { @class = "viewDialog", data_dialog_title = "Delete Order" })
+                    new { @class = "viewDialog", data_dialog_title = "Delete Order" }) |
+                @Html.ActionLink("CreateLuggage", "CreateLuggage", "TransportManagers", new { id = c.Id },
+                   new { @class = "viewDialog", data_dialog_title = "Sending Luggage" })
             </td>
         </tr>
     }
@@ -51,6 +57,7 @@
                         close: function () { $(this).remove() },
                         modal: true,
                         width: 600,
+                        height: 600,
                         resizable: false,
                     })
                     .load(this.href);
@@ -58,3 +65,5 @@
         });
     </script>
 }
+
+@*ToDO: Find a css class property(for making height of dialog menu resizable) to override for CreateLuggagePartialView, or add js code to override*@ 
