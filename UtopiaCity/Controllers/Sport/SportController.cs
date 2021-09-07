@@ -23,7 +23,8 @@ namespace UtopiaCity.Controllers.Sport
         {
             ViewBag.SportComplexes = await _sportComplexService.GetAllSportComplexes();
             ViewBag.SportEvents = await _sportEventService.GetAllSportEvents();
-            //ViewBag.SportAchievements = _lifeService.GetByEventType(EventType.Sport);
+            var eventDto = new EventDto { EventType = (int)EventType.sports };
+            ViewBag.SportAchievements = _lifeService.Search(eventDto);
             return View();
         }
     }

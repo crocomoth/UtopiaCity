@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.Sport.Enums;
@@ -270,7 +269,7 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                     Description = "title_3",
                     ReminderDate = new DateTime(2021, 11, 12),
                     UserId = "3"
-                },
+                }
             };
         }
 

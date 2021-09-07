@@ -56,7 +56,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for updating sport ticket in database.
         /// </summary>
-        /// <param name="sportTicket">Sport ticket for adding.</param>
+        /// <param name="sportTicket">Sport ticket for updating.</param>
         public virtual async Task UpdateSportTicketInDb(SportTicket sportTicket)
         {
             _dbContext.SportTickets.Update(sportTicket);
@@ -66,7 +66,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for removing sport ticket from database.
         /// </summary>
-        /// <param name="sportTicket">Sport ticket for adding.</param>
+        /// <param name="sportTicket">Sport ticket for removing.</param>
         public virtual async Task RemoveSportTicketFromDb(SportTicket sportTicket)
         {
             _dbContext.SportTickets.Remove(sportTicket);

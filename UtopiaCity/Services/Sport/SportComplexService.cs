@@ -23,14 +23,18 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of all sport complexes.
         /// </summary>
         /// <returns>List of all existing sport complexes.</returns>
-        public virtual async Task<List<SportComplex>> GetAllSportComplexes() => await _dbContext.SportComplex.ToListAsync();
+        public virtual async Task<List<SportComplex>> GetAllSportComplexes()
+            => await _dbContext.SportComplex
+                .ToListAsync();
 
         /// <summary>
         /// Gets <see cref="SportComplex"/> by Id.
         /// </summary>
         /// <param name="id">Id of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
-        public virtual async Task<SportComplex> GetSportComplexById(string id) => await _dbContext.SportComplex.FirstOrDefaultAsync(x => x.SportComplexId.Equals(id));
+        public virtual async Task<SportComplex> GetSportComplexById(string id)
+            => await _dbContext.SportComplex
+                .FirstOrDefaultAsync(x => x.SportComplexId.Equals(id));
 
         /// <summary>
         /// Method for adding new sport complex to database.
@@ -66,14 +70,19 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of sport complexes' titles.
         /// </summary>
         /// <returns>List of all existing sport complexes' titles.</returns>
-        public virtual async Task<List<string>> GetAllSportComplexesTitles() => await _dbContext.SportComplex.Select(x => x.Title).ToListAsync();
+        public virtual async Task<List<string>> GetAllSportComplexesTitles()
+            => await _dbContext.SportComplex
+                .Select(x => x.Title)
+                .ToListAsync();
 
         /// <summary>
         /// Gets <see cref="SportComplex"/> by Title.
         /// </summary>
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
-        public virtual async Task<SportComplex> GetSportComplexByTitle(string title) => await _dbContext.SportComplex.FirstOrDefaultAsync(x => x.Title.Equals(title));
+        public virtual async Task<SportComplex> GetSportComplexByTitle(string title)
+            => await _dbContext.SportComplex
+                .FirstOrDefaultAsync(x => x.Title.Equals(title));
 
         /// <summary>
         /// Gets <see cref="SportComplex.SportComplexId"/> by Title.
@@ -90,6 +99,9 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of sport complexes' ids.
         /// </summary>
         /// <returns>List of all existing sport complexes' ids.</returns>
-        public virtual async Task<List<string>> GetAllSportComplexesIds() => await _dbContext.SportComplex.Select(x => x.SportComplexId).ToListAsync();
+        public virtual async Task<List<string>> GetAllSportComplexesIds()
+            => await _dbContext.SportComplex
+                .Select(x => x.SportComplexId)
+                .ToListAsync();
     }
 }
