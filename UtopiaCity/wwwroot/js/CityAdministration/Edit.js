@@ -49,33 +49,47 @@ document.forms["accountForm"].addEventListener("submit", e => {
     const motorTransport = form.elements["motorTransport"].value;
     const email = form.elements["email"].value;
     const phone = form.elements["phone"].value;
+    const dataCreate = {
+        firstName: firstName,
+        familyName: familyName,
+        birthDate: birthDate,
+        birthPlace: birthPlace,
+        gender: gender,
+        registrationAddress: registrationAddress,
+        property: property,
+        motorTransport: motorTransport,
+        medicalRecords: medicalRecords,
+        phone: phone,
+        email: email
+    };
+    const dataEdit = {
+        id: id,
+        firstName: firstName,
+        familyName: familyName,
+        birthDate: birthDate,
+        gender: gender,
+        marriageId: marriageId,
+        birthPlace: birthPlace,
+        registrationAddress: registrationAddress,
+        medicalRecords: medicalRecords,
+        property: property,
+        motorTransport: motorTransport,
+        email: email,
+        phone: phone
+    };
     if (id == 0)
-        CreateAccount(firstName, familyName, birthDate, gender, birthPlace, registrationAddress, medicalRecords, property, motorTransport, email, phone);
+        CreateAccount(dataCreate);
     else
-        EditAccount(id, firstName, familyName, birthDate, gender, marriageId, birthPlace, registrationAddress, medicalRecords, property, motorTransport, email, phone);
+        EditAccount(dataEdit);
 });
 
 // add account
-async function CreateAccount(accFirstName, accFamilyName, accBirthDate,
-    accGender, accBirthPlace, accRegistrationAddress, accMedicalRecords,
-    accProperty, accMotorTransport, accEmail, accPhone) {
+async function CreateAccount(dataCreate) {
 
     const response = await fetch("/ResidentAccountApi/", {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({
-            firstName: accFirstName,
-            familyName: accFamilyName,
-            birthDate: accBirthDate,
-            gender: accGender,
-            birthPlace: accBirthPlace,
-            registrationAddress: accRegistrationAddress,
-            medicalRecords: accMedicalRecords,
-            property: accProperty,
-            motorTransport: accMotorTransport,
-            email: accEmail,
-            phone: accPhone
-        })
+        body: JSON.stringify(dataCreate)
     });
     if (response.ok === true) {
         location.href = "/CityAdministration/Index.html";
@@ -94,9 +108,6 @@ async function CreateAccount(accFirstName, accFamilyName, accBirthDate,
             if (errorData.errors["Email"]) {
                 errorMsg += errorData.errors["Email"] + "<br>";
             }
-            if (errorData.errors["$.birthDate"]) {
-                errorMsg += "Please enter the Birth Date" + "<br>";
-            }
             document.getElementById("errors").style.display = "block"
             document.getElementById("errors").innerHTML = errorMsg;
         }
@@ -104,27 +115,11 @@ async function CreateAccount(accFirstName, accFamilyName, accBirthDate,
 }
 
 // edit account
-async function EditAccount(id, accFirstName, accFamilyName, accBirthDate,
-    accGender, accMarriageId, accBirthPlace, accRegistrationAddress, accMedicalRecords,
-    accProperty, accMotorTransport, accEmail, accPhone) {
+async function EditAccount(dataEdit) {
     const response = await fetch("/ResidentAccountApi/", {
         method: "PUT",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({
-            id: id,
-            firstName: accFirstName,
-            familyName: accFamilyName,
-            birthDate: accBirthDate,
-            gender: accGender,
-            marriageId: accMarriageId,
-            birthPlace: accBirthPlace,
-            registrationAddress: accRegistrationAddress,
-            medicalRecords: accMedicalRecords,
-            property: accProperty,
-            motorTransport: accMotorTransport,
-            email: accEmail,
-            phone: accPhone,
-        })
+        body: JSON.stringify(dataEdit)
     });
     if (response.ok === true) {
         location.href = "/CityAdministration/Index.html";
