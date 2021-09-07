@@ -11,20 +11,13 @@ namespace UtopiaCity.Models.Business
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-
         public string ResidentAccountId { get; set; }
-
         public ResidentAccount ResidentAccount { get; set; }
-
         public string ProfessionId { get; set; }
         public Profession Profession { get; set; }
-
         public int Salary { get; set; }
-
         public DateTime? WorkExperienceDateStart { get; set; }
-
         public DateTime? WorkExperienceDateEnd { get; set; }
-
         public bool UntilNow { get; set; }
     }
 }

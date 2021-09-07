@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,6 +26,7 @@ namespace UtopiaCity.Models.Sport
         public string SportComplexId { get; set; }
 
         public SportComplex SportComplex { get; set; }
+        public List<SportTicket> SportTickets { get; set; }
 
         //TODO: Add Citizen as a subscriber on event
     }

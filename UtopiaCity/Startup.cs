@@ -48,6 +48,8 @@ namespace UtopiaCity
             services.AddScoped<MarriageService, MarriageService>();
             services.AddScoped<SportComplexService, SportComplexService>();
             services.AddScoped<SportEventService, SportEventService>();
+            services.AddScoped<SportTicketService, SportTicketService>();
+            services.AddScoped<RequestToAdministrationService, RequestToAdministrationService>();
             services.AddScoped<FlightService, FlightService>();
             services.AddScoped<WeatherReportService, WeatherReportService>();
             services.AddScoped<TimelineService, TimelineService>();
