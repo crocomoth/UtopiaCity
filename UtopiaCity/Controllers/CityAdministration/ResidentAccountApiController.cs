@@ -19,18 +19,24 @@ namespace UtopiaCity.Controllers.CityAdministration
             _residentAccountService = residentAccountService;
             _marriageService = marriageService;
         }
-
-        // view list of accounts
-
-        public async Task<ActionResult<IEnumerable<ResidentAccount>>> GetAccounts()
+        /// <summary>
+        /// Gets the list of accounts
+        /// </summary>
+        /// <returns>The list of all accounts</returns>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ResidentAccount>>> Get()
         {
             var accounts = await _residentAccountService.GetResidentAccounts();
             return accounts;
         }
 
-        // get account by id
+        /// <summary>
+        /// Gets account by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The account by id</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ResidentAccount>> Details(string id)
+        public async Task<ActionResult<ResidentAccount>> Get(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -46,9 +52,13 @@ namespace UtopiaCity.Controllers.CityAdministration
             return account;
         }
 
-        // create new account
+        /// <summary>
+        /// Creates new account
+        /// </summary>
+        /// <param name="newAccount"></param>
+        /// <returns>Newly created account</returns>
         [HttpPost]
-        public async Task<ActionResult<ResidentAccount>> Create(ResidentAccount newAccount)
+        public async Task<ActionResult<ResidentAccount>> Post(ResidentAccount newAccount)
         {
             if (newAccount == null)
             {
@@ -67,7 +77,11 @@ namespace UtopiaCity.Controllers.CityAdministration
             return Ok(newAccount);
         }
 
-        // update account
+        /// <summary>
+        /// Updates an account
+        /// </summary>
+        /// <param name="edited"></param>
+        /// <returns>Updated account</returns>
         [HttpPut]
         public async Task<ActionResult<ResidentAccount>> Edit(ResidentAccount edited)
         {
@@ -89,9 +103,13 @@ namespace UtopiaCity.Controllers.CityAdministration
             return Ok(edited);
         }
 
-        //delete account
+        /// <summary>
+        /// Deletes account by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Deleted account</returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResidentAccount>> DeleteConfirmed(string id)
+        public async Task<ActionResult<ResidentAccount>> Delete(string id)
         {
             var account = await _residentAccountService.GetResidentAccountById(id);
             if (account == null)

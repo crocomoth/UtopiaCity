@@ -1,0 +1,786 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UtopiaCity</name>
+    </assembly>
+    <members>
+        <member name="T:UtopiaCity.Common.AppConfig">
+            <summary>
+            Represents application configuration.
+            </summary>
+        </member>
+        <member name="P:UtopiaCity.Common.AppConfig.ClearDb">
+            <summary>
+            Flag to clear database by each set.
+            </summary>
+        </member>
+        <member name="P:UtopiaCity.Common.AppConfig.SeedDb">
+            <summary>
+            Flag to populate database for each set.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Common.DbInitializer">
+            <summary>
+            Class to clear and initialize database
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Controllers.CityAdministration.ResidentAccountApiController.Get">
+            <summary>
+            Gets the list of accounts
+            </summary>
+            <returns>The list of all accounts</returns>
+        </member>
+        <member name="M:UtopiaCity.Controllers.CityAdministration.ResidentAccountApiController.Get(System.String)">
+            <summary>
+            Gets account by id
+            </summary>
+            <param name="id"></param>
+            <returns>The account by id</returns>
+        </member>
+        <member name="M:UtopiaCity.Controllers.CityAdministration.ResidentAccountApiController.Post(UtopiaCity.Models.CityAdministration.ResidentAccount)">
+            <summary>
+            Creates new account
+            </summary>
+            <param name="newAccount"></param>
+            <returns>Newly created account</returns>
+        </member>
+        <member name="M:UtopiaCity.Controllers.CityAdministration.ResidentAccountApiController.Edit(UtopiaCity.Models.CityAdministration.ResidentAccount)">
+            <summary>
+            Updates an account
+            </summary>
+            <param name="edited"></param>
+            <returns>Updated account</returns>
+        </member>
+        <member name="M:UtopiaCity.Controllers.CityAdministration.ResidentAccountApiController.Delete(System.String)">
+            <summary>
+            Deletes account by id
+            </summary>
+            <param name="id"></param>
+            <returns>Deleted account</returns>
+        </member>
+        <member name="T:UtopiaCity.Models.Airport.WeatherReport">
+            <summary>
+            Represents report about weather
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.CitizenAccount.AppUser">
+            <summary>
+            Extended class by IdentityUser, represent User of App.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.CitizenAccount.CitizensTask">
+            <summary>
+            Represents citizens Task.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.CitizenAccount.Friend">
+            <summary>
+            Represent citizen friend.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.Clinic.ClinicVisit">
+            <summary>
+            Represents clinic report.
+            </summary>
+        </member>
+        <member name="P:UtopiaCity.Models.Clinic.ClinicVisit.Visit">
+            <summary>
+            Report test or data.
+            </summary>
+        </member>
+        <member name="P:UtopiaCity.Models.Clinic.ClinicVisit.VisitTime">
+            <summary>
+            Time when report event happened.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.Emergency.EmergencyReport">
+            <summary>
+            Represents emergency report.
+            </summary>
+        </member>
+        <member name="P:UtopiaCity.Models.Emergency.EmergencyReport.Report">
+            <summary>
+            Report test or data.
+            </summary>
+        </member>
+        <member name="P:UtopiaCity.Models.Emergency.EmergencyReport.ReportTime">
+            <summary>
+            Time when report event happened.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.Sport.RequestToAdministration">
+            <summary>
+            Represents requests to administration.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.Sport.SportComplex">
+            <summary>
+            Represents sport complex.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.Sport.SportEvent">
+            <summary>
+            Represents sport event.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Models.Sport.SportTicket">
+            <summary>
+            Represents sport ticket.
+            </summary>
+        </member>
+        <member name="T:UtopiaCity.Services.Airport.FlightService">
+            <summary>
+             Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Airport.Flight"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.GetFlightList">
+            <summary>
+            Gets list of all flights
+            </summary>
+            <returns>List of flights</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.GetFlightById(System.String)">
+            <summary>
+            Gets flight by Id
+            </summary>
+            <param name="id">Flights' Id</param>
+            <returns>Special flight if exist, otherwise null</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.AddFlight(UtopiaCity.Models.Airport.Flight)">
+            <summary>
+            Create a new flight, by adding it to the database
+            </summary>
+            <param name="newflight">New flight</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.UpdateFlight(UtopiaCity.Models.Airport.Flight)">
+            <summary>
+            Update existing flight
+            </summary>
+            <param name="editedFlight">Existing flight</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.DeleteFlight(UtopiaCity.Models.Airport.Flight)">
+            <summary>
+            Remove flight from database
+            </summary>
+            <param name="currentFlight">Flight to remove</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.GetFlyTime(System.String,System.String,System.String)">
+            <summary>
+            Count the general time which takes, to fly from one location to another based on special plane type
+            </summary>
+            <param name="location">location (capital city of country expected)</param>
+            <param name="destination">location (capital city of country expected)</param>
+            <param name="planeType">special type of existing aircrafts</param>
+            <returns>General fly time</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.GetArrivalTime(System.DateTime,System.String,System.String,System.String)">
+            <summary>
+            Define the arrival date which based on departure time and general fly time
+            </summary>
+            <param name="departure">Departure DateTime</param>
+            <param name="locationPoint">location (capital city of country expected)</param>
+            <param name="destinationPoint">location (capital city of country expected)</param>
+            <param name="planeType">special type of existing aircrafts</param>
+            <returns>Arrival Date</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.FlightService.GetListOfPlaneTypes">
+            <summary>
+            Gets the list of object of aircraft types
+            </summary>
+            <returns>The List of types of existing aircrafts</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Airport.WeatherReportService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Airport.WeatherReport"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.GetWeatherReportsList">
+            <summary>
+            Gets the whole list of weather reports
+            </summary>
+            <returns>List of reports</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.GetWeatherReportById(System.String)">
+            <summary>
+            Gets the special report by special id
+            </summary>
+            <param name="id">Reports id</param>
+            <returns>Whole report</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.CreateWeatherReport(UtopiaCity.Models.Airport.WeatherReport)">
+            <summary>
+            Adds reports
+            </summary>
+            <param name="newReport">Report to add</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.UpdateWeatherReport(UtopiaCity.Models.Airport.WeatherReport)">
+            <summary>
+            Update the database
+            </summary>
+            <param name="editedReport">Existing report to update</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.DeleteWeatherReport(UtopiaCity.Models.Airport.WeatherReport)">
+            <summary>
+            Removing the report from the database
+            </summary>
+            <param name="currentReport">Report to remove</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.GetPermitedWeatherReport(System.DateTime)">
+            <summary>
+            Gets Weather data report permission by using DateTime
+            </summary>
+            <param name="currentDate">DateTime to use</param>
+            <returns>Existing permission of Boolean type</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Airport.WeatherReportService.GetPermissionByWeatherConditions(UtopiaCity.Models.Airport.WeatherReport)">
+            <summary>
+            Additional method for validating data from third-party-api and context
+            </summary>
+            <param name="weatherData">Object to map for</param>
+            <returns>Bool : True if properties match conditions, otherwise false </returns>
+        </member>
+        <member name="T:UtopiaCity.Services.CitizenAccount.CitizenFriendsService">
+            <summary>
+            Class to handle operations for <see cref="T:UtopiaCity.Models.CitizenAccount.Friend"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.GetUserFriends(UtopiaCity.Models.CitizenAccount.AppUser)">
+            <summary>
+            Gets list of all user confirmed friend.
+            </summary>
+            <returns>List of all existing confirmed friend.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.GetUserWaitingApproveToFriends(UtopiaCity.Models.CitizenAccount.AppUser)">
+            <summary>
+            Gets list of all people waiting to approve by user.
+            </summary>
+            <returns>List of all existing waiting to approve people.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.GetUserRejectedAplicationsToFriends(UtopiaCity.Models.CitizenAccount.AppUser)">
+            <summary>
+            Gets list of all people rejected by user.
+            </summary>
+            <returns>List of all existing rejected people.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.AddFriendship(UtopiaCity.Models.CitizenAccount.Friend)">
+            <summary>
+            Method to add new friendship.
+            </summary>
+            <param name="friendship">Friendship to add.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.GetFriendship(UtopiaCity.Models.CitizenAccount.AppUser,UtopiaCity.Models.CitizenAccount.AppUser)">
+            <summary>
+            Method to add new friendship.
+            </summary>
+            <param name="user">Current user.</param>
+            <param name="userFriend">User to friend.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.DeleteFriendship(UtopiaCity.Models.CitizenAccount.Friend)">
+            <summary>
+            Method to delete friendship.
+            </summary>
+            <param name="friendship">Friendship to delete.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.AcceptFriendship(UtopiaCity.Models.CitizenAccount.Friend)">
+            <summary>
+            Method to accept friendship.
+            </summary>
+            <param name="friendship">Friendship accept and set FriendsStatus to confirmed.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenFriendsService.RefuseFriendship(UtopiaCity.Models.CitizenAccount.Friend)">
+            <summary>
+            Method to refuse friendship.
+            </summary>
+            <param name="friendship">Friendship rejection and set FriendsStatus to rejected.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.CitizenAccount.CitizensAccountService">
+            <summary>
+            Class to handle find AppUserBy ID <see cref="T:UtopiaCity.Models.CitizenAccount.AppUser"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizensAccountService.GetUserById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.CitizenAccount.AppUser"/> by Id.
+            </summary>
+            <param name="id">Id of User.</param>
+            <returns>User if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizensAccountService.GetUserByUserName(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.CitizenAccount.AppUser"/> by Id.
+            </summary>
+            <param name="username">UserName.</param>
+            <returns>User if it exists, otherwise null.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.CitizenAccount.CitizenTaskService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.CitizenAccount.CitizensTask"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenTaskService.GetTaskById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.CitizenAccount.CitizensTask"/> by Id.
+            </summary>
+            <param name="id">Id of citizen task.</param>
+            <returns>Citizen task if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenTaskService.GetTasksByReminderDate(System.String)">
+            <summary>
+            Gets list of all citizen task order by reminder date.
+            </summary>
+            <returns>List of all existing citizen tasks.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenTaskService.AddCitizenTask(UtopiaCity.Models.CitizenAccount.CitizensTask)">
+            <summary>
+            Method to add new citizen task.
+            </summary>
+            <param name="citizensTask">Citizen task to add.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenTaskService.UpdateCitizenTask(UtopiaCity.Models.CitizenAccount.CitizensTask)">
+            <summary>
+            Method to update citizen task.
+            </summary>
+            <param name="citizensTask">Citizen task to update.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CitizenAccount.CitizenTaskService.DeleteCitizenTask(UtopiaCity.Models.CitizenAccount.CitizensTask)">
+            <summary>
+            Method to delete existing citizen task.
+            </summary>
+            <param name="citizensTask">Citizen task to delete</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.CityAdministration.MarriageService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.CityAdministration.Marriage"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.MarriageService.GetMarriageById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.CityAdministration.Marriage"/> by Id.
+            </summary>
+            <param name="id">Id of marriage.</param>
+            <returns>Marriage if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.MarriageService.GetMarriages">
+            <summary>
+            Gets list of all marriages.
+            </summary>
+            <returns>List of all existing marriages.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.MarriageService.AddMarriage(UtopiaCity.Models.CityAdministration.Marriage)">
+            <summary> 
+            Method to add new marriages.
+            </summary>
+            <param name="marriage">Marriage to add.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.MarriageService.UpdateMarriage(UtopiaCity.Models.CityAdministration.Marriage)">
+            <summary>
+            Method to update existing marriage.
+            </summary>
+            <param name="marriage">Marriage to update.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.MarriageService.DeleteMarriage(UtopiaCity.Models.CityAdministration.Marriage)">
+            <summary>
+            Method to delete existing marriages.
+            </summary>
+            <param name="marriage">Marriage to delete</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.CityAdministration.ResidentAccountService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.CityAdministration.ResidentAccount"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.ResidentAccountService.GetResidentAccountById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.CityAdministration.ResidentAccount"/> by Id.
+            </summary>
+            <param name="id">Id of account.</param>
+            <returns>Account if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.ResidentAccountService.GetResidentAccounts">
+            <summary>
+            Gets list of all accounts.
+            </summary>
+            <returns>List of all existing accounts.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.ResidentAccountService.AddResidentAccount(UtopiaCity.Models.CityAdministration.ResidentAccount)">
+            <summary> 
+            Method to add new accounts.
+            </summary>
+            <param name="account">Account to add.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.ResidentAccountService.UpdateResidentAccount(UtopiaCity.Models.CityAdministration.ResidentAccount)">
+            <summary>
+            Method to update existing account.
+            </summary>
+            <param name="account">Account to update.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.CityAdministration.ResidentAccountService.DeleteResidentAccount(UtopiaCity.Models.CityAdministration.ResidentAccount)">
+            <summary>
+            Method to delete existing accounts.
+            </summary>
+            <param name="account">Account to delete</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Clinic.ClinicVisitService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Clinic.ClinicVisit"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Clinic.ClinicVisitService.GetClinicVisitById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Clinic.ClinicVisit"/> by Id.
+            </summary>
+            <param name="id">Id of report.</param>
+            <returns>Report if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Clinic.ClinicVisitService.GetClinicVisits">
+            <summary>
+            Gets list of all reports.
+            </summary>
+            <returns>List of all existing reports.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Clinic.ClinicVisitService.AddClinicVisit(UtopiaCity.Models.Clinic.ClinicVisit)">
+            <summary>
+            Method to add new reports.
+            </summary>
+            <param name="visit">Report to add.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Clinic.ClinicVisitService.UpdateClinicVisit(UtopiaCity.Models.Clinic.ClinicVisit)">
+            <summary>
+            Method to update existing report.
+            </summary>
+            <param name="visit">Report to update.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Clinic.ClinicVisitService.DeleteClinicVisit(UtopiaCity.Models.Clinic.ClinicVisit)">
+            <summary>
+            Method to delete existing reports.
+            </summary>
+            <param name="visit">Report to delete</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Emergency.EmergencyReportService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Emergency.EmergencyReport"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Emergency.EmergencyReportService.GetEmergencyReportById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Emergency.EmergencyReport"/> by Id.
+            </summary>
+            <param name="id">Id of report.</param>
+            <returns>Report if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Emergency.EmergencyReportService.GetEmergencyReports">
+            <summary>
+            Gets list of all reports.
+            </summary>
+            <returns>List of all existing reports.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Emergency.EmergencyReportService.AddEmergencyReport(UtopiaCity.Models.Emergency.EmergencyReport)">
+            <summary>
+            Method to add new reports.
+            </summary>
+            <param name="report">Report to add.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Emergency.EmergencyReportService.UpdateEmergencyReport(UtopiaCity.Models.Emergency.EmergencyReport)">
+            <summary>
+            Method to update existing report.
+            </summary>
+            <param name="report">Report to update.</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Emergency.EmergencyReportService.DeleteEmergencyReport(UtopiaCity.Models.Emergency.EmergencyReport)">
+            <summary>
+            Method to delete existing reports.
+            </summary>
+            <param name="report">Report to delete</param>
+            <returns>Task to await for.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.HousingSystem.RealEstateService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.HousingSystem.RealEstate"/>.
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.HousingSystem.RealEstateService.GetRealEstateById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.HousingSystem.RealEstate"/> by Id.
+            </summary>
+            <param name="id">Id of real estate.</param>
+            <returns>real estate if it exists, otherwise null.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Sport.RequestToAdministrationService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Sport.RequestToAdministration"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.GetAllRequestsToAdministration">
+            <summary>
+            Gets list of all requests to the city administration.
+            </summary>
+            <returns>List of all existing requests to the city administration.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.GetRequestsToAdministrationBySportComplexId(System.String)">
+            <summary>
+            Gets list of all requests to the city administation by sport complex's id>.
+            </summary>
+            <param name="sportComplexId">Id of sport complex</param>
+            <returns>List of all existing requests to the city administration.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.GetRequestsToAdministrationByDate(System.DateTime)">
+            <summary>
+            Gets list of all requests to the city administation by the date>.
+            </summary>
+            <param name="date">Date of request</param>
+            <returns>List of all existing requests to the city administration.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.GetRequestToAdministrationById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Sport.RequestToAdministration"/> by Id.
+            </summary>
+            <param name="requestId">Id of request.</param>
+            <returns>Request to the administration if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.AddRequestToDb(UtopiaCity.Models.Sport.RequestToAdministration)">
+            <summary>
+            Method for adding new request to the administration to database.
+            </summary>
+            <param name="request">Request to the administation for adding.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.UpdateRequestInDb(UtopiaCity.Models.Sport.RequestToAdministration)">
+            <summary>
+            Method for updating request to the administration in database.
+            </summary>
+            <param name="request">Request to the administation for updating.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.RemoveRequestFromDb(UtopiaCity.Models.Sport.RequestToAdministration)">
+            <summary>
+            Method for removing request to the administration from database.
+            </summary>
+            <param name="request">Request to the administation for removing.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.RequestToAdministrationService.CreatingRequestToAdministationViewModel(System.Collections.Generic.List{UtopiaCity.Models.Sport.RequestToAdministration},AutoMapper.IMapper)">
+            <summary>
+            Method for mapping <see cref="T:UtopiaCity.Models.Sport.RequestToAdministration"/> model into <see cref="T:UtopiaCity.ViewModels.Sport.RequestToAdministrationViewModel"/> view model.
+            </summary>
+            <param name="allRequests">Requests for mapping from model to viewModel</param>
+            <param name="mapper">Mapper for mapping model to viewModel</param>
+            <returns>List of <see cref="T:UtopiaCity.ViewModels.Sport.RequestToAdministrationViewModel"/></returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Sport.SportComplexService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Sport.SportComplex"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.GetAllSportComplexes">
+            <summary>
+            Gets list of all sport complexes.
+            </summary>
+            <returns>List of all existing sport complexes.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.GetSportComplexById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Sport.SportComplex"/> by Id.
+            </summary>
+            <param name="id">Id of sport complex.</param>
+            <returns>Sport complex if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.AddSportComplexToDb(UtopiaCity.Models.Sport.SportComplex)">
+            <summary>
+            Method for adding new sport complex to database.
+            </summary>
+            <param name="sportComplex">Sport complex for adding.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.RemoveSportComplexFromDb(UtopiaCity.Models.Sport.SportComplex)">
+            <summary>
+            Method for removing sport complex from database.
+            </summary>
+            <param name="sportComplex">Sport complex for removing.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.UpdateSportComplexInDb(UtopiaCity.Models.Sport.SportComplex)">
+            <summary>
+            Method for updating sport complex in database.
+            </summary>
+            <param name="sportComplex">Sport complex for updating.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.GetAllSportComplexesTitles">
+            <summary>
+            Gets list of sport complexes' titles.
+            </summary>
+            <returns>List of all existing sport complexes' titles.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.GetSportComplexByTitle(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Sport.SportComplex"/> by Title.
+            </summary>
+            <param name="title">Title of sport complex.</param>
+            <returns>Sport complex if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.GetSportComplexIdByTitle(System.String)">
+            <summary>
+            Gets <see cref="P:UtopiaCity.Models.Sport.SportComplex.SportComplexId"/> by Title.
+            </summary>
+            <param name="title">Title of sport complex.</param>
+            <returns>Sport complex's id if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportComplexService.GetAllSportComplexesIds">
+            <summary>
+            Gets list of sport complexes' ids.
+            </summary>
+            <returns>List of all existing sport complexes' ids.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Sport.SportEventService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Sport.SportEvent"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.GetAllSportEvents">
+            <summary>
+            Gets list of all sport events with their sport complexes.
+            </summary>
+            <returns>List of all existing sport events with their sport complexes.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.GetSportEventById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Sport.SportEvent"/> by Id.
+            </summary>
+            <param name="id">Id of sport event.</param>
+            <returns>Sport event if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.GetSportEventByIdWithSportComplex(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Sport.SportEvent"/> by Id with it's <see cref="T:UtopiaCity.Models.Sport.SportComplex"/>.
+            </summary>
+            <param name="id">Id of sport event.</param>
+            <returns>Sport event with it's Sport complex if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.AddSportEventToDb(UtopiaCity.Models.Sport.SportEvent)">
+            <summary>
+            Method for adding new sport event to database.
+            </summary>
+            <param name="sportEvent">Sport event for adding.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.RemoveSportEventFromDb(UtopiaCity.Models.Sport.SportEvent)">
+            <summary>
+            Method for removing sport event from database.
+            </summary>
+            <param name="sportEvent">Sport event for removing.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.UpdateSportEventInDb(UtopiaCity.Models.Sport.SportEvent)">
+            <summary>
+            Method for updating sport event in database.
+            </summary>
+            <param name="sportEvent">Sport event for updating.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.GetAllSportEventsTitles">
+            <summary>
+            Gets list of sport events' titles.
+            </summary>
+            <returns>List of all existing sport events' titles.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportEventService.GetSportEventIdByTitle(System.String)">
+            <summary>
+            Gets <see cref="P:UtopiaCity.Models.Sport.SportEvent.SportEventId"/> by Title.
+            </summary>
+            <param name="title">Title of sport event.</param>
+            <returns>Sport event's id if it exists, otherwise null.</returns>
+        </member>
+        <member name="T:UtopiaCity.Services.Sport.SportTicketService">
+            <summary>
+            Class to handle basic CRUD operations for <see cref="T:UtopiaCity.Models.Sport.SportTicket"/>
+            </summary>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportTicketService.GetAllSportTickets(System.String)">
+            <summary>
+            Gets list of all sport tickets with their relational information.
+            </summary>
+            <returns>List of all existing sport tickets with their relational information.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportTicketService.GetSportTicketById(System.String)">
+            <summary>
+            Gets <see cref="T:UtopiaCity.Models.Sport.SportTicket"/> by Id.
+            </summary>
+            <param name="id">Id of sport ticket.</param>
+            <returns>Sport ticket if it exists, otherwise null.</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportTicketService.AddSportTicketToDb(UtopiaCity.Models.Sport.SportTicket)">
+            <summary>
+            Method for adding new sport ticket to database.
+            </summary>
+            <param name="sportTicket">Sport ticket for adding.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportTicketService.UpdateSportTicketInDb(UtopiaCity.Models.Sport.SportTicket)">
+            <summary>
+            Method for updating sport ticket in database.
+            </summary>
+            <param name="sportTicket">Sport ticket for adding.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Sport.SportTicketService.RemoveSportTicketFromDb(UtopiaCity.Models.Sport.SportTicket)">
+            <summary>
+            Method for removing sport ticket from database.
+            </summary>
+            <param name="sportTicket">Sport ticket for adding.</param>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.PermitedConditonsService.GetList">
+            <summary>
+            SHOW LIST OF EVENT
+            </summary>
+            <returns>LIST</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.ScheduleService.GetList">
+            <summary>
+            SHOW LIST OF EVENT
+            </summary>
+            <returns>LIST</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.TimelineService.CreateNewEvent(UtopiaCity.Models.TimelineModel.TimelineModel)">
+            <summary>
+            CREATE METHOD 
+            </summary>
+            <param name="newEvent">MODEL OF EVENT</param>
+            <returns>NEW EVENT</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.TimelineService.EditEvent(UtopiaCity.Models.TimelineModel.TimelineModel)">
+            <summary>
+            EDIT EVENT
+            </summary>
+            <param name="chosenEvent">EVENT</param>
+            <returns>EDITED EVENT</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.TimelineService.DeleteEvent(UtopiaCity.Models.TimelineModel.TimelineModel)">
+            <summary>
+            DELETE(REMOVE) EVENT
+            </summary>
+            <param name="chosenEvent">EVENT</param>
+            <returns>NEW LIST WITH OUR 1 EVENT</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.TimelineService.GetEventById(System.String)">
+            <summary>
+            SHOW EVENT BY ID
+            </summary>
+            <param name="id">ID</param>
+            <returns>EVENT OR NOTHING</returns>
+        </member>
+        <member name="M:UtopiaCity.Services.Timeline.TimelineService.GetList">
+            <summary>
+            SHOW LIST OF EVENT
+            </summary>
+            <returns>LIST</returns>
+        </member>
+    </members>
+</doc>
