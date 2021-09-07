@@ -24,6 +24,8 @@
     <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210904093440_CitizenChat.cs" />
+    <Compile Remove="Data\Migrations\20210904093440_CitizenChat.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,8 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Common\" />
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Services\Common\" />
     <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
 

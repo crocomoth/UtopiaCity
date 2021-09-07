@@ -2,6 +2,7 @@
 using UtopiaCity.Common.CitizenAccount;
 using UtopiaCity.Common.Initializers;
 using UtopiaCity.Common.Initializers.AirportTransportSystem;
+using UtopiaCity.Common.Initializers.CitizenAccount;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
 
@@ -38,7 +39,12 @@ namespace UtopiaCity.Common
 
 
             subDbInitializers.Add(new SportEventInitializer());
+
+            subDbInitializers.Add(new CitizenUsersInitializer());
             subDbInitializers.Add(new CitizenTaskInitializer());
+            subDbInitializers.Add(new FriendInitizalier());
+            subDbInitializers.Add(new TalkInitializer());
+            subDbInitializers.Add(new MessageInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)
