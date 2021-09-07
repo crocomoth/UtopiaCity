@@ -187,21 +187,7 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public void Create_MethodGet_IdNull_ReturnsErrorPage()
-        {
-            //arrange
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
-
-            //act
-            ViewResult result = controller.Create(default(string)).GetAwaiter().GetResult() as ViewResult;
-
-            //assert
-            Assert.Equal("Error", result.ViewName);
-        }
-
-        [Fact]
-        public void Create_MethodGet_SportEventNull_ReturnsErrorPage()
+        public void Create_MethodGet_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
             _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(default(SportEvent));
@@ -209,10 +195,12 @@ namespace UtopiaCityTest.Controllers.Sport
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Create("1").GetAwaiter().GetResult() as ViewResult;
+            ViewResult idNullResult = controller.Create(default(string)).GetAwaiter().GetResult() as ViewResult;
+            ViewResult sportEventNullresult = controller.Create("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
-            Assert.Equal("Error", result.ViewName);
+            Assert.Equal("Error", idNullResult.ViewName);
+            Assert.Equal("Error", sportEventNullresult.ViewName);
         }
 
         [Fact]
@@ -261,21 +249,7 @@ namespace UtopiaCityTest.Controllers.Sport
         }
 
         [Fact]
-        public void Delete_MethodGet_IdNull_ReturnsErrorPage()
-        {
-            //arrange
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
-
-            //act
-            ViewResult result = controller.Delete(null).GetAwaiter().GetResult() as ViewResult;
-
-            //assert
-            Assert.Equal("Error", result.ViewName);
-        }
-
-        [Fact]
-        public void Delete_MethodGet_SportTicketNull_ReturnsErrorPage()
+        public void Delete_MethodGet_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
             _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
@@ -283,28 +257,16 @@ namespace UtopiaCityTest.Controllers.Sport
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
+            ViewResult idNullResult = controller.Delete(null).GetAwaiter().GetResult() as ViewResult;
+            ViewResult sportTicketNullResult = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
-            Assert.Equal("Error", result.ViewName);
+            Assert.Equal("Error", idNullResult.ViewName);
+            Assert.Equal("Error", sportTicketNullResult.ViewName);
         }
 
         [Fact]
-        public void Delete_MethodPost_IdNull_ReturnsErrorPage()
-        {
-            //arrange
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
-
-            //act
-            ViewResult result = controller.DeleteConfirmed(null).GetAwaiter().GetResult() as ViewResult;
-
-            //assert
-            Assert.Equal("Error", result.ViewName);
-        }
-
-        [Fact]
-        public void Delete_MethodPost_SportTicketNull_ReturnsErrorPage()
+        public void Delete_MethodPost_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
             _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
@@ -312,28 +274,16 @@ namespace UtopiaCityTest.Controllers.Sport
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.DeleteConfirmed("1").GetAwaiter().GetResult() as ViewResult;
+            ViewResult idNullResult = controller.DeleteConfirmed(null).GetAwaiter().GetResult() as ViewResult;
+            ViewResult sportTicketNullResult = controller.DeleteConfirmed("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
-            Assert.Equal("Error", result.ViewName);
+            Assert.Equal("Error", idNullResult.ViewName);
+            Assert.Equal("Error", sportTicketNullResult.ViewName);
         }
 
         [Fact]
-        public void Details_IdNull_ReturnsErrorPage()
-        {
-            //arrange
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
-
-            //act
-            ViewResult result = controller.Details(null).GetAwaiter().GetResult() as ViewResult;
-
-            //assert
-            Assert.Equal("Error", result.ViewName);
-        }
-
-        [Fact]
-        public void Details_SportTicketNull_ReturnsErrorPage()
+        public void Details_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
             _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
@@ -341,10 +291,12 @@ namespace UtopiaCityTest.Controllers.Sport
                 _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
 
             //act
-            ViewResult result = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
+            ViewResult idNullResult = controller.Details(null).GetAwaiter().GetResult() as ViewResult;
+            ViewResult sportTicketNullResult = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
 
             //assert
-            Assert.Equal("Error", result.ViewName);
+            Assert.Equal("Error", idNullResult.ViewName);
+            Assert.Equal("Error", sportTicketNullResult.ViewName);
         }
         #endregion
     }
