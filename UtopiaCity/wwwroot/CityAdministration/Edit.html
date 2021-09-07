@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Account List</title>
+</head>
+<body>
+    <div class="container-fluid" style="padding:50px;">
+        <h2 style="text-align:center">Edit/Add account using WebAPI</h2>
+        <div class="row">
+            <div class="col-md-12" style="background-color:white;">
+                <div class="container" style="background-color:white;">
+                    <form name="accountForm">
+                        <div class="form-group col-md-12">
+                            <label for="name">id:</label>
+                            <input class="form-control" name="id" readonly />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="name">Fitrst name:</label>
+                            <input class="form-control" name="firstName" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="familyName">Family name:</label>
+                            <input class="form-control" name="familyName" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="birthDate">Birth Date:</label>
+                            <input id="birthDate" class="form-control" name="birthDate" type="date" required/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="gender">Gender:</label>
+                            <select name="gender" class="form-control">
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="marriageId">Marriage Id:</label>
+                            <input class="form-control" name="marriageId" readonly/>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="birthPlace">Birth place:</label>
+                            <input class="form-control" name="birthPlace" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="registrationAddress">Registration address:</label>
+                            <input class="form-control" name="registrationAddress" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="medicalRecords">Medical records:</label>s
+                            <input class="form-control" name="medicalRecords" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="property">Property:</label>
+                            <input class="form-control" name="property" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="motorTransport">Motor transport:</label>
+                            <input class="form-control" name="motorTransport" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="email">Email:</label>
+                            <input class="form-control" name="email" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="phone">Phone:</label>
+                            <input class="form-control" name="phone" />
+                        </div>
+                        <p id="errors" class="alert alert-danger" style="display:none;"></p>
+                        <div class="panel-body">
+                            <button type="submit" id="submit" class="btn btn-primary" style="width:100px">Save</button>
+                            <button type="reset" class="btn btn-warning" style="width:100px">Reset</button>
+                            <button type="button" class="btn btn-info" style="width:100px" onclick="window.location.href = '/CityAdministration/Index.html'">Back</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/CityAdministration/Edit.js"></script>
+</body>
+</html>
