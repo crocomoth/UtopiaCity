@@ -24,6 +24,10 @@
     <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210825160013_Initial.cs" />
+    <Compile Remove="Data\Migrations\20210825160013_Initial.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210826070111_SportTicketAndRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210826070111_SportTicketAndRequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
   </ItemGroup>
