@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Services.CityAdministration;
+using System.Linq;
 
 namespace UtopiaCity.Controllers.CityAdministration
 {
@@ -17,9 +18,17 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         // view list of accounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int accountsPage = 1, int pageSize = 50)
         {
-            return View("~/Views/CityAdministration/ResidentAccount/Index.cshtml", await _residentAccountService.GetResidentAccounts());
+            var accounts = await _residentAccountService.GetResidentAccounts();
+            return View("~/Views/CityAdministration/ResidentAccount/Index.cshtml", new AccountsListViewModel{ Accounts = accounts.OrderBy(a => a.FirstName)
+                .Skip((accountsPage - 1) * pageSize).Take(pageSize), PagingInfo = new PagingInfo
+                {
+                    CurrentPage = accountsPage,
+                    ItemsPerPage = pageSize,
+                    TotalItems = accounts.Count
+                }
+            });
         }
 
         // get specific item by id
@@ -115,7 +124,6 @@ namespace UtopiaCity.Controllers.CityAdministration
             var account = await _residentAccountService.GetResidentAccountById(id);
             if (account == null)
             {
-                // TODO rewrite?
                 return NotFound();
             }
 

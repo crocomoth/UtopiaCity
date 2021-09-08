@@ -1,0 +1,68 @@
+﻿@model IEnumerable<RequestToAdministrationViewModel>
+
+@{
+    ViewData["Title"] = "Requests Confirmation";
+}
+
+<h2>Sport complexes confirmation</h2>
+
+@if (Model.Count() == 0)
+{
+    <h5>No requests</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfRequest)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsApproved)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsReviewed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Available)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SportComplexTitle)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfRequest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsApproved)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsReviewed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Available)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SportComplexTitle)
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" role="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

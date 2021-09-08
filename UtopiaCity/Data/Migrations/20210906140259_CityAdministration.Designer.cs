@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906140259_CityAdministration")]
+    partial class CityAdministration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -685,60 +687,6 @@ namespace UtopiaCity.Migrations
                     b.ToTable("Friend");
                 });
 
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Message", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenderId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TalkId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("When")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SenderId");
-
-                    b.HasIndex("TalkId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Talk", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserOneId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserTwoId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserOneId");
-
-                    b.HasIndex("UserTwoId");
-
-                    b.ToTable("Talks");
-                });
-
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
                 {
                     b.Property<string>("Id")
@@ -1301,30 +1249,6 @@ namespace UtopiaCity.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "SecondUser")
                         .WithMany()
                         .HasForeignKey("SecondUserId");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Message", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId");
-
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.Talk", "Talk")
-                        .WithMany()
-                        .HasForeignKey("TalkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Talk", b =>
-                {
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserOne")
-                        .WithMany()
-                        .HasForeignKey("UserOneId");
-
-                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserTwo")
-                        .WithMany()
-                        .HasForeignKey("UserTwoId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
