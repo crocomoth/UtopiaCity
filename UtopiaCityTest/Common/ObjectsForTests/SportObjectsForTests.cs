@@ -286,5 +286,114 @@ namespace UtopiaCityTest.Common.ObjectsForTests
                 VisitorSurname = "surname_1"
             };
         }
+        
+        public static RequestToAdministration RequestToAdministrationForTests()
+        {
+            return new RequestToAdministration()
+            {
+                Id = "1",
+                Description = "description_1",
+                DateOfRequest = new DateTime(2001, 1, 1),
+                IsApproved = false,
+                IsReviewed = false,
+                SportComplexId = "1"
+            };
+        }
+
+        public static RequestToAdministration[] ArrayOfRequestsToAdministrationForTests()
+        {
+            return new RequestToAdministration[]
+            {
+                new RequestToAdministration
+                {
+                    Id = "1",
+                    Description = "description_1",
+                    DateOfRequest = new DateTime(2001, 1, 1),
+                    IsApproved = false,
+                    IsReviewed = false,
+                    SportComplexId = "1"
+                },
+
+                new RequestToAdministration
+                {
+                    Id = "2",
+                    Description = "description_2",
+                    DateOfRequest = new DateTime(2002, 2, 2),
+                    IsApproved = false,
+                    IsReviewed = true,
+                    SportComplexId = "2"
+                },
+                new RequestToAdministration
+                {
+                    Id = "3",
+                    Description = "description_3",
+                    DateOfRequest = new DateTime(2003, 3, 3),
+                    IsApproved = false,
+                    IsReviewed = false,
+                    SportComplexId = "3"
+                }
+            };
+        }
+
+        public static RequestToAdministrationViewModel RequestToAdministrationViewModelForTests()
+        {
+            return new RequestToAdministrationViewModel
+            {
+                Id = "1",
+                Description = "description_1",
+                DateOfRequest = new DateTime(2001, 1, 1),
+                IsApproved = false,
+                IsReviewed = false,
+                Available = false,
+                TypeOfSport = TypesOfSport.Athletics,
+                SportComplexId = "1",
+                SportComplexTitle = "title_1"
+            };
+        }
+
+        public static RequestToAdministrationViewModel[] ArrayOfRequestToAdministrationViewModelsForTests()
+        {
+            return new RequestToAdministrationViewModel[]
+            {
+                new RequestToAdministrationViewModel
+                {
+                    Id = "1",
+                    Description = "description_1",
+                    DateOfRequest = new DateTime(2001, 1, 1),
+                    IsApproved = false,
+                    IsReviewed = false,
+                    Available = false,
+                    SportComplexId = "1",
+                    TypeOfSport = TypesOfSport.Athletics,
+                    SportComplexTitle = "title_1"
+                },
+
+                new RequestToAdministrationViewModel
+                {
+                    Id = "2",
+                    Description = "description_2",
+                    DateOfRequest = new DateTime(2002, 2, 2),
+                    IsApproved = false,
+                    IsReviewed = false,
+                    Available = false,
+                    SportComplexId = "2",
+                    TypeOfSport = TypesOfSport.FigureSkating,
+                    SportComplexTitle = "title_2"
+                },
+
+                new RequestToAdministrationViewModel
+                {
+                    Id = "3",
+                    Description = "description_3",
+                    DateOfRequest = new DateTime(2003, 3, 3),
+                    IsApproved = false,
+                    IsReviewed = false,
+                    Available = false,
+                    SportComplexId = "3",
+                    TypeOfSport = TypesOfSport.Motorsport,
+                    SportComplexTitle = "title_3"
+                },
+            };
+        }
     }
 }

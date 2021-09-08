@@ -26,7 +26,7 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of all requests to the city administration.
         /// </summary>
         /// <returns>List of all existing requests to the city administration.</returns>
-        public async Task<List<RequestToAdministration>> GetAllRequestsToAdministration()
+        public virtual async Task<List<RequestToAdministration>> GetAllRequestsToAdministration()
             => await _dbContext.RequestsToAdministration
                 .Include(x => x.SportComplex)
                 .ToListAsync();
@@ -36,7 +36,7 @@ namespace UtopiaCity.Services.Sport
         /// </summary>
         /// <param name="sportComplexId">Id of sport complex</param>
         /// <returns>List of all existing requests to the city administration.</returns>
-        public async Task<List<RequestToAdministration>> GetRequestsToAdministrationBySportComplexId(string sportComplexId)
+        public virtual async Task<List<RequestToAdministration>> GetRequestsToAdministrationBySportComplexId(string sportComplexId)
             => await _dbContext.RequestsToAdministration
                 .Include(x => x.SportComplex)
                 .Where(x => x.SportComplexId.Equals(sportComplexId))
@@ -47,7 +47,7 @@ namespace UtopiaCity.Services.Sport
         /// </summary>
         /// <param name="date">Date of request</param>
         /// <returns>List of all existing requests to the city administration.</returns>
-        public async Task<List<RequestToAdministration>> GetRequestsToAdministrationByDate(DateTime date)
+        public virtual async Task<List<RequestToAdministration>> GetRequestsToAdministrationByDate(DateTime date)
             => await _dbContext.RequestsToAdministration
                 .Include(x => x.SportComplex)
                 .Where(x => x.DateOfRequest.Date.Equals(date))
@@ -58,7 +58,7 @@ namespace UtopiaCity.Services.Sport
         /// </summary>
         /// <param name="requestId">Id of request.</param>
         /// <returns>Request to the administration if it exists, otherwise null.</returns>
-        public async Task<RequestToAdministration> GetRequestToAdministrationById(string requestId)
+        public virtual async Task<RequestToAdministration> GetRequestToAdministrationById(string requestId)
             => await _dbContext.RequestsToAdministration
                 .Include(x => x.SportComplex)
                 .FirstOrDefaultAsync(x => x.Id.Equals(requestId));
@@ -67,7 +67,7 @@ namespace UtopiaCity.Services.Sport
         /// Method for adding new request to the administration to database.
         /// </summary>
         /// <param name="request">Request to the administation for adding.</param>
-        public async Task AddRequestToDb(RequestToAdministration request)
+        public virtual async Task AddRequestToDb(RequestToAdministration request)
         {
             _dbContext.RequestsToAdministration.Add(request);
             await _dbContext.SaveChangesAsync();
@@ -77,7 +77,7 @@ namespace UtopiaCity.Services.Sport
         /// Method for updating request to the administration in database.
         /// </summary>
         /// <param name="request">Request to the administation for updating.</param>
-        public async Task UpdateRequestInDb(RequestToAdministration request)
+        public virtual async Task UpdateRequestInDb(RequestToAdministration request)
         {
             _dbContext.RequestsToAdministration.Update(request);
             await _dbContext.SaveChangesAsync();
@@ -87,7 +87,7 @@ namespace UtopiaCity.Services.Sport
         /// Method for removing request to the administration from database.
         /// </summary>
         /// <param name="request">Request to the administation for removing.</param>
-        public async Task RemoveRequestFromDb(RequestToAdministration request)
+        public virtual async Task RemoveRequestFromDb(RequestToAdministration request)
         {
             _dbContext.RequestsToAdministration.Remove(request);
             await _dbContext.SaveChangesAsync();

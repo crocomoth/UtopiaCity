@@ -21,11 +21,11 @@ namespace UtopiaCityTest.Controllers.Sport
     {
         #region PrivateFields
         private readonly Mock<ApplicationDbContext> _dbContext;
-        private readonly Mock<SportTicketService> _sportTicketService;
-        private readonly Mock<SportComplexService> _sportComplexService;
-        private readonly Mock<SportEventService> _sportEventService;
-        private readonly Mock<CitizensAccountService> _appUserAccountService;
-        private readonly Mock<CitizenTaskService> _citizensTaskService;
+        private readonly Mock<SportTicketService> _sportTicketServiceMock;
+        private readonly Mock<SportComplexService> _sportComplexServiceMock;
+        private readonly Mock<SportEventService> _sportEventServiceMock;
+        private readonly Mock<CitizensAccountService> _appUserAccountServiceMock;
+        private readonly Mock<CitizenTaskService> _citizensTaskServiceMock;
         
         private readonly IMapper _mapper;
         private readonly Mock<IHttpContextAccessor> _httpContextAccessor;
@@ -41,11 +41,11 @@ namespace UtopiaCityTest.Controllers.Sport
         public SportTicketControllerTests()
         {
             _dbContext = BasicClassForSportTests.CreateDbContextMock<ApplicationDbContext>();
-            _sportTicketService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportTicketService>(_dbContext);
-            _sportComplexService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportComplexService>(_dbContext);
-            _sportEventService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportEventService>(_dbContext);
-            _appUserAccountService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, CitizensAccountService>(_dbContext);
-            _citizensTaskService = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, CitizenTaskService>(_dbContext);
+            _sportTicketServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportTicketService>(_dbContext);
+            _sportComplexServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportComplexService>(_dbContext);
+            _sportEventServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, SportEventService>(_dbContext);
+            _appUserAccountServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, CitizensAccountService>(_dbContext);
+            _citizensTaskServiceMock = BasicClassForSportTests.CreateServiceMock<ApplicationDbContext, CitizenTaskService>(_dbContext);
             _mapper = BasicClassForSportTests.ConfigMapper(new SportTicketProfile());
             _sportTicketForTests = SportObjectsForTests.SportTicketForTests();
             _sportComplexForTests = SportObjectsForTests.SportComplexForTests();
@@ -62,9 +62,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void AllSportTickets_ModelObjectType_List_ReturnsDefaultView()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetAllSportTickets("1")).ReturnsAsync(new List<SportTicket>());
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetAllSportTickets("1")).ReturnsAsync(new List<SportTicket>());
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.AllSportTickets().GetAwaiter().GetResult() as ViewResult;
@@ -80,11 +80,11 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportEventForTests.SportComplex = _sportComplexForTests;
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(_sportEventForTests);
-            _sportEventService.Setup(x => x.GetAllSportEventsTitles()).ReturnsAsync(new List<string>());
-            _appUserAccountService.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportEventServiceMock.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(_sportEventForTests);
+            _sportEventServiceMock.Setup(x => x.GetAllSportEventsTitles()).ReturnsAsync(new List<string>());
+            _appUserAccountServiceMock.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.Create("1").GetAwaiter().GetResult() as ViewResult;
@@ -99,9 +99,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodGet_ModelObjectType_SportTicketViewModel_ReturnsDefaultView()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.Delete("1").GetAwaiter().GetResult() as ViewResult;
@@ -116,9 +116,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Details_ModelObjectType_SportTicketViewModel_ReturnsDefaultView()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.Details("1").GetAwaiter().GetResult() as ViewResult;
@@ -134,12 +134,12 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodPost_RedirectsToAllSportTickets()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
-            _sportEventService.Setup(x => x.GetSportEventIdByTitle("title_1")).ReturnsAsync("1");
-            _appUserAccountService.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
-            _sportTicketService.Setup(x => x.AddSportTicketToDb(_sportTicketForTests));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportComplexServiceMock.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
+            _sportEventServiceMock.Setup(x => x.GetSportEventIdByTitle("title_1")).ReturnsAsync("1");
+            _appUserAccountServiceMock.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
+            _sportTicketServiceMock.Setup(x => x.AddSportTicketToDb(_sportTicketForTests));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             RedirectToActionResult result = controller.Create(_sportTicketViewModelForTests).GetAwaiter().GetResult() as RedirectToActionResult;
@@ -154,12 +154,12 @@ namespace UtopiaCityTest.Controllers.Sport
         {
             //arrange
             _sportTicketForTests.SportEvent = _sportEventForTests;
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
-            _sportTicketService.Setup(x => x.RemoveSportTicketFromDb(_sportTicketForTests));
-            _citizensTaskService.Setup(x => x.GetTasksByReminderDate("1")).ReturnsAsync(_citizensTasks);
-            _appUserAccountService.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(_sportTicketForTests);
+            _sportTicketServiceMock.Setup(x => x.RemoveSportTicketFromDb(_sportTicketForTests));
+            _citizensTaskServiceMock.Setup(x => x.GetTasksByReminderDate("1")).ReturnsAsync(_citizensTasks);
+            _appUserAccountServiceMock.Setup(x => x.GetUserById("1")).ReturnsAsync(_appUserForTests);
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             RedirectToActionResult result = controller.DeleteConfirmed("1").GetAwaiter().GetResult() as RedirectToActionResult;
@@ -175,9 +175,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void AllSportTickets_IdNull_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetAllSportTickets("1")).ReturnsAsync(default(List<SportTicket>));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetAllSportTickets("1")).ReturnsAsync(default(List<SportTicket>));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.AllSportTickets().GetAwaiter().GetResult() as ViewResult;
@@ -190,9 +190,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodGet_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
-            _sportEventService.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(default(SportEvent));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportEventServiceMock.Setup(x => x.GetSportEventByIdWithSportComplex("1")).ReturnsAsync(default(SportEvent));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult idNullResult = controller.Create(default(string)).GetAwaiter().GetResult() as ViewResult;
@@ -207,8 +207,8 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodPost_SportTicketViewModelNull_ReturnsErrorPage()
         {
             //arrange
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.Create(default(SportTicketViewModel)).GetAwaiter().GetResult() as ViewResult;
@@ -221,10 +221,10 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodPost_SportEventIdNull_ReturnsErrorPage()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
-            _sportEventService.Setup(x => x.GetSportEventIdByTitle("title_1")).ReturnsAsync(default(string));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportComplexServiceMock.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync("1");
+            _sportEventServiceMock.Setup(x => x.GetSportEventIdByTitle("title_1")).ReturnsAsync(default(string));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.Create(_sportTicketViewModelForTests).GetAwaiter().GetResult() as ViewResult;
@@ -237,9 +237,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Create_MethodPost_SportComplexIdNull_ReturnsErrorPage()
         {
             //arrange
-            _sportComplexService.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync(default(string));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportComplexServiceMock.Setup(x => x.GetSportComplexIdByTitle("title_1")).ReturnsAsync(default(string));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult result = controller.Create(_sportTicketViewModelForTests).GetAwaiter().GetResult() as ViewResult;
@@ -252,9 +252,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodGet_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult idNullResult = controller.Delete(null).GetAwaiter().GetResult() as ViewResult;
@@ -269,9 +269,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Delete_MethodPost_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult idNullResult = controller.DeleteConfirmed(null).GetAwaiter().GetResult() as ViewResult;
@@ -286,9 +286,9 @@ namespace UtopiaCityTest.Controllers.Sport
         public void Details_InvalidInputData_ReturnsErrorPage()
         {
             //arrange
-            _sportTicketService.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
-            var controller = new SportTicketController(_sportTicketService.Object, _sportComplexService.Object, _sportEventService.Object,
-                _appUserAccountService.Object, _citizensTaskService.Object, _mapper, _httpContextAccessor.Object);
+            _sportTicketServiceMock.Setup(x => x.GetSportTicketById("1")).ReturnsAsync(default(SportTicket));
+            var controller = new SportTicketController(_sportTicketServiceMock.Object, _sportComplexServiceMock.Object, _sportEventServiceMock.Object,
+                _appUserAccountServiceMock.Object, _citizensTaskServiceMock.Object, _mapper, _httpContextAccessor.Object);
 
             //act
             ViewResult idNullResult = controller.Details(null).GetAwaiter().GetResult() as ViewResult;
