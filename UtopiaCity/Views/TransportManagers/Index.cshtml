@@ -35,13 +35,13 @@
                     new { @class = "viewDialog", data_dialog_title = "Edit Order" }) |
                 @Html.ActionLink("Delete", "Delete", "TransportManagers", new { id = c.Id },
                     new { @class = "viewDialog", data_dialog_title = "Delete Order" }) |
-                @Html.ActionLink("CreateLuggage", "CreateLuggage", "TransportManagers", new { id = c.Id },
+                @Html.ActionLink("SendLuggage", "CreateLuggage", "TransportManagers", new { id = c.Id },
                    new { @class = "viewDialog", data_dialog_title = "Sending Luggage" })
             </td>
         </tr>
     }
 </table>
-<p> @Html.ActionLink("Create", "Create", "TransportManagers", new { }, new { @class = "viewDialog", data_dialog_title = "Create Order" })</p>
+<p> @Html.ActionLink("MakeOrder", "Create", "TransportManagers", new { }, new { @class = "viewDialog", data_dialog_title = "Create Order" })</p>
 @section Scripts{
     <script src='@Url.Content("~/lib/jqueryui/jquery-ui.min.js")' type="text/javascript"></script>
     <script>
@@ -58,12 +58,15 @@
                         modal: true,
                         width: 600,
                         height: 600,
-                        resizable: false,
+                        resizable: true,
                     })
                     .load(this.href);
             });
         });
     </script>
 }
+<p>
+    <a asp-action="IndexLuggage">Local Airport Warehouse</a>
+</p>
 
 @*ToDO: Find a css class property(for making height of dialog menu resizable) to override for CreateLuggagePartialView, or add js code to override*@ 

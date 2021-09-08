@@ -7,11 +7,6 @@
         <form asp-action="CreateLuggageView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="LuggageType" class="control-label"></label>
                 <input asp-for="LuggageType" class="form-control" />
                 <span asp-validation-for="LuggageType" class="text-danger"></span>
@@ -31,7 +26,7 @@
                 <select asp-for="HostName" class="form-control" asp-items="ViewBag.ForPassengers"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" asp-action="CreateLuggage" value="Send Luggage to Warehouse" class="btn btn-primary" />
             </div>
         </form>
     </div>

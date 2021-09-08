@@ -202,6 +202,7 @@ namespace UtopiaCity.Controllers.Airport
 
         public async Task<IActionResult> IndexLuggage()
         {
+            ViewBag.ForPassengers = _context.ForPassengers.FirstOrDefault().FullName;
             return View("IndexLuggageView", await _context.AirportWarehouses.Include(t=>t.ForPassenger).ToListAsync());
         }
 
