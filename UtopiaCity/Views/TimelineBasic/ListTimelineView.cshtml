@@ -12,7 +12,7 @@
 
 @section Scripts{
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
             clockUpdate();
             setInterval(clockUpdate, 1000);
         })
@@ -53,7 +53,9 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">Разрешенные условия</a>
 
         <a class="nav-link text-dark" asp-area="" asp-controller="OverrideBreadcrumb" asp-action="Index">Хлебные Крошки</a>
-    </li>
+
+        <a class="nav-link text-dark" asp-area="" asp-controller="TimelineBasic" asp-action="Searching">Поиск</a>
+
 </ul>
 
 <p>
@@ -93,11 +95,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.UniqueRules)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
+                @*<td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                *@
             </tr>
         }
     </tbody>
