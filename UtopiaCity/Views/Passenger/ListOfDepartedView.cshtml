@@ -1,0 +1,46 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.Passenger>
+
+@{
+    ViewData["Title"] = "ListOfDepartedView";
+}
+
+<h1>ListOfDepartedView</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ResidentAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgressStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResidentAccount.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgressStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a asp-controller="Ticket" asp-action="Index">Back to Ticket list</a>
+</p>

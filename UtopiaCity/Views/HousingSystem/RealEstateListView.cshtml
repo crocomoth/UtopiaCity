@@ -1,0 +1,58 @@
+﻿@model IEnumerable<UtopiaCity.Models.HousingSystem.RealEstate>
+
+@{
+    ViewData["Title"] = "RealEstateListView";
+}
+
+<h1>RealEstateListView</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompletionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstateType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResidentAccount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstateType)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.ResidentAccount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

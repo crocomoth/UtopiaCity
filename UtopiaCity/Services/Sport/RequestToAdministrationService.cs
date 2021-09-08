@@ -96,7 +96,7 @@ namespace UtopiaCity.Services.Sport
         /// <summary>
         /// Method for mapping <see cref="RequestToAdministration"/> model into <see cref="RequestToAdministrationViewModel"/> view model.
         /// </summary>
-        /// <param name="allRequests">Requests for mapping from model to viewModel<./param>
+        /// <param name="allRequests">Requests for mapping from model to viewModel</param>
         /// <param name="mapper">Mapper for mapping model to viewModel</param>
         /// <returns>List of <see cref="RequestToAdministrationViewModel"/></returns>
         public List<RequestToAdministrationViewModel> CreatingRequestToAdministationViewModel(List<RequestToAdministration> allRequests, IMapper mapper)

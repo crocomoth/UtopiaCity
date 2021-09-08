@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CitizenAccount;
@@ -24,6 +25,16 @@ namespace UtopiaCity.Services.CitizenAccount
         public virtual async Task<AppUser> GetUserById(string id)
         {
             return (AppUser)await _dbContext.Users.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        }
+
+        /// <summary>
+        /// Gets <see cref="AppUser"/> by Id.
+        /// </summary>
+        /// <param name="username">UserName.</param>
+        /// <returns>User if it exists, otherwise null.</returns>
+        public virtual AppUser GetUserByUserName(string username)
+        {
+             return (AppUser)_dbContext.Users.FirstOrDefault(x => x.UserName == username);
         }
     }
 }

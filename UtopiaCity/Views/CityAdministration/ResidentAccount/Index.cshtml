@@ -1,53 +1,89 @@
-﻿@model IEnumerable<ResidentAccount>
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@model AccountsListViewModel
 
 @{
     ViewData["Title"] = "Residents Accounts";
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#accountSearch").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#accountsTable tr").filter(function () {
+                $(this).toggle($(this).children().not(".nosearch").text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 <h1>Residents</h1>
 
 <p>
     <a asp-action="Create">Create</a>
 </p>
+<p>
+    <input id="accountSearch" class="col-lg-3" type="text" placeholder="Search..">
+</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.Accounts.FirstOrDefault().FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FamilyName)
+                @Html.DisplayNameFor(model => model.Accounts.FirstOrDefault().FamilyName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                @Html.DisplayNameFor(model => model.Accounts.FirstOrDefault().BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gender)
+                @Html.DisplayNameFor(model => model.Accounts.FirstOrDefault().Gender)
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FamilyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+    <tbody id="accountsTable">
+        @foreach (var item in Model.Accounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td class="nosearch">
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td class="nosearch">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group pull-right m-1">
+</div>
+
+<div>
+    <br />
+    <h6>Items per page: @Model.PagingInfo.ItemsPerPage</h6>
+</div>
+
+<select onchange="location = this.value">
+    <option>Select</option>
+    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=2">2</option>
+    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=4">4</option>
+    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=6">6</option>
+    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=8">8</option>
+    <option value="@Configuration["applicationUrl"]/ResidentAccount/index?pageSize=50">50</option>
+</select>

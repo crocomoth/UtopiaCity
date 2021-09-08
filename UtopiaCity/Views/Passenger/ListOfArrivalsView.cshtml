@@ -1,0 +1,61 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.ArrivingPassenger>
+
+@{
+    ViewData["Title"] = "Arriving Passengers";
+}
+
+<h1>Arrived Passengers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerFamilyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerBirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerGender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassengerMarriageStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerFamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerBirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassengerMarriageStatus)
+            </td>
+            <td>               
+                <a asp-action="DetailsArrived" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
