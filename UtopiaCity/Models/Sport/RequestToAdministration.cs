@@ -13,6 +13,7 @@ namespace UtopiaCity.Models.Sport
         public string Id { get; set; }
 
         [Required]
+        [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct title")]
         public string Description { get; set; }
 
         [Required]

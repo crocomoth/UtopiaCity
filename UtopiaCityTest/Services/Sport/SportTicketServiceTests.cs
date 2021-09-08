@@ -17,7 +17,7 @@ namespace UtopiaCityTest.Services.Sport
         private readonly SportComplex[] _sportComplexesForTests;
         private readonly SportEvent _sportEventForTests;
         private readonly SportEvent[] _sportEventsForTests;
-        private readonly Task<AppUser> _appUserForTests;
+        private readonly AppUser _appUserForTests;
         private readonly AppUser[] _appUsersForTests;
 
         public SportTicketServiceTests()
@@ -34,7 +34,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetAllSportTickets_ReturnsListOfTicketsWithRelationalTablesData()
+        public async Task GetAllSportTickets_ReturnsListOfTicketsWithRelationalTablesData()
         {
             //arrange
             TearDown();
@@ -53,7 +53,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportTicketService(context);
 
                 //act
-                var result = service.GetAllSportTickets("1");
+                var result = await service.GetAllSportTickets("1");
 
                 //assert
                 Assert.Collection(result,
@@ -84,7 +84,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetSportTicketById_ReturnsSportTicketWithRelationalData()
+        public async Task GetSportTicketById_ReturnsSportTicketWithRelationalData()
         {
             //arrange
             TearDown();
@@ -93,7 +93,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests.Result);
+                context.AppUser.Add(_appUserForTests);
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SaveChanges();
             }
@@ -103,7 +103,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportTicketService(context);
 
                 //act
-                var result = service.GetSportTicketById("1");
+                var result = await service.GetSportTicketById("1");
 
                 //assert
                 Assert.NotNull(result);
@@ -120,7 +120,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void AddSportTicketToDbTest()
+        public async Task AddSportTicketToDbTest()
         {
             //arrange
             TearDown();
@@ -129,14 +129,14 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests.Result);
+                context.AppUser.Add(_appUserForTests);
                 context.SaveChanges();
             }
 
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportTicketService(context);
-                service.AddSportTicketToDb(_sportTicketForTests);
+                await service.AddSportTicketToDb(_sportTicketForTests);
 
                 //act
                 var result = context.SportTickets.FirstOrDefault(x => x.TicketId.Equals(_sportTicketForTests.TicketId));
@@ -153,7 +153,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void UpdateSportTicketInDbTest()
+        public async Task UpdateSportTicketInDbTest()
         {
             //arrange
             TearDown();
@@ -170,7 +170,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportTicketService(context);
-                service.UpdateSportTicketInDb(new SportTicket
+                await service.UpdateSportTicketInDb(new SportTicket
                 {
                     TicketId = "1",
                     SportComplexId = "2",
@@ -196,7 +196,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void DeleteSportTicketFromDbTest()
+        public async Task DeleteSportTicketFromDbTest()
         {
             //arrange
             TearDown();
@@ -205,7 +205,7 @@ namespace UtopiaCityTest.Services.Sport
             {
                 context.SportComplex.Add(_sportComplexForTests);
                 context.SportEvents.Add(_sportEventForTests);
-                context.AppUser.Add(_appUserForTests.Result);
+                context.AppUser.Add(_appUserForTests);
                 context.SportTickets.Add(_sportTicketForTests);
                 context.SaveChanges();
             }
@@ -213,7 +213,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportTicketService(context);
-                service.RemoveSportTicketFromDb(_sportTicketForTests);
+                await service.RemoveSportTicketFromDb(_sportTicketForTests);
 
                 //act
                 var result = context.SportTickets.FirstOrDefault(x => x.TicketId.Equals(_sportTicketForTests.TicketId));
