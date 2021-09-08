@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
     public partial class Initial : Migration
     {
@@ -210,7 +210,7 @@ namespace UtopiaCity.Migrations
                     SecondPersonId = table.Column<string>(nullable: false),
                     FirstPersonData = table.Column<string>(nullable: true),
                     SecondPersonData = table.Column<string>(nullable: true),
-                    MarriageDate = table.Column<DateTime>(nullable: false)
+                    MarriageDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -534,9 +534,16 @@ namespace UtopiaCity.Migrations
                     Id = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     FamilyName = table.Column<string>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    Gender = table.Column<string>(nullable: true),
-                    MarriageId = table.Column<string>(nullable: true)
+                    BirthDate = table.Column<DateTime>(type: "date", nullable: false),
+                    BirthPlace = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    MarriageId = table.Column<string>(nullable: true),
+                    RegistrationAddress = table.Column<string>(nullable: true),
+                    Property = table.Column<string>(nullable: true),
+                    MotorTransport = table.Column<string>(nullable: true),
+                    MedicalRecords = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
