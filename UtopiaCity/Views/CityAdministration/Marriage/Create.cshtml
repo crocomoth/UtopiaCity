@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="FirstPersonId" class="control-label">First Person</label>
                 <select asp-for="FirstPersonId" class="form-control">
-                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Male") && (a.MarriageId == null)))
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == Gender.Male) && (a.MarriageId == null)))
                     {
                         <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
                     }
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label asp-for="SecondPersonId" class="control-label">Second Person</label>
                 <select asp-for="SecondPersonId" class="form-control">
-                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Female") && (a.MarriageId == null)))
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == Gender.Female) && (a.MarriageId == null)))
                     {
                         <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
                     }

@@ -18,7 +18,7 @@
                 <select asp-for="FirstPersonId" class="form-control">
                     @{var account1 = Model.ResidentAccounts.Where(a => a.Id == Model.FirstPersonId).FirstOrDefault();}
                     <option value="@account1.Id">@account1.FirstName @account1.FamilyName | @account1.BirthDate.ToShortDateString()</option>
-                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Male") && (a.MarriageId == null)))
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == Gender.Male) && (a.MarriageId == null)))
                     {
                         <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
                     }
@@ -29,7 +29,7 @@
                 <select asp-for="SecondPersonId" class="form-control">
                     @{var account2 = Model.ResidentAccounts.Where(a => a.Id == Model.SecondPersonId).FirstOrDefault();}
                     <option option value="@account2.Id">@account2.FirstName @account2.FamilyName | @account2.BirthDate.ToShortDateString()</option>
-                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == "Female") && (a.MarriageId == null)))
+                    @foreach (var item in Model.ResidentAccounts.Where(a => (a.Gender == Gender.Female) && (a.MarriageId == null)))
                     {
                         <option value="@item.Id">@item.FirstName @item.FamilyName | @item.BirthDate.ToShortDateString()</option>
                     }

@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-UtopiaCity-D45A5F96-DE8D-4785-9915-4DEAA6419C9C</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+    <NoWarn>1701;1702;</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Data\Migrations\20210819055244_SportTicket.cs" />
     <Compile Remove="Data\Migrations\20210819055244_SportTicket.Designer.cs" />
@@ -40,10 +45,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Services\Common\" />
+	<Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210906140259_CityAdministration")]
+    partial class CityAdministration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,41 +254,6 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ArrivingPassengers");
-                });
-
-            modelBuilder.Entity("UtopiaCity.Models.Airport.CheckedFlight", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CheckedArrivalTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CheckedDepartureTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CheckedDestinationPoint")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CheckedFlightNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CheckedFlightWeather")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CheckedLocationPoint")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CheckedTypeOfAircraft")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CheckedWeather")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CheckedFlights");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
