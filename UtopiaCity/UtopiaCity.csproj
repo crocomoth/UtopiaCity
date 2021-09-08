@@ -28,8 +28,9 @@
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
   </ItemGroup>
-
-	<PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
+  
+  <ItemGroup>
+	  <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.16" />
@@ -38,8 +39,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
