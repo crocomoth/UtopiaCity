@@ -77,6 +77,8 @@ namespace UtopiaCity
 
             services.AddScoped<RealEstateService, RealEstateService>();
             services.AddTransient<IMailService, NullMailService>();
+            services.AddScoped<ChatService, ChatService>();
+
 
             #endregion
 

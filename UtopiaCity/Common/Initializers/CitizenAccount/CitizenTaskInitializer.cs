@@ -29,9 +29,9 @@ namespace UtopiaCity.Common.CitizenAccount
             var citizenTask1 = new CitizensTask
             {
                 Description = "Do task number one",
-                ReminderDate = new DateTime(2021,12,10),
-                UserId="1",
-                User=new AppUser { Name="user1@mail.ru"}              
+                ReminderDate = new DateTime(2021, 12, 10),
+                UserId = "1",
+                User =(AppUser) context.Users.FirstOrDefault(x=>x.UserName == "Jenya@mail.ru"),
             };
 
             var citizenTask2 = new CitizensTask
@@ -39,7 +39,7 @@ namespace UtopiaCity.Common.CitizenAccount
                 Description = "Do task number two",
                 ReminderDate = new DateTime(2021, 8, 10),
                 UserId = "2",
-                User = new AppUser { Name = "user2@mail.ru" }
+                User = (AppUser)context.Users.FirstOrDefault(x => x.UserName == "Jenya@mail.ru"),
 
             };
             var citizenTask3 = new CitizensTask
@@ -47,11 +47,25 @@ namespace UtopiaCity.Common.CitizenAccount
                 Description = "Do task number three",
                 ReminderDate = new DateTime(2021, 9, 25),
                 UserId = "3",
-                User = new AppUser { Name = "user3@mail.ru" }
-
+                User = (AppUser)context.Users.FirstOrDefault(x => x.UserName == "Jenya@mail.ru"),
             };
 
-            context.AddRange(citizenTask1, citizenTask2, citizenTask3);
+            var citizenTask4 = new CitizensTask
+            {
+                Description = "Do task number one",
+                ReminderDate = new DateTime(2021, 12, 15),
+                UserId = "3",
+                User = (AppUser)context.Users.FirstOrDefault(x => x.UserName == "Igor@mail.ru"),
+            };
+            var citizenTask5 = new CitizensTask
+            {
+                Description = "Do task number seven",
+                ReminderDate = new DateTime(2021, 11, 8),
+                UserId = "3",
+                User = (AppUser)context.Users.FirstOrDefault(x => x.UserName == "Ashot@mail.ru"),
+            };
+
+            context.AddRange(citizenTask1, citizenTask2, citizenTask3, citizenTask4, citizenTask5);
             context.SaveChanges();
         }
     }
