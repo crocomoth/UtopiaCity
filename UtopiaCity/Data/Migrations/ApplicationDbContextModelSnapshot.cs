@@ -225,6 +225,34 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.AirportWarehouse", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ForPassengerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("HostName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LuggageType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LuggageWeight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForPassengerId");
+
+                    b.ToTable("AirportWarehouses");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.ArrivingPassenger", b =>
                 {
                     b.Property<string>("Id")
@@ -1176,6 +1204,13 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.AirportWarehouse", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
+                        .WithMany()
+                        .HasForeignKey("ForPassengerId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Passenger", b =>
