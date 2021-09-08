@@ -11,6 +11,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210819055244_SportTicket.cs" />
+    <Compile Remove="Data\Migrations\20210819055244_SportTicket.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210819122726_FromTimelineDev.cs" />
+    <Compile Remove="Data\Migrations\20210819122726_FromTimelineDev.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823044711_AddedAvailablePropertyForSportComplex.cs" />
+    <Compile Remove="Data\Migrations\20210823044711_AddedAvailablePropertyForSportComplex.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823074243_RequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823074243_RequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823085651_RelationsBetweenSportComplexAndRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823085651_RelationsBetweenSportComplexAndRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
+    <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
+    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
+  </ItemGroup>
+
 	<PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />

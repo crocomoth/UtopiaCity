@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.ViewModels.Sport;
@@ -20,22 +21,22 @@ namespace UtopiaCity.Controllers.CityAdministration
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<RequestToAdministration> allRequests = _requestToAdministrationService.GetAllRequestsToAdministration();
+            List<RequestToAdministration> allRequests = await _requestToAdministrationService.GetAllRequestsToAdministration();
             List<RequestToAdministrationViewModel> viewModels = _requestToAdministrationService.CreatingRequestToAdministationViewModel(allRequests, _mapper);
             return View("~/Views/CityAdministration/RequestsConfirmation/Index.cshtml", viewModels);
         }
 
         [HttpGet]
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return View("Error", "The id is incorrect. Please, try again");
             }
 
-            RequestToAdministration request = _requestToAdministrationService.GetRequestToAdministrationById(id);
+            RequestToAdministration request = await _requestToAdministrationService.GetRequestToAdministrationById(id);
             if (request == null)
             {
                 return View("Error", "The request is not found. Please, try again");
@@ -46,7 +47,7 @@ namespace UtopiaCity.Controllers.CityAdministration
         }
 
         [HttpPost]
-        public IActionResult Edit(string id, RequestToAdministrationViewModel requestViewModel)
+        public async Task<IActionResult> Edit(string id, RequestToAdministrationViewModel requestViewModel)
         {
             if (id == null)
             {
@@ -57,7 +58,7 @@ namespace UtopiaCity.Controllers.CityAdministration
                 return View("Error", "Some errors in input data. Please, try again");
             }
 
-            SportComplex sportComplex = _sportComplexService.GetSportComplexByTitle(requestViewModel.SportComplexTitle);
+            SportComplex sportComplex = await _sportComplexService.GetSportComplexByTitle(requestViewModel.SportComplexTitle);
 
             if (sportComplex == null)
             {
@@ -79,9 +80,9 @@ namespace UtopiaCity.Controllers.CityAdministration
             }
 
             requestViewModel.SportComplexId = sportComplex.SportComplexId;
-            _sportComplexService.UpdateSportComplexInDb(sportComplex);
+            await _sportComplexService.UpdateSportComplexInDb(sportComplex);
             var request = _mapper.Map<RequestToAdministration>(requestViewModel);
-            _requestToAdministrationService.UpdateRequestInDb(request);
+            await _requestToAdministrationService.UpdateRequestInDb(request);
             return RedirectToAction(nameof(Index));
         }
     }
