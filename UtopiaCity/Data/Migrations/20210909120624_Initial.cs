@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UtopiaCity.Data.Migrations
+namespace UtopiaCity.Migrations
 {
     public partial class Initial : Migration
     {
@@ -80,6 +80,25 @@ namespace UtopiaCity.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Banks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CheckedFlights",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CheckedFlightNumber = table.Column<int>(nullable: false),
+                    CheckedArrivalTime = table.Column<DateTime>(nullable: false),
+                    CheckedDepartureTime = table.Column<DateTime>(nullable: false),
+                    CheckedDestinationPoint = table.Column<string>(nullable: true),
+                    CheckedLocationPoint = table.Column<string>(nullable: true),
+                    CheckedTypeOfAircraft = table.Column<string>(nullable: true),
+                    CheckedWeather = table.Column<string>(nullable: true),
+                    CheckedFlightWeather = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckedFlights", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -502,6 +521,28 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AirportWarehouses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    LuggageType = table.Column<string>(nullable: true),
+                    LuggageWeight = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    HostName = table.Column<string>(nullable: true),
+                    ForPassengerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AirportWarehouses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AirportWarehouses_ForPassengers_ForPassengerId",
+                        column: x => x.ForPassengerId,
+                        principalTable: "ForPassengers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TransportManagers",
                 columns: table => new
                 {
@@ -851,6 +892,11 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AirportWarehouses_ForPassengerId",
+                table: "AirportWarehouses",
+                column: "ForPassengerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -1043,6 +1089,9 @@ namespace UtopiaCity.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AirportWarehouses");
+
+            migrationBuilder.DropTable(
                 name: "ArrivingPassengers");
 
             migrationBuilder.DropTable(
@@ -1059,6 +1108,9 @@ namespace UtopiaCity.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CheckedFlights");
 
             migrationBuilder.DropTable(
                 name: "CitizensTasks");
