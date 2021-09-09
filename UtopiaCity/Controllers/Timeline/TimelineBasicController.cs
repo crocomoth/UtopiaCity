@@ -159,7 +159,7 @@ namespace UtopiaCity.Controllers.Timeline
                                select t;
             if (!string.IsNullOrEmpty(searchString))
             {
-                searchResult = searchResult.Where(i => i.LocationPoint.Contains(searchString));
+                searchResult = searchResult.Where(i => i.LocationPoint.Contains(searchString) || i.DestinationPoint.Contains(searchString));
             }
 
             return View(await searchResult.ToListAsync());
