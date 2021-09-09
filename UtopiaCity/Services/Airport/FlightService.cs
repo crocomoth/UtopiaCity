@@ -43,7 +43,7 @@ namespace UtopiaCity.Services.Airport
         /// Create a new flight, by adding it to the database
         /// </summary>
         /// <param name="newflight">New flight</param>
-        public void AddFlight(Flight newflight)
+        public virtual void AddFlight(Flight newflight)
         {
             _dbContext.Add(newflight);
             _dbContext.SaveChanges();
@@ -76,7 +76,7 @@ namespace UtopiaCity.Services.Airport
         /// <param name="destination">location (capital city of country expected)</param>
         /// <param name="planeType">special type of existing aircrafts</param>
         /// <returns>General fly time</returns>
-        public async Task<double> GetFlyTime(string location, string destination, string planeType)
+        public virtual async Task<double> GetFlyTime(string location, string destination, string planeType)
         {
             var resources = await _route.GetRouteObject(location, destination);
             var generalDistance = resources.ElementAtOrDefault(0).TravelDistance;
