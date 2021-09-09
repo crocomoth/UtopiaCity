@@ -28,8 +28,6 @@ namespace UtopiaCity.Models.Sport
         [Required]
         public TypesOfSport TypeOfSport { get; set; }
 
-        //TODO Take Address as a class
-        /*public Address Address {get;set;}*/
         [Required]
         [RegularExpression(@"[^' ']([A-Za-z0-9]{1,}([' ']{0,1})){1,}[^' ']", ErrorMessage = "Enter correct address")]
         public string Address { get; set; }

@@ -4,6 +4,7 @@ using UtopiaCity.Services.Sport;
 using Xunit;
 using System.Linq;
 using UtopiaCityTest.Common.ObjectsForTests;
+using System.Threading.Tasks;
 
 namespace UtopiaCityTest.Services.Sport
 {
@@ -20,7 +21,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetAllSportComplexes_ReturnsItems_IfItExistsInDb()
+        public async Task GetAllSportComplexes_ReturnsItems_IfItExistsInDb()
         {
             //arrange
             TearDown();
@@ -36,7 +37,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportComplexService(context);
 
                 //act
-                var result = service.GetAllSportComplexes();
+                var result = await service.GetAllSportComplexes();
 
                 //assert
                 Assert.NotNull(result);
@@ -50,7 +51,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetSportComplexById_ReturnsItem_IfItExistsInDb()
+        public async Task GetSportComplexById_ReturnsItem_IfItExistsInDb()
         {
             //arrange
             TearDown();
@@ -66,7 +67,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportComplexService(context);
 
                 //act
-                var result = service.GetSportComplexById("1");
+                var result = await service.GetSportComplexById("1");
 
                 //assert
 
@@ -75,7 +76,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void AddSportComplexToDb_AddsNewItem()
+        public async Task AddSportComplexToDb_AddsNewItem()
         {
             //arrange
             TearDown();
@@ -83,7 +84,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportComplexService(context);
-                service.AddSportComplexToDb(_sportComplexForTests);
+                await service.AddSportComplexToDb(_sportComplexForTests);
             }
 
             using (var context = new ApplicationDbContext(options))
@@ -98,7 +99,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void RemoveSportComplexFromDb_RemovesItem()
+        public async Task RemoveSportComplexFromDb_RemovesItem()
         {
             //arrange
             TearDown();
@@ -112,7 +113,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportComplexService(context);
-                service.RemoveSportComplexFromDb(_sportComplexForTests);
+                await service.RemoveSportComplexFromDb(_sportComplexForTests);
 
                 //act 
                 var result = context.SportComplex.Any(x => x.SportComplexId.Equals(_sportComplexForTests.SportComplexId));
@@ -123,7 +124,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void UpdateSportComplexInDb_UpdatesItem()
+        public async Task UpdateSportComplexInDb_UpdatesItem()
         {
             //arrange
             TearDown();
@@ -137,7 +138,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportComplexService(context);
-                service.UpdateSportComplexInDb(new SportComplex
+                await service.UpdateSportComplexInDb(new SportComplex
                 {
                     SportComplexId = _sportComplexForTests.SportComplexId,
                     Title = "New Title",
