@@ -210,7 +210,7 @@ namespace UtopiaCity.Data.Migrations
                     SecondPersonId = table.Column<string>(nullable: false),
                     FirstPersonData = table.Column<string>(nullable: true),
                     SecondPersonData = table.Column<string>(nullable: true),
-                    MarriageDate = table.Column<DateTime>(nullable: false)
+                    MarriageDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -422,6 +422,57 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Friend",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    FirstUserId = table.Column<string>(nullable: true),
+                    SecondUserId = table.Column<string>(nullable: true),
+                    FriendsStatus = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friend", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Friend_AspNetUsers_FirstUserId",
+                        column: x => x.FirstUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Friend_AspNetUsers_SecondUserId",
+                        column: x => x.SecondUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Talks",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserOneId = table.Column<string>(nullable: true),
+                    UserTwoId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Talks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Talks_AspNetUsers_UserOneId",
+                        column: x => x.UserOneId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Talks_AspNetUsers_UserTwoId",
+                        column: x => x.UserTwoId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Companies",
                 columns: table => new
                 {
@@ -483,9 +534,16 @@ namespace UtopiaCity.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     FamilyName = table.Column<string>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    Gender = table.Column<string>(nullable: true),
-                    MarriageId = table.Column<string>(nullable: true)
+                    BirthDate = table.Column<DateTime>(type: "date", nullable: false),
+                    BirthPlace = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    MarriageId = table.Column<string>(nullable: true),
+                    RegistrationAddress = table.Column<string>(nullable: true),
+                    Property = table.Column<string>(nullable: true),
+                    MotorTransport = table.Column<string>(nullable: true),
+                    MedicalRecords = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -567,6 +625,34 @@ namespace UtopiaCity.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Text = table.Column<string>(nullable: false),
+                    When = table.Column<DateTime>(nullable: false),
+                    Author = table.Column<string>(nullable: false),
+                    SenderId = table.Column<string>(nullable: true),
+                    TalkId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_AspNetUsers_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Messages_Talks_TalkId",
+                        column: x => x.TalkId,
+                        principalTable: "Talks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
@@ -617,6 +703,28 @@ namespace UtopiaCity.Data.Migrations
                         name: "FK_Vacancies_Professions_ProfessionId",
                         column: x => x.ProfessionId,
                         principalTable: "Professions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RealEstate",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Street = table.Column<string>(nullable: false),
+                    Number = table.Column<string>(nullable: false),
+                    ResidentAccountId = table.Column<string>(nullable: true),
+                    CompletionYear = table.Column<int>(nullable: false),
+                    EstateType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RealEstate", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RealEstate_ResidentAccount_ResidentAccountId",
+                        column: x => x.ResidentAccountId,
+                        principalTable: "ResidentAccount",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -807,6 +915,26 @@ namespace UtopiaCity.Data.Migrations
                 column: "ProfessionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Friend_FirstUserId",
+                table: "Friend",
+                column: "FirstUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friend_SecondUserId",
+                table: "Friend",
+                column: "SecondUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderId",
+                table: "Messages",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_TalkId",
+                table: "Messages",
+                column: "TalkId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Passengers_ResidentAccountId",
                 table: "Passengers",
                 column: "ResidentAccountId");
@@ -815,6 +943,11 @@ namespace UtopiaCity.Data.Migrations
                 name: "IX_Passengers_TicketId",
                 table: "Passengers",
                 column: "TicketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RealEstate_ResidentAccountId",
+                table: "RealEstate",
+                column: "ResidentAccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RequestsToAdministration_SportComplexId",
@@ -855,6 +988,16 @@ namespace UtopiaCity.Data.Migrations
                 name: "IX_SportTickets_SportEventId",
                 table: "SportTickets",
                 column: "SportEventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Talks_UserOneId",
+                table: "Talks",
+                column: "UserOneId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Talks_UserTwoId",
+                table: "Talks",
+                column: "UserTwoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_FlightId",
@@ -936,7 +1079,16 @@ namespace UtopiaCity.Data.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
+                name: "Friend");
+
+            migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
                 name: "Passengers");
+
+            migrationBuilder.DropTable(
+                name: "RealEstate");
 
             migrationBuilder.DropTable(
                 name: "RequestsToAdministration");
@@ -966,10 +1118,10 @@ namespace UtopiaCity.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Tickets");
+                name: "Talks");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "SportEvents");
@@ -985,6 +1137,9 @@ namespace UtopiaCity.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Professions");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Flights");

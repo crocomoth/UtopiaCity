@@ -2,6 +2,8 @@
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Models.Life;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace UtopiaCity.Controllers.Sport
 {
@@ -18,11 +20,12 @@ namespace UtopiaCity.Controllers.Sport
             _lifeService = lifeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.SportComplexes = _sportComplexService.GetAllSportComplexes();
-            ViewBag.SportEvents = _sportEventService.GetAllSportEvents();
-            //ViewBag.SportAchievements = _lifeService.GetByEventType(EventType.Sport);
+            ViewBag.SportComplexes = await _sportComplexService.GetAllSportComplexes();
+            ViewBag.SportEvents = await _sportEventService.GetAllSportEvents();
+            var eventDto = new EventDto { EventType = (int)EventType.sports };
+            ViewBag.SportAchievements = _lifeService.Search(eventDto).ToList();
             return View();
         }
     }

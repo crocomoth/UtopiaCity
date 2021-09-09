@@ -21,18 +21,16 @@
     <Compile Remove="Data\Migrations\20210823074243_RequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\20210823085651_RelationsBetweenSportComplexAndRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823085651_RelationsBetweenSportComplexAndRequestToAdministration.Designer.cs" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
+    <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
   </ItemGroup>
-
+  
   <ItemGroup>
-	<PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
+	  <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.16" />
@@ -41,8 +39,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
@@ -51,7 +49,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\" />
-	<Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\images\HousingSystem\" />
   </ItemGroup>
 
