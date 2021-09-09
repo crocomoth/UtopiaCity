@@ -40,6 +40,7 @@ namespace UtopiaCity.Controllers.Business
             {
                 company.IIK = "KZ" + RandomUtil.GenerateRandomString(18);
                 company.BIN = RandomUtil.GenerateRandomString(12);
+                company.CompanyStatusId = "1";
                 await _companyAppService.Create(company);
 
                 EmailService emailService = new EmailService();
