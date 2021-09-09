@@ -49,7 +49,7 @@ namespace UtopiaCity.Services.Life
         {
             return _dbContext.Events.Any(x => x.Id.Equals(id));
         }
-        public IQueryable<Event> Search(EventDto dto)
+        public virtual IQueryable<Event> Search(EventDto dto)
         {
             var list = SearchByDates(from: dto.From, to: dto.To);
             list = SearchByEventType(list, dto.EventType);

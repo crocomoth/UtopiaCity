@@ -24,7 +24,7 @@ namespace UtopiaCity.Services.Airport
         /// Gets list of all flights
         /// </summary>
         /// <returns>List of flights</returns>
-        public List<Flight> GetFlightList()
+        public virtual List<Flight> GetFlightList()
         {
             return _dbContext.Flights.ToList();
         }
@@ -34,7 +34,7 @@ namespace UtopiaCity.Services.Airport
         /// </summary>
         /// <param name="id">Flights' Id</param>
         /// <returns>Special flight if exist, otherwise null</returns>
-        public Flight GetFlightById(string id)
+        public virtual Flight GetFlightById(string id)
         {
             return _dbContext.Flights.FirstOrDefault(x => x.Id.Equals(id));
         }
@@ -112,7 +112,7 @@ namespace UtopiaCity.Services.Airport
         /// Gets the list of object of aircraft types
         /// </summary>
         /// <returns>The List of types of existing aircrafts</returns>
-        public List<string> GetListOfPlaneTypes()
+        public virtual List<string> GetListOfPlaneTypes()
         {
             List<string> list = new List<string>();
             list.Add("PassengerShortLengthAircraft");

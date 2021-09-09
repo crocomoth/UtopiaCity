@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using System.Linq;
+using UtopiaCity.Data;
+using UtopiaCity.Models.TimelineModel.CollectionDataModel;
 using UtopiaCity.Services.Airport;
-using UtopiaCity.Models.Airport;
-using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Timeline
 {
     public class ScheduleController : Controller
     {
-        private readonly ScheduleService _scheduleService;
+        private readonly FlightService _flightService;
 
-        public ScheduleController(ScheduleService scheduleService)
+        public ScheduleController(FlightService flightService)
         {
-            _scheduleService = scheduleService;
+            _flightService = flightService;
         }
 
-        //LIST
-        public async Task<IActionResult> Index()
+        public ViewResult Index(string name) => View("Index", new MultipleModel
         {
-            return View("ScheduleListView", await _scheduleService.GetFlights());
-        }
-
+            Flight = (System.Collections.Generic.IEnumerable<Models.Airport.Flight>)((System.Collections.Generic.IEnumerable<Models.Airport.Flight>)_flightService.GetFlightList())
+            .Where(i => i.Weather == name)
+            .OrderBy(i => i.Id)
+        });
     }
 }

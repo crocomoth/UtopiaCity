@@ -1,0 +1,51 @@
+﻿@model IEnumerable<UtopiaCity.Models.CitizenAccount.AppUser>
+@{
+    ViewData["Title"] = "Index Friend";
+}
+
+<div class="col-2 ml-3">
+    <partial name="_IndexPartial" />
+</div>
+
+<p>
+    <H2>Your Friends</H2>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                <a asp-action="ShowChat" asp-controller="Chat" asp-route-id="@item.Id">Show chat</a>
+            </td>
+            <td>
+                <a asp-action="DeleteUserFromFriends" asp-route-id="@item.Id">Delete From Friends?</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -10,8 +10,7 @@ namespace UtopiaCity.Models.TimelineModel.CollectionDataModel
     public class CollectionDataModel
     {
         public List<Flight> _flights;
+
         public List<Event> _events;
-        public Flight FlightModel { get; set; }
-        public Event EventModel { get; set; }
     }
 }

@@ -9,6 +9,8 @@ using UtopiaCity.Models.CityAdministration;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Models.TimelineModel;
 using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Models.Clinic;
+using UtopiaCity.Models.HousingSystem;
 
 namespace UtopiaCity.Data
 {
@@ -56,11 +58,8 @@ namespace UtopiaCity.Data
         public DbSet<WeatherReport> WeatherReports { get; set; }
         public DbSet<ForPassenger> ForPassengers { get; set; }
         public DbSet<ForCompany> ForCompanies { get; set; }
-        public DbSet<TransportManager> TransportManagers { get; set; }
-        public DbSet<PermitedModel> PermitedModel { get; set; }
+        public DbSet<TransportManager> TransportManagers { get; set; }       
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Airline> Airlines { get; set; }
-        public DbSet<ResidentAccount> RersidentAccount { get; set; }
         public DbSet<ResidentAccount> ResidentAccount { get; set; }
         public DbSet<TimelineModel> TimelineModel { get; set; }
         public DbSet<ScheduleModel> ScheduleModel { get; set; }
@@ -78,5 +77,13 @@ namespace UtopiaCity.Data
         public DbSet<Resume> Resumes { get; set; }
         public DbSet<SportTicket> SportTickets { get; set; }
         public DbSet<RequestToAdministration> RequestsToAdministration { get; set; }
+        public DbSet<PermitedModel> PermitedModel { get; set; }
+        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<ArrivingPassenger> ArrivingPassengers { get; set; }
+        public DbSet<ClinicVisit> ClinicVisit { get; set; }
+        public DbSet<Friend> Friend { get; set; }
+        public DbSet<RealEstate> RealEstate { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Talk> Talks { get; set; }
     }
 }

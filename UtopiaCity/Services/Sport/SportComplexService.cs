@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
 
@@ -21,89 +23,85 @@ namespace UtopiaCity.Services.Sport
         /// Gets list of all sport complexes.
         /// </summary>
         /// <returns>List of all existing sport complexes.</returns>
-        public virtual List<SportComplex> GetAllSportComplexes() => _dbContext.SportComplex.ToList();
+        public virtual async Task<List<SportComplex>> GetAllSportComplexes()
+            => await _dbContext.SportComplex
+                .ToListAsync();
 
         /// <summary>
         /// Gets <see cref="SportComplex"/> by Id.
         /// </summary>
         /// <param name="id">Id of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
-        public virtual SportComplex GetSportComplexById(string id) => _dbContext.SportComplex.FirstOrDefault(x => x.SportComplexId.Equals(id));
+        public virtual async Task<SportComplex> GetSportComplexById(string id)
+            => await _dbContext.SportComplex
+                .FirstOrDefaultAsync(x => x.SportComplexId.Equals(id));
 
         /// <summary>
         /// Method for adding new sport complex to database.
         /// </summary>
         /// <param name="sportComplex">Sport complex for adding.</param>
-        public virtual void AddSportComplexToDb(SportComplex sportComplex)
+        public virtual async Task AddSportComplexToDb(SportComplex sportComplex)
         {
             _dbContext.Add(sportComplex);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Method for removing sport complex from database.
         /// </summary>
         /// <param name="sportComplex">Sport complex for removing.</param>
-        public virtual void RemoveSportComplexFromDb(SportComplex sportComplex)
+        public virtual async Task RemoveSportComplexFromDb(SportComplex sportComplex)
         {
             _dbContext.Remove(sportComplex);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Method for updating sport complex in database.
         /// </summary>
         /// <param name="sportComplex">Sport complex for updating.</param>
-        public virtual void UpdateSportComplexInDb(SportComplex sportComplex)
+        public virtual async Task UpdateSportComplexInDb(SportComplex sportComplex)
         {
             _dbContext.SportComplex.Update(sportComplex);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Gets list of sport complexes' titles.
         /// </summary>
         /// <returns>List of all existing sport complexes' titles.</returns>
-        public virtual List<string> GetAllSportComplexesTitles()
-        {
-            var sportComplexes = GetAllSportComplexes();
-            var titles = new List<string>();
-            foreach (var sportComplex in sportComplexes)
-            {
-                titles.Add(sportComplex.Title);
-            }
-
-            return titles;
-        }
+        public virtual async Task<List<string>> GetAllSportComplexesTitles()
+            => await _dbContext.SportComplex
+                .Select(x => x.Title)
+                .ToListAsync();
 
         /// <summary>
         /// Gets <see cref="SportComplex"/> by Title.
         /// </summary>
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex if it exists, otherwise null.</returns>
-        public virtual SportComplex GetSportComplexByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title));
+        public virtual async Task<SportComplex> GetSportComplexByTitle(string title)
+            => await _dbContext.SportComplex
+                .FirstOrDefaultAsync(x => x.Title.Equals(title));
 
         /// <summary>
         /// Gets <see cref="SportComplex.SportComplexId"/> by Title.
         /// </summary>
         /// <param name="title">Title of sport complex.</param>
         /// <returns>Sport complex's id if it exists, otherwise null.</returns>
-        public virtual string GetSportComplexIdByTitle(string title) => _dbContext.SportComplex.FirstOrDefault(x => x.Title.Equals(title)).SportComplexId;
+        public virtual async Task<string> GetSportComplexIdByTitle(string title)
+        {
+            var sportComplex = await _dbContext.SportComplex.FirstOrDefaultAsync(x => x.Title.Equals(title));
+            return sportComplex.SportComplexId;
+        }
 
         /// <summary>
         /// Gets list of sport complexes' ids.
         /// </summary>
         /// <returns>List of all existing sport complexes' ids.</returns>
-        public virtual List<string> GetAllSportComplexesIds()
-        {
-            var sportComplexes = GetAllSportComplexes();
-            var ids = new List<string>();
-            foreach (var sportComplex in sportComplexes)
-            {
-                ids.Add(sportComplex.SportComplexId);
-            }
-
-            return ids;
-        }
+        public virtual async Task<List<string>> GetAllSportComplexesIds()
+            => await _dbContext.SportComplex
+                .Select(x => x.SportComplexId)
+                .ToListAsync();
     }
 }

@@ -12,7 +12,7 @@ namespace UtopiaCity.Models.CitizenAccount
         public string Name { get; set; }
         public string Surname { get; set; }
         [Display(Name = "Date Of Birth")]
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
         public double Balance { get; set; }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace UtopiaCity.Models.CitizenAccount
+﻿namespace UtopiaCity.Models.CitizenAccount
 {
+    /// <summary>
+    /// Represent user gender.
+    /// </summary>
     public enum Gender
     {
         Male=0,

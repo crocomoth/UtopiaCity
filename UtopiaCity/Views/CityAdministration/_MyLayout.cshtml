@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "City Administration";
 }
@@ -8,8 +10,12 @@
         <div class="col-sm-3" style="background-color:white; padding:0">
             <ul style="list-style-type:none;">
                 <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="CityAdministrationHome" asp-action="Index">Home</a></li>
-                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="ResidentAccount" asp-action="Index">Residents accounts</a></li>
+                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="ResidentAccount" asp-action="Index">Residents accounts MVC</a></li>
+                <li><a class="btn btn-info" style="width:90%; margin:3px" href="/CityAdministration/Index.html">Residents accounts WebAPI</a></li>
                 <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="Marriage" asp-action="Index">Marriage</a></li>
+                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="RequestsConfirmation" asp-action="Index">Sports Confirmation</a></li>
+                <li><a class="btn btn-primary" style="width:90%; margin:3px" asp-controller="Passenger" asp-action="ListOfArrivals">List Of Arriving Passengers</a></li>
+                <li><a class="btn btn-primary" style="width:90%; margin:3px; color:black; background-color:#4ee60e" href="/Swagger/Index.html">Swagger</a></li>
             </ul>
         </div>
         <div class="col-sm-9" style="background-color:white; align-content:center;">
