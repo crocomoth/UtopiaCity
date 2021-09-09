@@ -129,6 +129,6 @@ namespace UtopiaCity.Controllers.Airport
 
             _flightService.DeleteFlight(flight);
             return RedirectToAction(nameof(Index));
-        }       
+        }               
     }
 }

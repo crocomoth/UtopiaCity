@@ -144,7 +144,7 @@ namespace UtopiaCityTest.Controllers
         }
 
         [Fact]
-        public void Create_PostRequestMethod_ReturnsViewForCreatingModel_WhenThereIsNoModelAndModelStateIsValid()
+        public void Create_PostRequestMethod_ReturnsRedirectionView_WhenThereIsNoModelAndModelStateIsValid()
         {
             //arrange 
             var createdModel = new Flight()
@@ -160,16 +160,12 @@ namespace UtopiaCityTest.Controllers
             };            
             _mockService.Setup(x => x.AddFlight(createdModel));
 
-            //act
-            var result = _flightController.Create(createdModel);
+            //act            
+            var result = _flightController.Create(createdModel) as RedirectToActionResult;
 
-            //assert
-
-            var viewResult = result as ViewResult;
-            Assert.True(viewResult != null);
-            Assert.True(viewResult.ViewName == "FlightCreateView");
-            Assert.Equal(createdModel, viewResult.Model);
-
+            //assert           
+            Assert.True(result != null);;
+            Assert.Equal("Index", result.ActionName);
         }
     }
 }

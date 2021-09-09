@@ -1,0 +1,26 @@
+﻿.mainPageTable {
+    border-collapse: collapse;
+    /*border: 1px solid grey;*/
+    width: 100%;
+
+}
+.mainTh {
+    /*border: 1px solid grey; */   
+    width: 20%;
+    text-align: center;
+}
+.mainTd {
+    /*border: 1px solid grey;*/
+    border: hidden;
+    width: 20%;
+    text-align: center;
+}
+.mainFooter{
+    padding-top: 2em;
+}
+.mainTr{
+    padding: 15px 0 0 0;
+}
+.specialTh{
+    padding: 15px 0 0 0;
+}
