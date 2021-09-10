@@ -1,0 +1,66 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.CheckedFlight>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of CheckedFlight</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedFlightNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedDepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedDestinationPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedLocationPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedWeather)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckedFlightWeather)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedFlightNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedDepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedDestinationPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedLocationPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedWeather)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckedFlightWeather)
+            </td>
+            <td>                
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

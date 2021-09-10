@@ -27,7 +27,5 @@ namespace UtopiaCity.Models.Sport
 
         public SportComplex SportComplex { get; set; }
         public List<SportTicket> SportTickets { get; set; }
-
-        //TODO: Add Citizen as a subscriber on event
     }
 }

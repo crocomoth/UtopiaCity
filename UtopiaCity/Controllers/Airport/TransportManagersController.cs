@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UtopiaCity.Data;
+using UtopiaCity.Models.Airport;
 using UtopiaCity.Models.Airport.TransportManagerSystem;
 
 namespace UtopiaCity.Controllers.Airport
@@ -141,7 +142,7 @@ namespace UtopiaCity.Controllers.Airport
             return PartialView("DeletePartialView", transportManager);
         }
 
-        [HttpPost, ActionName("DeletePartialView")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
@@ -198,5 +199,31 @@ namespace UtopiaCity.Controllers.Airport
             return View("CreateForCompanyToView", company);
         }
         // TODO: add new data-table to the Index view 
+
+        public async Task<IActionResult> IndexLuggage()
+        {
+            ViewBag.ForPassengers = _context.ForPassengers.FirstOrDefault().FullName;
+            return View("IndexLuggageView", await _context.AirportWarehouses.Include(t=>t.ForPassenger).ToListAsync());
+        }
+
+        [HttpGet]
+        public IActionResult CreateLuggage()
+        {
+            ViewBag.ForPassengers = new SelectList(_context.ForPassengers, "Id", "FullName");
+            return PartialView("CreateLuggagePartialView");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateLuggage(AirportWarehouse warehouse)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(warehouse);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(IndexLuggage));
+            }
+
+            return PartialView("CreateLuggagePartialView", warehouse);
+        }
     }
 }

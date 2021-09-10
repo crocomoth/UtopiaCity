@@ -19,7 +19,7 @@ using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Services.CitizenAccount;
 using UtopiaCity.Services.Clinic;
 using UtopiaCity.Services.HousingSystem;
-using UtopiaCity.Services.FireSystem;
+using Microsoft.OpenApi.Models;
 
 namespace UtopiaCity
 {
@@ -72,12 +72,15 @@ namespace UtopiaCity
             services.AddScoped<TicketService, TicketService>();
             services.AddScoped<PassengerService, PassengerService>();
             services.AddScoped<ClinicVisitService, ClinicVisitService>();
-            services.AddScoped<FireMessageService, FireMessageService>();
-            services.AddScoped<EmployeeManagementService, EmployeeManagementService>();
-            services.AddScoped<TransportManagementService, TransportManagementService>();
             services.AddScoped<CitizenFriendsService, CitizenFriendsService>();
+            services.AddScoped<CheckedFlightService, CheckedFlightService>();
+            services.AddScoped<FlightRouteApiService, FlightRouteApiService>();
+
+
             services.AddScoped<RealEstateService, RealEstateService>();
             services.AddTransient<IMailService, NullMailService>();
+            services.AddScoped<ChatService, ChatService>();
+
 
             #endregion
 
@@ -111,6 +114,11 @@ namespace UtopiaCity
                 options.LoginPath = "/Identity/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Utopia City Residents accounts API", Version = "v1" });
             });
         }
 
@@ -153,6 +161,10 @@ namespace UtopiaCity
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "ResidentAccountApi")
+            );
             app.UseRouting();
 
             app.UseAuthentication();

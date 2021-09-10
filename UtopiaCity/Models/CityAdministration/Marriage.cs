@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,7 +21,7 @@ namespace UtopiaCity.Models.CityAdministration
         public string SecondPersonData { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
         public DateTime MarriageDate { get; set; }
     }
 }

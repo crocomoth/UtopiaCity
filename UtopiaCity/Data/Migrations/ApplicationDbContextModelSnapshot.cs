@@ -225,6 +225,34 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.AirportWarehouse", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ForPassengerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("HostName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LuggageType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LuggageWeight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForPassengerId");
+
+                    b.ToTable("AirportWarehouses");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.ArrivingPassenger", b =>
                 {
                     b.Property<string>("Id")
@@ -252,6 +280,41 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ArrivingPassengers");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.CheckedFlight", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CheckedArrivalTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckedDepartureTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CheckedDestinationPoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CheckedFlightNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CheckedFlightWeather")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CheckedLocationPoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CheckedTypeOfAircraft")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CheckedWeather")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CheckedFlights");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
@@ -685,6 +748,60 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Friend");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Message", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TalkId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("TalkId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Talk", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserOneId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserTwoId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserOneId");
+
+                    b.HasIndex("UserTwoId");
+
+                    b.ToTable("Talks");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
                 {
                     b.Property<string>("Id")
@@ -699,7 +816,7 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MarriageDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("SecondPersonData")
                         .HasColumnType("nvarchar(max)");
@@ -720,7 +837,13 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
+
+                    b.Property<string>("BirthPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FamilyName")
                         .IsRequired()
@@ -730,11 +853,26 @@ namespace UtopiaCity.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("MarriageId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MedicalRecords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MotorTransport")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Property")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegistrationAddress")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1122,6 +1260,13 @@ namespace UtopiaCity.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.AirportWarehouse", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
+                        .WithMany()
+                        .HasForeignKey("ForPassengerId");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.Passenger", b =>
                 {
                     b.HasOne("UtopiaCity.Models.CityAdministration.ResidentAccount", "ResidentAccount")
@@ -1226,6 +1371,30 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "SecondUser")
                         .WithMany()
                         .HasForeignKey("SecondUserId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Message", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
+
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.Talk", "Talk")
+                        .WithMany()
+                        .HasForeignKey("TalkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Talk", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserOne")
+                        .WithMany()
+                        .HasForeignKey("UserOneId");
+
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserTwo")
+                        .WithMany()
+                        .HasForeignKey("UserTwoId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>

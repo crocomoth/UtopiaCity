@@ -1,0 +1,52 @@
+﻿@model IEnumerable<UtopiaCity.Models.CitizenAccount.Message>
+
+@{
+    ViewData["Title"] = "ShowChat";
+}
+<link rel="stylesheet" href="~/lib/bootstrap/ForChat/ForChat.css" />
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card card-bordered">
+                    <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
+                        @{foreach (var item in Model)
+                            {
+                                if (item.Author == ViewBag.CurrentUser)
+                                {
+                                    <div class="media media-chat media-chat-reverse">
+                                        <div class="media-body">
+                                            <p>@item.Author</p>
+                                            <p>@item.Text</p>
+                                            <p>@item.When</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="media media-chat">
+                                        <div class="media-body">
+                                            <p>@item.Author</p>
+                                            <p>@item.Text</p>
+                                            <p>@item.When</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+                <div>
+                    <form asp-action="Create">
+                        <div class="form-group">
+                            <input class="form-control" hidden="hidden" name="userTwoId" value="@ViewBag.UserTwoId" />
+                            <input type="text" class="form-control" name="message" placeholder="Enter your message">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

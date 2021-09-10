@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.Sport;
 using UtopiaCity.Services.Sport;
@@ -25,7 +26,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetAllSportEvents_ReturnsListOfSportEventWithSportComplexes()
+        public async Task GetAllSportEvents_ReturnsListOfSportEventWithSportComplexes()
         {
             //arrange
             TearDown();
@@ -42,7 +43,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportEventService(context);
 
                 //act
-                var result = service.GetAllSportEvents();
+                var result = await service.GetAllSportEvents();
 
                 //assert
                 Assert.Collection(result,
@@ -69,7 +70,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetSportEventById_ReturnsSportEvent_IfExists()
+        public async Task GetSportEventById_ReturnsSportEvent_IfExists()
         {
             //arrange
             TearDown();
@@ -86,7 +87,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportEventService(context);
 
                 //act
-                var result = service.GetSportEventById("1");
+                var result = await service.GetSportEventById("1");
 
                 //assert
                 Assert.Equal("1", result.SportEventId);
@@ -97,7 +98,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void GetSportEventById_ReturnsSportEventWithSportComplex_IfExists()
+        public async Task GetSportEventById_ReturnsSportEventWithSportComplex_IfExists()
         {
             //arrange
             TearDown();
@@ -114,7 +115,7 @@ namespace UtopiaCityTest.Services.Sport
                 var service = new SportEventService(context);
 
                 //act
-                var result = service.GetSportEventByIdWithSportComplex("1");
+                var result = await service.GetSportEventByIdWithSportComplex("1");
 
                 //assert
                 Assert.Equal("1", result.SportEventId);
@@ -124,7 +125,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void AddSportEventToDbTest()
+        public async Task AddSportEventToDbTest()
         {
             //arrange
             TearDown();
@@ -132,7 +133,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportEventService(context);
-                service.AddSportEventToDb(_sportEventForTests);
+                await service.AddSportEventToDb(_sportEventForTests);
             }
 
             using (var context = new ApplicationDbContext(options))
@@ -147,7 +148,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void RemoveSportEventFromDbTest()
+        public async Task RemoveSportEventFromDbTest()
         {
             //arrange
             TearDown();
@@ -161,7 +162,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportEventService(context);
-                service.RemoveSportEventFromDb(_sportEventForTests);
+                await service.RemoveSportEventFromDb(_sportEventForTests);
 
                 //act
                 var result = context.SportEvents.Any(x => x.SportEventId.Equals(_sportEventForTests.SportEventId));
@@ -172,7 +173,7 @@ namespace UtopiaCityTest.Services.Sport
         }
 
         [Fact]
-        public void UpdateSportEventInDbTest()
+        public async Task UpdateSportEventInDbTest()
         {
             //arrange
             TearDown();
@@ -187,7 +188,7 @@ namespace UtopiaCityTest.Services.Sport
             using (var context = new ApplicationDbContext(options))
             {
                 var service = new SportEventService(context);
-                service.UpdateSportEventInDb(new SportEvent
+                await service.UpdateSportEventInDb(new SportEvent
                 {
                     SportEventId = _sportEventForTests.SportEventId,
                     Title = "new title_1",

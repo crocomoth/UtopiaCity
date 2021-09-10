@@ -29,20 +29,23 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Surname)
-                </td>
-                <td>
-                    <a asp-action="DeleteUserFromFriends" asp-route-id="@item.Id">Delete From Friends?</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                <a asp-action="ShowChat" asp-controller="Chat" asp-route-id="@item.Id">Show chat</a>
+            </td>
+            <td>
+                <a asp-action="DeleteUserFromFriends" asp-route-id="@item.Id">Delete From Friends?</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
