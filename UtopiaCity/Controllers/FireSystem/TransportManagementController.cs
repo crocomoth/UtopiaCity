@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,9 @@ namespace UtopiaCity.Controllers.FireSystem
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name"));
             return View("CreateTransportManagementView");
         }
 
@@ -65,6 +67,7 @@ namespace UtopiaCity.Controllers.FireSystem
             }
 
             var transport = await _transportManagementService.GetTrasportById(id);
+            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");)
             if (transport == null)
             {
                 return NotFound();
@@ -99,6 +102,7 @@ namespace UtopiaCity.Controllers.FireSystem
             }
 
             var transport = await _transportManagementService.GetTrasportById(id);
+            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");)
             if (transport == null)
             {
                 return NotFound();

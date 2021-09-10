@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
+using UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess;
 using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
 
 namespace UtopiaCity.Services.FireSystem
@@ -24,7 +25,7 @@ namespace UtopiaCity.Services.FireSystem
 
         public virtual async Task<List<TransportManagement>> GetTrasports()
         {
-            return await _dbContext.TransportsManagement.ToListAsync();
+            return await _dbContext.TransportsManagement.Include(d => d.Department).ToListAsync();
         }
 
         public async Task AddTransport(TransportManagement transport)
@@ -43,6 +44,11 @@ namespace UtopiaCity.Services.FireSystem
         {
             _dbContext.Remove(transport);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<FireSafetyDepartment>> GetDepartments()
+        {
+            return await _dbContext.Departments.ToListAsync();
         }
     }
 }

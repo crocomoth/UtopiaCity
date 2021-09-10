@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess;
 
 namespace UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees
 {
@@ -12,5 +13,7 @@ namespace UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees
         public bool FirePump { get; set; }
         public bool ContainerForStoringFireExtinguishingAgents { get; set; }
         public string FireFightingEquipment { get; set; } // enum
+        public string DepartmentId { get; set; }
+        public FireSafetyDepartment Department { get; set; }
     }
 }

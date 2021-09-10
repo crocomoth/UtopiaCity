@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,10 @@ namespace UtopiaCity.Controllers.FireSystem
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewData["PositionId"] = new SelectList(await _employeeManagementService.GetPositions(), "Id", "Name");
+            ViewData["DepartmentId"] = new SelectList(await _employeeManagementService.GetDepartments(), "Id", "Name");
             return View("CreateEmployeeManagementView");
         }
 
@@ -65,6 +68,8 @@ namespace UtopiaCity.Controllers.FireSystem
             }
 
             var employee = await _employeeManagementService.GetEmployeeById(id);
+            ViewData["PositionId"] = new SelectList(await _employeeManagementService.GetPositions(), "Id", "Name");
+            ViewData["DepartmentId"] = new SelectList(await _employeeManagementService.GetDepartments(), "Id", "Name");
             if (employee == null)
             {
                 return NotFound();
@@ -99,6 +104,8 @@ namespace UtopiaCity.Controllers.FireSystem
             }
 
             var employee = await _employeeManagementService.GetEmployeeById(id);
+            ViewData["PositionId"] = new SelectList(await _employeeManagementService.GetPositions(), "Id", "Name");
+            ViewData["DepartmentId"] = new SelectList(await _employeeManagementService.GetDepartments(), "Id", "Name");
             if (employee == null)
             {
                 return NotFound();

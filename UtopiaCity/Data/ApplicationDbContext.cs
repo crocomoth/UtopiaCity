@@ -13,6 +13,7 @@ using UtopiaCity.Models.Clinic;
 using UtopiaCity.Models.HousingSystem;
 using UtopiaCity.Models.FireSystem;
 using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
+using UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess;
 
 namespace UtopiaCity.Data
 {
@@ -89,5 +90,12 @@ namespace UtopiaCity.Data
         public DbSet<Talk> Talks { get; set; }
         public DbSet<CheckedFlight> CheckedFlights { get; set; }
         public DbSet<AirportWarehouse> AirportWarehouses { get; set; }
+        public DbSet<FireMessage> FireMessage { get; set; }
+        public DbSet<FireSafetyCheck> FireSafetyCheck { get; set; }
+        public DbSet<TransportManagement> TransportsManagement { get; set; }
+        public DbSet<EmployeeManagement> EmployeesManagement { get; set; }
+        public DbSet<FireSafetyDepartment> Departments { get; set; } 
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<DepartmentStatus> DepartmentStatuses { get; set; }
     }
 }
