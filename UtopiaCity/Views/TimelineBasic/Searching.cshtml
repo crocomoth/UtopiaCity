@@ -1,0 +1,54 @@
+﻿@model IEnumerable<UtopiaCity.Models.Airport.Flight>
+<h1>Hello from Searching Page</h1>
+
+<form asp-controller="TimelineBasic" asp-action="Searching">
+    <p>
+        Введите город Отправлене/Прибытия: <input type="text" name="SearchString" method="get" />
+        <input type="submit" value="Поиск" />
+    </p>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Номер рейса
+            </th>
+            <th>
+                От куда
+            </th>
+            <th>
+                Куда
+            </th>
+            <th>
+                Время отправления
+            </th>
+            <th>
+                Время прибытия
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using UtopiaCity.Data;
 using UtopiaCity.Models.Airport;
 using UtopiaCity.Models.Life;
 using UtopiaCity.Models.TimelineModel;
@@ -16,11 +19,13 @@ namespace UtopiaCity.Controllers.Timeline
         private readonly TimelineService _timelineService;
         private readonly FlightService _flightService;
         private readonly LifeService _lifeService;
-        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService)
+        private readonly ApplicationDbContext _dbContext;
+        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService, ApplicationDbContext dbContext)
         {
             _lifeService = lifeService;
             _flightService = flightService;
             _timelineService = timelineService;
+            _dbContext = dbContext;
         }
 
         //LIST
@@ -28,7 +33,6 @@ namespace UtopiaCity.Controllers.Timeline
         {
             return View("ListTimelineView", await _timelineService.GetList());
         }
-
         //CREATE
         [HttpGet]
         public IActionResult Create()
@@ -136,17 +140,29 @@ namespace UtopiaCity.Controllers.Timeline
         public ActionResult ViewModelResult()
         {
             CollectionDataModel dataViewModel = new CollectionDataModel();
-            
+
             List<Flight> flights = _flightService.GetFlightList();
-            
+
             List<Event> events = _lifeService.GetAll();
-            
+
             dataViewModel._flights = flights;
-            
+
             dataViewModel._events = events;
 
             return View(dataViewModel);
         }
 
+
+        public async Task<IActionResult> Searching(string searchString)
+        {
+            var searchResult = from t in _dbContext.Flights
+                               select t;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchResult = searchResult.Where(i => i.LocationPoint.Contains(searchString) || i.DestinationPoint.Contains(searchString));
+            }
+
+            return View(await searchResult.ToListAsync());
+        }
     }
 }
