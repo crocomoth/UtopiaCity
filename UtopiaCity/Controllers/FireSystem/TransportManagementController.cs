@@ -42,7 +42,7 @@ namespace UtopiaCity.Controllers.FireSystem
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name"));
+            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");
             return View("CreateTransportManagementView");
         }
 
@@ -67,7 +67,7 @@ namespace UtopiaCity.Controllers.FireSystem
             }
 
             var transport = await _transportManagementService.GetTrasportById(id);
-            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");)
+            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");
             if (transport == null)
             {
                 return NotFound();
@@ -102,7 +102,7 @@ namespace UtopiaCity.Controllers.FireSystem
             }
 
             var transport = await _transportManagementService.GetTrasportById(id);
-            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");)
+            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");
             if (transport == null)
             {
                 return NotFound();
