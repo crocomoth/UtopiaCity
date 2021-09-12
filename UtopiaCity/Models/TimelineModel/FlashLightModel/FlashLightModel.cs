@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UtopiaCity.Models.Airport;
 
 namespace UtopiaCity.Models.TimelineModel.FlashLightModel
 {
@@ -10,5 +11,7 @@ namespace UtopiaCity.Models.TimelineModel.FlashLightModel
 
         [Required(ErrorMessage = "Дата")]
         public DateTime DateValue { get; set; }
+
+        public WeatherReport weatherReport { get; set; }
     }
 }

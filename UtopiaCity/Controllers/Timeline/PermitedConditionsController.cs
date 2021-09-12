@@ -4,7 +4,7 @@ using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Timeline
 {
-    public class PermitedConditionsController:Controller
+    public class PermitedConditionsController : Controller
     {
         private readonly PermitedConditonsService _permitedConditionsService;
 
@@ -17,6 +17,11 @@ namespace UtopiaCity.Controllers.Timeline
         public async Task<IActionResult> Index()
         {
             return View("PermitedConditonsView", await _permitedConditionsService.GetList());
+        }
+
+        public IActionResult FlashLight()
+        {
+            return View("FlashLightView", _permitedConditionsService.GetList());
         }
     }
 }
