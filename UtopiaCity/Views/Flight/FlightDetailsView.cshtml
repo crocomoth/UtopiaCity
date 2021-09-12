@@ -55,6 +55,11 @@
     </dl>
 </div>
 <div>
+    <form asp-action="Dispatcher">
+        <div class="form-group">
+            <input type="submit" asp-controller="CheckedFlight" asp-action="Dispatcher" asp-route-id="@Model.Id" value="Check Weather by Direction" class="btn btn-primary" />
+        </div>
+    </form>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     <a asp-action="Index">Back to List</a>
 </div>

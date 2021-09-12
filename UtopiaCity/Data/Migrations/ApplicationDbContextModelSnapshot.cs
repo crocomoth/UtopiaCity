@@ -225,6 +225,34 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.Airport.AirportWarehouse", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ForPassengerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("HostName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LuggageType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LuggageWeight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForPassengerId");
+
+                    b.ToTable("AirportWarehouses");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.Airport.ArrivingPassenger", b =>
                 {
                     b.Property<string>("Id")
@@ -252,6 +280,41 @@ namespace UtopiaCity.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ArrivingPassengers");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.CheckedFlight", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CheckedArrivalTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckedDepartureTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CheckedDestinationPoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CheckedFlightNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CheckedFlightWeather")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CheckedLocationPoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CheckedTypeOfAircraft")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CheckedWeather")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CheckedFlights");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Flight", b =>
@@ -1195,6 +1258,13 @@ namespace UtopiaCity.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.Airport.AirportWarehouse", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.Airport.TransportManagerSystem.ForPassenger", "ForPassenger")
+                        .WithMany()
+                        .HasForeignKey("ForPassengerId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.Airport.Passenger", b =>

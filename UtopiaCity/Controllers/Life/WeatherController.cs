@@ -16,12 +16,12 @@ namespace UtopiaCity.Controllers.Life
             _mapper = mapper;
         }
         [HttpGet("flightreports")]
-        public async Task<List<UtopiaCity.Models.Airport.WeatherReport>> GetFlightWeatherReports()
+        public async Task<List<Models.Airport.WeatherReport>> GetFlightWeatherReports()
         {
             var data = await WeatherReportApi.Get30DayReportAsync();
             if (data != null)
             {
-                return _mapper.Map<List<UtopiaCity.Models.Airport.WeatherReport>>(data);
+                return _mapper.Map<List<Models.Airport.WeatherReport>>(data);
             }
             else
             {
@@ -29,7 +29,7 @@ namespace UtopiaCity.Controllers.Life
             }
         }
         [HttpPost("flightreport")]
-        public async Task<UtopiaCity.Models.Airport.WeatherReport> GetFlightWeatherReport(DateTime date)
+        public async Task<Models.Airport.WeatherReport> GetFlightWeatherReport(DateTime date)
         {
             if (date != null)
             {
