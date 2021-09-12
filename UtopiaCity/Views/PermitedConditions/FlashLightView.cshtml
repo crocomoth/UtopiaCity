@@ -1,23 +1,52 @@
-﻿@model UtopiaCity.Models.TimelineModel.FlashLightModel.FlashLightModel;
+﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.PermitedModel>
 
 
-<dl class="row">
-    <dt class="col-sm-2">
-        Season
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.weatherReport.PermitedModel.Season)
-    </dd>
-    <dt class="col-sm-2">
-        Data
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.weatherReport.PermitedModel.TimeOfDay)
-    </dd>
-    <dt class="col-sm-2">
-        Conditions
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => model.weatherReport.WeatherCondition)
-    </dd>
-</dl>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Вкл / Выкл
+            </th>
+            <th>
+                Дата
+            </th>
+            <th>
+                Сезон
+            </th>
+            <th>
+                Время суток
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        if (item.Season == "Winter")
+                        {
+                            if (item.TimeOfDay == "night")
+                            {
+                                <span>ВКЛ</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>ВЫКЛ</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermissionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Season)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeOfDay)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

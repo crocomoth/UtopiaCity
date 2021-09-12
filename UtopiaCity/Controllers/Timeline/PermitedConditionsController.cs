@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using UtopiaCity.Models.TimelineModel;
 using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Timeline
@@ -19,9 +21,14 @@ namespace UtopiaCity.Controllers.Timeline
             return View("PermitedConditonsView", await _permitedConditionsService.GetList());
         }
 
-        public IActionResult FlashLight()
+        public async Task<IActionResult> FlashLight()
         {
-            return View("FlashLightView", _permitedConditionsService.GetList());
+            List<PermitedModel> model = new List<PermitedModel>();
+
+            var data = _permitedConditionsService.GetList();
+
+
+            return View("FlashLightView", await data);
         }
     }
 }
