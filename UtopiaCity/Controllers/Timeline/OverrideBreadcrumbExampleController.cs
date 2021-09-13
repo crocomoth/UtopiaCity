@@ -2,11 +2,11 @@
 
 namespace UtopiaCity.Controllers.Timeline
 {
-    public class OverrideBreadcrumbController : BaseController
+    public class OverrideBreadcrumbExampleController : BaseController
     {
         public IActionResult Index()
         {
-            return View("BreadcrumsView");
+            return View();
         }
     }
 }

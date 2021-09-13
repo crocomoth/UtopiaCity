@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using UtopiaCity.Models.TimelineModel.CollectionDataModel;
+using System.Threading.Tasks;
+using UtopiaCity.Models.TimelineModel.BreadcrumsModel;
 
-namespace UtopiaCity.Controllers.Timeline
+namespace UtopiaCity.Utils.Attributes
 {
-    public class BreadcrumbActionFilterAttribute : ActionFilterAttribute
+    public class BreadcrumbActionFilter : ActionFilterAttribute
     {
         public override void OnActionExecuted(ActionExecutedContext context)
         {
@@ -28,12 +29,12 @@ namespace UtopiaCity.Controllers.Timeline
             base.OnActionExecuted(context);
         }
 
-        private List<Breadcrums> ConfigureBreadcrumb(ActionExecutedContext context)
+        private List<Breadcrumb> ConfigureBreadcrumb(ActionExecutedContext context)
         {
-            var breadcrumbList = new List<Breadcrums>();
+            var breadcrumbList = new List<Breadcrumb>();
             var homeControllerName = "Home";
 
-            breadcrumbList.Add(new Breadcrums
+            breadcrumbList.Add(new Breadcrumb
             {
                 Text = "Home",
                 Action = "Index",
@@ -63,7 +64,7 @@ namespace UtopiaCity.Controllers.Timeline
 
                         if (indexMethod != null)
                         {
-                            breadcrumbList.Add(new Breadcrums
+                            breadcrumbList.Add(new Breadcrumb
                             {
                                 Text = this.CamelCaseSpacing(pathSplit[i]),
                                 Action = "Index",
@@ -95,7 +96,7 @@ namespace UtopiaCity.Controllers.Timeline
                             if (method != null)
                             {
                                 // We've found an endpoint on the previous controller.
-                                breadcrumbList.Add(new Breadcrums
+                                breadcrumbList.Add(new Breadcrumb
                                 {
                                     Text = this.CamelCaseSpacing(pathSplit[i]),
                                     Action = pathSplit[i],
@@ -139,4 +140,5 @@ namespace UtopiaCity.Controllers.Timeline
         }
 
     }
+
 }
