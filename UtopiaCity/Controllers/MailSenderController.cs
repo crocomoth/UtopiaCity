@@ -1,15 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace UtopiaCity.Controllers
 {
-    public class MailSenderController: Controller
+    public class MailSenderController : Controller
     {
         public ActionResult Index()
         {
