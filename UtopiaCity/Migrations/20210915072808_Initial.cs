@@ -492,6 +492,27 @@ namespace UtopiaCity.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
+                    ReminderDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transactions_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Companies",
                 columns: table => new
                 {
@@ -1061,6 +1082,11 @@ namespace UtopiaCity.Migrations
                 column: "ResidentAccountId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Transactions_UserId",
+                table: "Transactions",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TransportManagers_ForCompanyId",
                 table: "TransportManagers",
                 column: "ForCompanyId");
@@ -1156,6 +1182,9 @@ namespace UtopiaCity.Migrations
 
             migrationBuilder.DropTable(
                 name: "TimelineModel");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "TransportManagers");

@@ -9,7 +9,7 @@ using UtopiaCity.Services.CitizenAccount;
 namespace UtopiaCity.Controllers.CitizenAccount
 {
     /// <summary>
-    /// Class represent work for chat between users
+    /// Class represent work for chat between users.
     /// </summary>
     [Authorize]
     public class ChatController : Controller

@@ -7,7 +7,7 @@ using UtopiaCity.Models.CitizenAccount;
 namespace UtopiaCity.Services.CitizenAccount
 {
     /// <summary>
-    /// Class to handle find AppUserBy ID <see cref="AppUser"/>
+    /// Class to handle find AppUser <see cref="AppUser"/>
     /// </summary>
     public class CitizensAccountService
     {

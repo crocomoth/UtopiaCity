@@ -4,22 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UtopiaCity.Models.CitizenAccount
 {
+    /// <summary>
+    /// Represent user money transaction.
+    /// </summary>
     public class Transaction
     {
-        /// <summary>
-        /// Represent money transaction.
-        /// </summary>
         [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-
-        [Display(Name = "Recipients Username"),Required]
-        public string RecipientsUsername { get; set; }
+        public string UserId { get; set; }
+        public AppUser User { get; set; }
 
         [Required]
-        [Range(1,10000,
-        ErrorMessage = "Value for {0} must be more than 1.")]
-        public double Amount { get; set; }
-        public DateTime ReminderDate { get; set; } = DateTime.Now;
+        public string Description { get; set; }
+
+        public int Amount { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

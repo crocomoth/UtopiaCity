@@ -10,8 +10,8 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210915054404_sec")]
-    partial class sec
+    [Migration("20210915072808_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -810,10 +810,11 @@ namespace UtopiaCity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RecipientsUsername")
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ReminderDate")

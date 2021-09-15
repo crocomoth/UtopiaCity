@@ -10,8 +10,8 @@ using UtopiaCity.Data;
 namespace UtopiaCity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210915061238_3")]
-    partial class _3
+    [Migration("20210915161951_5")]
+    partial class _5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -810,16 +810,22 @@ namespace UtopiaCity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RecipientsUsername")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReminderDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
                 });
@@ -1417,6 +1423,13 @@ namespace UtopiaCity.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserTwo")
                         .WithMany()
                         .HasForeignKey("UserTwoId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Transaction", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>

@@ -9,27 +9,27 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UtopiaCity.Controllers.CitizenAccount
 {
+    /// <summary>
+    /// Class represent citizen finance.
+    /// </summary>
     [Authorize]
     public class CitizenFinanceController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly CitizensAccountService _citizensAccountService;
-        private readonly CitizenFriendsService _citizenFriendsService;
-        private readonly ApplicationDbContext _context;
+        private readonly CitizenFinanceService _citizenFinanceService;
 
 
-        public CitizenFinanceController(UserManager<AppUser> userManager, CitizensAccountService citizensAccountService, CitizenFriendsService citizenFriendsService, ApplicationDbContext context)
+        public CitizenFinanceController(UserManager<AppUser> userManager, CitizensAccountService citizensAccountService, CitizenFinanceService citizenFinanceService)
         {
             _userManager = userManager;
             _citizensAccountService = citizensAccountService;
-            _citizenFriendsService = citizenFriendsService;
-            _context = context;
+            _citizenFinanceService = citizenFinanceService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var currentuser = await _userManager.GetUserAsync(User);
-            //var z=_context.AppUser.FirstOrDefault(x => x.UserName == currentuser.UserName).Balance;
+            var currentuser =await _userManager.GetUserAsync(User);
             return View(currentuser);
         }
 
@@ -40,20 +40,65 @@ namespace UtopiaCity.Controllers.CitizenAccount
         }
 
         [HttpPost]
-        public IActionResult TopUpBalance(Transaction transaction)
+        public IActionResult TopUpBalance(TransactionToTopUpViewModel transactionToTopUp)
         {
-            if (_context.AppUser.FirstOrDefault(x => x.UserName == transaction.RecipientsUsername) is null)
+
+            if (_citizensAccountService.GetUserByUserName(transactionToTopUp.RecipientsUsername) is null)
             {
                 ViewBag.Message = "There is no such user";
-                return View(transaction);
+                return View(transactionToTopUp);
             }
-            else
+            if (transactionToTopUp.Amount<=1)
             {
-                var user = _context.AppUser.FirstOrDefault(x => x.UserName == transaction.RecipientsUsername);
-                user.Balance += transaction.Amount;
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = "Amount can't be less then 1";
+                return View(transactionToTopUp);
             }
+           
+            var user = _citizensAccountService.GetUserByUserName(transactionToTopUp.RecipientsUsername);
+            user.Balance += transactionToTopUp.Amount;
+            _citizenFinanceService.CreateTransactionAndSave(transactionToTopUp, user);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task <IActionResult> Buy()
+        {
+            var currentuser =await _userManager.GetUserAsync(User);
+            ViewBag.Balance = currentuser.Balance;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(TransactionToBuyViewModel transactionToBuy)
+        {
+            var currentuser = await _userManager.GetUserAsync(User);
+            if (transactionToBuy.UserBalance < transactionToBuy.Amount)
+            {
+                ViewBag.Message = "The purchase amount exceeds the balance";
+                ViewBag.Balance = currentuser.Balance;
+                return View(transactionToBuy);
+            }
+            if (transactionToBuy.Amount <= 1)
+            {
+                ViewBag.Message = "Amount can't be less then 1";
+                ViewBag.Balance = currentuser.Balance;
+                return View(transactionToBuy);
+            }
+            currentuser.Balance -= transactionToBuy.Amount;
+            _citizenFinanceService.CreateTransactionAndSave(transactionToBuy, currentuser);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ShowPurchases()
+        {
+            var currentuser = await _userManager.GetUserAsync(User);
+            return View(_citizenFinanceService.GetPurchases(currentuser.Id));
+        }
+
+        public async Task<IActionResult> ShowHistory()
+        {
+            var currentuser = await _userManager.GetUserAsync(User);
+            return View(_citizenFinanceService.GetTransactionHistory(currentuser.Id));
         }
     }
 }
