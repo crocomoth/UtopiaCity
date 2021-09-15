@@ -28,7 +28,7 @@ namespace UtopiaCity.Services.CitizenAccount
         }
 
         /// <summary>
-        /// Gets <see cref="AppUser"/> by Id.
+        /// Gets <see cref="AppUser"/> by username.
         /// </summary>
         /// <param name="username">UserName.</param>
         /// <returns>User if it exists, otherwise null.</returns>
