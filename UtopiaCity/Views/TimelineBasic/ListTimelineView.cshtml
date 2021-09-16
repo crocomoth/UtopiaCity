@@ -5,7 +5,7 @@
     ViewData["Title"] = name;
 }
 
-<h1>Главная Timeline-22</h1>
+<h1>Main Page of Timeline-22</h1>
 
 <data></data>
 <div class="clock"></div>
@@ -46,15 +46,19 @@
         }</script>
 }
 
-<ul class="navbar-nav flex-grow-1">
+<ul class="nav">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">Расписание</a>
-
-        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">Разрешенные условия</a>
-
-        <a class="nav-link text-dark" asp-area="" asp-controller="TimelineBasic" asp-action="Searching">Поиск</a>
-
-        <a class="nav-link text-dark" asp-area="" asp-controller="MailSender" asp-action="Index">Связь</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">Schedule</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">Permited Conditions</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="TimelineBasic" asp-action="Searching">Searching</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="MailSender" asp-action="Index">Support</a>
+    </li>
 </ul>
 
 <p>
