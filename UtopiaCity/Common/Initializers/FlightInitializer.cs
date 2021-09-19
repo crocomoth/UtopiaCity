@@ -28,7 +28,7 @@ namespace UtopiaCity.Common.Initializers
             }
             var flight1 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(200).ElementAt(1),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(4),
                 DepartureTime = DateTime.Now,
                 LocationPoint = "Moscow",
@@ -37,7 +37,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight2 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(100).ElementAt(2),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(13),
                 DepartureTime = DateTime.Now.AddHours(1),
                 LocationPoint = "Moscow",
@@ -46,7 +46,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight3 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(150).ElementAt(17),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(5),
                 DepartureTime = DateTime.Now,
                 LocationPoint="Madrid",
@@ -55,7 +55,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight4 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(300).ElementAt(26),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(7),
                 DepartureTime = DateTime.Now.AddHours(2),
                 LocationPoint="Moscow",
@@ -64,7 +64,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight5 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(200).ElementAt(44),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(13),
                 DepartureTime = DateTime.Now.AddHours(3),
                 LocationPoint="Stambul",
@@ -73,7 +73,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight6 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(444).ElementAt(27),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(7),
                 DepartureTime = DateTime.Now.AddHours(3),
                 LocationPoint = "Madrid",
@@ -82,7 +82,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight7 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(444).ElementAt(8),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(7),
                 DepartureTime = DateTime.Now.AddHours(2),
                 LocationPoint = "Dubai",
@@ -91,7 +91,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight8 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(300).ElementAt(9),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(9),
                 DepartureTime = DateTime.Now.AddHours(5),
                 LocationPoint = "Dubai",
@@ -100,7 +100,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight9 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(200).ElementAt(13),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(9),
                 DepartureTime = DateTime.Now.AddHours(4),
                 LocationPoint = "London",
@@ -109,7 +109,7 @@ namespace UtopiaCity.Common.Initializers
             };
             var flight10 = new Flight()
             {
-                FlightNumber = RandomUtil.GenerateRandomString(300).ElementAt(38),
+                FlightNumber = RandomUtil.GenerateRandomThreePointInteger(),
                 ArrivalTime = DateTime.Now.AddHours(5),
                 DepartureTime = DateTime.Now.AddHours(1),
                 LocationPoint = "London",

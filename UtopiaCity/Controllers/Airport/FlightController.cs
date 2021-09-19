@@ -43,7 +43,7 @@ namespace UtopiaCity.Controllers.Airport
 
         [HttpGet]
         public IActionResult Create()
-        {
+        { 
             ViewData["TypeOfAircraft"] = new SelectList(_flightService.GetListOfPlaneTypes());
             return View("FlightCreateView");
         }
@@ -53,7 +53,7 @@ namespace UtopiaCity.Controllers.Airport
         {
             if (ModelState.IsValid)
             {
-                newFlight.FlightNumber = RandomUtil.GenerateRandomString(150).FirstOrDefault();
+                newFlight.FlightNumber = RandomUtil.GenerateRandomThreePointInteger();
                 var arrivalTime = _flightService.GetArrivalTime(newFlight.DepartureTime, newFlight.LocationPoint, newFlight.DestinationPoint, newFlight.TypeOfAircraft);
                 newFlight.ArrivalTime = arrivalTime;
                 _flightService.AddFlight(newFlight);
