@@ -71,8 +71,53 @@ namespace UtopiaCity.Common.Initializers
                 DestinationPoint = "London",
                 Weather = "Foggy"
             };
+            var flight6 = new Flight()
+            {
+                FlightNumber = RandomUtil.GenerateRandomString(150).FirstOrDefault(),
+                ArrivalTime = DateTime.Now.AddHours(7),
+                DepartureTime = DateTime.Now.AddHours(3),
+                LocationPoint = "Madrid",
+                DestinationPoint = "London",
+                Weather = "Stormy"
+            };
+            var flight7 = new Flight()
+            {
+                FlightNumber = RandomUtil.GenerateRandomString(100).FirstOrDefault(),
+                ArrivalTime = DateTime.Now.AddHours(7),
+                DepartureTime = DateTime.Now.AddHours(2),
+                LocationPoint = "Dubai",
+                DestinationPoint = "Stambul",
+                Weather = "Sunny"
+            };
+            var flight8 = new Flight()
+            {
+                FlightNumber = RandomUtil.GenerateRandomString(250).FirstOrDefault(),
+                ArrivalTime = DateTime.Now.AddHours(9),
+                DepartureTime = DateTime.Now.AddHours(5),
+                LocationPoint = "Dubai",
+                DestinationPoint = "London",
+                Weather = "Cloudy"
+            };
+            var flight9 = new Flight()
+            {
+                FlightNumber = RandomUtil.GenerateRandomString(200).FirstOrDefault(),
+                ArrivalTime = DateTime.Now.AddHours(9),
+                DepartureTime = DateTime.Now.AddHours(4),
+                LocationPoint = "London",
+                DestinationPoint = "Moscow",
+                Weather = "Rainy"
+            };
+            var flight10 = new Flight()
+            {
+                FlightNumber = RandomUtil.GenerateRandomString(300).FirstOrDefault(),
+                ArrivalTime = DateTime.Now.AddHours(5),
+                DepartureTime = DateTime.Now.AddHours(1),
+                LocationPoint = "London",
+                DestinationPoint = "Dubai",
+                Weather = "Windy"
+            };
 
-            context.AddRange(flight1, flight2, flight3, flight4, flight5);
+            context.AddRange(flight1, flight2, flight3, flight4, flight5, flight6, flight7, flight8, flight9, flight10);
             context.SaveChanges();
         }
     }
