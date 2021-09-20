@@ -12,34 +12,34 @@ function createCustomAlert(txt) {
 
 	if (d.getElementById("modal")) return;
 
-	mObj = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
-	mObj.id = "modal";
-	mObj.style.height = d.documentElement.scrollHeight + "px";
+	modalWrapper = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
+	modalWrapper.id = "modal";
+	modalWrapper.style.height = d.documentElement.scrollHeight + "px";
 
-	alertObj = mObj.appendChild(d.createElement("div"));
-	alertObj.id = "modal-dialog";
+	alertWrapper= modalWrapper.appendChild(d.createElement("div"));
+	alertWrapper.id = "modal-dialog";
+	alertWrapper.style.visiblity = "visible";
 
-	//if (d.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
-	//alertObj.style.left = (d.documentElement.scrollWidth - alertObj.offsetWidth) / 2 + "px";
-	alertObj.style.visiblity = "visible";
+	//if (d.all && !window.opera) alertWrapper.style.top = document.documentElement.scrollTop + "px";
+	//alertWrapper.style.left = (d.documentElement.scrollWidth - alertWrapper.offsetWidth) / 2 + "px";
 
-	h5 = alertObj.appendChild(d.createElement("h5"));
+	h5 = alertWrapper.appendChild(d.createElement("h5"));
 	h5.id  = "modal-header"
 	h5.appendChild(d.createTextNode(ALERT_TITLE));
 
-	msg = alertObj.appendChild(d.createElement("p"));
+	msg = alertWrapper.appendChild(d.createElement("p"));
 	msg.id = "modal-body";
 	msg.appendChild(d.createTextNode(txt));
 	msg.innerHTML = txt;
 
-	btn = alertObj.appendChild(d.createElement("button"));
+	btn = alertWrapper.appendChild(d.createElement("button"));
 	btn.id = "btn-secondary";
 	btn.appendChild(d.createTextNode(ALERT_BUTTON_TEXT));
 	btn.type = "button";
 	btn.focus();
 	btn.onclick = function () { removeCustomAlert(); return false; }
 
-	alertObj.style.display = "block";
+	alertWrapper.style.display = "block";
 
 }
 
