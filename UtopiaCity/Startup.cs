@@ -81,6 +81,9 @@ namespace UtopiaCity
             services.AddTransient<IMailService, NullMailService>();
             services.AddScoped<ChatService, ChatService>();
             services.AddScoped<CitizenFinanceService, CitizenFinanceService>();
+            services.AddScoped<ServicesForOtherStudents, ServicesForOtherStudents>();
+
+            
 
             #endregion
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Services.CitizenAccount;
 
 namespace UtopiaCity.Controllers.CitizenAccount
 {
@@ -13,12 +14,14 @@ namespace UtopiaCity.Controllers.CitizenAccount
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        
-        public CitizensAccountController(ApplicationDbContext dbContext, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly ServicesForOtherStudents _servicesForOtherStudents;
+
+        public CitizensAccountController(ApplicationDbContext dbContext, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ServicesForOtherStudents servicesForOtherStudents)
         {
             _dbContext = dbContext;
             _userManager = userManager;
             _signInManager = signInManager;
+            _servicesForOtherStudents = servicesForOtherStudents;
         }
 
         public async Task<IActionResult> IndexAsync()
@@ -82,6 +85,19 @@ namespace UtopiaCity.Controllers.CitizenAccount
                     return RedirectToAction("Index", "Home");
                 }
             }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult BlockUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BlockUser(string userId)
+        {
+            _servicesForOtherStudents.BlockCitizenAccount(userId);
             return RedirectToAction("Index", "Home");
         }
     }
