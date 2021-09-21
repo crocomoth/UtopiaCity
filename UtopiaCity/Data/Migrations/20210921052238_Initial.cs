@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
     public partial class Initial : Migration
     {
@@ -499,7 +499,7 @@ namespace UtopiaCity.Migrations
                     UserId = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false),
                     Amount = table.Column<int>(nullable: false),
-                    ReminderDate = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
