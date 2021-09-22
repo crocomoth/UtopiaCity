@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace UtopiaCity.Controllers.Timeline
         }
 
         [HttpPost]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(TimelineModel newEvent)
         {
             if (ModelState.IsValid)
