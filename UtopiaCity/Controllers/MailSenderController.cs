@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Net;
 using System.Net.Mail;
-
 namespace UtopiaCity.Controllers
 {
     public class MailSenderController : Controller
     {
+        private IConfiguration configuration;
+        public MailSenderController(IConfiguration Configuration)
+        {
+            configuration = Configuration;
+        }
         public ActionResult Index()
         {
             return View();
@@ -15,8 +21,12 @@ namespace UtopiaCity.Controllers
 
             try
             {
+                string user = configuration.GetSection("MailConnecton").GetSection("UserName").Value;
+
+                string secretWord = configuration.GetSection("MailConnecton").GetSection("Password").Value;
+
                 // Credentials
-                var credentials = new NetworkCredential("2681567f7e14e0", "d4bb031a8ee6b3");
+                var credentials = new NetworkCredential(user, secretWord);
                 // Mail message
                 var mail = new MailMessage()
                 {
@@ -30,7 +40,7 @@ namespace UtopiaCity.Controllers
                 // Smtp client
                 var client = new SmtpClient()
                 {
-                    Port = 587,
+                    Port = 2525,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
                     Host = "smtp.mailtrap.io",

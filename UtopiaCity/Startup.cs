@@ -5,21 +5,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using UtopiaCity.Common;
 using UtopiaCity.Data;
-using UtopiaCity.Services.CityAdministration;
+using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Services.Airport;
 using UtopiaCity.Services.Business;
+using UtopiaCity.Services.CitizenAccount;
+using UtopiaCity.Services.CityAdministration;
+using UtopiaCity.Services.Clinic;
 using UtopiaCity.Services.Emergency;
+using UtopiaCity.Services.HousingSystem;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
-using UtopiaCity.Models.CitizenAccount;
-using UtopiaCity.Services.CitizenAccount;
-using UtopiaCity.Services.Clinic;
-using UtopiaCity.Services.HousingSystem;
-using Microsoft.OpenApi.Models;
 
 namespace UtopiaCity
 {
@@ -132,6 +132,7 @@ namespace UtopiaCity
                 DbInitializer.RegisterSubInitializers();
 
                 var appConfig = Configuration.GetSection("AppConfig").Get<AppConfig>();
+
                 if (appConfig != null)
                 {
                     if (appConfig.ClearDb)
