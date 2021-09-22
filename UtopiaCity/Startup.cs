@@ -20,6 +20,11 @@ using UtopiaCity.Services.HousingSystem;
 using UtopiaCity.Services.Life;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
+using UtopiaCity.Models.CitizenAccount;
+using UtopiaCity.Services.CitizenAccount;
+using UtopiaCity.Services.Clinic;
+using UtopiaCity.Services.HousingSystem;
+//using Microsoft.OpenApi.Models;
 
 namespace UtopiaCity
 {
@@ -116,10 +121,10 @@ namespace UtopiaCity
                 options.SlidingExpiration = true;
             });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Utopia City Residents accounts API", Version = "v1" });
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Utopia City Residents accounts API", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -162,10 +167,10 @@ namespace UtopiaCity
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "ResidentAccountApi")
-            );
+            //app.UseSwagger();
+            //app.UseSwaggerUI(options =>
+            //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "ResidentAccountApi")
+            //);
             app.UseRouting();
 
             app.UseAuthentication();
