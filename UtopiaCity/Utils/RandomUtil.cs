@@ -18,5 +18,19 @@ namespace UtopiaCity.Utils
         {
             return new string(Enumerable.Repeat(numbers, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        public static int GenerateRandomThreePointInteger()
+        {
+            var intVar = GenerateRandomString(50).Substring(0, 3);
+            try
+            {
+                return int.Parse(intVar);
+            }
+            catch (FormatException)
+            {
+
+                throw;
+            }
+        }
     }
 }
