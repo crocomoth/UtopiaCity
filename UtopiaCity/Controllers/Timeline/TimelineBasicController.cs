@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
@@ -21,17 +22,21 @@ namespace UtopiaCity.Controllers.Timeline
         private readonly FlightService _flightService;
         private readonly LifeService _lifeService;
         private readonly ApplicationDbContext _dbContext;
-        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService, ApplicationDbContext dbContext)
+        private readonly IStringLocalizer<TimelineBasicController> _stringLocalizer;
+        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService, ApplicationDbContext dbContext, IStringLocalizer<TimelineBasicController> stringLocalizer)
         {
             _lifeService = lifeService;
             _flightService = flightService;
             _timelineService = timelineService;
             _dbContext = dbContext;
+            _stringLocalizer = stringLocalizer;
         }
 
         //LIST
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = _stringLocalizer["Header"];
+
             return View("ListTimelineView", await _timelineService.GetList());
         }
         //CREATE
@@ -166,5 +171,17 @@ namespace UtopiaCity.Controllers.Timeline
 
             return View(await searchResult.ToListAsync());
         }
+
+        public string GetCultureName(string code = "")
+        {
+            if (!string.IsNullOrEmpty(code))
+            {
+                CultureInfo.CurrentCulture = new CultureInfo(code);
+                CultureInfo.CurrentUICulture = new CultureInfo(code);
+            }
+
+            return $"{CultureInfo.CurrentCulture.Name}";
+        }
+
     }
 }

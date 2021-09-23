@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Globalization;
 using UtopiaCity.Common;
 using UtopiaCity.Data;
 using UtopiaCity.Models.CitizenAccount;
@@ -83,7 +85,8 @@ namespace UtopiaCity
 
 
             #endregion
-
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddControllersWithViews().AddViewLocalization();
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -159,6 +162,19 @@ namespace UtopiaCity
                 app.UseHsts();
             }
 
+            var culturesList = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("ru")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ru"),
+                SupportedCultures = culturesList,
+                SupportedUICultures = culturesList
+            });
+            /*app.UseCulture()*/
+            ;
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

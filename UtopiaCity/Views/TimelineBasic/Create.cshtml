@@ -1,5 +1,6 @@
-﻿@model UtopiaCity.Models.TimelineModel.TimelineModel
-
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UtopiaCity.Models.TimelineModel.TimelineModel
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Create";
 }
@@ -13,7 +14,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DayAndYear" class="control-label"></label>
+                <label asp-for="DayAndYear" class="control-label">@Localizer["BackToList"]</label>
                 <input asp-for="DayAndYear" class="form-control" />
                 <span asp-validation-for="DayAndYear" class="text-danger"></span>
             </div>
@@ -40,7 +41,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["BackToList"]</a>
 </div>
 
 @section Scripts {
