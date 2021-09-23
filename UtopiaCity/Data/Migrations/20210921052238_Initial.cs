@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
     public partial class Initial : Migration
     {
@@ -486,6 +486,27 @@ namespace UtopiaCity.Migrations
                     table.ForeignKey(
                         name: "FK_Talks_AspNetUsers_UserTwoId",
                         column: x => x.UserTwoId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transactions_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -1061,6 +1082,11 @@ namespace UtopiaCity.Migrations
                 column: "ResidentAccountId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Transactions_UserId",
+                table: "Transactions",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TransportManagers_ForCompanyId",
                 table: "TransportManagers",
                 column: "ForCompanyId");
@@ -1156,6 +1182,9 @@ namespace UtopiaCity.Migrations
 
             migrationBuilder.DropTable(
                 name: "TimelineModel");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "TransportManagers");

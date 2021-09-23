@@ -40,6 +40,7 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new FriendInitizalier());
             subDbInitializers.Add(new TalkInitializer());
             subDbInitializers.Add(new MessageInitializer());
+            subDbInitializers.Add(new CitizenFinanceInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)

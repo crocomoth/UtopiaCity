@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
-namespace UtopiaCity.Migrations
+namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210909120624_Initial")]
+    [Migration("20210921052238_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -804,6 +804,32 @@ namespace UtopiaCity.Migrations
                     b.ToTable("Talks");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Transaction", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
                 {
                     b.Property<string>("Id")
@@ -1397,6 +1423,13 @@ namespace UtopiaCity.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserTwo")
                         .WithMany()
                         .HasForeignKey("UserTwoId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Transaction", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
