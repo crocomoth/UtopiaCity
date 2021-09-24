@@ -2,7 +2,7 @@
 @model UtopiaCity.Models.TimelineModel.TimelineModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Date"] = "Create";
 }
 
 <h1>CreateTimelineView</h1>
@@ -14,22 +14,22 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DayAndYear" class="control-label">@Localizer["BackToList"]</label>
+                <label asp-for="DayAndYear" class="control-label">@Localizer["Date"]</label>
                 <input asp-for="DayAndYear" class="form-control" />
                 <span asp-validation-for="DayAndYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Schedule" class="control-label"></label>
+                <label asp-for="Schedule" class="control-label">@Localizer["Schedule"]</label>
                 <input asp-for="Schedule" class="form-control" />
                 <span asp-validation-for="Schedule" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TranscriptionOfPermission" class="control-label"></label>
+                <label asp-for="TranscriptionOfPermission" class="control-label">@Localizer["TranscriptionOfPermissions"]</label>
                 <input asp-for="TranscriptionOfPermission" class="form-control" />
                 <span asp-validation-for="TranscriptionOfPermission" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UniqueRules" class="control-label"></label>
+                <label asp-for="UniqueRules" class="control-label">@Localizer["UniqueRules"]</label>
                 <input asp-for="UniqueRules" class="form-control" />
                 <span asp-validation-for="UniqueRules" class="text-danger"></span>
             </div>

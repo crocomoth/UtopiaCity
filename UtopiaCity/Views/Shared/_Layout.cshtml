@@ -31,18 +31,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="EmergencyReport" asp-action="Index">Emergency Reports</a>
                         </li>
-                        <li class="nav-item">                       
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Index">Tickets Service</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="TransportManagers" asp-action="Index">AirportTransportSystem</a>
-                        </li>                      
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
+        <div>
+            @await Html.PartialAsync("_ChangeLangView")
+        </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

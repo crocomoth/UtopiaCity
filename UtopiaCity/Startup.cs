@@ -86,7 +86,7 @@ namespace UtopiaCity
 
             #endregion
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddControllersWithViews().AddViewLocalization();
+            services.AddControllersWithViews().AddDataAnnotationsLocalization().AddViewLocalization();
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -119,6 +119,20 @@ namespace UtopiaCity
                 options.SlidingExpiration = true;
             });
 
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var culturesList = new[]
+                {
+                new CultureInfo("en"),
+                new CultureInfo("ru"),
+                new CultureInfo("kz")
+            };
+
+                options.DefaultRequestCulture = new RequestCulture("ru");
+                options.SupportedCultures = culturesList;
+                options.SupportedUICultures = culturesList;
+
+            });
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Utopia City Residents accounts API", Version = "v1" });
@@ -162,17 +176,6 @@ namespace UtopiaCity
                 app.UseHsts();
             }
 
-            var culturesList = new[]
-            {
-                new CultureInfo("en"),
-                new CultureInfo("ru")
-            };
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("ru"),
-                SupportedCultures = culturesList,
-                SupportedUICultures = culturesList
-            });
             /*app.UseCulture()*/
             ;
             app.UseHttpsRedirection();

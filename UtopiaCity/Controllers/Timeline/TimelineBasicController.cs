@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Data;
@@ -172,16 +172,24 @@ namespace UtopiaCity.Controllers.Timeline
             return View(await searchResult.ToListAsync());
         }
 
-        public string GetCultureName(string code = "")
+        //        public string GetCultureName(string code = "")
+        //        {
+        //            if (!string.IsNullOrEmpty(code))
+        //            {
+        //                CultureInfo.CurrentCulture = new CultureInfo(code);
+        //                CultureInfo.CurrentUICulture = new CultureInfo(code);
+        //            }
+        //
+        //            return $"{CultureInfo.CurrentCulture.Name}";
+        //        }
+        [HttpPost]
+        public IActionResult ChangeLang(string culture, string returnUrl)
         {
-            if (!string.IsNullOrEmpty(code))
-            {
-                CultureInfo.CurrentCulture = new CultureInfo(code);
-                CultureInfo.CurrentUICulture = new CultureInfo(code);
-            }
-
-            return $"{CultureInfo.CurrentCulture.Name}";
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new Microsoft.AspNetCore.Http.CookieOptions { Expires = System.DateTimeOffset.UtcNow.AddYears(1) });
+            return LocalRedirect(returnUrl);
         }
-
     }
 }

@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Date" xml:space="preserve">
-    <value>Дата</value>
+    <value>Date</value>
   </data>
   <data name="Schedule" xml:space="preserve">
-    <value>Расписание</value>
+    <value>Schedule</value>
   </data>
   <data name="TranscriptionOfPermissions" xml:space="preserve">
-    <value>Транскрипция разрешений</value>
+    <value>Transcription of permissions</value>
   </data>
   <data name="UniqueRules" xml:space="preserve">
-    <value>Уникальные правила</value>
+    <value>Unique rules</value>
   </data>
 </root>
