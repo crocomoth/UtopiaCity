@@ -13,18 +13,17 @@ namespace UtopiaCity.Common.Initializers.CitizenAccount
     {
         public void ClearSet(ApplicationDbContext context)
         {
-            if (!context.Users.Any())
+            if (!context.AppUser.Any())
             {
                 return;
             }
-
-            context.RemoveRange(context.Users.ToList());
+            context.RemoveRange(context.AppUser.ToList());
             context.SaveChanges();
         }
 
         public void InitializeSet(ApplicationDbContext context)
         {
-            if (context.Users.Any())
+            if (context.AppUser.Any())
             {
                 return;
             }

@@ -1,0 +1,49 @@
+﻿@model UtopiaCity.Models.CitizenAccount.TransactionToBuyViewModel
+
+@{
+    ViewData["Title"] = "BuySomething";
+}
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info" role="alert">
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
+<div>
+    <partial name="_IndexPartial" />
+</div>
+
+<h1 class="text-center">Description of the purchase</h1>
+<h3 class="text-center">Your balance:<strong>@ViewBag.Balance$</strong></h3>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Buy">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Date" />
+            <input type="hidden" asp-for="UserBalance" value="@ViewBag.Balance"/>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DescriptionOfThePurchase" class="control-label"></label>
+                        <input asp-for="DescriptionOfThePurchase" class="form-control" />
+                        <span asp-validation-for="DescriptionOfThePurchase" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Make purchase" class="btn btn-primary btn-block" />
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class=" btn btn-secondary btn-block">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

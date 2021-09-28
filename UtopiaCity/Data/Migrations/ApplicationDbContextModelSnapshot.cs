@@ -802,6 +802,32 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("Talks");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Transaction", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.Marriage", b =>
                 {
                     b.Property<string>("Id")
@@ -1395,6 +1421,13 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "UserTwo")
                         .WithMany()
                         .HasForeignKey("UserTwoId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.Transaction", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.CitizenAccount.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.CityAdministration.ResidentAccount", b =>
