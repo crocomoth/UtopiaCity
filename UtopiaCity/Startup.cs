@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,8 +36,30 @@ namespace UtopiaCity
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        private const string enUSCulture = "en-US";
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo(enUSCulture),
+                    new CultureInfo("ru-RU"),
+                    //new CultureInfo("kz-KZ")
+
+                };
+
+                options.DefaultRequestCulture = new RequestCulture(culture: enUSCulture, uiCulture: enUSCulture);
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+
+                options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+                {
+                    // My custom request culture logic
+                    return new ProviderCultureResult("en");
+                }));
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -85,8 +108,17 @@ namespace UtopiaCity
 
 
             #endregion
+            services.AddMvc()
+        .AddDataAnnotationsLocalization(options =>
+        {
+            options.DataAnnotationLocalizerProvider = (type, factory) =>
+                factory.Create(typeof(SharedResource));
+        });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddControllersWithViews().AddDataAnnotationsLocalization().AddViewLocalization();
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -119,20 +151,6 @@ namespace UtopiaCity
                 options.SlidingExpiration = true;
             });
 
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                var culturesList = new[]
-                {
-                new CultureInfo("en"),
-                new CultureInfo("ru"),
-                new CultureInfo("kz")
-            };
-
-                options.DefaultRequestCulture = new RequestCulture("ru");
-                options.SupportedCultures = culturesList;
-                options.SupportedUICultures = culturesList;
-
-            });
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Utopia City Residents accounts API", Version = "v1" });
@@ -176,6 +194,14 @@ namespace UtopiaCity
                 app.UseHsts();
             }
 
+            //var supportedCultures = new[] { "en-US", "ru-RU", "kz-KZ" };
+            var supportedCultures = new[] { "en-US", "ru-RU"};
+
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[1])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
             /*app.UseCulture()*/
             ;
             app.UseHttpsRedirection();

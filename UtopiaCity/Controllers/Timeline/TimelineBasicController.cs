@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -183,12 +185,14 @@ namespace UtopiaCity.Controllers.Timeline
         //            return $"{CultureInfo.CurrentCulture.Name}";
         //        }
         [HttpPost]
-        public IActionResult ChangeLang(string culture, string returnUrl)
+        public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new Microsoft.AspNetCore.Http.CookieOptions { Expires = System.DateTimeOffset.UtcNow.AddYears(1) });
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
             return LocalRedirect(returnUrl);
         }
     }

@@ -117,25 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackToList" xml:space="preserve">
-    <value>Back to list</value>
-  </data>
-  <data name="Create" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="CreateTimelineView" xml:space="preserve">
-    <value>Create Page</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date</value>
+  <data name="PermitedConditions" xml:space="preserve">
+    <value>Разрешённые условия</value>
   </data>
   <data name="Schedule" xml:space="preserve">
-    <value>Schedule</value>
+    <value>Расписание</value>
   </data>
-  <data name="TranscriptionOfPermissions" xml:space="preserve">
-    <value>Transcription of permissions</value>
+  <data name="Searching" xml:space="preserve">
+    <value>Поиск</value>
   </data>
-  <data name="UniqueRules" xml:space="preserve">
-    <value>Unique rules</value>
+  <data name="Support" xml:space="preserve">
+    <value>Поддержка</value>
   </data>
 </root>

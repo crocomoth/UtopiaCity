@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.TimelineModel>
 @addTagHelper *, UtopiaCity
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
 
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
 <h1>@ViewData["Title"]</h1>
 
@@ -45,16 +53,16 @@
 
 <ul class="nav">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">Schedule</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">@Localizer["Schedule"]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">Permited Conditions</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="Index">@Localizer["PermitedConditions"]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="TimelineBasic" asp-action="Searching">Searching</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="TimelineBasic" asp-action="Searching">@Localizer["Searching"]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="MailSender" asp-action="Index">Support</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="MailSender" asp-action="Index">@Localizer["Support"]</a>
     </li>
 </ul>
 

@@ -42,14 +42,16 @@
             </div>
         </nav>
     </header>
-
-    <div class="container">
-        <div>
-            @await Html.PartialAsync("_ChangeLangView")
-        </div>
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="container body-content" style="margin-top:60px">
+        @RenderBody()
+        <hr>
+        <footer>
+            <div class="row">
+                <div class="col-md-6">
+                    @await Html.PartialAsync("_ChangeLangView")
+                </div>
+            </div>
+        </footer>
     </div>
     @***@
     <div class="row m-1 p-1">
