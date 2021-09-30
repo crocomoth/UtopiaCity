@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,6 +101,7 @@ namespace UtopiaCity.Controllers.Airport
         public IActionResult CreateDepartedPassengers()
         {
             ViewBag.Residents = _ticketService.GetSelectListOfContextResidents("Id", "FirstName");
+            ViewBag.Tickets = new SelectList(_ticketService.GetTicketsComplex(), "Id", "Id");
             return View("CreateDepartedPassengersView");
         }
 
@@ -127,6 +129,9 @@ namespace UtopiaCity.Controllers.Airport
             {
                 return NotFound();
             }
+
+            ViewData["ResidentAccountId"] = new SelectList(_residentService.GetResidentAccounts()
+                                                        .GetAwaiter().GetResult(), "FirstName", "FirstName");
             return View("PassengerEditView", passenger);
         }
 
@@ -140,10 +145,37 @@ namespace UtopiaCity.Controllers.Airport
             if (ModelState.IsValid)
             {
                 _passengerService.UpdatePassenger(edited);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListOfDeparted));
             }
 
             return View("PassengerEditView", edited);
+        }
+        [HttpGet]
+        public IActionResult DeleteArrivingPassengers(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+            var arrived = _passengerService.GetArrivingPassengerById(id);
+            if(arrived is null)
+            {
+                return NotFound();
+            }
+
+            return View("DeleteArrivingPassengersView", arrived);
+        }
+
+        [HttpPost,ActionName("DeleteArrivingPassengers")]
+        public IActionResult DeleteArrivingPassengersConfirm(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+            var arrived = _passengerService.GetArrivingPassengerById(id);
+            _passengerService.DeleteArrivingPassenger(arrived);
+            return RedirectToAction(nameof(ListOfArrivals));
         }
 
         [HttpGet]
@@ -159,7 +191,7 @@ namespace UtopiaCity.Controllers.Airport
                 return NotFound();
             }
 
-            return View("PassengerDeleteView");
+            return View("PassengerDeleteView", passenger);
         }
 
         [HttpPost,ActionName("Delete")]

@@ -1,25 +1,18 @@
 ﻿@model UtopiaCity.Models.Airport.Passenger
 
 @{
-    ViewData["Title"] = "CreateDepartedPassengersView";
+    ViewData["Title"] = "PassengerEditView";
 }
 
-<h1>CreateDepartedPassengersView</h1>
+<h1>Passenger Edit</h1>
 
 <h4>Passenger</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateDepartedPassengersView">
+        <form asp-action="Passenger EditView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PassengerName" class="control-label"></label>
-                <select asp-for="ResidentAccountId" class="form-control" asp-items="ViewBag.Residents"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ticket" class="control-label"></label>
-                <select asp-for="TicketId" class="form-control" asp-items="ViewBag.Tickets"></select>
-            </div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="ProgressStatus" class="control-label"></label>
                 <input asp-for="ProgressStatus" class="form-control" />
@@ -31,13 +24,16 @@
                 <span asp-validation-for="PassengerStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" asp-action="CreateDepartedPassengers" value="Send" class="btn btn-primary" />
+                <input type="submit" asp-controller="Passenger" asp-action="Edit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-controller="Ticket" asp-action="Index">Back to List</a>
+    <a asp-action="ListOfDeparted">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

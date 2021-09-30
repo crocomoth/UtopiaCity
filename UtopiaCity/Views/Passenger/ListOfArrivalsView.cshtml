@@ -21,12 +21,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PassengerGender)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PassengerStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PassengerMarriageStatus)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -45,15 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PassengerGender)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PassengerStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PassengerMarriageStatus)
-            </td>
             <td>               
                 <a asp-action="DetailsArrived" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="DeleteArrivingPassengers" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

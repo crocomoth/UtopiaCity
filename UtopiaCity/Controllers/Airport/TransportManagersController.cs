@@ -225,5 +225,87 @@ namespace UtopiaCity.Controllers.Airport
 
             return PartialView("CreateLuggagePartialView", warehouse);
         }
+
+        public async Task<IActionResult> DetailsLuggage(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return NotFound();
+            }
+            var luggage = await _context.AirportWarehouses
+                                .Include(t=>t.ForPassenger)
+                                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+            if(luggage is null)
+            {
+                return NotFound();
+            }
+
+            return View("DetailsLuggageView",luggage);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditLuggage(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+            var existingLuggage = await _context.AirportWarehouses.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            if(existingLuggage is null)
+            {
+                return NotFound();
+            }
+
+            ViewData["ForPassengerId"] = new SelectList(_context.AirportWarehouses, "Id", "Id");
+            return View("EditLuggageView", existingLuggage);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditLuggage (AirportWarehouse edited, string id)
+        {
+            if (id != edited.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _context.Update(edited);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(IndexLuggage));
+            }
+
+            return View("EditLuggageView", edited);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteLuggage(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+            var luggage = await _context.AirportWarehouses.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            if(luggage is null)
+            {
+                return NotFound();
+            }
+
+            return View("DeleteLuggageView", luggage);
+        }
+
+        [HttpPost, ActionName("DeleteLuggage")]
+        public async Task<IActionResult> DeleteLuggageConfirm(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var existedLuggage = await _context.AirportWarehouses.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            _context.Remove(existedLuggage);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(IndexLuggage));
+        }
     }
 }

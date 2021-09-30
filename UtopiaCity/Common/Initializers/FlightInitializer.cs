@@ -33,7 +33,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now,
                 LocationPoint = "Moscow",
                 DestinationPoint = "Stambul",
-                Weather = "Sunny"
+                Weather = "Sunny",
+                TypeOfAircraft= "PassengerAverageLengthAircraft"
             };
             var flight2 = new Flight()
             {
@@ -42,7 +43,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(1),
                 LocationPoint = "Moscow",
                 DestinationPoint = "Madrid",
-                Weather = "Rainy"
+                Weather = "Rainy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight3 = new Flight()
             {
@@ -51,7 +53,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now,
                 LocationPoint="Madrid",
                 DestinationPoint = "Stambul",
-                Weather = "Cloudy"
+                Weather = "Cloudy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight4 = new Flight()
             {
@@ -60,7 +63,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(2),
                 LocationPoint="Moscow",
                 DestinationPoint = "Dubai",
-                Weather = "Windy"
+                Weather = "Windy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight5 = new Flight()
             {
@@ -69,7 +73,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(3),
                 LocationPoint="Stambul",
                 DestinationPoint = "London",
-                Weather = "Foggy"
+                Weather = "Foggy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight6 = new Flight()
             {
@@ -78,7 +83,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(3),
                 LocationPoint = "Madrid",
                 DestinationPoint = "London",
-                Weather = "Stormy"
+                Weather = "Stormy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight7 = new Flight()
             {
@@ -87,7 +93,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(2),
                 LocationPoint = "Dubai",
                 DestinationPoint = "Stambul",
-                Weather = "Sunny"
+                Weather = "Sunny",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight8 = new Flight()
             {
@@ -96,7 +103,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(5),
                 LocationPoint = "Dubai",
                 DestinationPoint = "London",
-                Weather = "Cloudy"
+                Weather = "Cloudy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight9 = new Flight()
             {
@@ -105,7 +113,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(4),
                 LocationPoint = "London",
                 DestinationPoint = "Moscow",
-                Weather = "Rainy"
+                Weather = "Rainy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
             var flight10 = new Flight()
             {
@@ -114,7 +123,8 @@ namespace UtopiaCity.Common.Initializers
                 DepartureTime = DateTime.Now.AddHours(1),
                 LocationPoint = "London",
                 DestinationPoint = "Dubai",
-                Weather = "Windy"
+                Weather = "Windy",
+                TypeOfAircraft = "PassengerAverageLengthAircraft"
             };
 
             context.AddRange(flight1, flight2, flight3, flight4, flight5, flight6, flight7, flight8, flight9, flight10);

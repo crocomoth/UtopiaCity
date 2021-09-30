@@ -65,6 +65,11 @@ namespace UtopiaCity.Services.Airport
             _dbContext.SaveChanges();
         }
 
+        public void DeleteArrivingPassenger(ArrivingPassenger passenger)
+        {
+            _dbContext.Remove(passenger);
+            _dbContext.SaveChanges();
+        }
 
         public ResidentAccount GetNewResidentFromArrivedPassegers(ArrivingPassenger passenger)
         {

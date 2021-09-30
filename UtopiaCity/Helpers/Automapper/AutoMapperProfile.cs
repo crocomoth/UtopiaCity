@@ -47,7 +47,7 @@ namespace UtopiaCity.Helpers.Automapper
                        map => map.MapFrom(source => source.PassengerBirthDate))
                        .ForMember(destination => destination.Gender,
                        map => map.MapFrom(source => source.PassengerGender))
-                       .ForMember(destination => destination.Marriage,
+                       .ForMember(destination => destination.MarriageId,
                        map => map.MapFrom(source => source.PassengerMarriageStatus));
 
             CreateMap<Flight, CheckedFlight>()

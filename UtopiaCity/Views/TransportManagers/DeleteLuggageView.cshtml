@@ -1,0 +1,51 @@
+﻿@model UtopiaCity.Models.Airport.AirportWarehouse
+
+@{
+    ViewData["Title"] = "DeleteLuggageView";
+}
+
+<h1>DeleteLuggageView</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AirportWarehouse</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LuggageType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LuggageType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LuggageWeight)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LuggageWeight)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HostName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HostName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForPassenger)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForPassenger.Id)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete LuggageView">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" asp-action="DeleteLuggage" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
