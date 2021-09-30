@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,17 +24,21 @@ namespace UtopiaCity.Controllers.Timeline
         private readonly FlightService _flightService;
         private readonly LifeService _lifeService;
         private readonly ApplicationDbContext _dbContext;
-        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService, ApplicationDbContext dbContext)
+        private readonly IStringLocalizer<TimelineBasicController> _stringLocalizer;
+        public TimelineBasicController(TimelineService timelineService, FlightService flightService, LifeService lifeService, ApplicationDbContext dbContext, IStringLocalizer<TimelineBasicController> stringLocalizer)
         {
             _lifeService = lifeService;
             _flightService = flightService;
             _timelineService = timelineService;
             _dbContext = dbContext;
+            _stringLocalizer = stringLocalizer;
         }
 
         //LIST
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = _stringLocalizer["Header"];
+
             return View("ListTimelineView", await _timelineService.GetList());
         }
         //CREATE
@@ -41,6 +49,7 @@ namespace UtopiaCity.Controllers.Timeline
         }
 
         [HttpPost]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(TimelineModel newEvent)
         {
             if (ModelState.IsValid)
@@ -163,6 +172,28 @@ namespace UtopiaCity.Controllers.Timeline
             }
 
             return View(await searchResult.ToListAsync());
+        }
+
+        //        public string GetCultureName(string code = "")
+        //        {
+        //            if (!string.IsNullOrEmpty(code))
+        //            {
+        //                CultureInfo.CurrentCulture = new CultureInfo(code);
+        //                CultureInfo.CurrentUICulture = new CultureInfo(code);
+        //            }
+        //
+        //            return $"{CultureInfo.CurrentCulture.Name}";
+        //        }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }

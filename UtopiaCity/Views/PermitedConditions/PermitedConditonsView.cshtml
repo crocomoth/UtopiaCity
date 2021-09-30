@@ -5,7 +5,11 @@
 }
 
 <h1>PermitedConditonsView</h1>
-
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="PermitedConditions" asp-action="FlashLight">Фонари</a>
+    </li>
+</ul>
 <table class="table">
     <thead>
         <tr>
@@ -34,30 +38,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PermissionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Season)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpeedOfWind)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GovernmentStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rainfall)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeOfDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PermissionStatus)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermissionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Season)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpeedOfWind)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GovernmentStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rainfall)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeOfDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermissionStatus)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

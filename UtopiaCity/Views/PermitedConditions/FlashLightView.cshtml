@@ -1,0 +1,52 @@
+﻿@model IEnumerable<UtopiaCity.Models.TimelineModel.PermitedModel>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Off/On
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Season
+            </th>
+            <th>
+                Day/Night
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        if (item.Season == "Winter")
+                        {
+                            if (item.TimeOfDay == "night")
+                            {
+                                <span>On</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>Off</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermissionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Season)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeOfDay)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
