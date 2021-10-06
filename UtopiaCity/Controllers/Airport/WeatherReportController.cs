@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Airport
 {
+    [Authorize]
     public class WeatherReportController:Controller
     {
         private readonly WeatherReportService _weatherReportService;

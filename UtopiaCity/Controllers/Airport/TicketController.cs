@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -10,6 +11,7 @@ using UtopiaCity.Services.Airport;
 
 namespace UtopiaCity.Controllers.Airport
 {
+    [Authorize]
     public class TicketController:Controller
     {
         private readonly TicketService _ticketService;

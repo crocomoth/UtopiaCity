@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +12,7 @@ using UtopiaCity.Services.Life;
 
 namespace UtopiaCity.Controllers.Life
 {
+    [Authorize]
     public class LifeController : Controller
     {
         private readonly LifeService _service;                // Implement the DI pattern 

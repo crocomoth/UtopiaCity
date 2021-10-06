@@ -4,9 +4,11 @@ using UtopiaCity.Services.Sport;
 using UtopiaCity.Models.Life;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UtopiaCity.Controllers.Sport
 {
+    [Authorize]
     public class SportController : Controller
     {
         private readonly SportComplexService _sportComplexService;

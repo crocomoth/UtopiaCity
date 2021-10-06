@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ using UtopiaCity.Services.Timeline;
 
 namespace UtopiaCity.Controllers.Timeline
 {
+    [Authorize]
     public class TimelineBasicController : Controller
     {
         private readonly TimelineService _timelineService;

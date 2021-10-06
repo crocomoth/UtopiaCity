@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using UtopiaCity.Utils;
 
 namespace UtopiaCity.Controllers.Airport
 {
+    [Authorize]
     public class FlightController: Controller
     {
         private FlightService _flightService;

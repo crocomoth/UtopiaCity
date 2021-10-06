@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using UtopiaCity.ViewModels.HousingSystem;
 
 namespace UtopiaCity.Controllers.HousingSystem
 {
+    [Authorize]
     public class HousingSystemController : Controller
     {
         private readonly RealEstateService _realEstateService;
