@@ -25,11 +25,16 @@
     <Compile Remove="Data\Migrations\20210823115809_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.cs" />
     <Compile Remove="Data\Migrations\20210823115858_SportComplexOnDeleteBehaviorForRequestToAdministration.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211004151101_ad.cs" />
+    <Compile Remove="Data\Migrations\20211004151101_ad.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211009063035_MediaInit.cs" />
+    <Compile Remove="Data\Migrations\20211009063035_MediaInit.Designer.cs" />
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.cs" />
     <Compile Remove="Data\Migrations\AirportMigrations\20210810070154_test.Designer.cs" />
   </ItemGroup>
   
   <ItemGroup>
+	  <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
 	  <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -38,8 +43,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.19" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.19">
     <PrivateAssets>all</PrivateAssets>
     <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

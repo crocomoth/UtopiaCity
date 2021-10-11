@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtopiaCity.Data;
 
 namespace UtopiaCity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211009063540_MediaInit")]
+    partial class MediaInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.19")
+                .HasAnnotation("ProductVersion", "3.1.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -1029,8 +1031,14 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1059,13 +1067,18 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool?>("ApproversApprove")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool?>("EditorApprove")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("EmployeeId")
@@ -1076,7 +1089,11 @@ namespace UtopiaCity.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("PublicationDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -1095,6 +1112,9 @@ namespace UtopiaCity.Data.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
@@ -1110,6 +1130,9 @@ namespace UtopiaCity.Data.Migrations
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -1139,6 +1162,12 @@ namespace UtopiaCity.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
@@ -1155,6 +1184,9 @@ namespace UtopiaCity.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1163,6 +1195,9 @@ namespace UtopiaCity.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
