@@ -1,0 +1,79 @@
+﻿@model IEnumerable<UtopiaCity.Models.FireSystem.FireSafetyCheck>
+
+@{
+    ViewData["Title"] = "FireSafetyCheckListView";
+}
+
+<h1>FireSafetyCheckListView</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ObjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FireSafetyDocuments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FireFightingEquipment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Journals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FireSafetySigns)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EscapeRoutes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SmokingAreas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ObjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FireSafetyDocuments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FireFightingEquipment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Journals)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FireSafetySigns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EscapeRoutes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SmokingAreas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

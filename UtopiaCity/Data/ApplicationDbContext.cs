@@ -14,6 +14,8 @@ using UtopiaCity.Models.HousingSystem;
 using UtopiaCity.Models.FireSystem;
 using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
 using UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess;
+using UtopiaCity.ViewModels.FireSystem;
+using UtopiaCity.ViewModels;
 
 namespace UtopiaCity.Data
 {
@@ -50,6 +52,11 @@ namespace UtopiaCity.Data
                 .HasOne(s => s.SportComplex)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<FireMessage>()
+                .HasOne(s => s.DepartureToThePlace)
+                .WithOne(ad => ad.FireMessage)
+                .HasForeignKey<DepartureToThePlaceOfFire>(b => b.FireMessageId);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -90,12 +97,17 @@ namespace UtopiaCity.Data
         public DbSet<Talk> Talks { get; set; }
         public DbSet<CheckedFlight> CheckedFlights { get; set; }
         public DbSet<AirportWarehouse> AirportWarehouses { get; set; }
-        public DbSet<FireMessage> FireMessage { get; set; }
-        public DbSet<FireSafetyCheck> FireSafetyCheck { get; set; }
-        public DbSet<TransportManagement> TransportsManagement { get; set; }
-        public DbSet<EmployeeManagement> EmployeesManagement { get; set; }
-        public DbSet<FireSafetyDepartment> Departments { get; set; } 
+        public DbSet<FireSafetyDepartment> Departments { get; set; }
         public DbSet<Position> Positions { get; set; }
-        public DbSet<DepartmentStatus> DepartmentStatuses { get; set; }
+        public DbSet<EmployeeManagement> EmployeesManagement { get; set; }
+        public DbSet<TransportManagement> TransportsManagement { get; set; }
+        public DbSet<FireMessage> FireMessage { get; set; }
+        public DbSet<DepartureToThePlaceOfFire> DeparturesToThePlaces { get; set; }
+        public DbSet<FireSafetyCheck> FireSafetyCheck { get; set; }
+        public DbSet<FireSafetyCheckRequest> FireSafetyCheckRequests { get; set; }
+        public DbSet<UtopiaCity.ViewModels.FireSystem.EmployeeManagementViewModel> EmployeeManagementViewModel { get; set; }
+        public DbSet<UtopiaCity.ViewModels.FireSystem.TransportManagementViewModel> TransportManagementViewModel { get; set; }
+        public DbSet<UtopiaCity.ViewModels.FireSystem.DepartmentViewModel> DepartmentViewModel { get; set; }
+        public DbSet<UtopiaCity.ViewModels.PositionViewModel> PositionViewModel { get; set; }
     }
 }

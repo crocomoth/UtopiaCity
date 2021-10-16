@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Common.Interfaces;
 using UtopiaCity.Data;
+using UtopiaCity.Models.FireSystem;
 using UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess;
+using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
 
 namespace UtopiaCity.Common.Initializers
 {
@@ -25,26 +27,31 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            var department1 = new FireSafetyDepartment
+            var departments = new FireSafetyDepartment[]
             {
-                Name = "отдел 1",
-                Сhief = "руководитель 1",
-                DepartmentStatusId = "1"
-            };
-            var department2 = new FireSafetyDepartment
-            {
-                Name = "отдел 2",
-                Сhief = "руководитель 2",
-                DepartmentStatusId = "2"
-            };
-            var department3 = new FireSafetyDepartment
-            {
-                Name = "отдел 3",
-                Сhief = "руководитель 3",
-                DepartmentStatusId = "3"
+                new FireSafetyDepartment
+                {
+                    Name = "Отдел пожарной безопасности №1",
+                    Сhief = "Иванов Иван Иванович",
+                    DepartmentStatusEnum = DepartmentStatusEnum.Free
+                },
+
+                new FireSafetyDepartment
+                {
+                    Name = "Отдел пожарной безопасности №2",
+                    Сhief = "Данилов Сергей Иванович",
+                    DepartmentStatusEnum = DepartmentStatusEnum.OnTheRoad
+                },
+
+                new FireSafetyDepartment
+                {
+                    Name = "Отдел пожарной безопасности №3",
+                    Сhief = "Кириллов Александ Иванович",
+                    DepartmentStatusEnum = DepartmentStatusEnum.Free
+                }
             };
 
-            context.AddRange(department1, department2, department3);
+            context.AddRange(departments);
             context.SaveChanges();
         }
     }

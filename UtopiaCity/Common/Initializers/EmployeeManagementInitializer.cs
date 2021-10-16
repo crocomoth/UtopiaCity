@@ -25,34 +25,71 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            var employee1 = new EmployeeManagement
+            var employees = new List<EmployeeManagement>()
             {
-                FullName = "ФИО 1",
-                PhoneNumber = "87475685685",
-                Equipment = "снаряжение 1",
-                PositionId = "1",
-                DepartmentId = "1"
+                new EmployeeManagement()
+                {
+                    FullName = "ФИО 1",
+                    PhoneNumber = "87475685685",
+                    //Equipment = "снаряжение 1",
+                    CanCheck = true,
+                    DepartmentName = "Отдел пожарной безопасности №1",
+                    EmployeePosition = "должность 1"
+                },
+
+                new EmployeeManagement()
+                {
+                    FullName = "ФИО 2",
+                    PhoneNumber = "87475635685",
+                    //Equipment = "снаряжение 2",
+                    CanCheck = true,
+                    DepartmentName = "Отдел пожарной безопасности №2",
+                    EmployeePosition = "должность 2"
+                },
+
+                new EmployeeManagement()
+                {
+                    FullName = "ФИО 3",
+                    PhoneNumber = "87475635655",
+                    //Equipment = "снаряжение 3",
+                    CanCheck = false,
+                    DepartmentName = "Отдел пожарной безопасности №3",
+                    EmployeePosition = "должность 3"
+                }
             };
 
-            var employee2 = new EmployeeManagement
+            var departments = context.Departments.ToList();
+            for (int i = 0; i < departments.Count; i++)
             {
-                FullName = "ФИО 2",
-                PhoneNumber = "87474685685",
-                Equipment = "снаряжение 2",
-                PositionId = "2",
-                DepartmentId = "2"
-            };
+                var department = departments.FirstOrDefault(x => employees[i].DepartmentName
+                .Contains(x.Name, StringComparison.InvariantCultureIgnoreCase));
+                if (department == null)
+                {
+                    employees.RemoveAt(i--);
+                }
+                else
+                {
+                    employees[i].Department = department;
+                }
+            }
 
-            var employee3 = new EmployeeManagement
+            var positions = context.Positions.ToList();
+            for (int i = 0; i < positions.Count; i++)
             {
-                FullName = "ФИО 3",
-                PhoneNumber = "87474485685",
-                Equipment = "снаряжение 3",
-                PositionId = "3",
-                DepartmentId = "3"
-            };
+                var position = positions.FirstOrDefault(x => employees[i].EmployeePosition
+                .Contains(x.Name, StringComparison.InvariantCultureIgnoreCase));
+                if (position == null)
+                {
+                    employees.RemoveAt(i--);
+                }
+                else
+                {
+                    employees[i].Position = position;
+                }
+            }
 
-            context.AddRange(employee1, employee2, employee3);
+
+            context.AddRange(employees);
             context.SaveChanges();
         }
     }

@@ -20,6 +20,7 @@ using UtopiaCity.Services.CitizenAccount;
 using UtopiaCity.Services.Clinic;
 using UtopiaCity.Services.HousingSystem;
 using Microsoft.OpenApi.Models;
+using UtopiaCity.Services.FireSystem;
 
 namespace UtopiaCity
 {
@@ -76,6 +77,14 @@ namespace UtopiaCity
             services.AddScoped<CheckedFlightService, CheckedFlightService>();
             services.AddScoped<FlightRouteApiService, FlightRouteApiService>();
 
+            services.AddScoped<DepatureToThePlaceService, DepatureToThePlaceService>();
+            services.AddScoped<EmployeeManagementService, EmployeeManagementService>();
+            services.AddScoped<FireMessageService, FireMessageService>();
+            services.AddScoped<FireSafetyCheckService, FireSafetyCheckService>();
+            services.AddScoped<FireSafetyCheckRequestService, FireSafetyCheckRequestService>();
+            services.AddScoped<FireSafetyDepartmentService, FireSafetyDepartmentService>();
+            services.AddScoped<PositionService, PositionService>();
+            services.AddScoped<TransportManagementService, TransportManagementService>();
 
             services.AddScoped<RealEstateService, RealEstateService>();
             services.AddTransient<IMailService, NullMailService>();

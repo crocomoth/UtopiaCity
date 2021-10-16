@@ -25,34 +25,52 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            var transport1 = new TransportManagement
+            var transports = new List<TransportManagement>()
             {
-                TypeOfFireCar = "тип 1",
-                FirePump = true,
-                ContainerForStoringFireExtinguishingAgents = true,
-                FireFightingEquipment = "снаряжение 1",
-                DepartmentId = "1"
+                new TransportManagement()
+                {
+                    TypeOfFireCar = "тип 1",
+                    DepartmentName = "Отдел пожарной безопасности №1",
+                    FirePump = true,
+                    ContainerForStoringFireExtinguishingAgents = true,
+                    FireFightingEquipment = "снаряжение 1",
+                },
+
+                new TransportManagement()
+                {
+                    TypeOfFireCar = "тип 2",
+                    DepartmentName = "Отдел пожарной безопасности №2",
+                    FirePump = true,
+                    ContainerForStoringFireExtinguishingAgents = false,
+                    FireFightingEquipment = "снаряжение 2",
+                },
+
+                new TransportManagement()
+                {
+                    TypeOfFireCar = "тип 3",
+                    DepartmentName = "Отдел пожарной безопасности №3",
+                    FirePump = false,
+                    ContainerForStoringFireExtinguishingAgents = false,
+                    FireFightingEquipment = "снаряжение 3",
+                }
             };
 
-            var transport2 = new TransportManagement
+            var departments = context.Departments.ToList();
+            for(int i = 0; i < transports.Count; i++)
             {
-                TypeOfFireCar = "тип 2",
-                FirePump = true,
-                ContainerForStoringFireExtinguishingAgents = false,
-                FireFightingEquipment = "снаряжение 2",
-                DepartmentId = "2"
-            };
+                var department = departments.FirstOrDefault(x => transports[i].DepartmentName
+                .Contains(x.Name, StringComparison.InvariantCultureIgnoreCase));
+                if (department == null)
+                {
+                    transports.RemoveAt(i--);
+                }
+                else
+                {
+                    transports[i].Department = department;
+                }
+            }
 
-            var transport3 = new TransportManagement
-            {
-                TypeOfFireCar = "тип 3",
-                FirePump = true,
-                ContainerForStoringFireExtinguishingAgents = true,
-                FireFightingEquipment = "снаряжение 3",
-                DepartmentId = "3"
-            };
-
-            context.AddRange(transport1, transport2, transport3);
+            context.AddRange(transports);
             context.SaveChanges();
         }
     }

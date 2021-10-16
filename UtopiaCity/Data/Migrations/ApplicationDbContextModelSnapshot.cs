@@ -939,6 +939,244 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("EmergencyReport");
                 });
 
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.DepartureToThePlaceOfFire", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("DepartmentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FireMessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FireMessageId")
+                        .IsUnique()
+                        .HasFilter("[FireMessageId] IS NOT NULL");
+
+                    b.ToTable("DeparturesToThePlaces");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.FireMessage", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FireMessage");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.FireSafetyCheck", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("EscapeRoutes")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FireFightingEquipment")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FireSafetyDocuments")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FireSafetySigns")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Journals")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ObjectName")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<bool>("SmokingAreas")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("FireSafetyCheck");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.FireSafetyCheckRequest", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<string>("ObjectName")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FireSafetyCheckRequests");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess.FireSafetyDepartment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("DepartmentStatusEnum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Сhief")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess.Position", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees.EmployeeManagement", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("CanCheck")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DepartmentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeePosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("EmployeesManagement");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees.TransportManagement", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("ContainerForStoringFireExtinguishingAgents")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DepartmentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FireFightingEquipment")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<bool>("FirePump")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TypeOfFireCar")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("TransportsManagement");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.HousingSystem.RealEstate", b =>
                 {
                     b.Property<string>("Id")
@@ -1187,6 +1425,104 @@ namespace UtopiaCity.Data.Migrations
                     b.ToTable("TimelineModel");
                 });
 
+            modelBuilder.Entity("UtopiaCity.ViewModels.FireSystem.DepartmentViewModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("DepartmentStatusEnum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Сhief")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DepartmentViewModel");
+                });
+
+            modelBuilder.Entity("UtopiaCity.ViewModels.FireSystem.EmployeeManagementViewModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("CanCheck")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DepartmentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeePosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Positionid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeManagementViewModel");
+                });
+
+            modelBuilder.Entity("UtopiaCity.ViewModels.FireSystem.TransportManagementViewModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("ContainerForStoringFireExtinguishingAgents")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("DepartmentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FireFightingEquipment")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<bool>("FirePump")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TypeOfFireCar")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransportManagementViewModel");
+                });
+
+            modelBuilder.Entity("UtopiaCity.ViewModels.PositionViewModel", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PositionViewModel");
+                });
+
             modelBuilder.Entity("UtopiaCity.Models.CitizenAccount.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -1402,6 +1738,48 @@ namespace UtopiaCity.Data.Migrations
                     b.HasOne("UtopiaCity.Models.CityAdministration.Marriage", "Marriage")
                         .WithMany()
                         .HasForeignKey("MarriageId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.DepartureToThePlaceOfFire", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess.FireSafetyDepartment", "Department")
+                        .WithMany("DepartureToThePlaces")
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("UtopiaCity.Models.FireSystem.FireMessage", "FireMessage")
+                        .WithOne("DepartureToThePlace")
+                        .HasForeignKey("UtopiaCity.Models.FireSystem.DepartureToThePlaceOfFire", "FireMessageId");
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.FireSafetyCheck", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees.EmployeeManagement", "Employee")
+                        .WithMany("Checks")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees.EmployeeManagement", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess.FireSafetyDepartment", "Department")
+                        .WithMany("Employees")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess.Position", "Position")
+                        .WithMany("Employees")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees.TransportManagement", b =>
+                {
+                    b.HasOne("UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess.FireSafetyDepartment", "Department")
+                        .WithMany("Transports")
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("UtopiaCity.Models.HousingSystem.RealEstate", b =>

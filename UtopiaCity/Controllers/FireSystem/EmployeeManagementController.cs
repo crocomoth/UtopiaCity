@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -6,21 +7,65 @@ using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
 using UtopiaCity.Services.FireSystem;
+using UtopiaCity.ViewModels.FireSystem;
 
 namespace UtopiaCity.Controllers.FireSystem
 {
     public class EmployeeManagementController : Controller
     {
         private readonly EmployeeManagementService _employeeManagementService;
+        private readonly FireSafetyDepartmentService _fireSafetyDepartmentService;
+        private readonly PositionService _positionService;
+        private readonly IMapper _mapper;
 
-        public EmployeeManagementController(EmployeeManagementService employeeManagementService)
+        public EmployeeManagementController(EmployeeManagementService employeeManagementService, FireSafetyDepartmentService fireSafetyDepartmentService, PositionService position, IMapper mapper)
         {
             _employeeManagementService = employeeManagementService;
+            _fireSafetyDepartmentService = fireSafetyDepartmentService;
+            _positionService = position;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View("EmployeeManagementListView", await _employeeManagementService.GetEmployees());
+            List<EmployeeManagement> employees = await _employeeManagementService.GetEmployees();
+            List<EmployeeManagementViewModel> employeesViewModel = new List<EmployeeManagementViewModel>();
+            foreach(var employee in employees)
+            {
+                employeesViewModel.Add(_mapper.Map<EmployeeManagementViewModel>(employee));
+            }
+            
+            return View("EmployeeManagementListView", employeesViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.DepartmentsName = await _fireSafetyDepartmentService.GetDepartmentsNames();
+            ViewBag.PositionsName = await _positionService.GetPositionsNames();
+            return View("CreateEmployeeManagementView");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(EmployeeManagementViewModel employeeViewModel)
+        { 
+            if(employeeViewModel == null)
+            {
+                return NotFound();
+            }
+
+            string departmentId = await _fireSafetyDepartmentService.GetDepartmentIdByName(employeeViewModel.DepartmentName);
+            string positionId = await _positionService.GetPositionIdByName(employeeViewModel.EmployeePosition);
+            if (departmentId == null || positionId == null)
+            {
+                return NotFound();
+            }
+
+            employeeViewModel.DepartmentId = departmentId;
+            employeeViewModel.Positionid = positionId;
+            EmployeeManagement employee = _mapper.Map<EmployeeManagement>(employeeViewModel);
+            await _employeeManagementService.AddEmployee(employee);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Details(string id)
@@ -30,33 +75,15 @@ namespace UtopiaCity.Controllers.FireSystem
                 return NotFound();
             }
 
-            var employee = await _employeeManagementService.GetEmployeeById(id);
+            EmployeeManagement employee = await _employeeManagementService.GetEmployeeByIdWithDepartmentAndPosition(id);
             if (employee == null)
             {
                 return NotFound();
             }
 
-            return View("DetailsEmployeeManagementView", employee);
-        }
+            EmployeeManagementViewModel employeeViewModel = _mapper.Map<EmployeeManagementViewModel>(employee);
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            ViewData["PositionId"] = new SelectList(await _employeeManagementService.GetPositions(), "Id", "Name");
-            ViewData["DepartmentId"] = new SelectList(await _employeeManagementService.GetDepartments(), "Id", "Name");
-            return View("CreateEmployeeManagementView");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(EmployeeManagement newEmployee)
-        {
-            if (ModelState.IsValid)
-            {
-                await _employeeManagementService.AddEmployee(newEmployee);
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View("CreateEmployeeManagementView", newEmployee);
+            return View("DetailsEmployeeManagementView", employeeViewModel);
         }
 
         [HttpGet]
@@ -67,32 +94,43 @@ namespace UtopiaCity.Controllers.FireSystem
                 return NotFound();
             }
 
-            var employee = await _employeeManagementService.GetEmployeeById(id);
-            ViewData["PositionId"] = new SelectList(await _employeeManagementService.GetPositions(), "Id", "Name");
-            ViewData["DepartmentId"] = new SelectList(await _employeeManagementService.GetDepartments(), "Id", "Name");
-            if (employee == null)
+            EmployeeManagement employee = await _employeeManagementService.GetEmployeeByIdWithDepartmentAndPosition(id);
+            if(employee == null)
             {
                 return NotFound();
             }
 
-            return View("EditEmployeeManagementView", employee);
+            EmployeeManagementViewModel employeeViewModel = _mapper.Map<EmployeeManagementViewModel>(employee);
+            ViewBag.DepartmentsNames = await _fireSafetyDepartmentService.GetDepartmentsNames();
+            ViewBag.PositionsName = await _positionService.GetPositionsNames();
+
+            return View("EditEmployeeManagementView", employeeViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, EmployeeManagement edited)
+        public async Task<IActionResult> Edit(string id, EmployeeManagementViewModel employeeViewModel)
         {
-            if (id != edited.Id)
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else if (employeeViewModel == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            string departmentId = await _fireSafetyDepartmentService.GetDepartmentIdByName(employeeViewModel.DepartmentName);
+            string positionId = await _positionService.GetPositionIdByName(employeeViewModel.EmployeePosition);
+            if (departmentId == null || positionId == null)
             {
-                await _employeeManagementService.UpdateEmployee(edited);
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
-            return View("EditEmployeeManagementView", edited);
+            employeeViewModel.DepartmentId = departmentId;
+            employeeViewModel.Positionid = positionId;
+            EmployeeManagement employee = _mapper.Map<EmployeeManagement>(employeeViewModel);
+            await _employeeManagementService.UpdateEmployee(employee);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -103,20 +141,26 @@ namespace UtopiaCity.Controllers.FireSystem
                 return NotFound();
             }
 
-            var employee = await _employeeManagementService.GetEmployeeById(id);
-            ViewData["PositionId"] = new SelectList(await _employeeManagementService.GetPositions(), "Id", "Name");
-            ViewData["DepartmentId"] = new SelectList(await _employeeManagementService.GetDepartments(), "Id", "Name");
-            if (employee == null)
+            EmployeeManagement employee = await _employeeManagementService.GetEmployeeByIdWithDepartmentAndPosition(id);
+            if(employee == null)
             {
                 return NotFound();
             }
 
-            return View("DeleteEmployeeManagementView", employee);
+            EmployeeManagementViewModel employeeViewModel = _mapper.Map<EmployeeManagementViewModel>(employee);
+
+            return View("DeleteEmployeeManagementView", employeeViewModel);
         }
 
+        [HttpPost, ActionName("DeleteEmployeeManagementView")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var employee = await _employeeManagementService.GetEmployeeById(id);
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            EmployeeManagement employee = await _employeeManagementService.GetEmployeeById(id);
             if (employee == null)
             {
                 return NotFound();
@@ -125,6 +169,5 @@ namespace UtopiaCity.Controllers.FireSystem
             await _employeeManagementService.DeleteEmployee(employee);
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

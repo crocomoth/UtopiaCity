@@ -18,42 +18,60 @@ namespace UtopiaCity.Services.FireSystem
             _dbContext = dbContext;
         }
 
-        public async Task<EmployeeManagement> GetEmployeeById(string id)
+        public virtual async Task<EmployeeManagement> GetEmployeeById(string id)
         {
             return await _dbContext.EmployeesManagement.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         public virtual async Task<List<EmployeeManagement>> GetEmployees()
         {
-            return await _dbContext.EmployeesManagement.Include(e => e.Position)
-                                                       .Include(d => d.Department)
+            return await _dbContext.EmployeesManagement.Include(d => d.Department)
+                                                       .Include(p => p.Position)
                                                        .ToListAsync();
         }
 
-        public async Task AddEmployee(EmployeeManagement employee)
+        public virtual async Task AddEmployee(EmployeeManagement employee)
         {
             _dbContext.Add(employee);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateEmployee(EmployeeManagement employee)
+        public virtual async Task UpdateEmployee(EmployeeManagement employee)
         {
             _dbContext.Update(employee);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteEmployee(EmployeeManagement employee)
+        public virtual async Task DeleteEmployee(EmployeeManagement employee)
         {
             _dbContext.Remove(employee);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<FireSafetyDepartment>> GetDepartments()
+        public virtual async Task<EmployeeManagement> GetEmployeeByIdWithDepartmentAndPosition(string id)
+        {
+            return await _dbContext.EmployeesManagement.Include(d => d.Department)
+                                                       .Include(p => p.Position)
+                                                       .FirstOrDefaultAsync(x => x.Id.Equals(id));
+        }
+
+        //public virtual async Task<List<string>> GetEmployeeByEquipment()
+        //{
+        //    return await _dbContext.EmployeesManagement.Select(e => e.Equipment).ToListAsync();
+        //}
+
+        //public virtual async Task<string> GetEmployeeIdByEquipment(string equipment)
+        //{
+        //    var employee = await _dbContext.EmployeesManagement.FirstOrDefaultAsync(t => t.Equipment.Equals(equipment));
+        //    return employee.Id;
+        //}
+
+        public virtual async Task<List<FireSafetyDepartment>> GetDepartments()
         {
             return await _dbContext.Departments.ToListAsync();
         }
 
-        public async Task<List<Position>> GetPositions()
+        public virtual async Task<List<Position>> GetPositions()
         {
             return await _dbContext.Positions.ToListAsync();
         }

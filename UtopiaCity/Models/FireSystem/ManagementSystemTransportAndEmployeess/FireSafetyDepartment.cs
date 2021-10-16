@@ -7,15 +7,18 @@ namespace UtopiaCity.Models.FireSystem.ManagementSystemTransportAndEmployeess
 {
     public class FireSafetyDepartment
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [ScaffoldColumn(false)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
         [Required]
         public string Name { get; set; }
         public string Сhief { get; set; }
-        public string DepartmentStatusId { get;set; }
-        public DepartmentStatus DepartmentStatus { get; set; }
-        public ICollection<EmployeeManagement> Employees { get; set; }
-        public ICollection<TransportManagement> Transports { get; set; }
+        public DepartmentStatusEnum DepartmentStatusEnum { get; set; }
+        //public string TypeOfFireCar { get; set; }
+        //public string EmployeeEquipment { get; set; }
+        public List<EmployeeManagement> Employees { get; set; }
+        public List<TransportManagement> Transports { get; set; }
+        public List<DepartureToThePlaceOfFire> DepartureToThePlaces { get; set; }
     }
 }

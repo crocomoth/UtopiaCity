@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -6,21 +7,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using UtopiaCity.Models.FireSystem.ManagerSystemTransportAndEmployees;
 using UtopiaCity.Services.FireSystem;
+using UtopiaCity.ViewModels.FireSystem;
 
 namespace UtopiaCity.Controllers.FireSystem
 {
     public class TransportManagementController : Controller
     {
         private readonly TransportManagementService _transportManagementService;
-
-        public TransportManagementController(TransportManagementService transportManagementService)
+        private readonly IMapper _mapper;
+        private readonly FireSafetyDepartmentService _fireSafetyDepartmentService;
+        public TransportManagementController(TransportManagementService transportManagementService, FireSafetyDepartmentService fireSafetyDepartmentService, IMapper mapper)
         {
             _transportManagementService = transportManagementService;
+            _fireSafetyDepartmentService = fireSafetyDepartmentService;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View("TransportManagentListView", await _transportManagementService.GetTrasports());
+            List<TransportManagement> transports = await _transportManagementService.GetTrasports();
+            List<TransportManagementViewModel> transportsViewModels = new List<TransportManagementViewModel>();
+            foreach(var transport in transports)
+            {
+                transportsViewModels.Add(_mapper.Map<TransportManagementViewModel>(transport));
+            }
+            return View("TransportManagentListView", transportsViewModels);
         }
 
         public async Task<IActionResult> Details(string id)
@@ -29,33 +40,42 @@ namespace UtopiaCity.Controllers.FireSystem
             {
                 return NotFound();
             }
-
-            var transport = await _transportManagementService.GetTrasportById(id);
+            TransportManagement transport = await _transportManagementService.GetTransportByIdWithDepartment(id);
             if (transport == null)
             {
                 return NotFound();
             }
+            TransportManagementViewModel transportViewModel = _mapper.Map<TransportManagementViewModel>(transport);
+            
 
-            return View("DetailsTransportManagementView", transport);
+            return View("DetailsTransportManagementView", transportViewModel);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");
+            ViewBag.DepartmentsName = await _fireSafetyDepartmentService.GetDepartmentsNames();
             return View("CreateTransportManagementView");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TransportManagement newTransport)
+        public async Task<IActionResult> Create(TransportManagementViewModel transportViewModel)
         {
-            if (ModelState.IsValid)
+            if(transportViewModel == null)
             {
-                await _transportManagementService.AddTransport(newTransport);
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
-            return View("CreateTransportManagementView", newTransport);
+            string departmentId = await _fireSafetyDepartmentService.GetDepartmentIdByName(transportViewModel.DepartmentName);
+            if (departmentId == null)
+            {
+                return NotFound();
+            }
+
+            transportViewModel.DepartmentId = departmentId;
+            TransportManagement transport = _mapper.Map<TransportManagement>(transportViewModel);
+            await _transportManagementService.AddTransport(transport);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -66,31 +86,41 @@ namespace UtopiaCity.Controllers.FireSystem
                 return NotFound();
             }
 
-            var transport = await _transportManagementService.GetTrasportById(id);
-            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");
+            TransportManagement transport = await _transportManagementService.GetTransportByIdWithDepartment(id);
             if (transport == null)
             {
                 return NotFound();
             }
 
-            return View("EditTransportManagementView", transport);
+            TransportManagementViewModel transportViewModel = _mapper.Map<TransportManagementViewModel>(transport);
+            ViewBag.DepartmentsNames = await _fireSafetyDepartmentService.GetDepartmentsNames();
+
+            return View("EditTransportManagementView", transportViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, TransportManagement edited)
+        public async Task<IActionResult> Edit(string id, TransportManagementViewModel transporViewModel)
         {
-            if (id != edited.Id)
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else if(transporViewModel == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            string departmentId = await _fireSafetyDepartmentService.GetDepartmentIdByName(transporViewModel.DepartmentName);
+            if (departmentId == null)
             {
-                await _transportManagementService.UpdateTrasnport(edited);
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
-            return View("EditTransportManagementView", edited);
+            transporViewModel.DepartmentId = departmentId;
+            TransportManagement transport = _mapper.Map<TransportManagement>(transporViewModel);
+            await _transportManagementService.UpdateTrasnport(transport);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -101,19 +131,26 @@ namespace UtopiaCity.Controllers.FireSystem
                 return NotFound();
             }
 
-            var transport = await _transportManagementService.GetTrasportById(id);
-            ViewData["DepartmentId"] = new SelectList(await _transportManagementService.GetDepartments(), "Id", "Name");
+            TransportManagement transport = await _transportManagementService.GetTransportByIdWithDepartment(id);
             if (transport == null)
             {
                 return NotFound();
             }
 
-            return View("DeleteTransportManagementView", transport);
+            TransportManagementViewModel transportViewModel = _mapper.Map<TransportManagementViewModel>(transport);
+
+            return View("DeleteTransportManagementView", transportViewModel);
         }
 
+        [HttpPost, ActionName("DeleteTransportManagementView")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var transport = await _transportManagementService.GetTrasportById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            TransportManagement transport = await _transportManagementService.GetTrasportById(id);
             if (transport == null)
             {
                 return NotFound();

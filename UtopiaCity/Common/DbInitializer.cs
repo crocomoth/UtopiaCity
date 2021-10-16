@@ -39,13 +39,12 @@ namespace UtopiaCity.Common
             subDbInitializers.Add(new FriendInitizalier());
             subDbInitializers.Add(new TalkInitializer());
             subDbInitializers.Add(new MessageInitializer());
-            subDbInitializers.Add(new FireMessageInitializer());
-            subDbInitializers.Add(new DepartmentStatusInitializer());
-            subDbInitializers.Add(new FireSafetyCheckInitializer());
-            subDbInitializers.Add(new TransportManagementInitializer());
-            subDbInitializers.Add(new PositionInitializer());
             subDbInitializers.Add(new FireSafetyDepartmentInitializer());
+            subDbInitializers.Add(new PositionInitializer());
+            subDbInitializers.Add(new TransportManagementInitializer());
             subDbInitializers.Add(new EmployeeManagementInitializer());
+            subDbInitializers.Add(new DepatureToThePlaceInitializer());
+            subDbInitializers.Add(new FireMessageInitializer());
         }
 
         public static void InitializeDb(ApplicationDbContext context)

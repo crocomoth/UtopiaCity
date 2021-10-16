@@ -28,29 +28,40 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            var message1 = new FireMessage
+            var messages = new FireMessage[]
             {
-                Address = "Address 1",
-                FullName = "FullName 1",
-                PhoneNumber = "87472897898"
+                new FireMessage
+                {
+                    Address = "Address 1",
+                    FullName = "FullName 1",
+                    PhoneNumber = "87472897898"
+                },
+
+                new FireMessage
+                {
+                    Address = "Address 2",
+                    FullName = "FullName 2",
+                    PhoneNumber = "87472897891"
+                },
+
+                new FireMessage
+                {
+                    Address = "Address 3",
+                    FullName = "FullName 3",
+                    PhoneNumber = "87472897893"
+                }
             };
 
-            var message2 = new FireMessage
+            var depatures = context.DeparturesToThePlaces.ToList();
+            for (int i = 0; i < depatures.Count; i++)
             {
-                Address = "Address 2",
-                FullName = "FullName 2",
-                PhoneNumber = "87472897891"
-            };
+                var depature = depatures.FirstOrDefault(x => messages[i].Address
+                .Contains(x.Address, StringComparison.CurrentCultureIgnoreCase));
+                messages[i].DepartureToThePlace = depature;
+            }
 
-            var message3 = new FireMessage
-            {
-                Address = "Address 3",
-                FullName = "FullName 3",
-                PhoneNumber = "87472897893"
-            };
-
-            context.AddRange(message1, message2, message3);
-            context.SaveChanges();
+            context.AddRange(messages);
+            context.SaveChangesAsync();
         }
     }
 }

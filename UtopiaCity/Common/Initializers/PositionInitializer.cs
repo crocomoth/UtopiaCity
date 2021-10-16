@@ -25,22 +25,25 @@ namespace UtopiaCity.Common.Initializers
                 return;
             }
 
-            var position1 = new Position
+            var positions = new Position[]
             {
-                Name = "позиция 1"
+                new Position
+                {
+                    Name = "должность 1"
+                },
+
+                new Position
+                {
+                    Name = "должность 2"
+                },
+
+                new Position
+                {
+                    Name = "должность 3"
+                }
             };
 
-            var position2 = new Position
-            {
-                Name = "позиция 2"
-            };
-
-            var position3 = new Position
-            {
-                Name = "позиция 3"
-            };
-
-            context.AddRange(position1, position2, position3);
+            context.AddRange(positions);
             context.SaveChanges();
         }
     }
