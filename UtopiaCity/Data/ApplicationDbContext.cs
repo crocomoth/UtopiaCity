@@ -11,6 +11,7 @@ using UtopiaCity.Models.TimelineModel;
 using UtopiaCity.Models.CitizenAccount;
 using UtopiaCity.Models.Clinic;
 using UtopiaCity.Models.HousingSystem;
+using UtopiaCity.Models;
 
 namespace UtopiaCity.Data
 {
@@ -58,7 +59,7 @@ namespace UtopiaCity.Data
         public DbSet<WeatherReport> WeatherReports { get; set; }
         public DbSet<ForPassenger> ForPassengers { get; set; }
         public DbSet<ForCompany> ForCompanies { get; set; }
-        public DbSet<TransportManager> TransportManagers { get; set; }       
+        public DbSet<TransportManager> TransportManagers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<ResidentAccount> ResidentAccount { get; set; }
         public DbSet<TimelineModel> TimelineModel { get; set; }
@@ -88,5 +89,10 @@ namespace UtopiaCity.Data
         public DbSet<CheckedFlight> CheckedFlights { get; set; }
         public DbSet<AirportWarehouse> AirportWarehouses { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Models.Media.User> Users_ { get; set; }
+        public DbSet<Models.Media.Role> Roles_ { get; set; }
+        public DbSet<Models.Media.Employee> Employees_ { get; set; }
+        public DbSet<Models.Media.DataCapture> DataCaptures { get; set; }
+        public DbSet<Models.Media.Advertisment> Advertisments { get; set; }
     }
 }

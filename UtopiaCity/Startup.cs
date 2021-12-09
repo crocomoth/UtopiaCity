@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +21,7 @@ using UtopiaCity.Services.Clinic;
 using UtopiaCity.Services.Emergency;
 using UtopiaCity.Services.HousingSystem;
 using UtopiaCity.Services.Life;
+using UtopiaCity.Services.Media;
 using UtopiaCity.Services.Sport;
 using UtopiaCity.Services.Timeline;
 //using Microsoft.OpenApi.Models;
@@ -65,6 +67,14 @@ namespace UtopiaCity
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Media/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Media/Account/Login");
+                });
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -108,7 +118,9 @@ namespace UtopiaCity
             services.AddScoped<CitizenFinanceService, CitizenFinanceService>();
             services.AddScoped<ServicesForOtherStudents, ServicesForOtherStudents>();
 
-            
+            services.AddScoped<AccountService, AccountService>();
+            services.AddScoped<AdvertismentService, AdvertismentService>();
+            services.AddScoped<DataCaptureService, DataCaptureService>();
 
             #endregion
             services.AddMvc()
